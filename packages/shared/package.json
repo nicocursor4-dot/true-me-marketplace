@@ -1,0 +1,20 @@
+{
+  "name": "@trueme/shared",
+  "version": "1.0.0",
+  "description": "Shared types, utilities and constants for TRUE ME project",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@trueme/typescript-config": "workspace:*",
+    "typescript": "^5.3.0"
+  }
+}

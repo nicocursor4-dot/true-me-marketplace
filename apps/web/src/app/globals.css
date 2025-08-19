@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-trueme-white text-trueme-black;
+  }
+  
+  body {
+    @apply min-h-screen antialiased;
+  }
+}
+
+@layer components {
+  .btn-trueme {
+    @apply bg-trueme-black text-trueme-white px-4 py-2 rounded-md hover:bg-gray-800 transition-colors;
+  }
+  
+  .btn-vip {
+    @apply bg-trueme-gold text-trueme-black px-4 py-2 rounded-md hover:bg-yellow-600 transition-colors font-semibold;
+  }
+}

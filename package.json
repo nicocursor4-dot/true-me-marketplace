@@ -1,0 +1,28 @@
+{
+  "name": "true-me-marketplace",
+  "version": "1.0.0",
+  "description": "TRUE ME - Luxury marketplace platform with authentication and gamification",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev": "pnpm -r --parallel dev",
+    "lint": "pnpm -r lint",
+    "type-check": "pnpm -r type-check",
+    "clean": "pnpm -r clean && rm -rf node_modules",
+    "format": "prettier --write \"**/*.{js,ts,tsx,json,md}\"",
+    "test": "pnpm -r test"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "turbo": "^1.13.4"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@8.15.0"
+}

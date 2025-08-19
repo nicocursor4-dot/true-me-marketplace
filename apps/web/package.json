@@ -1,0 +1,33 @@
+{
+  "name": "@trueme/web",
+  "version": "1.0.0",
+  "description": "TRUE ME Web App - Next.js frontend",
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev -p 3002",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.55.0",
+    "@trueme/shared": "workspace:*",
+    "@trueme/ui": "workspace:*",
+    "next": "^14.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@trueme/eslint-config": "workspace:*",
+    "@trueme/typescript-config": "workspace:*",
+    "@types/node": "^20.10.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.0.0",
+    "eslint-config-next": "^14.2.0",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.3.0"
+  }
+}

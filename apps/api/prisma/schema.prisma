@@ -1,0 +1,118 @@
+// TRUE ME Database Schema
+// Prisma schema for luxury marketplace platform
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Enums
+enum Status {
+  BRONZE
+  SILVER
+  GOLD
+  PLATINUM
+  DIAMOND
+}
+
+enum ArticleStatus {
+  PRIVATE
+  PENDING_VERIFICATION
+  FOR_SALE
+  SOLD
+  REJECTED
+}
+
+enum Condition {
+  NEW
+  EXCELLENT
+  GOOD
+  FAIR
+}
+
+enum ListingType {
+  STANDARD
+  VIP
+}
+
+enum VerificationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+// Main Models
+model User {
+  id              String    @id @default(cuid())
+  clerkId         String    @unique
+  email           String    @unique
+  username        String?   @unique
+  profileImageUrl String?
+  slogan          String?
+  globalStatus    Status    @default(BRONZE)
+  isVip           Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  lastActiveAt    DateTime  @default(now())
+  
+  articles        Article[]
+  brandStatuses   BrandStatus[]
+  
+  @@map("users")
+}
+
+model Article {
+  id                  String        @id @default(cuid())
+  name                String
+  description         String
+  imageUrls           String[]
+  brand               String
+  category            String
+  size                String?
+  condition           Condition     @default(EXCELLENT)
+  ownerId             String
+  status              ArticleStatus @default(PRIVATE)
+  certificateUrl      String?
+  price               Decimal?      @db.Decimal(10, 2)
+  listingType         ListingType   @default(STANDARD)
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+  
+  owner               User          @relation(fields: [ownerId], references: [clerkId])
+  verificationRequest VerificationRequest?
+  
+  @@map("articles")
+}
+
+model BrandStatus {
+  id          String   @id @default(cuid())
+  userId      String
+  brandName   String
+  status      Status   @default(BRONZE)
+  articleCount Int     @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  user        User     @relation(fields: [userId], references: [clerkId])
+  
+  @@unique([userId, brandName])
+  @@map("brand_statuses")
+}
+
+model VerificationRequest {
+  id              String             @id @default(cuid())
+  articleId       String             @unique
+  status          VerificationStatus @default(PENDING)
+  rejectionReason String?
+  reviewedAt      DateTime?
+  reviewedBy      String?
+  createdAt       DateTime           @default(now())
+  
+  article         Article            @relation(fields: [articleId], references: [id])
+  
+  @@map("verification_requests")
+}
