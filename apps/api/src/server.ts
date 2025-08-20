@@ -1,41 +1,133 @@
 /**
  * TRUE ME API Server
- * Simple Express.js server with TypeScript
+ * Express.js server with TypeScript
  */
 
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
-
-// Load environment variables
-dotenv.config();
+import { errorHandler } from './middlewares/error';
+import { supabase } from './config/supabase';
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8000;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://true-me-marketplace.vercel.app', 'https://www.trueme.ae']
+    : ['http://localhost:3002', 'http://localhost:3000'],
+  credentials: true
+}));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Health check route
-app.get('/health', (req, res) => {
+// Health check with database connectivity
+app.get('/health', async (req, res) => {
+  try {
+    // Test database connection
+    const { error } = await supabase
+      .from('users')
+      .select('count')
+      .limit(1);
+
+    const dbStatus = error ? 'DISCONNECTED' : 'CONNECTED';
+    
+    res.json({ 
+      status: 'OK', 
+      timestamp: new Date().toISOString(),
+      service: 'TRUE ME API',
+      version: '1.0.0',
+      database: dbStatus,
+      environment: process.env.NODE_ENV || 'development'
+    });
+  } catch (error) {
+    res.status(503).json({
+      status: 'ERROR',
+      timestamp: new Date().toISOString(),
+      service: 'TRUE ME API',
+      database: 'DISCONNECTED',
+      error: error instanceof Error ? error.message : 'Unknown error'
+    });
+  }
+});
+
+// API Routes
+app.get('/', (req, res) => {
   res.json({ 
-    status: 'ok', 
     message: 'TRUE ME API is running',
-    timestamp: new Date().toISOString()
+    version: '1.0.0',
+    endpoints: [
+      'GET /health - Health check',
+      'GET /api/users - Users management',
+      'GET /api/articles - Articles management',
+      'GET /api/brands - Brand status management'
+    ]
   });
 });
 
-// Basic API route
-app.get('/api', (req, res) => {
-  res.json({ 
-    message: 'Welcome to TRUE ME API',
-    version: '1.0.0'
+// Users API endpoints (placeholder)
+app.get('/api/users', async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('users')
+      .select('*')
+      .order('createdAt', { ascending: false })
+      .limit(10);
+
+    if (error) throw error;
+
+    res.json({ 
+      success: true, 
+      data: data || [],
+      count: data?.length || 0
+    });
+  } catch (error) {
+    res.status(500).json({ 
+      success: false, 
+      error: error instanceof Error ? error.message : 'Unknown error' 
+    });
+  }
+});
+
+// Articles API endpoints (placeholder)
+app.get('/api/articles', async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('articles')
+      .select('*')
+      .order('createdAt', { ascending: false })
+      .limit(10);
+
+    if (error) throw error;
+
+    res.json({ 
+      success: true, 
+      data: data || [],
+      count: data?.length || 0
+    });
+  } catch (error) {
+    res.status(500).json({ 
+      success: false, 
+      error: error instanceof Error ? error.message : 'Unknown error' 
+    });
+  }
+});
+
+// Error handling
+app.use(errorHandler);
+
+// 404 handler
+app.use('*', (req, res) => {
+  res.status(404).json({
+    success: false,
+    error: 'Endpoint not found',
+    path: req.originalUrl,
+    method: req.method
   });
 });
 
-// Start server
 app.listen(PORT, () => {
-  console.log(`🚀 TRUE ME API running on port ${PORT}`);
-  console.log(`📱 Health check: http://localhost:${PORT}/health`);
-});
+  console.log(`🚀 TRUE ME API server running on port ${PORT}`);
+  console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`🔗 Health check: http://localhost:${PORT}/health`);
+});  

@@ -1,7 +1,8 @@
-'use client';
+'use client'
 
-import { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import { useEffect, useState } from 'react'
+import { supabase } from '@/lib/supabase'
+import cuid from 'cuid';
 
 interface User {
   id: string;
@@ -63,12 +64,17 @@ export default function TestDbPage() {
   };
 
   const createTestUser = async () => {
+    const now = new Date().toISOString();
     const testUser = {
+      id: cuid(),
       clerkId: `test_user_${Date.now()}`,
       email: `user_${Date.now()}@trueme.com`,
       username: `user${Date.now()}`,
       globalStatus: 'PLATINUM',
-      isVip: true
+      isVip: true,
+      createdAt: now,
+      updatedAt: now,
+      lastActiveAt: now
     };
 
     const { error } = await supabase
@@ -88,7 +94,9 @@ export default function TestDbPage() {
       return;
     }
 
+    const now = new Date().toISOString();
     const testArticle = {
+      id: cuid(),
       name: `Article Test ${Date.now()}`,
       description: 'Article de test pour vérifier le système',
       imageUrls: ['https://example.com/test.jpg'],
@@ -97,7 +105,9 @@ export default function TestDbPage() {
       condition: ['NEW', 'EXCELLENT', 'GOOD'][Math.floor(Math.random() * 3)],
       ownerId: users[0].clerkId,
       status: 'FOR_SALE',
-      price: Math.floor(Math.random() * 10000) + 100
+      price: Math.floor(Math.random() * 10000) + 100,
+      createdAt: now,
+      updatedAt: now
     };
 
     const { error } = await supabase
