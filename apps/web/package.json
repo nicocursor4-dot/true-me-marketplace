@@ -13,10 +13,12 @@
     "@supabase/supabase-js": "^2.55.0",
     "@trueme/shared": "workspace:*",
     "@trueme/ui": "workspace:*",
+    "clsx": "^2.0.0",
     "cuid": "^3.0.0",
     "next": "^14.2.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
     "@trueme/eslint-config": "workspace:*",

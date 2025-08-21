@@ -72,6 +72,9 @@ importers:
       '@trueme/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      clsx:
+        specifier: ^2.0.0
+        version: 2.1.1
       cuid:
         specifier: ^3.0.0
         version: 3.0.0
@@ -84,6 +87,9 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.3.1(react@18.3.1)
+      tailwind-merge:
+        specifier: ^2.0.0
+        version: 2.6.0
     devDependencies:
       '@trueme/eslint-config':
         specifier: workspace:*
