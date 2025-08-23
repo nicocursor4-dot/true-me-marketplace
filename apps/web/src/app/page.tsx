@@ -166,7 +166,7 @@ export default function Home() {
             <div className="text-center">
               <div className="mb-10">
                 <div className="text-3xl font-light mb-4 text-trueme tracking-wide">TRUE ME</div>
-                <div className="text-trueme-gold font-light text-lg tracking-[0.1em]">Not a Style. A Signature</div>
+                <div className="text-trueme-gold font-light text-lg tracking-[0.1em]">Not a Styl. A Signature.</div>
               </div>
               
               <div className="flex justify-center space-x-8 mb-8 text-sm text-trueme-light">
@@ -177,7 +177,7 @@ export default function Home() {
               </div>
               
               <p className="text-trueme-light text-sm">
-                &copy; 2024 TRUE ME. Tous droits réservés. Émirats Arabes Unis.
+                &copy; 2025 TRUE ME. Tous droits réservés. Émirats Arabes Unis.
               </p>
             </div>
           </div>

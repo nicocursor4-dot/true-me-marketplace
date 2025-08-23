@@ -84,49 +84,51 @@ const Navigation = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden fixed inset-0 top-16 z-40">
-          <div className="glass-menu-overlay h-full">
-            <div className="px-6 py-8 space-y-6">
-              <Link
-                href="/"
-                className="block text-white text-lg font-medium hover:text-trueme-gold transition-colors duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Accueil
-              </Link>
-              <Link
-                href="/dashboard"
-                className="block text-white text-lg font-medium hover:text-trueme-gold transition-colors duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Dashboard
-              </Link>
-              <Link
-                href="/brands"
-                className="block text-white text-lg font-medium hover:text-trueme-gold transition-colors duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Marques
-              </Link>
-              <Link
-                href="/marketplace"
-                className="block text-white text-lg font-medium hover:text-trueme-gold transition-colors duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Marketplace
-              </Link>
+        <div className="md:hidden fixed inset-0 z-50">
+          <div className="glass-menu-overlay h-full flex flex-col justify-center">
+            <div className="px-8 py-12 space-y-8 text-center">
+              <div className="space-y-12">
+                <Link
+                  href="/"
+                  className="block text-white text-3xl font-light tracking-wide hover:text-trueme-gold transition-all duration-300 transform hover:scale-105"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Accueil
+                </Link>
+                <Link
+                  href="/dashboard"
+                  className="block text-white text-3xl font-light tracking-wide hover:text-trueme-gold transition-all duration-300 transform hover:scale-105"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Dashboard
+                </Link>
+                <Link
+                  href="/brands"
+                  className="block text-white text-3xl font-light tracking-wide hover:text-trueme-gold transition-all duration-300 transform hover:scale-105"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Marques
+                </Link>
+                <Link
+                  href="/marketplace"
+                  className="block text-white text-3xl font-light tracking-wide hover:text-trueme-gold transition-all duration-300 transform hover:scale-105"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Marketplace
+                </Link>
+              </div>
               
-              <div className="border-t border-white/10 pt-6 mt-8 space-y-4">
+              <div className="border-t border-white/20 pt-12 mt-16 space-y-6">
                 <Link
                   href="/auth/login"
-                  className="block text-white text-lg font-medium hover:text-trueme-gold transition-colors duration-200"
+                  className="block text-white text-xl font-light hover:text-trueme-gold transition-colors duration-300"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Connexion
                 </Link>
                 <Link
                   href="/auth/register"
-                  className="btn-primary w-full text-center block py-3 text-lg font-semibold"
+                  className="inline-block bg-gradient-to-r from-trueme-gold to-level-gold text-trueme-dark px-8 py-4 rounded-full text-xl font-medium hover:shadow-lg hover:scale-105 transition-all duration-300"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   S&apos;inscrire
