@@ -126,39 +126,36 @@ export default function MarketplacePage() {
   ];
 
   return (
-    <main className="min-h-screen bg-[#F5F2E8]">
+    <main className="min-h-screen bg-[#FCFAF7]">
       <Navigation />
       
-      <div className="pt-24 pb-12">
-        <div className="max-w-6xl mx-auto px-4">
+      <div className="pt-32 pb-20">
+        <div className="max-w-7xl mx-auto px-8">
           
-          {/* Header with Tabs */}
-          <div className="bg-[rgba(255,255,255,0.4)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.3)] rounded-[20px] p-8 mb-8">
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <h1 className="text-3xl font-bold text-[#1C1C1E] mb-2">Marketplace VIP</h1>
-                <p className="text-[#6B6B6B]">Bloc 3 - Achat et vente authentifiés</p>
-              </div>
-              <Link href="/dashboard" className="px-6 py-3 bg-[rgba(184,134,11,0.1)] text-[#B8860B] rounded-lg hover:bg-[rgba(184,134,11,0.2)] transition-all duration-300">
-                ← Dashboard
-              </Link>
-            </div>
-            
-            {/* Navigation Tabs */}
-            <div className="flex space-x-4">
+          {/* Header */}
+          <div className="text-center mb-20">
+            <h1 className="heading-primary mb-6">Marketplace</h1>
+            <p className="text-minimal text-xl max-w-2xl mx-auto">
+              Une sélection exclusive d'articles de luxe authentifiés par nos experts
+            </p>
+          </div>
+
+          {/* Navigation Tabs */}
+          <div className="flex justify-center mb-16">
+            <div className="inline-flex space-x-2 p-2 bg-white rounded-[16px] border border-[#F0F0F0]">
               {['acheter', 'vendre', 'services'].map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
+                  className={`px-8 py-4 rounded-[12px] font-medium transition-all duration-300 ${
                     activeTab === tab
-                      ? 'bg-[#B8860B] text-white shadow-lg'
-                      : 'bg-[rgba(255,255,255,0.3)] text-[#6B6B6B] hover:bg-[rgba(255,255,255,0.5)]'
+                      ? 'bg-[#1A1A1A] text-white'
+                      : 'text-minimal hover:text-[#1A1A1A] hover:bg-[#F8F8F8]'
                   }`}
                 >
-                  {tab === 'acheter' ? '🛒 Acheter' : 
-                   tab === 'vendre' ? '💰 Vendre' : 
-                   '👑 Services VIP'}
+                  {tab === 'acheter' ? 'Acheter' : 
+                   tab === 'vendre' ? 'Vendre' : 
+                   'Services VIP'}
                 </button>
               ))}
             </div>
@@ -167,34 +164,33 @@ export default function MarketplacePage() {
           {activeTab === 'acheter' && (
             <>
               {/* Filters */}
-              <div className="bg-[rgba(255,255,255,0.3)] backdrop-blur-[10px] border border-[rgba(255,255,255,0.25)] rounded-[16px] p-6 mb-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="card-minimal p-8 mb-16">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                   <div>
-                    <label className="block text-sm font-medium text-[#1C1C1E] mb-3">Catégorie</label>
-                    <div className="flex flex-wrap gap-2">
+                    <h3 className="mb-8">Catégorie</h3>
+                    <div className="flex flex-wrap gap-3">
                       {categories.map((category) => (
                         <button
                           key={category.id}
                           onClick={() => setSelectedCategory(category.id)}
-                          className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm transition-all duration-300 ${
+                          className={`px-6 py-3 rounded-[12px] text-sm font-medium transition-all duration-300 ${
                             selectedCategory === category.id
-                              ? 'bg-[#B8860B] text-white'
-                              : 'bg-[rgba(255,255,255,0.4)] text-[#6B6B6B] hover:bg-[rgba(255,255,255,0.6)]'
+                              ? 'bg-[#1A1A1A] text-white'
+                              : 'bg-[#F8F8F8] text-minimal hover:bg-[#F0F0F0] hover:text-[#1A1A1A]'
                           }`}
                         >
-                          <span>{category.icon}</span>
-                          <span>{category.name}</span>
+                          {category.name}
                         </button>
                       ))}
                     </div>
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-[#1C1C1E] mb-3">Prix</label>
+                    <h3 className="mb-8">Prix</h3>
                     <select
                       value={priceRange}
                       onChange={(e) => setPriceRange(e.target.value)}
-                      className="w-full px-4 py-2 bg-[rgba(255,255,255,0.4)] border border-[rgba(255,255,255,0.3)] rounded-lg text-[#1C1C1E] focus:outline-none focus:ring-2 focus:ring-[#B8860B]"
+                      className="w-full px-6 py-4 bg-[#F8F8F8] border border-[#F0F0F0] rounded-[12px] text-[#1A1A1A] focus:outline-none focus:border-[#1A1A1A] transition-all duration-300"
                     >
                       {priceRanges.map((range) => (
                         <option key={range.id} value={range.id}>
@@ -207,133 +203,126 @@ export default function MarketplacePage() {
               </div>
 
               {/* Products Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mb-16">
                 {featuredProducts.map((product, index) => (
-                  <AnimatedCard 
+                  <div 
                     key={product.id}
-                    className="bg-[rgba(255,255,255,0.4)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.3)] rounded-[20px] overflow-hidden"
-                    hoverScale={true}
-                    glowEffect={true}
+                    className="card-minimal subtle-hover cursor-pointer overflow-hidden"
                   >
-                    
                     {/* Product Image */}
-                    <div className="relative bg-[rgba(245,242,232,0.8)] h-48 flex items-center justify-center">
+                    <div className="relative bg-[#F8F8F8] h-64 flex items-center justify-center mb-6">
                       <div className="text-6xl">{product.image}</div>
                       {product.vip && (
-                        <div className="absolute top-3 left-3 bg-gradient-to-r from-[#B8860B] to-[#DAA520] text-white px-2 py-1 rounded-full text-xs font-bold">
+                        <div className="absolute top-4 left-4 bg-[#1A1A1A] text-white px-3 py-1 rounded-[8px] text-xs font-medium">
                           VIP
                         </div>
                       )}
                       {product.featured && (
-                        <div className="absolute top-3 right-3 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold">
-                          COUP DE ❤️
+                        <div className="absolute top-4 right-4 bg-[#FF5722] text-white px-3 py-1 rounded-[8px] text-xs font-medium">
+                          Sélection
                         </div>
                       )}
-                      <div className="absolute bottom-3 right-3 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-bold flex items-center space-x-1">
-                        <span>✓</span>
-                        <span>{product.authenticity}</span>
+                      <div className="absolute bottom-4 right-4 bg-[#4CAF50] text-white px-3 py-1 rounded-[8px] text-xs font-medium">
+                        ✓ {product.authenticity}
                       </div>
                     </div>
 
                     {/* Product Info */}
-                    <div className="p-6">
+                    <div className="px-8 pb-8">
                       <div className="mb-2">
-                        <span className="text-sm font-medium text-[#B8860B]">{product.brand}</span>
+                        <span className="text-sm text-minimal">{product.brand}</span>
                       </div>
-                      <h3 className="font-bold text-[#1C1C1E] mb-2">{product.name}</h3>
-                      <div className="flex items-center space-x-2 mb-3">
-                        <span className="text-xl font-bold text-[#1C1C1E]">{product.price}</span>
-                        <span className="text-sm text-gray-500 line-through">{product.originalPrice}</span>
+                      <h3 className="text-xl font-semibold text-[#1A1A1A] mb-4">{product.name}</h3>
+                      <div className="flex items-center space-x-3 mb-6">
+                        <span className="text-2xl font-bold text-[#1A1A1A]">{product.price}</span>
+                        <span className="text-sm text-minimal line-through">{product.originalPrice}</span>
                       </div>
                       
-                      <div className="text-sm text-[#6B6B6B] space-y-1 mb-4">
+                      <div className="space-y-3 mb-8 text-sm">
                         <div className="flex justify-between">
-                          <span>État :</span>
-                          <span className="font-medium">{product.condition}</span>
+                          <span className="text-minimal">État</span>
+                          <span className="text-[#1A1A1A] font-medium">{product.condition}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span>Vendeur :</span>
-                          <span className="font-medium">{product.seller}</span>
+                          <span className="text-minimal">Vendeur</span>
+                          <span className="text-[#1A1A1A] font-medium">{product.seller}</span>
                         </div>
-                        <div className="flex justify-between items-center">
-                          <span>Note :</span>
+                        <div className="flex justify-between">
+                          <span className="text-minimal">Note</span>
                           <div className="flex items-center space-x-1">
-                            <span className="text-yellow-500">⭐</span>
-                            <span className="font-medium">{product.sellerRating}</span>
+                            <span>⭐</span>
+                            <span className="text-[#1A1A1A] font-medium">{product.sellerRating}</span>
                           </div>
                         </div>
                         <div className="flex justify-between">
-                          <span>Localisation :</span>
-                          <span className="font-medium">{product.location}</span>
+                          <span className="text-minimal">Localisation</span>
+                          <span className="text-[#1A1A1A] font-medium">{product.location}</span>
                         </div>
                       </div>
 
-                      <button className="w-full bg-[#B8860B] text-white py-3 rounded-lg font-medium hover:bg-[#A0750A] transition-all duration-300">
+                      <button className="btn-primary w-full">
                         Voir les détails
                       </button>
                     </div>
-                  </AnimatedCard>
+                  </div>
                 ))}
               </div>
             </>
           )}
 
           {activeTab === 'vendre' && (
-            <div className="bg-[rgba(255,255,255,0.4)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.3)] rounded-[20px] p-8">
-              <div className="text-center mb-8">
-                <div className="text-4xl mb-4">💰</div>
-                <h2 className="text-2xl font-bold text-[#1C1C1E] mb-4">Vendez vos articles de luxe</h2>
-                <p className="text-[#6B6B6B] mb-8">Bénéficiez de la garantie d'authenticité TRUE ME</p>
-              </div>
+            <div className="card-minimal p-16 text-center">
+              <h2 className="heading-secondary mb-6">Vendez vos articles de luxe</h2>
+              <p className="text-minimal text-lg mb-16 max-w-lg mx-auto">
+                Bénéficiez de notre expertise et de nos services d'authentification
+              </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-[rgba(184,134,11,0.1)] rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl">📸</span>
+                  <div className="w-20 h-20 bg-[#F8F8F8] rounded-full flex items-center justify-center mx-auto mb-6">
+                    <span className="text-3xl">📸</span>
                   </div>
-                  <h3 className="font-bold text-[#1C1C1E] mb-2">1. Photographiez</h3>
-                  <p className="text-sm text-[#6B6B6B]">Prenez des photos détaillées de votre article</p>
+                  <h3 className="text-xl font-semibold text-[#1A1A1A] mb-3">01 — Photographiez</h3>
+                  <p className="text-minimal">Prenez des photos détaillées de votre article</p>
                 </div>
                 
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-[rgba(184,134,11,0.1)] rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl">🔍</span>
+                  <div className="w-20 h-20 bg-[#F8F8F8] rounded-full flex items-center justify-center mx-auto mb-6">
+                    <span className="text-3xl">🔍</span>
                   </div>
-                  <h3 className="font-bold text-[#1C1C1E] mb-2">2. Authentification</h3>
-                  <p className="text-sm text-[#6B6B6B]">Nos experts certifient l'authenticité</p>
+                  <h3 className="text-xl font-semibold text-[#1A1A1A] mb-3">02 — Authentification</h3>
+                  <p className="text-minimal">Nos experts certifient l'authenticité</p>
                 </div>
                 
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-[rgba(184,134,11,0.1)] rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl">💰</span>
+                  <div className="w-20 h-20 bg-[#F8F8F8] rounded-full flex items-center justify-center mx-auto mb-6">
+                    <span className="text-3xl">💰</span>
                   </div>
-                  <h3 className="font-bold text-[#1C1C1E] mb-2">3. Vendez</h3>
-                  <p className="text-sm text-[#6B6B6B]">Mettez en vente avec garantie TRUE ME</p>
+                  <h3 className="text-xl font-semibold text-[#1A1A1A] mb-3">03 — Vendez</h3>
+                  <p className="text-minimal">Mettez en vente avec garantie TRUE ME</p>
                 </div>
               </div>
 
-              <div className="mt-8 text-center">
-                <button className="bg-[#B8860B] text-white px-8 py-3 rounded-lg font-medium hover:bg-[#A0750A] transition-all duration-300">
-                  Commencer à vendre
-                </button>
-              </div>
+              <button className="btn-primary px-12 py-4">
+                Commencer à vendre
+              </button>
             </div>
           )}
 
           {activeTab === 'services' && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {vipServices.map((service) => (
-                <div key={service.id} className="bg-[rgba(255,255,255,0.4)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.3)] rounded-[20px] p-8 hover:shadow-[0_8px_32px_rgba(184,134,11,0.15)] hover:-translate-y-1 transition-all duration-300">
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-[#B8860B] to-[#DAA520] rounded-full flex items-center justify-center text-white text-xl">
+                <div key={service.id} className="card-minimal p-8 subtle-hover">
+                  <div className="flex items-start space-x-6">
+                    <div className="w-16 h-16 bg-[#1A1A1A] rounded-full flex items-center justify-center text-white text-2xl flex-shrink-0">
                       {service.icon}
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-bold text-[#1C1C1E] mb-2">{service.title}</h3>
-                      <p className="text-[#6B6B6B] mb-4">{service.description}</p>
+                      <h3 className="text-xl font-semibold text-[#1A1A1A] mb-3">{service.title}</h3>
+                      <p className="text-minimal mb-6">{service.description}</p>
                       <div className="flex items-center justify-between">
-                        <span className="text-lg font-bold text-[#B8860B]">{service.price}</span>
-                        <button className="px-4 py-2 bg-[#B8860B] text-white rounded-lg text-sm hover:bg-[#A0750A] transition-all duration-300">
+                        <span className="text-lg font-semibold text-[#1A1A1A]">{service.price}</span>
+                        <button className="btn-primary px-6 py-3 text-sm">
                           Réserver
                         </button>
                       </div>
@@ -343,13 +332,6 @@ export default function MarketplacePage() {
               ))}
             </div>
           )}
-
-          {/* Floating Action Button */}
-          <div className="fixed bottom-8 right-8 z-40">
-            <button className="w-16 h-16 bg-gradient-to-r from-[#B8860B] to-[#DAA520] rounded-full flex items-center justify-center text-white text-2xl shadow-[0_6px_20px_rgba(184,134,11,0.3)] hover:scale-110 transition-all duration-300">
-              💬
-            </button>
-          </div>
 
         </div>
       </div>

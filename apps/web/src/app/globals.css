@@ -1,23 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   html {
-    @apply bg-trueme-white text-trueme-black;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    scroll-behavior: smooth;
   }
   
   body {
-    @apply min-h-screen antialiased;
+    background: #FEFEFE;
+    min-height: 100vh;
+    color: #1A1A1A;
+    line-height: 1.6;
+    font-size: 18px;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  * {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: #0A0A0A;
+  }
+
+  h1 {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 800;
+  }
+
+  h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+  }
+
+  h3 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 600;
   }
 }
 
 @layer components {
-  .btn-trueme {
-    @apply bg-trueme-black text-trueme-white px-4 py-2 rounded-md hover:bg-gray-800 transition-colors;
+  .luxury-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
   }
-  
-  .btn-vip {
-    @apply bg-trueme-gold text-trueme-black px-4 py-2 rounded-md hover:bg-yellow-600 transition-colors font-semibold;
+
+  .section-spacing {
+    padding: 8rem 0;
+  }
+
+  .section-spacing-lg {
+    padding: 12rem 0;
+  }
+
+  .hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .subtle-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .subtle-hover:hover {
+    transform: translateY(-4px);
+    opacity: 0.8;
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(2rem);
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .text-minimal {
+    color: #666666;
+    font-weight: 400;
+  }
+
+  .border-minimal {
+    border: 1px solid #E8E8E8;
+  }
+
+  .bg-minimal {
+    background: #FAFAFA;
+  }
+
+  .card-minimal {
+    background: #FFFFFF;
+    border: 1px solid #F0F0F0;
+    border-radius: 0.75rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-minimal:hover {
+    border-color: #E0E0E0;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
   }
 }
