@@ -1,167 +1,211 @@
-import { Header } from '@/components/layout/Header'
-import { StatusCard } from '@/components/ui/StatusCard'
-import { AdvantageCard } from '@/components/ui/AdvantageCard'
-import { Timeline } from '@/components/ui/Timeline'
+'use client';
 
-// BLOC 1 - Dashboard Statut Global
-export default function DashboardPage() {
+import React from 'react';
+import Navigation from '@/components/Navigation';
+import Link from 'next/link';
+
+export default function Dashboard() {
+  const userStats = {
+    name: "John Doe",
+    tagline: "I embody authenticity.",
+    memberSince: "12 juillet 2025",
+    currentStatus: "GOLD",
+    nextStatus: "PLATINUM",
+    progress: 65,
+    articlesAuthenticated: 127,
+    collectionValue: "AED 89,450",
+    brandCount: 8,
+    authenticityScore: "98.5%"
+  };
+
   const advantages = [
     {
-      icon: '🚀',
-      title: 'Authentification Express',
-      description: 'Vérification en 24h garantie',
-      status: 'active' as const
+      icon: "🔐",
+      title: "Accès aux ventes privées TRUE ME",
+      description: "Ventes exclusives réservées aux membres Gold+"
     },
     {
-      icon: '💎',
-      title: 'Accès VIP Marketplace',
-      description: 'Articles exclusifs avant les autres',
-      status: 'active' as const
+      icon: "🎭", 
+      title: "Invitations à des événements partenaires",
+      description: "Événements VIP dans les boutiques de luxe"
     },
     {
-      icon: '🛡️',
-      title: 'Assurance Premium',
-      description: 'Couverture complète incluse',
-      status: 'active' as const
+      icon: "✨",
+      title: "Code de réduction chez The Luxury Cleaner",
+      description: "15% de réduction sur les services premium"
     },
     {
-      icon: '📱',
-      title: 'Support Prioritaire',
-      description: 'Réponse en moins de 2h',
-      status: 'active' as const
-    },
-    {
-      icon: '🎯',
-      title: 'Recommandations IA',
-      description: 'Suggestions personnalisées',
-      status: 'active' as const
-    },
-    {
-      icon: '👥',
-      title: 'Événements Exclusifs',
-      description: 'Invitation aux ventes privées',
-      status: 'soon' as const
+      icon: "⚡",
+      title: "Accès prioritaire au centre d'authentification",
+      description: "Authentification rapide sous 24h"
     }
-  ]
+  ];
 
-  const timelineEvents = [
+  const statsCards = [
     {
-      date: 'Juillet 2025',
-      title: 'Inscription TRUE ME',
-      status: 'completed' as const
+      icon: "✓",
+      value: userStats.articlesAuthenticated,
+      label: "Articles authentifiés",
+      trend: "+12 ce mois",
+      trendColor: "text-green-600"
     },
     {
-      date: 'Août 2025',
-      title: 'Statut Bronze atteint (15 articles)',
-      status: 'completed' as const
+      icon: "💎",
+      value: userStats.collectionValue,
+      label: "Valeur totale",
+      trend: "+15% cette année",
+      trendColor: "text-green-600"
     },
     {
-      date: 'Octobre 2025',
-      title: 'Statut Silver atteint (35 articles)',
-      status: 'completed' as const
+      icon: "🏷️",
+      value: userStats.brandCount,
+      label: "Marques différentes",
+      trend: "Chanel (Silver)",
+      trendColor: "text-[#C0C0C0]"
     },
     {
-      date: 'Janvier 2026',
-      title: 'Statut Gold atteint (67 articles)',
-      status: 'current' as const
-    },
-    {
-      date: 'Mars 2026',
-      title: 'Statut Platinum (75 articles)',
-      status: 'future' as const
-    },
-    {
-      date: '2027',
-      title: 'Statut Diamond (150 articles)',
-      status: 'future' as const
+      icon: "🛡️",
+      value: userStats.authenticityScore,
+      label: "Fiabilité",
+      trend: "Excellent",
+      trendColor: "text-green-600"
     }
-  ]
+  ];
 
   return (
-    <div className="min-h-screen bg-trueme-cream">
-      <Header />
+    <main className="min-h-screen bg-[#F5F2E8]">
+      <Navigation />
       
-      {/* Main content with top padding for fixed header */}
-      <main className="pt-24 pb-8">
-        <div className="container mx-auto px-4 max-w-4xl">
+      <div className="pt-24 pb-12">
+        <div className="max-w-6xl mx-auto px-4">
           
-          {/* Welcome section */}
-          <div className="mb-8 text-center">
-            <h1 className="text-2xl font-bold text-trueme-black mb-2">
-              Bonjour John
-            </h1>
-            <div className="flex items-center justify-center space-x-2">
-              <span className="px-3 py-1 bg-gradient-to-r from-level-gold to-trueme-gold text-white text-sm font-semibold rounded-full">
-                Membre Gold
-              </span>
-              <span className="text-trueme-secondary text-sm">
-                Depuis le 12 juillet 2025
-              </span>
-            </div>
-          </div>
-
-          {/* Main Status Card */}
-          <div className="mb-8 flex justify-center">
-            <StatusCard
-              level="gold"
-              currentArticles={67}
-              targetArticles={75}
-              progress={89} // 67/75 = 89%
-              totalValue="AED 127,850"
-              authenticityScore={94}
-            />
-          </div>
-
-          {/* Avantages Gold Section */}
-          <div className="mb-12">
-            <h2 className="text-xl font-bold text-trueme-black mb-6 text-center">
-              Vos avantages Gold
-            </h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {advantages.map((advantage, index) => (
-                <AdvantageCard
-                  key={index}
-                  icon={advantage.icon}
-                  title={advantage.title}
-                  description={advantage.description}
-                  status={advantage.status}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Progression vers Platinum */}
-          <div className="mb-12">
-            <div className="bg-glass-cream backdrop-blur-glass border border-glass-border rounded-xl p-6">
-              <h3 className="text-lg font-bold text-trueme-black mb-4">Vers Platinum</h3>
-              <div className="space-y-3">
-                <p className="text-trueme-black">
-                  <span className="font-semibold">8 articles manquants</span>
-                </p>
-                <div className="space-y-2 text-sm text-trueme-secondary">
-                  <p>• 1 sac Hermès ou Chanel</p>
-                  <p>• 1 accessoire de luxe</p>
-                  <p>• 1 article haute couture</p>
-                </div>
-                <div className="flex items-center justify-between mt-4">
-                  <span className="text-sm text-trueme-secondary">
-                    ETA: 2-3 mois à votre rythme
-                  </span>
-                  <button className="px-4 py-2 bg-glass-white backdrop-blur-sm border border-glass-border rounded-lg text-trueme-gold text-sm hover:bg-trueme-gold hover:text-white transition-colors">
-                    Voir opportunités
-                  </button>
-                </div>
+          {/* Header Glassmorphisme */}
+          <div className="bg-[rgba(245,242,232,0.95)] backdrop-blur-[20px] border-b border-[rgba(255,255,255,0.2)] rounded-t-[20px] p-6 mb-8 shadow-[0_2px_12px_rgba(184,134,11,0.1)]">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <div className="text-2xl font-bold text-[#1C1C1E]">TM</div>
+                <div className="text-sm text-[#B8860B] tracking-wider font-light">NOT A STYLE. A SIGNATURE.</div>
+              </div>
+              <div className="w-12 h-12 rounded-full bg-[rgba(255,255,255,0.4)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.3)] flex items-center justify-center cursor-pointer hover:scale-105 transition-all duration-300">
+                <div className="text-xl">🔔</div>
               </div>
             </div>
           </div>
 
-          {/* Timeline Section */}
-          <div className="mb-8">
-            <Timeline events={timelineEvents} />
+          {/* Hero Profile Section */}
+          <div className="bg-[rgba(255,255,255,0.4)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.3)] rounded-[20px] p-8 mb-8 shadow-[0_8px_32px_rgba(184,134,11,0.12)]">
+            <div className="text-center">
+              {/* Avatar avec glassmorphisme */}
+              <div className="relative inline-block mb-6">
+                <div className="w-20 h-20 rounded-full bg-gradient-to-r from-[#B8860B] to-[#DAA520] p-1 shadow-[0_4px_16px_rgba(184,134,11,0.2)]">
+                  <div className="w-full h-full rounded-full bg-gray-300 flex items-center justify-center text-2xl font-bold text-white">
+                    JD
+                  </div>
+                </div>
+                <div className="absolute top-0 right-0 w-3 h-3 bg-[#B8860B] rounded-full border-2 border-white"></div>
+              </div>
+
+              {/* Informations utilisateur */}
+              <h1 className="text-3xl font-bold text-[#1C1C1E] mb-2">{userStats.name}</h1>
+              <p className="text-lg italic text-[#6B6B6B] mb-4">{userStats.tagline}</p>
+              <p className="text-sm text-[#6B6B6B] mb-8">
+                Membre TRUE ME depuis : {userStats.memberSince}
+              </p>
+
+              {/* Carte Statut Actuel avec glassmorphisme gold */}
+              <div className="bg-gradient-to-r from-[#B8860B] to-[#DAA520] backdrop-blur-[15px] rounded-[16px] p-6 text-white shadow-[0_6px_20px_rgba(184,134,11,0.25)] max-w-md mx-auto">
+                <p className="text-sm opacity-90 mb-2">Statut actuel TRUE ME :</p>
+                <div className="flex items-center justify-center space-x-2 mb-4">
+                  <span className="text-2xl">🏆</span>
+                  <span className="text-2xl font-bold tracking-wide">{userStats.currentStatus}</span>
+                </div>
+                
+                <div className="mb-4">
+                  <div className="flex justify-between text-sm mb-2">
+                    <span>Évolution du statut : {userStats.nextStatus}</span>
+                    <span>{userStats.progress}%</span>
+                  </div>
+                  <div className="w-full bg-[rgba(255,255,255,0.2)] rounded-full h-1 overflow-hidden">
+                    <div 
+                      className="bg-white h-1 rounded-full transition-all duration-1000 ease-out"
+                      style={{ width: `${userStats.progress}%` }}
+                    ></div>
+                  </div>
+                </div>
+                
+                <Link href="/dashboard/evolution" className="text-sm underline hover:no-underline transition-all duration-300 cursor-pointer">
+                  Voir détails →
+                </Link>
+              </div>
+            </div>
           </div>
 
+          {/* Statistics Cards Grid avec glassmorphisme */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            {statsCards.map((stat, index) => (
+              <div key={index} className="bg-[rgba(255,255,255,0.3)] backdrop-blur-[10px] border border-[rgba(255,255,255,0.25)] rounded-[16px] p-6 shadow-[0_4px_16px_rgba(184,134,11,0.08)] hover:shadow-[0_8px_24px_rgba(184,134,11,0.15)] hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-10 h-10 bg-[rgba(184,134,11,0.1)] rounded-full flex items-center justify-center text-xl">
+                    {stat.icon}
+                  </div>
+                </div>
+                <div className="text-3xl font-bold text-[#1C1C1E] mb-2">{stat.value}</div>
+                <div className="text-sm text-[#6B6B6B] mb-2">{stat.label}</div>
+                <div className={`text-sm font-medium ${stat.trendColor}`}>{stat.trend}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Section Avantages avec glassmorphisme cream */}
+          <div className="bg-[rgba(245,242,232,0.8)] backdrop-blur-[15px] rounded-[20px] p-8 mb-8 border border-[rgba(255,255,255,0.3)]">
+            <h2 className="text-2xl font-bold text-[#1C1C1E] mb-6">Avantages associés</h2>
+            <div className="space-y-4">
+              {advantages.map((advantage, index) => (
+                <div key={index} className="flex items-start space-x-4 p-4 bg-[rgba(255,255,255,0.4)] rounded-[12px] border border-[rgba(255,255,255,0.3)] hover:bg-[rgba(255,255,255,0.5)] transition-all duration-300">
+                  <div className="w-8 h-8 bg-[rgba(255,255,255,0.6)] backdrop-blur-[10px] rounded-full flex items-center justify-center text-lg flex-shrink-0 shadow-inner">
+                    {advantage.icon}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-[#1C1C1E] mb-1">{advantage.title}</h3>
+                    <p className="text-sm text-[#6B6B6B] leading-relaxed">{advantage.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Actions rapides */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Link href="/brands" className="bg-[rgba(255,255,255,0.4)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.3)] rounded-[16px] p-6 text-center hover:shadow-[0_8px_24px_rgba(184,134,11,0.15)] hover:-translate-y-1 transition-all duration-300">
+              <div className="text-3xl mb-4">🏷️</div>
+              <h3 className="font-bold text-[#1C1C1E] mb-2">Mes Marques</h3>
+              <p className="text-sm text-[#6B6B6B]">Voir mon statut par marque</p>
+            </Link>
+            
+            <Link href="/marketplace" className="bg-[rgba(255,255,255,0.4)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.3)] rounded-[16px] p-6 text-center hover:shadow-[0_8px_24px_rgba(184,134,11,0.15)] hover:-translate-y-1 transition-all duration-300">
+              <div className="text-3xl mb-4">🛍️</div>
+              <h3 className="font-bold text-[#1C1C1E] mb-2">Marketplace</h3>
+              <p className="text-sm text-[#6B6B6B]">Explorer les articles</p>
+            </Link>
+            
+            <div className="bg-[rgba(255,255,255,0.4)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.3)] rounded-[16px] p-6 text-center hover:shadow-[0_8px_24px_rgba(184,134,11,0.15)] hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+              <div className="text-3xl mb-4">📈</div>
+              <h3 className="font-bold text-[#1C1C1E] mb-2">Progression</h3>
+              <p className="text-sm text-[#6B6B6B]">Historique détaillé</p>
+            </div>
+          </div>
+
+          {/* Floating Action Buttons */}
+          <div className="fixed bottom-8 right-8 flex flex-col space-y-3 z-40">
+            <button className="w-14 h-14 bg-gradient-to-r from-[#B8860B] to-[#DAA520] rounded-full flex items-center justify-center text-white text-2xl shadow-[0_6px_20px_rgba(184,134,11,0.3)] hover:scale-110 transition-all duration-300 animate-pulse">
+              +
+            </button>
+            <button className="w-12 h-12 bg-[rgba(255,255,255,0.4)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.3)] rounded-full flex items-center justify-center text-xl text-[#B8860B] shadow-[0_4px_16px_rgba(184,134,11,0.15)] hover:scale-110 transition-all duration-300">
+              📊
+            </button>
+          </div>
         </div>
-      </main>
-    </div>
-  )
+      </div>
+    </main>
+  );
 }

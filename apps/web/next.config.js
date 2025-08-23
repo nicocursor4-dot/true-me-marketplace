@@ -2,7 +2,7 @@
 const nextConfig = {
   transpilePackages: ['@trueme/shared', '@trueme/ui'],
   experimental: {
-    typedRoutes: true,
+    // typedRoutes: true, // Disabled temporarily for development
   },
 }
 
