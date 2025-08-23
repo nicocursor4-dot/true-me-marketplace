@@ -129,35 +129,62 @@ export default function MarketplacePage() {
     <main className="min-h-screen bg-trueme-cream">
       <Navigation />
       
-      <div className="pt-32 pb-20">
-        <div className="max-w-7xl mx-auto px-8">
-          
-          {/* Header */}
-          <div className="text-center mb-20 fade-in">
-            <h1 className="text-trueme text-6xl font-bold mb-8">Marketplace</h1>
-            <p className="text-trueme-light text-2xl max-w-3xl mx-auto leading-relaxed">
-              Une sélection exclusive d'articles de luxe authentifiés par nos experts
+      <div className="min-h-screen pt-16 pb-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 md:mb-16 fade-in">
+            <div className="inline-flex items-center space-x-2 mb-6">
+              <div className="w-2 h-2 bg-trueme-gold rounded-full"></div>
+              <span className="text-sm font-medium text-trueme-gold tracking-[0.2em] uppercase">Marketplace Privé</span>
+              <div className="w-2 h-2 bg-trueme-gold rounded-full"></div>
+            </div>
+            <h1 className="text-4xl md:text-6xl font-light mb-6 text-trueme tracking-tight">
+              TRUE ME
+            </h1>
+            <h2 className="text-lg md:text-xl font-light mb-8 text-trueme-gold tracking-wide">
+              Not a Style. A Signature
+            </h2>
+            <p className="text-lg md:text-xl text-trueme-light max-w-3xl mx-auto leading-relaxed">
+              Collection curated d'articles de luxe authentifiés par nos experts
             </p>
           </div>
 
           {/* Navigation Tabs */}
           <div className="flex justify-center mb-20 fade-in">
             <div className="glass-morphism p-2 rounded-3xl">
-              {['acheter', 'vendre', 'services'].map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`px-10 py-4 rounded-2xl font-medium transition-all duration-400 text-lg ${
-                    activeTab === tab
-                      ? 'bg-trueme-gold text-white shadow-lg transform scale-105'
-                      : 'text-trueme hover:text-trueme-gold luxury-hover'
-                  }`}
-                >
-                  {tab === 'acheter' ? 'Acheter' : 
-                   tab === 'vendre' ? 'Vendre' : 
-                   'Services VIP'}
-                </button>
-              ))}
+              <div className="flex justify-center mb-8 md:mb-12 fade-in px-2" style={{animationDelay: '0.2s'}}>
+                <div className="glass-morphism p-1 md:p-2 rounded-xl md:rounded-2xl">
+                  <button
+                    onClick={() => setActiveTab('acheter')}
+                    className={`px-4 md:px-8 py-3 md:py-4 rounded-lg md:rounded-xl font-medium text-sm md:text-lg transition-all duration-300 ${
+                      activeTab === 'acheter' 
+                        ? 'bg-trueme-gold text-white transform scale-105' 
+                        : 'text-trueme hover:text-trueme-gold'
+                    }`}
+                  >
+                    Acheter
+                  </button>
+                  <button
+                    onClick={() => setActiveTab('vendre')}
+                    className={`px-4 md:px-8 py-3 md:py-4 rounded-lg md:rounded-xl font-medium text-sm md:text-lg transition-all duration-300 ${
+                      activeTab === 'vendre' 
+                        ? 'bg-trueme-gold text-white transform scale-105' 
+                        : 'text-trueme hover:text-trueme-gold'
+                    }`}
+                  >
+                    Vendre
+                  </button>
+                  <button
+                    onClick={() => setActiveTab('vip')}
+                    className={`px-4 md:px-8 py-3 md:py-4 rounded-lg md:rounded-xl font-medium text-sm md:text-lg transition-all duration-300 ${
+                      activeTab === 'vip' 
+                        ? 'bg-trueme-gold text-white transform scale-105' 
+                        : 'text-trueme hover:text-trueme-gold'
+                    }`}
+                  >
+                    VIP
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -204,65 +231,58 @@ export default function MarketplacePage() {
               </div>
 
               {/* Products Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 mb-20">
-                {featuredProducts.map((product, index) => (
-                  <div 
-                    key={product.id}
-                    className="glass-premium luxury-hover cursor-pointer overflow-hidden fade-in"
-                    style={{animationDelay: `${index * 0.1}s`}}
-                  >
-                    {/* Product Image */}
-                    <div className="relative glass-morphism h-80 flex items-center justify-center mb-8 mx-6 mt-6 rounded-2xl">
-                      <div className="text-8xl">{product.image}</div>
-                      {product.vip && (
-                        <div className="absolute top-4 left-4 bg-trueme-gold text-white px-4 py-2 rounded-xl text-sm font-bold shadow-lg">
-                          VIP ✨
-                        </div>
-                      )}
-                      {product.featured && (
-                        <div className="absolute top-4 right-4 bg-trueme text-white px-4 py-2 rounded-xl text-sm font-bold shadow-lg">
-                          Sélection 🏆
-                        </div>
-                      )}
-                      <div className="absolute bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-xl text-sm font-bold shadow-lg">
-                        ✓ {product.authenticity}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16 fade-in" style={{animationDelay: '0.6s'}}>
+                {featuredProducts.map((product) => (
+                  <div key={product.id} className="glass-premium p-6 md:p-8 cursor-pointer">
+                    {/* Product Header */}
+                    <div className="flex items-center justify-between mb-4 md:mb-6">
+                      <div className="flex items-center space-x-2 md:space-x-3">
+                        {product.vip && (
+                          <span className="bg-trueme-gold text-white px-2 md:px-3 py-1 rounded-full text-xs font-semibold">
+                            VIP
+                          </span>
+                        )}
+                        {product.authenticated && (
+                          <span className="bg-green-500 text-white px-2 md:px-3 py-1 rounded-full text-xs font-semibold">
+                            ✓ Authentifié
+                          </span>
+                        )}
                       </div>
                     </div>
 
+                    {/* Product Image */}
+                    <div className="text-6xl md:text-8xl text-center mb-6 md:mb-8">{product.image}</div>
+
                     {/* Product Info */}
-                    <div className="px-8 pb-8">
-                      <div className="mb-3">
-                        <span className="text-lg text-trueme-gold font-bold">{product.brand}</span>
-                      </div>
-                      <h3 className="text-2xl font-bold text-trueme mb-6">{product.name}</h3>
-                      <div className="flex items-center space-x-4 mb-8">
-                        <span className="text-3xl font-bold text-trueme-gold">{product.price}</span>
-                        <span className="text-lg text-trueme-light line-through">{product.originalPrice}</span>
-                      </div>
-                      
-                      <div className="space-y-4 mb-10 text-base">
-                        <div className="flex justify-between glass-morphism p-3 rounded-xl">
-                          <span className="text-trueme-light">État</span>
-                          <span className="text-trueme font-semibold">{product.condition}</span>
-                        </div>
-                        <div className="flex justify-between glass-morphism p-3 rounded-xl">
-                          <span className="text-trueme-light">Vendeur</span>
-                          <span className="text-trueme font-semibold">{product.seller}</span>
-                        </div>
-                        <div className="flex justify-between glass-morphism p-3 rounded-xl">
-                          <span className="text-trueme-light">Note</span>
-                          <div className="flex items-center space-x-1">
-                            <span>⭐</span>
-                            <span className="text-trueme font-semibold">{product.sellerRating}</span>
-                          </div>
-                        </div>
-                        <div className="flex justify-between glass-morphism p-3 rounded-xl">
-                          <span className="text-trueme-light">Localisation</span>
-                          <span className="text-trueme font-semibold">{product.location}</span>
-                        </div>
+                    <div className="space-y-3 md:space-y-4">
+                      <div>
+                        <h3 className="text-lg md:text-xl font-medium text-trueme mb-1 md:mb-2">{product.brand}</h3>
+                        <p className="text-trueme-light text-sm md:text-base">{product.name}</p>
                       </div>
 
-                      <button className="btn-primary w-full py-4 text-lg">
+                      <div className="flex items-center space-x-3 md:space-x-4">
+                        <span className="text-xl md:text-2xl font-semibold text-trueme-gold">{product.price}</span>
+                        {product.originalPrice && (
+                          <span className="text-base md:text-lg text-trueme-light line-through">{product.originalPrice}</span>
+                        )}
+                      </div>
+
+                      <div className="flex items-center justify-between text-xs md:text-sm text-trueme-light">
+                        <span>Condition: {product.condition}</span>
+                        <span>Score: {product.authenticity}</span>
+                      </div>
+
+                      <div className="border-t border-trueme-light/20 pt-3 md:pt-4">
+                        <div className="flex flex-col md:flex-row md:items-center md:justify-between text-xs md:text-sm text-trueme-light space-y-1 md:space-y-0">
+                          <span>{product.seller} • {product.sellerRating}⭐</span>
+                          <span>{product.location}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Action Button */}
+                    <div className="mt-6 md:mt-8">
+                      <button className="w-full btn-primary py-3 md:py-4 text-base md:text-lg font-medium">
                         Voir les détails
                       </button>
                     </div>

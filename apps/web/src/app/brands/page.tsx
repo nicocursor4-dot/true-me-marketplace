@@ -86,26 +86,35 @@ export default function Brands() {
     <main className="min-h-screen bg-trueme-cream pt-24">
       <Navigation />
       
-      <div className="luxury-container section-spacing">
-        <div className="max-w-6xl mx-auto">
-          {/* Header */}
-          <div className="mb-20 text-center fade-in">
-            <h1 className="mb-8 text-trueme text-5xl">Mes Marques</h1>
-            <p className="text-2xl text-trueme-light max-w-3xl mx-auto leading-relaxed">
-              Suivez votre progression et débloquez des avantages exclusifs pour chaque maison de luxe.
+      <div className="min-h-screen pt-16 pb-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 md:mb-16 fade-in">
+            <div className="inline-flex items-center space-x-2 mb-6">
+              <div className="w-2 h-2 bg-trueme-gold rounded-full"></div>
+              <span className="text-sm font-medium text-trueme-gold tracking-[0.2em] uppercase">Maisons Partenaires</span>
+              <div className="w-2 h-2 bg-trueme-gold rounded-full"></div>
+            </div>
+            <h1 className="text-4xl md:text-6xl font-light mb-6 text-trueme tracking-tight">
+              Vos Marques
+            </h1>
+            <h2 className="text-lg md:text-xl font-light mb-8 text-trueme-gold tracking-wide">
+              Not a Style. A Signature
+            </h2>
+            <p className="text-lg md:text-xl text-trueme-light max-w-3xl mx-auto leading-relaxed">
+              Cultivez vos relations privilégiées avec les plus grandes maisons de luxe
             </p>
           </div>
           
-          {/* Brand Selector */}
-          <div className="flex justify-center space-x-6 mb-20 fade-in">
+          {/* Brand Selection */}
+          <div className="flex flex-wrap justify-center gap-3 md:gap-6 mb-12 md:mb-16 fade-in px-2" style={{animationDelay: '0.2s'}}>
             {Object.entries(brandsData).map(([key, brand]) => (
               <button
                 key={key}
                 onClick={() => setSelectedBrand(key)}
-                className={`px-10 py-4 font-medium transition-all duration-400 rounded-2xl text-lg ${
-                  selectedBrand === key
-                    ? 'glass-premium text-trueme shadow-lg transform scale-105'
-                    : 'glass-morphism text-trueme hover:text-trueme-gold luxury-hover'
+                className={`glass-morphism px-4 md:px-8 py-3 md:py-4 rounded-xl font-medium text-sm md:text-lg transition-all duration-300 ${
+                  selectedBrand === key 
+                    ? 'bg-trueme-gold text-white transform scale-105' 
+                    : 'text-trueme hover:text-trueme-gold'
                 }`}
               >
                 {brand.name}
@@ -113,24 +122,25 @@ export default function Brands() {
             ))}
           </div>
 
-          {/* Current Brand Details */}
-          <div className="glass-premium p-20 mb-20 fade-in luxury-hover">
-            <div className="text-center mb-16">
-              <div className="text-6xl mb-8">👑</div>
-              <h2 className="mb-6 text-trueme text-4xl">{currentBrand.name}</h2>
-              <div className="text-trueme-light text-2xl mb-12">Statut <span className="text-trueme-gold font-semibold">{currentBrand.status}</span></div>
-              
-              {/* Progress */}
-              <div className="max-w-lg mx-auto mb-8">
-                <div className="text-xl mb-6 text-trueme font-medium">{currentBrand.progress}% vers <span className="text-trueme-gold">{currentBrand.nextGoal}</span></div>
-                <div className="bg-trueme-light/20 rounded-full h-4 overflow-hidden">
-                  <div 
-                    className="bg-gradient-to-r from-trueme-gold to-trueme rounded-full h-4 transition-all duration-2000"
-                    style={{width: `${currentBrand.progress}%`}}
-                  ></div>
-                </div>
+          {/* Brand Status Card */}
+          <div className="glass-premium p-8 md:p-16 mb-12 md:mb-16 text-center fade-in" style={{animationDelay: '0.4s'}}>
+            <div className="text-4xl md:text-6xl mb-6 md:mb-8">👑</div>
+            <h2 className="mb-6 md:mb-8 text-trueme text-2xl md:text-4xl font-light">Statut <span className="text-trueme-gold font-medium">{currentBrand.status}</span></h2>
+            <div className="text-trueme-light text-lg md:text-2xl mb-12 md:mb-16">
+              {currentBrand.currentItems} articles • {currentBrand.totalValue}
+            </div>
+            
+            {/* Progress */}
+            <div className="max-w-lg mx-auto">
+              <div className="text-lg md:text-xl mb-6 text-trueme font-medium">{currentBrand.progress}% vers <span className="text-trueme-gold">{currentBrand.nextGoal}</span></div>
+              <div className="progress-bar h-3 md:h-4">
+                <div 
+                  className="progress-fill h-3 md:h-4"
+                  style={{width: `${currentBrand.progress}%`}}
+                ></div>
               </div>
             </div>
+          </div>
 
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
@@ -149,63 +159,63 @@ export default function Brands() {
             </div>
 
             {/* Missions */}
-            <div className="mb-20">
-              <h3 className="mb-12 text-center text-trueme text-3xl">Missions <span className="text-trueme-gold">{currentBrand.name}</span></h3>
-              <div className="space-y-6">
-                {currentBrand.missions.map((mission: any) => (
-                  <div key={mission.id} className="glass-morphism p-8 flex items-center justify-between luxury-hover">
-                    <div>
-                      <h4 className="font-bold mb-3 text-trueme text-xl">{mission.title}</h4>
-                      <span className="text-trueme-gold font-medium">{mission.reward}</span>
-                    </div>
-                    <div className={`px-6 py-3 rounded-xl text-sm font-bold transition-all duration-300 ${
-                      mission.status === 'completed' 
-                        ? 'bg-trueme-gold text-white'
-                        : mission.status === 'in_progress'
-                        ? 'bg-trueme text-white'
-                        : mission.status === 'available'
-                        ? 'border-2 border-trueme-gold text-trueme-gold hover:bg-trueme-gold hover:text-white'
-                        : 'bg-trueme-light/30 text-trueme-light'
+          <div className="mb-16 md:mb-20 fade-in" style={{animationDelay: '0.6s'}}>
+            <h2 className="mb-8 md:mb-12 text-center text-trueme text-2xl md:text-4xl font-light">Missions <span className="text-trueme-gold font-medium">{currentBrand.name}</span></h2>
+            <div className="space-y-4 md:space-y-6">
+              {currentBrand.missions.map((mission) => (
+                <div key={mission.id} className="glass-morphism p-6 md:p-8 flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
+                  <div className="flex items-center space-x-4 md:space-x-6">
+                    <div className={`w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center shrink-0 ${
+                      mission.status === 'completed' ? 'bg-green-500' :
+                      mission.status === 'in_progress' ? 'bg-trueme-gold' :
+                      mission.status === 'available' ? 'bg-blue-500' :
+                      'bg-gray-400'
                     }`}>
-                      {getMissionStatus(mission.status)}
+                      {mission.status === 'completed' && <span className="text-white text-xs md:text-sm">✓</span>}
+                      {mission.status === 'locked' && <span className="text-white text-xs md:text-sm">🔒</span>}
+                    </div>
+                    <div>
+                      <h3 className="text-trueme text-lg md:text-xl font-medium mb-1 md:mb-2">{mission.title}</h3>
+                      <div className="text-trueme-light capitalize text-sm md:text-base">{mission.status}</div>
                     </div>
                   </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Advantages */}
-            <div>
-              <h3 className="mb-12 text-center text-trueme text-3xl">Vos Avantages <span className="text-trueme-gold">{currentBrand.status}</span></h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {currentBrand.advantages.map((advantage: string, index: number) => (
-                  <div key={index} className="glass-morphism p-6 flex items-start space-x-4 luxury-hover">
-                    <div className="text-2xl">✨</div>
-                    <span className="text-trueme-light leading-relaxed text-lg">{advantage}</span>
-                  </div>
-                ))}
-              </div>
+                  <div className="text-trueme-gold font-semibold text-base md:text-lg md:text-right">{mission.reward}</div>
+                </div>
+              ))}
             </div>
           </div>
 
+            {/* Advantages */}
+          <div className="mb-16 md:mb-20 fade-in" style={{animationDelay: '0.8s'}}>
+            <h2 className="mb-12 md:mb-16 text-center text-trueme text-2xl md:text-4xl font-light">Vos Avantages <span className="text-trueme-gold font-medium">{currentBrand.name}</span></h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+              {currentBrand.advantages.map((advantage, index) => (
+                <div key={index} className="glass-morphism p-6 md:p-10">
+                  <div className="text-3xl md:text-4xl mb-4 md:mb-6">✨</div>
+                  <p className="text-trueme-light leading-relaxed text-base md:text-lg">{advantage}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          
           {/* Quick Actions */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 fade-in">
-            <Link href="/marketplace" className="glass-premium p-12 block luxury-hover">
-              <div className="text-5xl mb-6">🛒</div>
-              <h3 className="mb-6 text-trueme text-2xl font-bold">01 — Marketplace</h3>
-              <p className="text-trueme-light text-lg">Découvrir de nouveaux articles {currentBrand.name}</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 fade-in">
+            <Link href="/marketplace" className="glass-premium p-8 md:p-12 block">
+              <div className="text-4xl md:text-5xl mb-4 md:mb-6">🛒</div>
+              <h3 className="mb-4 md:mb-6 text-trueme text-xl md:text-2xl font-medium">Marketplace</h3>
+              <p className="text-trueme-light text-base md:text-lg">Découvrir de nouveaux articles {currentBrand.name}</p>
             </Link>
             
-            <Link href="/dashboard" className="glass-premium p-12 block luxury-hover">
-              <div className="text-5xl mb-6">📊</div>
-              <h3 className="mb-6 text-trueme text-2xl font-bold">02 — Dashboard</h3>
-              <p className="text-trueme-light text-lg">Voir mon statut global TRUE ME</p>
+            <Link href="/dashboard" className="glass-premium p-8 md:p-12 block">
+              <div className="text-4xl md:text-5xl mb-4 md:mb-6">📊</div>
+              <h3 className="mb-4 md:mb-6 text-trueme text-xl md:text-2xl font-medium">Dashboard</h3>
+              <p className="text-trueme-light text-base md:text-lg">Voir votre statut global</p>
             </Link>
             
-            <div className="glass-premium p-12 luxury-hover cursor-pointer">
-              <div className="text-5xl mb-6">🎯</div>
-              <h3 className="mb-6 text-trueme text-2xl font-bold">03 — Programmes</h3>
-              <p className="text-trueme-light text-lg">Découvrir tous les programmes fidélité</p>
+            <div className="glass-premium p-8 md:p-12 cursor-pointer">
+              <div className="text-4xl md:text-5xl mb-4 md:mb-6">🎯</div>
+              <h3 className="mb-4 md:mb-6 text-trueme text-xl md:text-2xl font-medium">Objectifs</h3>
+              <p className="text-trueme-light text-base md:text-lg">Planifier votre progression</p>
             </div>
           </div>
         </div>

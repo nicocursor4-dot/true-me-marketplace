@@ -63,9 +63,9 @@ export default function Dashboard() {
             {/* Progress */}
             <div className="max-w-lg mx-auto">
               <div className="text-xl mb-6 text-trueme font-medium">{userStats.progress}% vers <span className="text-trueme-gold">{userStats.nextStatus}</span></div>
-              <div className="bg-trueme-light/20 rounded-full h-4 overflow-hidden">
+              <div className="progress-bar h-4">
                 <div 
-                  className="bg-gradient-to-r from-trueme-gold to-trueme rounded-full h-4 transition-all duration-2000"
+                  className="progress-fill h-4"
                   style={{width: `${userStats.progress}%`}}
                 ></div>
               </div>
