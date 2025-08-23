@@ -141,7 +141,7 @@ export default function MarketplacePage() {
               TRUE ME
             </h1>
             <h2 className="text-lg md:text-xl font-light mb-8 text-trueme-gold tracking-wide">
-              Not a Style. A Signature
+              Not a Styl. A Signature.
             </h2>
             <p className="text-lg md:text-xl text-trueme-light max-w-3xl mx-auto leading-relaxed">
               Collection curated d'articles de luxe authentifiés par nos experts

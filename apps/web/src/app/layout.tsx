@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'TRUE ME - Not a Style, a Signature',
+  title: 'TRUE ME - Not a Styl. A Signature.',
   description: 'Luxury marketplace platform with authentication and gamification',
 }
 

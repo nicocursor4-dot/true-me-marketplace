@@ -98,7 +98,7 @@ export default function Brands() {
               Vos Marques
             </h1>
             <h2 className="text-lg md:text-xl font-light mb-8 text-trueme-gold tracking-wide">
-              Not a Style. A Signature
+              Not a Styl. A Signature.
             </h2>
             <p className="text-lg md:text-xl text-trueme-light max-w-3xl mx-auto leading-relaxed">
               Cultivez vos relations privilégiées avec les plus grandes maisons de luxe

@@ -9,7 +9,7 @@ export function Header() {
         {/* Logo et tagline */}
         <div className="flex flex-col">
           <h1 className="text-xl font-bold text-trueme-black">TRUE ME</h1>
-          <p className="text-xs text-trueme-secondary font-medium">Not a Style. A Signature</p>
+          <p className="text-xs text-trueme-secondary font-medium">Not a Styl. A Signature.</p>
         </div>
         
         {/* Navigation centrale */}

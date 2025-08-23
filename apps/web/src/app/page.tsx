@@ -29,7 +29,7 @@ export default function Home() {
             
             {/* Signature */}
             <h2 className="text-2xl md:text-3xl font-light mb-16 fade-in text-trueme-gold tracking-wide" style={{animationDelay: '0.2s'}}>
-              Not a Style. A Signature
+              Not a Styl. A Signature.
             </h2>
             
             {/* Description */}
