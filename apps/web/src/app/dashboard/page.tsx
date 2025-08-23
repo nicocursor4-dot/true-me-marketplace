@@ -38,33 +38,34 @@ export default function Dashboard() {
   ];
 
   return (
-    <main className="min-h-screen bg-white pt-20">
+    <main className="min-h-screen bg-trueme-cream pt-24">
       <Navigation />
       
       <div className="luxury-container section-spacing">
         {/* User Profile */}
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="mb-20 fade-in">
-            <h1 className="mb-6">Bonjour, {userStats.name.split(' ')[0]}</h1>
-            <div className="text-minimal text-xl">
-              <p className="mb-2">{userStats.username}</p>
-              <p>Membre TRUE ME depuis {userStats.memberSince}</p>
+            <h1 className="mb-6 text-trueme text-5xl">Bonjour, {userStats.name.split(' ')[0]}</h1>
+            <div className="text-trueme-light text-2xl">
+              <p className="mb-2 text-trueme-gold font-medium">{userStats.username}</p>
+              <p>Membre TRUE ME depuis <span className="text-trueme font-semibold">{userStats.memberSince}</span></p>
             </div>
           </div>
 
           {/* Current Status */}
-          <div className="card-minimal p-16 mb-20 text-center fade-in">
-            <h2 className="mb-8">Statut {userStats.currentStatus}</h2>
-            <div className="text-minimal text-xl mb-12">
+          <div className="glass-premium p-20 mb-20 text-center fade-in luxury-hover">
+            <div className="text-6xl mb-8">👑</div>
+            <h2 className="mb-8 text-trueme text-4xl">Statut <span className="text-trueme-gold">{userStats.currentStatus}</span></h2>
+            <div className="text-trueme-light text-2xl mb-16">
               Membre privilégié de l'écosystème TRUE ME
             </div>
             
             {/* Progress */}
-            <div className="max-w-md mx-auto">
-              <div className="text-lg mb-4">{userStats.progress}% vers {userStats.nextStatus}</div>
-              <div className="bg-minimal rounded-full h-2">
+            <div className="max-w-lg mx-auto">
+              <div className="text-xl mb-6 text-trueme font-medium">{userStats.progress}% vers <span className="text-trueme-gold">{userStats.nextStatus}</span></div>
+              <div className="bg-trueme-light/20 rounded-full h-4 overflow-hidden">
                 <div 
-                  className="bg-black rounded-full h-2 transition-all duration-1000"
+                  className="bg-gradient-to-r from-trueme-gold to-trueme rounded-full h-4 transition-all duration-2000"
                   style={{width: `${userStats.progress}%`}}
                 ></div>
               </div>
@@ -73,35 +74,36 @@ export default function Dashboard() {
 
           {/* Stats Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20 fade-in">
-            <div className="card-minimal p-8 text-center">
-              <div className="text-4xl font-bold mb-2">{userStats.totalItems}</div>
-              <div className="text-minimal">Articles certifiés</div>
+            <div className="glass-morphism p-10 text-center luxury-hover">
+              <div className="text-5xl font-bold mb-4 text-trueme">{userStats.totalItems}</div>
+              <div className="text-trueme-light text-lg">Articles certifiés</div>
             </div>
             
-            <div className="card-minimal p-8 text-center">
-              <div className="text-4xl font-bold mb-2">{userStats.totalValue}</div>
-              <div className="text-minimal">Valeur totale</div>
+            <div className="glass-morphism p-10 text-center luxury-hover">
+              <div className="text-5xl font-bold mb-4 text-trueme-gold">{userStats.totalValue}</div>
+              <div className="text-trueme-light text-lg">Valeur totale</div>
             </div>
             
-            <div className="card-minimal p-8 text-center">
-              <div className="text-4xl font-bold mb-2">{userStats.authenticityScore}</div>
-              <div className="text-minimal">Score d'authenticité</div>
+            <div className="glass-morphism p-10 text-center luxury-hover">
+              <div className="text-5xl font-bold mb-4 text-trueme">{userStats.authenticityScore}</div>
+              <div className="text-trueme-light text-lg">Score d'authenticité</div>
             </div>
             
-            <div className="card-minimal p-8 text-center">
-              <div className="text-4xl font-bold mb-2">{userStats.collectionGrowth}</div>
-              <div className="text-minimal">Croissance ce mois</div>
+            <div className="glass-morphism p-10 text-center luxury-hover">
+              <div className="text-5xl font-bold mb-4 text-trueme-gold">{userStats.collectionGrowth}</div>
+              <div className="text-trueme-light text-lg">Croissance ce mois</div>
             </div>
           </div>
 
           {/* Advantages */}
           <div className="mb-20 fade-in">
-            <h2 className="mb-16 text-center">Vos Avantages {userStats.currentStatus}</h2>
+            <h2 className="mb-16 text-center text-trueme text-4xl">Vos Avantages <span className="text-trueme-gold">{userStats.currentStatus}</span></h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {advantages.map((advantage, index) => (
-                <div key={index} className="card-minimal p-8">
-                  <h3 className="mb-4">{advantage.title}</h3>
-                  <p className="text-minimal leading-relaxed">{advantage.description}</p>
+                <div key={index} className="glass-morphism p-10 luxury-hover">
+                  <div className="text-4xl mb-6">✨</div>
+                  <h3 className="mb-6 text-trueme text-2xl font-bold">{advantage.title}</h3>
+                  <p className="text-trueme-light leading-relaxed text-lg">{advantage.description}</p>
                 </div>
               ))}
             </div>
@@ -109,19 +111,22 @@ export default function Dashboard() {
 
           {/* Quick Actions */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 fade-in">
-            <Link href="/brands" className="card-minimal p-8 block subtle-hover">
-              <h3 className="mb-4">01 — Mes Marques</h3>
-              <p className="text-minimal">Voir mon statut par marque</p>
+            <Link href="/brands" className="glass-premium p-12 block luxury-hover">
+              <div className="text-5xl mb-6">👑</div>
+              <h3 className="mb-6 text-trueme text-2xl font-bold">01 — Mes Marques</h3>
+              <p className="text-trueme-light text-lg">Voir mon statut par marque</p>
             </Link>
             
-            <Link href="/marketplace" className="card-minimal p-8 block subtle-hover">
-              <h3 className="mb-4">02 — Marketplace</h3>
-              <p className="text-minimal">Explorer les articles</p>
+            <Link href="/marketplace" className="glass-premium p-12 block luxury-hover">
+              <div className="text-5xl mb-6">🛒</div>
+              <h3 className="mb-6 text-trueme text-2xl font-bold">02 — Marketplace</h3>
+              <p className="text-trueme-light text-lg">Explorer les articles</p>
             </Link>
             
-            <div className="card-minimal p-8 subtle-hover cursor-pointer">
-              <h3 className="mb-4">03 — Progression</h3>
-              <p className="text-minimal">Historique détaillé</p>
+            <div className="glass-premium p-12 luxury-hover cursor-pointer">
+              <div className="text-5xl mb-6">📊</div>
+              <h3 className="mb-6 text-trueme text-2xl font-bold">03 — Progression</h3>
+              <p className="text-trueme-light text-lg">Historique détaillé</p>
             </div>
           </div>
         </div>

@@ -3,114 +3,86 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen">
       <Navigation />
       
-      {/* Hero Section */}
-      <section className="hero-section">
-        <div className="luxury-container">
-          <div className="max-w-5xl mx-auto">
-            <h1 className="mb-12 fade-in">
+      <div className="hero-section">
+        <div className="luxury-container px-8">
+          <div className="text-center max-w-6xl mx-auto">
+            
+            {/* Main Title */}
+            <h1 className="heading-primary mb-8 fade-in text-trueme">
               TRUE ME
+              <br />
+              <span className="text-trueme-gold font-light">Marketplace</span>
             </h1>
-            <p className="text-2xl md:text-3xl text-minimal mb-16 font-light tracking-wide fade-in" style={{animationDelay: '0.2s'}}>
-              NOT A STYLE. A SIGNATURE.
-            </p>
-            <p className="text-xl text-minimal mb-20 max-w-2xl mx-auto leading-relaxed fade-in" style={{animationDelay: '0.4s'}}>
-              La plateforme digitale qui valorise votre authenticité 
-              à travers des articles de luxe certifiés.
+            
+            {/* Subtitle */}
+            <p className="text-2xl text-trueme-light mb-16 max-w-4xl mx-auto leading-relaxed fade-in" style={{animationDelay: '0.2s'}}>
+              La première plateforme d'authentification et de vente de produits de luxe aux Émirats Arabes Unis
             </p>
             
-            {/* Minimal CTA */}
-            <div className="fade-in" style={{animationDelay: '0.6s'}}>
-              <Link 
-                href="/auth/signup"
-                className="inline-block bg-black text-white px-12 py-4 text-lg font-medium subtle-hover border border-black"
-              >
-                Commencer
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-24 fade-in" style={{animationDelay: '0.4s'}}>
+              <Link href="/dashboard" className="btn-primary px-12 py-5 text-lg">
+                Accéder au Dashboard
+              </Link>
+              <Link href="/marketplace" className="btn-secondary px-12 py-5 text-lg">
+                Explorer le Marketplace
               </Link>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Three Blocs Section */}
-      <section className="section-spacing-lg">
-        <div className="luxury-container">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="mb-20 text-center fade-in">Trois univers</h2>
-            
-            <div className="grid grid-cols-1 gap-16">
-              {/* Bloc 1 */}
-              <div className="card-minimal p-12 fade-in">
-                <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8">
-                  <div className="flex-1">
-                    <h3 className="mb-6">01 — Statut Global</h3>
-                    <p className="text-minimal mb-8 leading-relaxed">
-                      Votre niveau d'authenticité valorisé selon votre collection totale. 
-                      De Bronze à Diamant, chaque article compte.
-                    </p>
-                    <Link 
-                      href="/dashboard"
-                      className="inline-block text-black font-medium subtle-hover underline"
-                    >
-                      Voir mon statut
-                    </Link>
-                  </div>
+            {/* Feature Cards Grid */}
+            <div className="grid md:grid-cols-3 gap-8 mb-20">
+              
+              {/* Card 1 - Dashboard */}
+              <Link href="/dashboard" className="group">
+                <div className="glass-premium p-12 text-center luxury-hover h-full fade-in" style={{animationDelay: '0.6s'}}>
+                  <div className="text-7xl mb-8">📊</div>
+                  <h3 className="text-2xl font-bold mb-6 text-trueme">01 — Dashboard</h3>
+                  <p className="text-trueme-light text-lg leading-relaxed">
+                    Tableau de bord complet avec statut global, suivi par marques et programmes fidélité
+                  </p>
                 </div>
-              </div>
+              </Link>
 
-              {/* Bloc 2 */}
-              <div className="card-minimal p-12 fade-in">
-                <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8">
-                  <div className="flex-1">
-                    <h3 className="mb-6">02 — Statut par Marque</h3>
-                    <p className="text-minimal mb-8 leading-relaxed">
-                      Progressez avec vos marques favorites. Chanel, Hermès, Dior. 
-                      Développez votre expertise par maison.
-                    </p>
-                    <Link 
-                      href="/brands"
-                      className="inline-block text-black font-medium subtle-hover underline"
-                    >
-                      Mes marques
-                    </Link>
-                  </div>
+              {/* Card 2 - Brands */}
+              <Link href="/brands" className="group">
+                <div className="glass-premium p-12 text-center luxury-hover h-full fade-in" style={{animationDelay: '0.8s'}}>
+                  <div className="text-7xl mb-8">👑</div>
+                  <h3 className="text-2xl font-bold mb-6 text-trueme">02 — Marques</h3>
+                  <p className="text-trueme-light text-lg leading-relaxed">
+                    Gestion des marques de luxe avec avantages et statuts personnalisés
+                  </p>
                 </div>
-              </div>
+              </Link>
 
-              {/* Bloc 3 */}
-              <div className="card-minimal p-12 fade-in">
-                <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8">
-                  <div className="flex-1">
-                    <h3 className="mb-6">03 — Marketplace VIP</h3>
-                    <p className="text-minimal mb-8 leading-relaxed">
-                      Achetez et vendez en toute confiance. Service VIP avec collecte, 
-                      shooting professionnel et expertise incluse.
-                    </p>
-                    <Link 
-                      href="/marketplace"
-                      className="inline-block text-black font-medium subtle-hover underline"
-                    >
-                      Explorer
-                    </Link>
-                  </div>
+              {/* Card 3 - Marketplace */}
+              <Link href="/marketplace" className="group">
+                <div className="glass-premium p-12 text-center luxury-hover h-full fade-in" style={{animationDelay: '1s'}}>
+                  <div className="text-7xl mb-8">🛒</div>
+                  <h3 className="text-2xl font-bold mb-6 text-trueme">03 — Marketplace</h3>
+                  <p className="text-trueme-light text-lg leading-relaxed">
+                    Achat et vente d'articles authentifiés avec services VIP premium
+                  </p>
                 </div>
-              </div>
+              </Link>
+              
             </div>
+
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Minimal Footer */}
-      <footer className="section-spacing border-t border-minimal">
+      {/* Footer */}
+      <footer className="section-spacing glass-morphism mx-8 mb-8">
         <div className="luxury-container">
           <div className="text-center">
             <div className="mb-8">
-              <div className="text-lg font-bold mb-2">TRUE ME</div>
-              <div className="text-minimal">NOT A STYLE. A SIGNATURE.</div>
+              <div className="text-xl font-bold mb-2 text-trueme">TRUE ME</div>
+              <div className="text-trueme-gold font-medium">NOT A STYLE. A SIGNATURE.</div>
             </div>
-            <p className="text-minimal">
+            <p className="text-trueme-light">
               &copy; 2024 TRUE ME. Tous droits réservés.
             </p>
           </div>

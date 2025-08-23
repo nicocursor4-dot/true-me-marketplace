@@ -126,31 +126,31 @@ export default function MarketplacePage() {
   ];
 
   return (
-    <main className="min-h-screen bg-[#FCFAF7]">
+    <main className="min-h-screen bg-trueme-cream">
       <Navigation />
       
       <div className="pt-32 pb-20">
         <div className="max-w-7xl mx-auto px-8">
           
           {/* Header */}
-          <div className="text-center mb-20">
-            <h1 className="heading-primary mb-6">Marketplace</h1>
-            <p className="text-minimal text-xl max-w-2xl mx-auto">
+          <div className="text-center mb-20 fade-in">
+            <h1 className="text-trueme text-6xl font-bold mb-8">Marketplace</h1>
+            <p className="text-trueme-light text-2xl max-w-3xl mx-auto leading-relaxed">
               Une sélection exclusive d'articles de luxe authentifiés par nos experts
             </p>
           </div>
 
           {/* Navigation Tabs */}
-          <div className="flex justify-center mb-16">
-            <div className="inline-flex space-x-2 p-2 bg-white rounded-[16px] border border-[#F0F0F0]">
+          <div className="flex justify-center mb-20 fade-in">
+            <div className="glass-morphism p-2 rounded-3xl">
               {['acheter', 'vendre', 'services'].map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`px-8 py-4 rounded-[12px] font-medium transition-all duration-300 ${
+                  className={`px-10 py-4 rounded-2xl font-medium transition-all duration-400 text-lg ${
                     activeTab === tab
-                      ? 'bg-[#1A1A1A] text-white'
-                      : 'text-minimal hover:text-[#1A1A1A] hover:bg-[#F8F8F8]'
+                      ? 'bg-trueme-gold text-white shadow-lg transform scale-105'
+                      : 'text-trueme hover:text-trueme-gold luxury-hover'
                   }`}
                 >
                   {tab === 'acheter' ? 'Acheter' : 
@@ -164,33 +164,34 @@ export default function MarketplacePage() {
           {activeTab === 'acheter' && (
             <>
               {/* Filters */}
-              <div className="card-minimal p-8 mb-16">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              <div className="glass-premium p-12 mb-20 fade-in">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
                   <div>
-                    <h3 className="mb-8">Catégorie</h3>
-                    <div className="flex flex-wrap gap-3">
+                    <h3 className="mb-10 text-trueme text-2xl font-bold">Catégorie</h3>
+                    <div className="flex flex-wrap gap-4">
                       {categories.map((category) => (
                         <button
                           key={category.id}
                           onClick={() => setSelectedCategory(category.id)}
-                          className={`px-6 py-3 rounded-[12px] text-sm font-medium transition-all duration-300 ${
+                          className={`px-6 py-3 rounded-2xl font-medium transition-all duration-400 flex items-center space-x-2 ${
                             selectedCategory === category.id
-                              ? 'bg-[#1A1A1A] text-white'
-                              : 'bg-[#F8F8F8] text-minimal hover:bg-[#F0F0F0] hover:text-[#1A1A1A]'
+                              ? 'glass-premium transform scale-105 text-trueme-gold shadow-lg'
+                              : 'glass-morphism text-trueme hover:text-trueme-gold luxury-hover'
                           }`}
                         >
-                          {category.name}
+                          <span>{category.icon}</span>
+                          <span>{category.name}</span>
                         </button>
                       ))}
                     </div>
                   </div>
                   
                   <div>
-                    <h3 className="mb-8">Prix</h3>
+                    <h3 className="mb-10 text-trueme text-2xl font-bold">Prix</h3>
                     <select
                       value={priceRange}
                       onChange={(e) => setPriceRange(e.target.value)}
-                      className="w-full px-6 py-4 bg-[#F8F8F8] border border-[#F0F0F0] rounded-[12px] text-[#1A1A1A] focus:outline-none focus:border-[#1A1A1A] transition-all duration-300"
+                      className="w-full px-6 py-4 glass-morphism border-0 rounded-2xl text-trueme focus:outline-none focus:ring-2 focus:ring-trueme-gold transition-all duration-300 text-lg"
                     >
                       {priceRanges.map((range) => (
                         <option key={range.id} value={range.id}>
@@ -203,64 +204,65 @@ export default function MarketplacePage() {
               </div>
 
               {/* Products Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mb-16">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 mb-20">
                 {featuredProducts.map((product, index) => (
                   <div 
                     key={product.id}
-                    className="card-minimal subtle-hover cursor-pointer overflow-hidden"
+                    className="glass-premium luxury-hover cursor-pointer overflow-hidden fade-in"
+                    style={{animationDelay: `${index * 0.1}s`}}
                   >
                     {/* Product Image */}
-                    <div className="relative bg-[#F8F8F8] h-64 flex items-center justify-center mb-6">
-                      <div className="text-6xl">{product.image}</div>
+                    <div className="relative glass-morphism h-80 flex items-center justify-center mb-8 mx-6 mt-6 rounded-2xl">
+                      <div className="text-8xl">{product.image}</div>
                       {product.vip && (
-                        <div className="absolute top-4 left-4 bg-[#1A1A1A] text-white px-3 py-1 rounded-[8px] text-xs font-medium">
-                          VIP
+                        <div className="absolute top-4 left-4 bg-trueme-gold text-white px-4 py-2 rounded-xl text-sm font-bold shadow-lg">
+                          VIP ✨
                         </div>
                       )}
                       {product.featured && (
-                        <div className="absolute top-4 right-4 bg-[#FF5722] text-white px-3 py-1 rounded-[8px] text-xs font-medium">
-                          Sélection
+                        <div className="absolute top-4 right-4 bg-trueme text-white px-4 py-2 rounded-xl text-sm font-bold shadow-lg">
+                          Sélection 🏆
                         </div>
                       )}
-                      <div className="absolute bottom-4 right-4 bg-[#4CAF50] text-white px-3 py-1 rounded-[8px] text-xs font-medium">
+                      <div className="absolute bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-xl text-sm font-bold shadow-lg">
                         ✓ {product.authenticity}
                       </div>
                     </div>
 
                     {/* Product Info */}
                     <div className="px-8 pb-8">
-                      <div className="mb-2">
-                        <span className="text-sm text-minimal">{product.brand}</span>
+                      <div className="mb-3">
+                        <span className="text-lg text-trueme-gold font-bold">{product.brand}</span>
                       </div>
-                      <h3 className="text-xl font-semibold text-[#1A1A1A] mb-4">{product.name}</h3>
-                      <div className="flex items-center space-x-3 mb-6">
-                        <span className="text-2xl font-bold text-[#1A1A1A]">{product.price}</span>
-                        <span className="text-sm text-minimal line-through">{product.originalPrice}</span>
+                      <h3 className="text-2xl font-bold text-trueme mb-6">{product.name}</h3>
+                      <div className="flex items-center space-x-4 mb-8">
+                        <span className="text-3xl font-bold text-trueme-gold">{product.price}</span>
+                        <span className="text-lg text-trueme-light line-through">{product.originalPrice}</span>
                       </div>
                       
-                      <div className="space-y-3 mb-8 text-sm">
-                        <div className="flex justify-between">
-                          <span className="text-minimal">État</span>
-                          <span className="text-[#1A1A1A] font-medium">{product.condition}</span>
+                      <div className="space-y-4 mb-10 text-base">
+                        <div className="flex justify-between glass-morphism p-3 rounded-xl">
+                          <span className="text-trueme-light">État</span>
+                          <span className="text-trueme font-semibold">{product.condition}</span>
                         </div>
-                        <div className="flex justify-between">
-                          <span className="text-minimal">Vendeur</span>
-                          <span className="text-[#1A1A1A] font-medium">{product.seller}</span>
+                        <div className="flex justify-between glass-morphism p-3 rounded-xl">
+                          <span className="text-trueme-light">Vendeur</span>
+                          <span className="text-trueme font-semibold">{product.seller}</span>
                         </div>
-                        <div className="flex justify-between">
-                          <span className="text-minimal">Note</span>
+                        <div className="flex justify-between glass-morphism p-3 rounded-xl">
+                          <span className="text-trueme-light">Note</span>
                           <div className="flex items-center space-x-1">
                             <span>⭐</span>
-                            <span className="text-[#1A1A1A] font-medium">{product.sellerRating}</span>
+                            <span className="text-trueme font-semibold">{product.sellerRating}</span>
                           </div>
                         </div>
-                        <div className="flex justify-between">
-                          <span className="text-minimal">Localisation</span>
-                          <span className="text-[#1A1A1A] font-medium">{product.location}</span>
+                        <div className="flex justify-between glass-morphism p-3 rounded-xl">
+                          <span className="text-trueme-light">Localisation</span>
+                          <span className="text-trueme font-semibold">{product.location}</span>
                         </div>
                       </div>
 
-                      <button className="btn-primary w-full">
+                      <button className="btn-primary w-full py-4 text-lg">
                         Voir les détails
                       </button>
                     </div>
@@ -271,58 +273,53 @@ export default function MarketplacePage() {
           )}
 
           {activeTab === 'vendre' && (
-            <div className="card-minimal p-16 text-center">
-              <h2 className="heading-secondary mb-6">Vendez vos articles de luxe</h2>
-              <p className="text-minimal text-lg mb-16 max-w-lg mx-auto">
+            <div className="glass-premium p-20 text-center fade-in">
+              <div className="text-6xl mb-8">💎</div>
+              <h2 className="text-4xl font-bold text-trueme mb-8">Vendez vos articles de luxe</h2>
+              <p className="text-trueme-light text-2xl mb-20 max-w-2xl mx-auto leading-relaxed">
                 Bénéficiez de notre expertise et de nos services d'authentification
               </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
-                <div className="text-center">
-                  <div className="w-20 h-20 bg-[#F8F8F8] rounded-full flex items-center justify-center mx-auto mb-6">
-                    <span className="text-3xl">📸</span>
-                  </div>
-                  <h3 className="text-xl font-semibold text-[#1A1A1A] mb-3">01 — Photographiez</h3>
-                  <p className="text-minimal">Prenez des photos détaillées de votre article</p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20">
+                <div className="glass-morphism p-10 text-center luxury-hover">
+                  <div className="text-6xl mb-8">📸</div>
+                  <h3 className="text-2xl font-bold text-trueme mb-6">01 — Photographiez</h3>
+                  <p className="text-trueme-light text-lg leading-relaxed">Prenez des photos détaillées de votre article</p>
                 </div>
                 
-                <div className="text-center">
-                  <div className="w-20 h-20 bg-[#F8F8F8] rounded-full flex items-center justify-center mx-auto mb-6">
-                    <span className="text-3xl">🔍</span>
-                  </div>
-                  <h3 className="text-xl font-semibold text-[#1A1A1A] mb-3">02 — Authentification</h3>
-                  <p className="text-minimal">Nos experts certifient l'authenticité</p>
+                <div className="glass-morphism p-10 text-center luxury-hover">
+                  <div className="text-6xl mb-8">🔍</div>
+                  <h3 className="text-2xl font-bold text-trueme mb-6">02 — Authentification</h3>
+                  <p className="text-trueme-light text-lg leading-relaxed">Nos experts certifient l'authenticité</p>
                 </div>
                 
-                <div className="text-center">
-                  <div className="w-20 h-20 bg-[#F8F8F8] rounded-full flex items-center justify-center mx-auto mb-6">
-                    <span className="text-3xl">💰</span>
-                  </div>
-                  <h3 className="text-xl font-semibold text-[#1A1A1A] mb-3">03 — Vendez</h3>
-                  <p className="text-minimal">Mettez en vente avec garantie TRUE ME</p>
+                <div className="glass-morphism p-10 text-center luxury-hover">
+                  <div className="text-6xl mb-8">💰</div>
+                  <h3 className="text-2xl font-bold text-trueme mb-6">03 — Vendez</h3>
+                  <p className="text-trueme-light text-lg leading-relaxed">Mettez en vente avec garantie TRUE ME</p>
                 </div>
               </div>
 
-              <button className="btn-primary px-12 py-4">
+              <button className="btn-primary px-16 py-6 text-xl">
                 Commencer à vendre
               </button>
             </div>
           )}
 
           {activeTab === 'services' && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {vipServices.map((service) => (
-                <div key={service.id} className="card-minimal p-8 subtle-hover">
-                  <div className="flex items-start space-x-6">
-                    <div className="w-16 h-16 bg-[#1A1A1A] rounded-full flex items-center justify-center text-white text-2xl flex-shrink-0">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+              {vipServices.map((service, index) => (
+                <div key={service.id} className="glass-premium p-12 luxury-hover fade-in" style={{animationDelay: `${index * 0.1}s`}}>
+                  <div className="flex items-start space-x-8">
+                    <div className="glass-morphism w-20 h-20 rounded-full flex items-center justify-center text-3xl flex-shrink-0">
                       {service.icon}
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-[#1A1A1A] mb-3">{service.title}</h3>
-                      <p className="text-minimal mb-6">{service.description}</p>
+                      <h3 className="text-2xl font-bold text-trueme mb-4">{service.title}</h3>
+                      <p className="text-trueme-light text-lg mb-8 leading-relaxed">{service.description}</p>
                       <div className="flex items-center justify-between">
-                        <span className="text-lg font-semibold text-[#1A1A1A]">{service.price}</span>
-                        <button className="btn-primary px-6 py-3 text-sm">
+                        <span className="text-2xl font-bold text-trueme-gold">{service.price}</span>
+                        <button className="btn-primary px-8 py-4 text-lg">
                           Réserver
                         </button>
                       </div>

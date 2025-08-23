@@ -83,29 +83,29 @@ export default function Brands() {
   };
 
   return (
-    <main className="min-h-screen bg-white pt-20">
+    <main className="min-h-screen bg-trueme-cream pt-24">
       <Navigation />
       
       <div className="luxury-container section-spacing">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="mb-20 text-center fade-in">
-            <h1 className="mb-8">Mes Marques</h1>
-            <p className="text-xl text-minimal max-w-2xl mx-auto">
+            <h1 className="mb-8 text-trueme text-5xl">Mes Marques</h1>
+            <p className="text-2xl text-trueme-light max-w-3xl mx-auto leading-relaxed">
               Suivez votre progression et débloquez des avantages exclusifs pour chaque maison de luxe.
             </p>
           </div>
           
           {/* Brand Selector */}
-          <div className="flex justify-center space-x-4 mb-20 fade-in">
+          <div className="flex justify-center space-x-6 mb-20 fade-in">
             {Object.entries(brandsData).map(([key, brand]) => (
               <button
                 key={key}
                 onClick={() => setSelectedBrand(key)}
-                className={`px-8 py-3 font-medium transition-all duration-300 border ${
+                className={`px-10 py-4 font-medium transition-all duration-400 rounded-2xl text-lg ${
                   selectedBrand === key
-                    ? 'bg-black text-white border-black'
-                    : 'bg-white text-black border-minimal hover:border-black'
+                    ? 'glass-premium text-trueme shadow-lg transform scale-105'
+                    : 'glass-morphism text-trueme hover:text-trueme-gold luxury-hover'
                 }`}
               >
                 {brand.name}
@@ -114,17 +114,18 @@ export default function Brands() {
           </div>
 
           {/* Current Brand Details */}
-          <div className="card-minimal p-16 mb-20 fade-in">
-            <div className="text-center mb-12">
-              <h2 className="mb-4">{currentBrand.name}</h2>
-              <div className="text-minimal text-xl mb-8">Statut {currentBrand.status}</div>
+          <div className="glass-premium p-20 mb-20 fade-in luxury-hover">
+            <div className="text-center mb-16">
+              <div className="text-6xl mb-8">👑</div>
+              <h2 className="mb-6 text-trueme text-4xl">{currentBrand.name}</h2>
+              <div className="text-trueme-light text-2xl mb-12">Statut <span className="text-trueme-gold font-semibold">{currentBrand.status}</span></div>
               
               {/* Progress */}
-              <div className="max-w-md mx-auto mb-8">
-                <div className="text-lg mb-4">{currentBrand.progress}% vers {currentBrand.nextGoal}</div>
-                <div className="bg-minimal rounded-full h-2">
+              <div className="max-w-lg mx-auto mb-8">
+                <div className="text-xl mb-6 text-trueme font-medium">{currentBrand.progress}% vers <span className="text-trueme-gold">{currentBrand.nextGoal}</span></div>
+                <div className="bg-trueme-light/20 rounded-full h-4 overflow-hidden">
                   <div 
-                    className="bg-black rounded-full h-2 transition-all duration-1000"
+                    className="bg-gradient-to-r from-trueme-gold to-trueme rounded-full h-4 transition-all duration-2000"
                     style={{width: `${currentBrand.progress}%`}}
                   ></div>
                 </div>
@@ -132,39 +133,39 @@ export default function Brands() {
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-              <div className="text-center">
-                <div className="text-4xl font-bold mb-2">{currentBrand.currentItems}</div>
-                <div className="text-minimal">Articles authentifiés</div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+              <div className="glass-morphism p-8 text-center luxury-hover">
+                <div className="text-5xl font-bold mb-4 text-trueme">{currentBrand.currentItems}</div>
+                <div className="text-trueme-light text-lg">Articles authentifiés</div>
               </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold mb-2">{currentBrand.totalValue}</div>
-                <div className="text-minimal">Valeur totale</div>
+              <div className="glass-morphism p-8 text-center luxury-hover">
+                <div className="text-5xl font-bold mb-4 text-trueme-gold">{currentBrand.totalValue}</div>
+                <div className="text-trueme-light text-lg">Valeur totale</div>
               </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold mb-2">{currentBrand.nextGoal}</div>
-                <div className="text-minimal">Prochain objectif</div>
+              <div className="glass-morphism p-8 text-center luxury-hover">
+                <div className="text-5xl font-bold mb-4 text-trueme">{currentBrand.nextGoal}</div>
+                <div className="text-trueme-light text-lg">Prochain objectif</div>
               </div>
             </div>
 
             {/* Missions */}
-            <div className="mb-16">
-              <h3 className="mb-8 text-center">Missions {currentBrand.name}</h3>
-              <div className="space-y-4">
+            <div className="mb-20">
+              <h3 className="mb-12 text-center text-trueme text-3xl">Missions <span className="text-trueme-gold">{currentBrand.name}</span></h3>
+              <div className="space-y-6">
                 {currentBrand.missions.map((mission: any) => (
-                  <div key={mission.id} className="border-minimal border rounded-xl p-6 flex items-center justify-between">
+                  <div key={mission.id} className="glass-morphism p-8 flex items-center justify-between luxury-hover">
                     <div>
-                      <h4 className="font-medium mb-2">{mission.title}</h4>
-                      <span className="text-minimal text-sm">{mission.reward}</span>
+                      <h4 className="font-bold mb-3 text-trueme text-xl">{mission.title}</h4>
+                      <span className="text-trueme-gold font-medium">{mission.reward}</span>
                     </div>
-                    <div className={`px-4 py-2 rounded text-sm font-medium ${
+                    <div className={`px-6 py-3 rounded-xl text-sm font-bold transition-all duration-300 ${
                       mission.status === 'completed' 
-                        ? 'bg-minimal text-black'
+                        ? 'bg-trueme-gold text-white'
                         : mission.status === 'in_progress'
-                        ? 'bg-black text-white'
+                        ? 'bg-trueme text-white'
                         : mission.status === 'available'
-                        ? 'border border-black text-black hover:bg-black hover:text-white transition-all'
-                        : 'bg-minimal text-minimal'
+                        ? 'border-2 border-trueme-gold text-trueme-gold hover:bg-trueme-gold hover:text-white'
+                        : 'bg-trueme-light/30 text-trueme-light'
                     }`}>
                       {getMissionStatus(mission.status)}
                     </div>
@@ -175,12 +176,12 @@ export default function Brands() {
 
             {/* Advantages */}
             <div>
-              <h3 className="mb-8 text-center">Vos Avantages {currentBrand.status}</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <h3 className="mb-12 text-center text-trueme text-3xl">Vos Avantages <span className="text-trueme-gold">{currentBrand.status}</span></h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {currentBrand.advantages.map((advantage: string, index: number) => (
-                  <div key={index} className="flex items-start space-x-3 p-4">
-                    <div className="w-2 h-2 rounded-full bg-black mt-2 flex-shrink-0"></div>
-                    <span className="text-minimal leading-relaxed">{advantage}</span>
+                  <div key={index} className="glass-morphism p-6 flex items-start space-x-4 luxury-hover">
+                    <div className="text-2xl">✨</div>
+                    <span className="text-trueme-light leading-relaxed text-lg">{advantage}</span>
                   </div>
                 ))}
               </div>
@@ -189,19 +190,22 @@ export default function Brands() {
 
           {/* Quick Actions */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 fade-in">
-            <Link href="/marketplace" className="card-minimal p-8 block subtle-hover">
-              <h3 className="mb-4">01 — Marketplace</h3>
-              <p className="text-minimal">Découvrir de nouveaux articles {currentBrand.name}</p>
+            <Link href="/marketplace" className="glass-premium p-12 block luxury-hover">
+              <div className="text-5xl mb-6">🛒</div>
+              <h3 className="mb-6 text-trueme text-2xl font-bold">01 — Marketplace</h3>
+              <p className="text-trueme-light text-lg">Découvrir de nouveaux articles {currentBrand.name}</p>
             </Link>
             
-            <Link href="/dashboard" className="card-minimal p-8 block subtle-hover">
-              <h3 className="mb-4">02 — Dashboard</h3>
-              <p className="text-minimal">Voir mon statut global TRUE ME</p>
+            <Link href="/dashboard" className="glass-premium p-12 block luxury-hover">
+              <div className="text-5xl mb-6">📊</div>
+              <h3 className="mb-6 text-trueme text-2xl font-bold">02 — Dashboard</h3>
+              <p className="text-trueme-light text-lg">Voir mon statut global TRUE ME</p>
             </Link>
             
-            <div className="card-minimal p-8 subtle-hover cursor-pointer">
-              <h3 className="mb-4">03 — Programmes</h3>
-              <p className="text-minimal">Découvrir tous les programmes fidélité</p>
+            <div className="glass-premium p-12 luxury-hover cursor-pointer">
+              <div className="text-5xl mb-6">🎯</div>
+              <h3 className="mb-6 text-trueme text-2xl font-bold">03 — Programmes</h3>
+              <p className="text-trueme-light text-lg">Découvrir tous les programmes fidélité</p>
             </div>
           </div>
         </div>
