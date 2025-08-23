@@ -3,6 +3,8 @@
 import React from 'react';
 import Navigation from '@/components/Navigation';
 import Link from 'next/link';
+import AnimatedCard from '@/components/AnimatedCard';
+import StatusProgressRing from '@/components/StatusProgressRing';
 
 export default function Dashboard() {
   const userStats = {
@@ -93,16 +95,19 @@ export default function Dashboard() {
           </div>
 
           {/* Hero Profile Section */}
-          <div className="bg-[rgba(255,255,255,0.4)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.3)] rounded-[20px] p-8 mb-8 shadow-[0_8px_32px_rgba(184,134,11,0.12)]">
+          <AnimatedCard 
+            className="bg-[rgba(255,255,255,0.4)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.3)] rounded-[20px] p-8 mb-8 shadow-[0_8px_32px_rgba(184,134,11,0.12)]" 
+            glowEffect={true}
+          >
             <div className="text-center">
               {/* Avatar avec glassmorphisme */}
               <div className="relative inline-block mb-6">
-                <div className="w-20 h-20 rounded-full bg-gradient-to-r from-[#B8860B] to-[#DAA520] p-1 shadow-[0_4px_16px_rgba(184,134,11,0.2)]">
+                <div className="w-20 h-20 rounded-full bg-gradient-to-r from-[#B8860B] to-[#DAA520] p-1 shadow-[0_4px_16px_rgba(184,134,11,0.2)] hover:shadow-[0_6px_24px_rgba(184,134,11,0.4)] transition-all duration-300">
                   <div className="w-full h-full rounded-full bg-gray-300 flex items-center justify-center text-2xl font-bold text-white">
                     JD
                   </div>
                 </div>
-                <div className="absolute top-0 right-0 w-3 h-3 bg-[#B8860B] rounded-full border-2 border-white"></div>
+                <div className="absolute top-0 right-0 w-3 h-3 bg-[#B8860B] rounded-full border-2 border-white animate-pulse"></div>
               </div>
 
               {/* Informations utilisateur */}
@@ -112,47 +117,51 @@ export default function Dashboard() {
                 Membre TRUE ME depuis : {userStats.memberSince}
               </p>
 
+              {/* Progress Ring */}
+              <div className="mb-6">
+                <StatusProgressRing 
+                  progress={userStats.progress}
+                  size={140}
+                  strokeWidth={10}
+                  color="#DAA520"
+                  animationDelay={500}
+                  label="vers Platinum"
+                />
+              </div>
+
               {/* Carte Statut Actuel avec glassmorphisme gold */}
-              <div className="bg-gradient-to-r from-[#B8860B] to-[#DAA520] backdrop-blur-[15px] rounded-[16px] p-6 text-white shadow-[0_6px_20px_rgba(184,134,11,0.25)] max-w-md mx-auto">
+              <AnimatedCard className="bg-gradient-to-r from-[#B8860B] to-[#DAA520] backdrop-blur-[15px] rounded-[16px] p-6 text-white shadow-[0_6px_20px_rgba(184,134,11,0.25)] max-w-md mx-auto">
                 <p className="text-sm opacity-90 mb-2">Statut actuel TRUE ME :</p>
                 <div className="flex items-center justify-center space-x-2 mb-4">
                   <span className="text-2xl">🏆</span>
                   <span className="text-2xl font-bold tracking-wide">{userStats.currentStatus}</span>
                 </div>
                 
-                <div className="mb-4">
-                  <div className="flex justify-between text-sm mb-2">
-                    <span>Évolution du statut : {userStats.nextStatus}</span>
-                    <span>{userStats.progress}%</span>
-                  </div>
-                  <div className="w-full bg-[rgba(255,255,255,0.2)] rounded-full h-1 overflow-hidden">
-                    <div 
-                      className="bg-white h-1 rounded-full transition-all duration-1000 ease-out"
-                      style={{ width: `${userStats.progress}%` }}
-                    ></div>
-                  </div>
-                </div>
-                
-                <Link href="/dashboard/evolution" className="text-sm underline hover:no-underline transition-all duration-300 cursor-pointer">
+                <Link href="/dashboard/evolution" className="text-sm underline hover:no-underline transition-all duration-300 cursor-pointer hover:text-yellow-200">
                   Voir détails →
                 </Link>
-              </div>
+              </AnimatedCard>
             </div>
-          </div>
+          </AnimatedCard>
 
           {/* Statistics Cards Grid avec glassmorphisme */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             {statsCards.map((stat, index) => (
-              <div key={index} className="bg-[rgba(255,255,255,0.3)] backdrop-blur-[10px] border border-[rgba(255,255,255,0.25)] rounded-[16px] p-6 shadow-[0_4px_16px_rgba(184,134,11,0.08)] hover:shadow-[0_8px_24px_rgba(184,134,11,0.15)] hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+              <AnimatedCard 
+                key={index} 
+                className="bg-[rgba(255,255,255,0.3)] backdrop-blur-[10px] border border-[rgba(255,255,255,0.25)] rounded-[16px] p-6 shadow-[0_4px_16px_rgba(184,134,11,0.08)]"
+                hoverScale={true}
+                glowEffect={true}
+              >
                 <div className="flex items-center justify-between mb-4">
-                  <div className="w-10 h-10 bg-[rgba(184,134,11,0.1)] rounded-full flex items-center justify-center text-xl">
+                  <div className="w-10 h-10 bg-[rgba(184,134,11,0.1)] rounded-full flex items-center justify-center text-xl hover:bg-[rgba(184,134,11,0.2)] hover:scale-110 transition-all duration-300">
                     {stat.icon}
                   </div>
                 </div>
                 <div className="text-3xl font-bold text-[#1C1C1E] mb-2">{stat.value}</div>
                 <div className="text-sm text-[#6B6B6B] mb-2">{stat.label}</div>
                 <div className={`text-sm font-medium ${stat.trendColor}`}>{stat.trend}</div>
-              </div>
+              </AnimatedCard>
             ))}
           </div>
 
@@ -176,23 +185,39 @@ export default function Dashboard() {
 
           {/* Actions rapides */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Link href="/brands" className="bg-[rgba(255,255,255,0.4)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.3)] rounded-[16px] p-6 text-center hover:shadow-[0_8px_24px_rgba(184,134,11,0.15)] hover:-translate-y-1 transition-all duration-300">
-              <div className="text-3xl mb-4">🏷️</div>
-              <h3 className="font-bold text-[#1C1C1E] mb-2">Mes Marques</h3>
-              <p className="text-sm text-[#6B6B6B]">Voir mon statut par marque</p>
-            </Link>
+            <AnimatedCard 
+              className="bg-[rgba(255,255,255,0.4)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.3)] rounded-[16px] p-6 text-center"
+              hoverScale={true}
+              glowEffect={true}
+            >
+              <Link href="/brands" className="block">
+                <div className="text-3xl mb-4 hover:scale-110 transition-transform duration-300">🏷️</div>
+                <h3 className="font-bold text-[#1C1C1E] mb-2">Mes Marques</h3>
+                <p className="text-sm text-[#6B6B6B]">Voir mon statut par marque</p>
+              </Link>
+            </AnimatedCard>
             
-            <Link href="/marketplace" className="bg-[rgba(255,255,255,0.4)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.3)] rounded-[16px] p-6 text-center hover:shadow-[0_8px_24px_rgba(184,134,11,0.15)] hover:-translate-y-1 transition-all duration-300">
-              <div className="text-3xl mb-4">🛍️</div>
-              <h3 className="font-bold text-[#1C1C1E] mb-2">Marketplace</h3>
-              <p className="text-sm text-[#6B6B6B]">Explorer les articles</p>
-            </Link>
+            <AnimatedCard 
+              className="bg-[rgba(255,255,255,0.4)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.3)] rounded-[16px] p-6 text-center"
+              hoverScale={true}
+              glowEffect={true}
+            >
+              <Link href="/marketplace" className="block">
+                <div className="text-3xl mb-4 hover:scale-110 transition-transform duration-300">🛍️</div>
+                <h3 className="font-bold text-[#1C1C1E] mb-2">Marketplace</h3>
+                <p className="text-sm text-[#6B6B6B]">Explorer les articles</p>
+              </Link>
+            </AnimatedCard>
             
-            <div className="bg-[rgba(255,255,255,0.4)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.3)] rounded-[16px] p-6 text-center hover:shadow-[0_8px_24px_rgba(184,134,11,0.15)] hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-              <div className="text-3xl mb-4">📈</div>
+            <AnimatedCard 
+              className="bg-[rgba(255,255,255,0.4)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.3)] rounded-[16px] p-6 text-center cursor-pointer"
+              hoverScale={true}
+              glowEffect={true}
+            >
+              <div className="text-3xl mb-4 hover:scale-110 transition-transform duration-300">📈</div>
               <h3 className="font-bold text-[#1C1C1E] mb-2">Progression</h3>
               <p className="text-sm text-[#6B6B6B]">Historique détaillé</p>
-            </div>
+            </AnimatedCard>
           </div>
 
           {/* Floating Action Buttons */}

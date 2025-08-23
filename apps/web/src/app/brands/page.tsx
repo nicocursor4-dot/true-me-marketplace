@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Link from 'next/link';
+import AnimatedCard from '@/components/AnimatedCard';
+import StatusProgressRing from '@/components/StatusProgressRing';
 
 export default function Brands() {
   const [selectedBrand, setSelectedBrand] = useState('chanel');
@@ -184,7 +186,14 @@ export default function Brands() {
                   {getStatusBadge(currentBrand.status, currentBrand.statusColor)}
                 </div>
               </div>
-              {getProgressRing(currentBrand.progress, currentBrand.statusColor)}
+              <StatusProgressRing 
+                progress={currentBrand.progress}
+                size={100}
+                strokeWidth={8}
+                color={currentBrand.statusColor}
+                animationDelay={200}
+                showPercentage={true}
+              />
             </div>
 
             {/* Stats Grid */}

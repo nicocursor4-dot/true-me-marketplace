@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Link from 'next/link';
+import AnimatedCard from '@/components/AnimatedCard';
 
 export default function MarketplacePage() {
   const [activeTab, setActiveTab] = useState('acheter');
@@ -207,8 +208,13 @@ export default function MarketplacePage() {
 
               {/* Products Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                {featuredProducts.map((product) => (
-                  <div key={product.id} className="bg-[rgba(255,255,255,0.4)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.3)] rounded-[20px] overflow-hidden hover:shadow-[0_8px_32px_rgba(184,134,11,0.15)] hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                {featuredProducts.map((product, index) => (
+                  <AnimatedCard 
+                    key={product.id}
+                    className="bg-[rgba(255,255,255,0.4)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.3)] rounded-[20px] overflow-hidden"
+                    hoverScale={true}
+                    glowEffect={true}
+                  >
                     
                     {/* Product Image */}
                     <div className="relative bg-[rgba(245,242,232,0.8)] h-48 flex items-center justify-center">
@@ -266,7 +272,7 @@ export default function MarketplacePage() {
                         Voir les détails
                       </button>
                     </div>
-                  </div>
+                  </AnimatedCard>
                 ))}
               </div>
             </>
