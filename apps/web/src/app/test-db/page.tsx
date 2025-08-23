@@ -4,6 +4,9 @@ import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabase'
 import cuid from 'cuid';
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+
 interface User {
   id: string;
   clerkId: string;
@@ -38,6 +41,10 @@ export default function TestDbPage() {
     try {
       setLoading(true);
       
+      if (!supabase) {
+        throw new Error('Supabase client not configured - missing NEXT_PUBLIC_SUPABASE_ANON_KEY');
+      }
+      
       // Fetch users
       const { data: usersData, error: usersError } = await supabase
         .from('users')
@@ -64,6 +71,11 @@ export default function TestDbPage() {
   };
 
   const createTestUser = async () => {
+    if (!supabase) {
+      setError('Supabase client not configured');
+      return;
+    }
+
     const now = new Date().toISOString();
     const testUser = {
       id: cuid(),
@@ -89,6 +101,11 @@ export default function TestDbPage() {
   };
 
   const createTestArticle = async () => {
+    if (!supabase) {
+      setError('Supabase client not configured');
+      return;
+    }
+
     if (users.length === 0) {
       setError('Créez d\'abord un utilisateur');
       return;
