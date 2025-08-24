@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React, { useState } from 'react';
 import Link from 'next/link';
@@ -23,13 +23,17 @@ const TrueMeNavbar = () => {
     { name: 'Inscription', href: '/auth/register' },
   ];
 
-  const TrueMeLogo = () => (
+  const TrueMeLogo = ({ visible }: { visible?: boolean }) => (
     <Link href="/" className="flex items-center space-x-3 z-20">
       <div className="w-8 h-8 bg-trueme-gold rounded-full flex items-center justify-center">
         <span className="text-black font-bold text-sm">TM</span>
       </div>
-      <span className="text-trueme font-light text-xl tracking-wider">TRUE ME</span>
-      <span className="text-trueme-gold text-sm font-light italic">Authenticité Garantie</span>
+      {!visible && (
+        <>
+          <span className="text-trueme font-light text-xl tracking-wider">TRUE ME</span>
+          <span className="text-trueme-gold text-sm font-light italic">Authenticité Garantie</span>
+        </>
+      )}
     </Link>
   );
 
@@ -65,15 +69,13 @@ const TrueMeNavbar = () => {
 
   return (
     <Navbar>
-      {/* Desktop Navigation */}
-      <NavBody className="bg-white/25 backdrop-blur-xl border border-white/30 shadow-lg">
+      <NavBody className="bg-neutral-50/30 backdrop-blur-xl border border-white/20 shadow-lg">
         <TrueMeLogo />
         <NavItems items={navItems} className="text-trueme" />
         <AccountDropdown />
       </NavBody>
 
-      {/* Mobile Navigation */}
-      <MobileNav className="bg-white/25 backdrop-blur-xl border border-white/30 shadow-lg">
+      <MobileNav className="bg-neutral-50/30 backdrop-blur-xl border border-white/20 shadow-lg">
         <MobileNavHeader>
           <TrueMeLogo />
           <MobileNavToggle
@@ -85,7 +87,7 @@ const TrueMeNavbar = () => {
         <MobileNavMenu
           isOpen={isMobileMenuOpen}
           onClose={() => setIsMobileMenuOpen(false)}
-          className="bg-white/95 backdrop-blur-xl border border-trueme-gold/20"
+          className="bg-neutral-50/95 backdrop-blur-xl border border-trueme-gold/20"
         >
           {navItems.map((item) => (
             <Link
