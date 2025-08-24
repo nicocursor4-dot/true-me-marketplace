@@ -1,8 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import Navigation from '@/components/Navigation';
 import Link from 'next/link';
+import Navigation from '@/components/Navigation';
+import { GlassCard } from '@/components/ui/GlassCard';
+import { Crown, Check, Lock, Sparkles, ShoppingCart, BarChart, Target } from 'lucide-react';
 
 export default function Brands() {
   const [selectedBrand, setSelectedBrand] = useState('chanel');
@@ -124,7 +126,9 @@ export default function Brands() {
 
           {/* Brand Status Card */}
           <div className="glass-premium p-8 md:p-16 mb-12 md:mb-16 text-center fade-in" style={{animationDelay: '0.4s'}}>
-            <div className="text-4xl md:text-6xl mb-6 md:mb-8">👑</div>
+            <div className="mb-6 md:mb-8">
+              <Crown className="w-12 h-12 md:w-16 md:h-16 mx-auto text-trueme-gold" />
+            </div>
             <h2 className="mb-6 md:mb-8 text-trueme text-2xl md:text-4xl font-light">Statut <span className="text-trueme-gold font-medium">{currentBrand.status}</span></h2>
             <div className="text-trueme-light text-lg md:text-2xl mb-12 md:mb-16">
               {currentBrand.currentItems} articles • {currentBrand.totalValue}
@@ -171,8 +175,8 @@ export default function Brands() {
                       mission.status === 'available' ? 'bg-blue-500' :
                       'bg-gray-400'
                     }`}>
-                      {mission.status === 'completed' && <span className="text-white text-xs md:text-sm">✓</span>}
-                      {mission.status === 'locked' && <span className="text-white text-xs md:text-sm">🔒</span>}
+                      {mission.status === 'completed' && <Check className="w-3 h-3 md:w-4 md:h-4 text-white" />}
+                      {mission.status === 'locked' && <Lock className="w-3 h-3 md:w-4 md:h-4 text-white" />}
                     </div>
                     <div>
                       <h3 className="text-trueme text-lg md:text-xl font-medium mb-1 md:mb-2">{mission.title}</h3>
@@ -191,7 +195,9 @@ export default function Brands() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
               {currentBrand.advantages.map((advantage, index) => (
                 <div key={index} className="glass-morphism p-6 md:p-10">
-                  <div className="text-3xl md:text-4xl mb-4 md:mb-6">✨</div>
+                  <div className="mb-4 md:mb-6">
+                    <Sparkles className="w-8 h-8 md:w-10 md:h-10 text-trueme-gold" />
+                  </div>
                   <p className="text-trueme-light leading-relaxed text-base md:text-lg">{advantage}</p>
                 </div>
               ))}
@@ -201,19 +207,25 @@ export default function Brands() {
           {/* Quick Actions */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 fade-in">
             <Link href="/marketplace" className="glass-premium p-8 md:p-12 block">
-              <div className="text-4xl md:text-5xl mb-4 md:mb-6">🛒</div>
+              <div className="mb-4 md:mb-6">
+                <ShoppingCart className="w-10 h-10 md:w-12 md:h-12 text-trueme-gold" />
+              </div>
               <h3 className="mb-4 md:mb-6 text-trueme text-xl md:text-2xl font-medium">Marketplace</h3>
               <p className="text-trueme-light text-base md:text-lg">Découvrir de nouveaux articles {currentBrand.name}</p>
             </Link>
             
             <Link href="/dashboard" className="glass-premium p-8 md:p-12 block">
-              <div className="text-4xl md:text-5xl mb-4 md:mb-6">📊</div>
+              <div className="mb-4 md:mb-6">
+                <BarChart className="w-10 h-10 md:w-12 md:h-12 text-trueme-gold" />
+              </div>
               <h3 className="mb-4 md:mb-6 text-trueme text-xl md:text-2xl font-medium">Dashboard</h3>
               <p className="text-trueme-light text-base md:text-lg">Voir votre statut global</p>
             </Link>
             
             <div className="glass-premium p-8 md:p-12 cursor-pointer">
-              <div className="text-4xl md:text-5xl mb-4 md:mb-6">🎯</div>
+              <div className="mb-4 md:mb-6">
+                <Target className="w-10 h-10 md:w-12 md:h-12 text-trueme-gold" />
+              </div>
               <h3 className="mb-4 md:mb-6 text-trueme text-xl md:text-2xl font-medium">Objectifs</h3>
               <p className="text-trueme-light text-base md:text-lg">Planifier votre progression</p>
             </div>

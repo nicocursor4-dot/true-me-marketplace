@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { CheckCircle, AlertTriangle, X, Info } from 'lucide-react';
 
 interface NotificationToastProps {
   message: string;
@@ -22,10 +23,10 @@ export default function NotificationToast({
 
   const getIcon = () => {
     switch (type) {
-      case 'success': return '✅';
-      case 'warning': return '⚠️';
-      case 'error': return '❌';
-      default: return 'ℹ️';
+      case 'success': return <CheckCircle className="w-5 h-5 text-green-500" />;
+      case 'warning': return <AlertTriangle className="w-5 h-5 text-yellow-500" />;
+      case 'error': return <X className="w-5 h-5 text-red-500" />;
+      default: return <Info className="w-5 h-5 text-blue-500" />;
     }
   };
 
@@ -79,7 +80,7 @@ export default function NotificationToast({
         max-w-sm min-w-[300px]
         ${getColors()}
       `}>
-        <div className="text-lg">{getIcon()}</div>
+        <div className="mr-3">{getIcon()}</div>
         <div className="flex-1 text-sm font-medium">{message}</div>
         <button
           onClick={handleClose}

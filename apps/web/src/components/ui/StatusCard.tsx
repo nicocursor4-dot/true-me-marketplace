@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Crown, TrendingUp, Users } from 'lucide-react';
 import { GlassCard } from './GlassCard'
 import { ProgressRing } from './ProgressRing'
 
@@ -19,13 +20,14 @@ export function StatusCard({
   totalValue,
   authenticityScore
 }: StatusCardProps) {
-  const levelEmojis = {
-    bronze: '🥉',
-    silver: '🥈', 
-    gold: '🏆',
-    platinum: '💎',
-    diamond: '💍'
-  }
+  const getStatusIcon = () => {
+    switch (level.toUpperCase()) {
+      case 'PLATINUM': return <Crown className="w-8 h-8 text-trueme-gold" />;
+      case 'GOLD': return <TrendingUp className="w-8 h-8 text-trueme-gold" />;
+      case 'SILVER': return <Users className="w-8 h-8 text-trueme-gold" />;
+      default: return <Crown className="w-8 h-8 text-trueme-gold" />;
+    }
+  };
 
   const nextLevel = {
     bronze: 'SILVER',
@@ -43,7 +45,7 @@ export function StatusCard({
       <div className="flex justify-center mb-6">
         <ProgressRing progress={progress} size="large" level={level}>
           <div className="text-center">
-            <div className="text-2xl mb-1">{levelEmojis[level]}</div>
+            <div className="mb-4">{getStatusIcon()}</div>
             <div className="text-lg font-bold text-trueme-black uppercase">
               {level}
             </div>

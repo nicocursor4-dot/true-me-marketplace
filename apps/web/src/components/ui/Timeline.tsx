@@ -1,4 +1,5 @@
 import React from 'react'
+import { Check, Trophy, Circle } from 'lucide-react'
 import { GlassCard } from './GlassCard'
 
 interface TimelineEvent {
@@ -34,9 +35,9 @@ export function Timeline({ events }: TimelineProps) {
                 ${isCurrent ? 'bg-trueme-gold border-trueme-gold text-white animate-pulse' : ''}
                 ${isFuture ? 'bg-gray-200 border-gray-300 text-gray-400' : ''}
               `}>
-                {isCompleted && '✓'}
-                {isCurrent && '🏆'}
-                {isFuture && '○'}
+                {isCompleted && <Check className="w-4 h-4" />}
+                {isCurrent && <Trophy className="w-4 h-4" />}
+                {isFuture && <Circle className="w-4 h-4" />}
               </div>
               
               {/* Timeline content */}

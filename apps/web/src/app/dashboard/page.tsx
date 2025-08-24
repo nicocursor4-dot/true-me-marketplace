@@ -1,8 +1,10 @@
 'use client';
 
 import React from 'react';
-import Navigation from '@/components/Navigation';
 import Link from 'next/link';
+import Navigation from '@/components/Navigation';
+import { GlassCard } from '@/components/ui/GlassCard';
+import { Crown, Sparkles, ShoppingCart, BarChart } from 'lucide-react';
 
 export default function Dashboard() {
   const userStats = {
@@ -54,7 +56,9 @@ export default function Dashboard() {
 
           {/* Current Status */}
           <div className="glass-premium p-20 mb-20 text-center fade-in luxury-hover">
-            <div className="text-6xl mb-8">👑</div>
+            <div className="mb-8">
+              <Crown className="w-16 h-16 mx-auto text-trueme-gold" />
+            </div>
             <h2 className="mb-8 text-trueme text-4xl">Statut <span className="text-trueme-gold">{userStats.currentStatus}</span></h2>
             <div className="text-trueme-light text-2xl mb-16">
               Membre privilégié de l'écosystème TRUE ME
@@ -101,7 +105,9 @@ export default function Dashboard() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {advantages.map((advantage, index) => (
                 <div key={index} className="glass-morphism p-10 luxury-hover">
-                  <div className="text-4xl mb-6">✨</div>
+                  <div className="mb-6">
+                    <Sparkles className="w-10 h-10 text-trueme-gold" />
+                  </div>
                   <h3 className="mb-6 text-trueme text-2xl font-bold">{advantage.title}</h3>
                   <p className="text-trueme-light leading-relaxed text-lg">{advantage.description}</p>
                 </div>
@@ -112,19 +118,25 @@ export default function Dashboard() {
           {/* Quick Actions */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 fade-in">
             <Link href="/brands" className="glass-premium p-12 block luxury-hover">
-              <div className="text-5xl mb-6">👑</div>
+              <div className="mb-6">
+                <Crown className="w-12 h-12 text-trueme-gold" />
+              </div>
               <h3 className="mb-6 text-trueme text-2xl font-bold">01 — Mes Marques</h3>
               <p className="text-trueme-light text-lg">Voir mon statut par marque</p>
             </Link>
             
             <Link href="/marketplace" className="glass-premium p-12 block luxury-hover">
-              <div className="text-5xl mb-6">🛒</div>
+              <div className="mb-6">
+                <ShoppingCart className="w-12 h-12 text-trueme-gold" />
+              </div>
               <h3 className="mb-6 text-trueme text-2xl font-bold">02 — Marketplace</h3>
               <p className="text-trueme-light text-lg">Explorer les articles</p>
             </Link>
             
             <div className="glass-premium p-12 luxury-hover cursor-pointer">
-              <div className="text-5xl mb-6">📊</div>
+              <div className="mb-6">
+                <BarChart className="w-12 h-12 text-trueme-gold" />
+              </div>
               <h3 className="mb-6 text-trueme text-2xl font-bold">03 — Progression</h3>
               <p className="text-trueme-light text-lg">Historique détaillé</p>
             </div>

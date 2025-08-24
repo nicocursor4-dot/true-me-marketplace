@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Link from 'next/link';
 import AnimatedCard from '@/components/AnimatedCard';
+import { Tag, ShoppingBag, Gem, Shirt, Watch, Footprints, Crown, Diamond, Sparkles, Zap, User, Truck, Search, Camera, DollarSign, CheckCircle } from 'lucide-react';
 
 export default function MarketplacePage() {
   const [activeTab, setActiveTab] = useState('acheter');
@@ -11,12 +12,12 @@ export default function MarketplacePage() {
   const [priceRange, setPriceRange] = useState('all');
 
   const categories = [
-    { id: 'all', name: 'Toutes catégories', icon: '🏷️' },
-    { id: 'bags', name: 'Sacs', icon: '👜' },
-    { id: 'jewelry', name: 'Bijoux', icon: '💎' },
-    { id: 'clothes', name: 'Vêtements', icon: '👗' },
-    { id: 'accessories', name: 'Accessoires', icon: '⌚' },
-    { id: 'shoes', name: 'Chaussures', icon: '👠' }
+    { id: 'all', name: 'Toutes catégories', icon: Tag },
+    { id: 'bags', name: 'Sacs', icon: ShoppingBag },
+    { id: 'jewelry', name: 'Bijoux', icon: Gem },
+    { id: 'clothes', name: 'Vêtements', icon: Shirt },
+    { id: 'accessories', name: 'Accessoires', icon: Watch },
+    { id: 'shoes', name: 'Chaussures', icon: Footprints }
   ];
 
   const priceRanges = [
@@ -34,7 +35,7 @@ export default function MarketplacePage() {
       name: 'Sac 2.55 Classic Flap',
       price: 'AED 12,500',
       originalPrice: 'AED 15,000',
-      image: '👑',
+      image: Crown,
       condition: 'Excellent',
       authenticity: '98.5%',
       seller: 'LuxuryCollector_AE',
@@ -66,7 +67,7 @@ export default function MarketplacePage() {
       name: 'Speedy 30 Monogram',
       price: 'AED 3,200',
       originalPrice: 'AED 4,500',
-      image: '💎',
+      image: Diamond,
       condition: 'Très bon',
       authenticity: '96.8%',
       seller: 'LV_Collector_UAE',
@@ -82,7 +83,7 @@ export default function MarketplacePage() {
       name: 'Lady Dior Medium',
       price: 'AED 8,900',
       originalPrice: 'AED 11,200',
-      image: '✨',
+      image: Sparkles,
       condition: 'Excellent',
       authenticity: '97.5%',
       seller: 'DiorLover_DXB',
@@ -100,28 +101,28 @@ export default function MarketplacePage() {
       title: 'Authentification Express',
       description: 'Certification en 24h par nos experts',
       price: 'AED 250',
-      icon: '⚡'
+      icon: Zap
     },
     {
       id: 2,
       title: 'Personal Shopper VIP',
       description: 'Accompagnement personnalisé pour vos achats',
       price: 'AED 500/h',
-      icon: '👨‍💼'
+      icon: User
     },
     {
       id: 3,
       title: 'Livraison Premium',
       description: 'Livraison sécurisée partout aux EAU',
       price: 'AED 150',
-      icon: '🚚'
+      icon: Truck
     },
     {
       id: 4,
       title: 'Expertise sur mesure',
       description: 'Évaluation professionnelle de votre collection',
       price: 'AED 400',
-      icon: '🔍'
+      icon: Search
     }
   ];
 
@@ -206,7 +207,7 @@ export default function MarketplacePage() {
                               : 'glass-morphism text-trueme hover:text-trueme-gold luxury-hover'
                           }`}
                         >
-                          <span>{category.icon}</span>
+                          <category.icon className="w-4 h-4" />
                           <span>{category.name}</span>
                         </button>
                       ))}
@@ -243,15 +244,17 @@ export default function MarketplacePage() {
                           </span>
                         )}
                         {product.authenticated && (
-                          <span className="bg-green-500 text-white px-2 md:px-3 py-1 rounded-full text-xs font-semibold">
-                            ✓ Authentifié
+                          <span className="bg-green-500 text-white px-2 md:px-3 py-1 rounded-full text-xs font-semibold flex items-center">
+                            <CheckCircle className="w-3 h-3 mr-1" /> Authentifié
                           </span>
                         )}
                       </div>
                     </div>
 
                     {/* Product Image */}
-                    <div className="text-6xl md:text-8xl text-center mb-6 md:mb-8">{product.image}</div>
+                    <div className="text-center mb-6 md:mb-8">
+                      <product.image className="w-16 h-16 md:w-20 md:h-20 mx-auto text-trueme-gold" />
+                    </div>
 
                     {/* Product Info */}
                     <div className="space-y-3 md:space-y-4">
@@ -294,7 +297,9 @@ export default function MarketplacePage() {
 
           {activeTab === 'vendre' && (
             <div className="glass-premium p-20 text-center fade-in">
-              <div className="text-6xl mb-8">💎</div>
+              <div className="mb-8">
+                <Gem className="w-16 h-16 mx-auto text-trueme-gold" />
+              </div>
               <h2 className="text-4xl font-bold text-trueme mb-8">Vendez vos articles de luxe</h2>
               <p className="text-trueme-light text-2xl mb-20 max-w-2xl mx-auto leading-relaxed">
                 Bénéficiez de notre expertise et de nos services d'authentification
@@ -302,19 +307,25 @@ export default function MarketplacePage() {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20">
                 <div className="glass-morphism p-10 text-center luxury-hover">
-                  <div className="text-6xl mb-8">📸</div>
+                  <div className="mb-8">
+                    <Camera className="w-16 h-16 mx-auto text-trueme-gold" />
+                  </div>
                   <h3 className="text-2xl font-bold text-trueme mb-6">01 — Photographiez</h3>
                   <p className="text-trueme-light text-lg leading-relaxed">Prenez des photos détaillées de votre article</p>
                 </div>
                 
                 <div className="glass-morphism p-10 text-center luxury-hover">
-                  <div className="text-6xl mb-8">🔍</div>
+                  <div className="mb-8">
+                    <Search className="w-16 h-16 mx-auto text-trueme-gold" />
+                  </div>
                   <h3 className="text-2xl font-bold text-trueme mb-6">02 — Authentification</h3>
                   <p className="text-trueme-light text-lg leading-relaxed">Nos experts certifient l'authenticité</p>
                 </div>
                 
                 <div className="glass-morphism p-10 text-center luxury-hover">
-                  <div className="text-6xl mb-8">💰</div>
+                  <div className="mb-8">
+                    <DollarSign className="w-16 h-16 mx-auto text-trueme-gold" />
+                  </div>
                   <h3 className="text-2xl font-bold text-trueme mb-6">03 — Vendez</h3>
                   <p className="text-trueme-light text-lg leading-relaxed">Mettez en vente avec garantie TRUE ME</p>
                 </div>
@@ -326,13 +337,13 @@ export default function MarketplacePage() {
             </div>
           )}
 
-          {activeTab === 'services' && (
+          {activeTab === 'vip' && (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
               {vipServices.map((service, index) => (
                 <div key={service.id} className="glass-premium p-12 luxury-hover fade-in" style={{animationDelay: `${index * 0.1}s`}}>
                   <div className="flex items-start space-x-8">
-                    <div className="glass-morphism w-20 h-20 rounded-full flex items-center justify-center text-3xl flex-shrink-0">
-                      {service.icon}
+                    <div className="glass-morphism w-20 h-20 rounded-full flex items-center justify-center flex-shrink-0">
+                      <service.icon className="w-8 h-8 text-trueme-gold" />
                     </div>
                     <div className="flex-1">
                       <h3 className="text-2xl font-bold text-trueme mb-4">{service.title}</h3>
