@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Navigation from '@/components/Navigation';
+import TrueMeNavbar from '@/components/TrueMeNavbar';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Crown, Check, Lock, Sparkles, ShoppingCart, BarChart, Target } from 'lucide-react';
 
@@ -86,7 +86,7 @@ export default function Brands() {
 
   return (
     <main className="min-h-screen bg-trueme-cream pt-24">
-      <Navigation />
+      <TrueMeNavbar />
       
       <div className="min-h-screen pt-16 pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -2,8 +2,9 @@
 
 import React from 'react'
 import Link from 'next/link'
-import Navigation from '@/components/Navigation'
+import TrueMeNavbar from '@/components/TrueMeNavbar'
 import { GlassCard } from '@/components/ui/GlassCard'
+import { AnimatedTestimonials } from '@/components/ui/animated-testimonials'
 import { Crown, ShoppingBag, Shield, Sparkles, ArrowRight, CheckCircle } from 'lucide-react'
 
 export default function Home() {
@@ -46,9 +47,30 @@ export default function Home() {
     }
   ];
 
+  const testimonials = [
+    {
+      quote: "TRUE ME a révolutionné ma façon de collectionner le luxe. L'authentification est impeccable et le service conciergerie d'un niveau exceptionnel.",
+      name: "Isabella Romanoff",
+      designation: "Collectionneuse Privée, Monaco",
+      src: "https://images.unsplash.com/photo-1494790108755-2616c96fad0c?q=80&w=1887&auto=format&fit=crop"
+    },
+    {
+      quote: "En tant que passionnée de haute horlogerie, je ne fais confiance qu'à TRUE ME. Leur expertise et leur réseau sont incomparables.",
+      name: "Sophie Dubois",
+      designation: "CEO, Luxury Consulting",
+      src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1935&auto=format&fit=crop"
+    },
+    {
+      quote: "L'accès privilégié aux pièces rares et la communauté exclusive font de TRUE ME une expérience unique dans l'univers du luxe.",
+      name: "Alexandre Beaumont",
+      designation: "Investisseur Art & Luxe",
+      src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=1935&auto=format&fit=crop"
+    }
+  ];
+
   return (
     <main className="min-h-screen">
-      <Navigation />
+      <TrueMeNavbar />
       
       {/* Hero Section */}
       <section className="relative px-4 pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
@@ -225,6 +247,26 @@ export default function Home() {
             Découvrir nos services Premium
             <ArrowRight className="w-5 h-5" />
           </Link>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="relative py-20 bg-trueme-cream">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center space-x-2 mb-6">
+              <div className="w-2 h-2 bg-trueme-gold rounded-full"></div>
+              <span className="text-sm font-medium text-trueme-gold tracking-[0.2em] uppercase">Témoignages</span>
+              <div className="w-2 h-2 bg-trueme-gold rounded-full"></div>
+            </div>
+            <h2 className="text-4xl md:text-6xl font-light mb-6 text-trueme tracking-tight">
+              La Confiance de Nos Membres
+            </h2>
+            <p className="text-xl text-trueme-light max-w-3xl mx-auto leading-relaxed">
+              Découvrez les expériences exceptionnelles de notre communauté exclusive
+            </p>
+          </div>
+          <AnimatedTestimonials testimonials={testimonials} autoplay={true} />
         </div>
       </section>
 

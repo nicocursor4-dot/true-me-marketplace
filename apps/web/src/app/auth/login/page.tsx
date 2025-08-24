@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Navigation from '@/components/Navigation';
+import TrueMeNavbar from '@/components/TrueMeNavbar';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Shield } from 'lucide-react';
 
@@ -28,7 +28,9 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-trueme-cream p-8">
+    <main className="min-h-screen bg-trueme-cream">
+      <TrueMeNavbar />
+      <div className="min-h-screen flex items-center justify-center p-8 pt-32">
       <div className="w-full max-w-lg">
         <form onSubmit={handleSubmit} className="glass-premium p-16 space-y-10 fade-in">
           
@@ -112,6 +114,7 @@ export default function LoginPage() {
           </div>
           
         </form>
+      </div>
       </div>
     </main>
   );

@@ -2,14 +2,14 @@
 
 import React from 'react';
 import Link from 'next/link';
-import Navigation from '@/components/Navigation';
+import TrueMeNavbar from '@/components/TrueMeNavbar';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { TrendingUp } from 'lucide-react';
 
 export default function Evolution() {
   return (
     <main className="min-h-screen bg-[#F5F2E8]">
-      <Navigation />
+      <TrueMeNavbar />
       
       <div className="pt-24 pb-12">
         <div className="max-w-6xl mx-auto px-4">

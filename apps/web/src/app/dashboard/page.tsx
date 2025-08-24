@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import Navigation from '@/components/Navigation';
+import TrueMeNavbar from '@/components/TrueMeNavbar';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Crown, Sparkles, ShoppingCart, BarChart } from 'lucide-react';
 
@@ -41,7 +41,7 @@ export default function Dashboard() {
 
   return (
     <main className="min-h-screen bg-trueme-cream pt-24">
-      <Navigation />
+      <TrueMeNavbar />
       
       <div className="luxury-container section-spacing">
         {/* User Profile */}

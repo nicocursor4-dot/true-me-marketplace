@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Navigation from '@/components/Navigation';
+import TrueMeNavbar from '@/components/TrueMeNavbar';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { UserPlus } from 'lucide-react';
 
@@ -75,7 +75,9 @@ export default function RegisterPage() {
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-trueme-cream p-8">
+    <main className="min-h-screen bg-trueme-cream">
+      <TrueMeNavbar />
+      <div className="min-h-screen flex items-center justify-center p-8 pt-32">
       <div className="w-full max-w-3xl">
         <form onSubmit={handleSubmit} className="glass-premium p-20 space-y-12 fade-in">
           
@@ -276,6 +278,7 @@ export default function RegisterPage() {
           </div>
           
         </form>
+      </div>
       </div>
     </main>
   );

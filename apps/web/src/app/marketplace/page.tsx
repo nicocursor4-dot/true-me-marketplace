@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import Navigation from '@/components/Navigation';
+import TrueMeNavbar from '@/components/TrueMeNavbar';
 import Link from 'next/link';
 import AnimatedCard from '@/components/AnimatedCard';
 import { Tag, ShoppingBag, Gem, Shirt, Watch, Footprints, Crown, Diamond, Sparkles, Zap, User, Truck, Search, Camera, DollarSign, CheckCircle } from 'lucide-react';
@@ -128,7 +128,7 @@ export default function MarketplacePage() {
 
   return (
     <main className="min-h-screen bg-trueme-cream">
-      <Navigation />
+      <TrueMeNavbar />
       
       <div className="min-h-screen pt-16 pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
