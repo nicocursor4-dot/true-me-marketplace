@@ -151,7 +151,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto text-center relative z-10">
           {/* Hero Title */}
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-light mb-8 fade-in text-trueme tracking-tight">
-            La Luxure Authentique
+            L'Excellence Authentique
           </h1>
           
           {/* Hero Subtitle */}
@@ -160,7 +160,7 @@ export default function Home() {
               Not a Styl. A Signature.
             </p>
             <p className="text-xl md:text-2xl text-trueme-light max-w-4xl mx-auto leading-relaxed">
-              Découvrez l'élégance redéfinie. Chaque pièce raconte une histoire, chaque acquisition révèle votre essence.
+              Votre signature du luxe authentique. Découvrez des pièces d'exception où chaque détail révèle l'art de l'excellence.
             </p>
           </div>
           
@@ -184,9 +184,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* True Me Universe Section */}
       <section className="py-16 px-4 bg-gradient-to-r from-transparent via-trueme-cream/20 to-transparent">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto text-center">
+          <div className="mb-12 fade-in">
+            <div className="inline-flex items-center space-x-2 mb-6">
+              <div className="w-2 h-2 bg-trueme-gold rounded-full"></div>
+              <span className="text-sm font-medium text-trueme-gold tracking-[0.2em] uppercase">L'Univers TRUE ME</span>
+              <div className="w-2 h-2 bg-trueme-gold rounded-full"></div>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-light mb-6 text-trueme tracking-tight">
+              L'Excellence en Chiffres
+            </h2>
+          </div>
+          
           <div className="grid md:grid-cols-3 gap-8 text-center">
             <div className="fade-in">
               <div className="text-4xl md:text-5xl font-light text-trueme-gold mb-2">500+</div>
@@ -233,29 +244,29 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12">
             {featuredArticles.map((article, index) => (
-              <GlassCard key={article.id} className="p-6 luxury-hover fade-in">
+              <GlassCard key={article.id} className="p-4 md:p-6 luxury-hover fade-in">
                 <div className="aspect-square bg-gradient-to-br from-trueme-gold/20 to-trueme-gold/5 rounded-lg mb-4 flex items-center justify-center">
-                  <Crown className="w-12 h-12 text-trueme-gold" />
+                  <Crown className="w-8 h-8 md:w-12 md:h-12 text-trueme-gold" />
                 </div>
                 <div className="text-center">
-                  <p className="text-sm text-trueme-gold font-medium mb-1">{article.brand}</p>
-                  <h3 className="text-lg font-semibold text-trueme mb-2">{article.name}</h3>
+                  <p className="text-xs md:text-sm text-trueme-gold font-medium mb-1">{article.brand}</p>
+                  <h3 className="text-base md:text-lg font-semibold text-trueme mb-2">{article.name}</h3>
                   <div className="flex items-center justify-center gap-1 mb-2">
-                    <CheckCircle className="w-4 h-4 text-trueme-gold" />
+                    <CheckCircle className="w-3 h-3 md:w-4 md:h-4 text-trueme-gold" />
                     <span className="text-xs text-trueme-gold">Certifié True Me</span>
                   </div>
-                  <p className="text-xl font-bold text-trueme">{article.price}</p>
+                  <p className="text-lg md:text-xl font-bold text-trueme">{article.price}</p>
                 </div>
               </GlassCard>
             ))}
           </div>
           
           <div className="text-center">
-            <Link href="/marketplace" className="btn-primary px-8 py-3 text-lg font-medium inline-flex items-center gap-2">
+            <Link href="/marketplace" className="btn-primary px-6 md:px-8 py-3 text-base md:text-lg font-medium inline-flex items-center gap-2">
               Explorer toute la collection
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
             </Link>
           </div>
         </div>
@@ -264,7 +275,7 @@ export default function Home() {
       {/* Authentification Section */}
       <section id="authentification" className="py-20 md:py-32 px-4 bg-gradient-to-b from-white/5 to-transparent">
         <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center">
             <div className="fade-in">
               <div className="aspect-square bg-gradient-to-br from-trueme-gold/20 to-trueme-gold/5 rounded-3xl flex items-center justify-center mb-8 md:mb-0">
                 <Shield className="w-24 h-24 text-trueme-gold" />
@@ -303,9 +314,9 @@ export default function Home() {
                 </div>
               </div>
               
-              <Link href="/auth/register" className="btn-primary px-8 py-4 text-lg font-medium inline-flex items-center gap-2">
+              <Link href="/auth/register" className="btn-primary px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-medium inline-flex items-center gap-2">
                 Faire authentifier mon article
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
               </Link>
             </div>
           </div>
@@ -515,9 +526,9 @@ export default function Home() {
             </Dialog>
           </div>
           
-          <Link href="/auth/register" className="btn-primary px-10 py-4 text-lg font-medium inline-flex items-center gap-2">
+          <Link href="/auth/register" className="btn-primary px-6 md:px-10 py-3 md:py-4 text-base md:text-lg font-medium inline-flex items-center gap-2">
             Découvrir nos services Premium
-            <ArrowRight className="w-5 h-5" />
+            <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
           </Link>
         </div>
       </section>

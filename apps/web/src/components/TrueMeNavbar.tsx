@@ -69,13 +69,13 @@ const TrueMeNavbar = () => {
 
   return (
     <Navbar>
-      <NavBody className="bg-neutral-50/30 backdrop-blur-xl border border-white/20 shadow-lg">
+      <NavBody className="bg-neutral-50/20 backdrop-blur-md border border-white/20 shadow-lg">
         <TrueMeLogo />
         <NavItems items={navItems} className="text-trueme" />
         <AccountDropdown />
       </NavBody>
 
-      <MobileNav className="bg-neutral-50/30 backdrop-blur-xl border border-white/20 shadow-lg">
+      <MobileNav className="bg-neutral-50/20 backdrop-blur-md border border-white/20 shadow-lg">
         <MobileNavHeader>
           <TrueMeLogo />
           <MobileNavToggle
@@ -87,7 +87,7 @@ const TrueMeNavbar = () => {
         <MobileNavMenu
           isOpen={isMobileMenuOpen}
           onClose={() => setIsMobileMenuOpen(false)}
-          className="bg-neutral-50/95 backdrop-blur-xl border border-trueme-gold/20"
+          className="bg-neutral-50/95 backdrop-blur-lg border border-trueme-gold/20"
         >
           {navItems.map((item) => (
             <Link
