@@ -29,10 +29,7 @@ const TrueMeNavbar = () => {
         <span className="text-black font-bold text-sm">TM</span>
       </div>
       {!visible && (
-        <>
-          <span className="text-trueme font-light text-xl tracking-wider">TRUE ME</span>
-          <span className="text-trueme-gold text-sm font-light italic">Authenticité Garantie</span>
-        </>
+        <span className="text-trueme font-light text-xl tracking-wider">True Me</span>
       )}
     </Link>
   );
