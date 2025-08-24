@@ -1,15 +1,23 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import TrueMeNavbar from '@/components/TrueMeNavbar'
 import { GlassCard } from '@/components/ui/GlassCard'
 import { AnimatedTestimonials } from '@/components/ui/animated-testimonials'
-import { Crown, ShoppingBag, Shield, Sparkles, ArrowRight, CheckCircle } from 'lucide-react'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Crown, ShoppingBag, Shield, Sparkles, ArrowRight, CheckCircle, Phone, Clock, Star } from 'lucide-react'
 
 export default function Home() {
   const brandLogos = [
-    'Rolex', 'Chanel', 'Hermès', 'Louis Vuitton', 'Dior'
+    'Chanel', 'Hermès', 'Louis Vuitton', 'Dior', 'Gucci'
   ];
 
   const featuredArticles = [
@@ -23,18 +31,18 @@ export default function Home() {
     },
     {
       id: 2,
-      brand: 'Rolex',
-      name: 'Submariner Date',
-      price: 'AED 35,000',
-      condition: 'Neuf',
+      brand: 'Hermès',
+      name: 'Birkin 35 Togo Leather',
+      price: 'AED 45,000',
+      condition: 'Comme neuf',
       certified: true
     },
     {
       id: 3,
-      brand: 'Hermès',
-      name: 'Birkin 35 Togo',
-      price: 'AED 45,000',
-      condition: 'Excellent',
+      brand: 'Dior',
+      name: 'Lady Dior Medium Cannage',
+      price: 'AED 8,500',
+      condition: 'Très bon',
       certified: true
     },
     {
@@ -49,22 +57,28 @@ export default function Home() {
 
   const testimonials = [
     {
-      quote: "TRUE ME a révolutionné ma façon de collectionner le luxe. L'authentification est impeccable et le service conciergerie d'un niveau exceptionnel.",
-      name: "Isabella Romanoff",
-      designation: "Collectionneuse Privée, Monaco",
+      quote: "TRUE ME a transformé ma vision du luxe. En tant qu'égérie, je ne porte que des pièces authentifiées par leurs experts. Une confiance absolue.",
+      name: "Zara Al-Rashid",
+      designation: "Top Model & Influenceuse Mode",
       src: "https://images.unsplash.com/photo-1494790108755-2616c96fad0c?q=80&w=1887&auto=format&fit=crop"
     },
     {
-      quote: "En tant que passionnée de haute horlogerie, je ne fais confiance qu'à TRUE ME. Leur expertise et leur réseau sont incomparables.",
-      name: "Sophie Dubois",
-      designation: "CEO, Luxury Consulting",
+      quote: "Après mes matchs, TRUE ME m'aide à investir dans des pièces d'exception. Leur service VIP et leur authenticité sont légendaires.",
+      name: "Marcus Sterling",
+      designation: "Footballeur Professionnel, Premier League",
+      src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=1935&auto=format&fit=crop"
+    },
+    {
+      quote: "Pour mes red carpets, TRUE ME me donne accès aux plus belles créations. Leur réseau exclusif et leur expertise sont incomparables.",
+      name: "Luna Castillo",
+      designation: "Actrice & Ambassadrice Luxe",
       src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1935&auto=format&fit=crop"
     },
     {
-      quote: "L'accès privilégié aux pièces rares et la communauté exclusive font de TRUE ME une expérience unique dans l'univers du luxe.",
-      name: "Alexandre Beaumont",
-      designation: "Investisseur Art & Luxe",
-      src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=1935&auto=format&fit=crop"
+      quote: "TRUE ME comprend l'art de vivre à Dubaï. Chaque acquisition devient un investissement grâce à leur expertise du marché du luxe.",
+      name: "Ahmed Al-Maktoum",
+      designation: "Entrepreneur & Collectionneur",
+      src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1935&auto=format&fit=crop"
     }
   ];
 
@@ -74,17 +88,21 @@ export default function Home() {
       
       {/* Hero Section */}
       <section className="relative px-4 pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
-        <div className="max-w-7xl mx-auto text-center relative z-10">
+        <div className="max-w-6xl mx-auto text-center relative z-10">
           {/* Hero Title */}
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-light mb-8 fade-in text-trueme tracking-tight">
-            L'Authenticité est le Nouveau Luxe
+            TRUE ME : L'Authenticité Redéfinie
           </h1>
           
           {/* Hero Subtitle */}
-          <p className="text-xl md:text-2xl text-trueme-light mb-12 max-w-4xl mx-auto leading-relaxed fade-in" style={{animationDelay: '0.2s'}}>
-            Achetez, vendez et authentifiez vos articles de luxe en toute confiance. 
-            La première marketplace de Dubaï où chaque pièce raconte une histoire vraie.
-          </p>
+          <div className="mb-12 fade-in-delay-1">
+            <p className="text-2xl md:text-3xl lg:text-4xl text-trueme-light font-light mb-6 leading-relaxed">
+              Not a Style. A Signature.
+            </p>
+            <p className="text-xl md:text-2xl text-trueme-light max-w-4xl mx-auto leading-relaxed">
+              TRUE ME révolutionne le luxe à Dubaï. Authenticité garantie, transactions sécurisées, expérience exclusive.
+            </p>
+          </div>
           
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-24 fade-in" style={{animationDelay: '0.4s'}}>
@@ -116,6 +134,42 @@ export default function Home() {
                 {brand}
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Excellence Section */}
+      <section className="py-20 bg-white/5 backdrop-blur-sm">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center space-x-2 mb-6">
+              <div className="w-2 h-2 bg-trueme-gold rounded-full"></div>
+              <span className="text-sm font-medium text-trueme-gold tracking-[0.2em] uppercase">Excellence</span>
+              <div className="w-2 h-2 bg-trueme-gold rounded-full"></div>
+            </div>
+            <h2 className="text-4xl md:text-6xl font-light mb-6 text-trueme tracking-tight">
+              L'Art du Luxe Authentique
+            </h2>
+            <p className="text-xl text-trueme-light max-w-3xl mx-auto leading-relaxed">
+              Plus qu'une marketplace, TRUE ME est votre passerelle vers l'excellence
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center p-8">
+              <Shield className="w-12 h-12 text-trueme-gold mx-auto mb-4" />
+              <h3 className="text-xl font-medium text-trueme mb-3">Authentification</h3>
+              <p className="text-trueme-light">Chaque pièce certifiée par nos experts</p>
+            </div>
+            <div className="text-center p-8">
+              <Crown className="w-12 h-12 text-trueme-gold mx-auto mb-4" />
+              <h3 className="text-xl font-medium text-trueme mb-3">Exclusivité</h3>
+              <p className="text-trueme-light">Accès aux pièces les plus recherchées</p>
+            </div>
+            <div className="text-center p-8">
+              <Sparkles className="w-12 h-12 text-trueme-gold mx-auto mb-4" />
+              <h3 className="text-xl font-medium text-trueme mb-3">Prestige</h3>
+              <p className="text-trueme-light">Une expérience digne du luxe</p>
+            </div>
           </div>
         </div>
       </section>
@@ -157,9 +211,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Authentication Service */}
-      <section id="authentification" className="py-20 md:py-32 px-4 bg-gradient-to-t from-trueme-cream/30 to-transparent">
-        <div className="max-w-7xl mx-auto">
+      {/* Authentification Section */}
+      <section id="authentification" className="py-20 md:py-32 px-4 bg-gradient-to-b from-white/5 to-transparent">
+        <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
             <div className="fade-in">
               <div className="aspect-square bg-gradient-to-br from-trueme-gold/20 to-trueme-gold/5 rounded-3xl flex items-center justify-center mb-8 md:mb-0">
@@ -210,7 +264,7 @@ export default function Home() {
 
       {/* VIP Services */}
       <section className="py-20 md:py-32 px-4">
-        <div className="max-w-7xl mx-auto text-center">
+        <div className="max-w-6xl mx-auto text-center">
           <div className="mb-16 md:mb-24 fade-in">
             <h2 className="text-4xl md:text-6xl font-light mb-8 text-trueme tracking-tight">
               L'Expérience True Me. Au-delà de l'Attendu.
@@ -218,29 +272,181 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 md:gap-12 mb-16">
-            <div className="glass-premium p-12 luxury-hover fade-in">
-              <Crown className="w-12 h-12 text-trueme-gold mx-auto mb-6" />
-              <h3 className="text-2xl font-bold mb-6 text-trueme">Conciergerie de Luxe</h3>
-              <p className="text-trueme-light leading-relaxed text-lg">
-                De la gestion de votre collection à la recherche de la pièce rare, notre équipe dédiée s'occupe de tout.
-              </p>
-            </div>
+            <Dialog>
+              <DialogTrigger asChild>
+                <div className="glass-premium p-12 luxury-hover fade-in cursor-pointer hover:scale-105 transition-all duration-300">
+                  <Crown className="w-12 h-12 text-trueme-gold mx-auto mb-6" />
+                  <h3 className="text-2xl font-bold mb-6 text-trueme">Conciergerie de Luxe</h3>
+                  <p className="text-trueme-light leading-relaxed text-lg">
+                    De la gestion de votre collection à la recherche de la pièce rare, notre équipe dédiée s'occupe de tout.
+                  </p>
+                </div>
+              </DialogTrigger>
+              <DialogContent className="max-w-2xl bg-trueme-cream/95 backdrop-blur-xl border-trueme-gold/30">
+                <DialogHeader>
+                  <DialogTitle className="flex items-center gap-3 text-2xl text-trueme">
+                    <Crown className="w-8 h-8 text-trueme-gold" />
+                    Conciergerie Privée TRUE ME
+                  </DialogTitle>
+                  <DialogDescription className="text-trueme-light text-lg">
+                    Votre assistant personnel dédié au luxe
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="space-y-6 py-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-4">
+                      <h4 className="font-medium text-trueme flex items-center gap-2">
+                        <Star className="w-5 h-5 text-trueme-gold" />
+                        Services Inclus
+                      </h4>
+                      <ul className="space-y-2 text-trueme-light">
+                        <li>• Recherche de pièces rares</li>
+                        <li>• Réservations exclusives</li>
+                        <li>• Gestion de collection</li>
+                        <li>• Expertise personnalisée</li>
+                        <li>• Accompagnement VIP</li>
+                      </ul>
+                    </div>
+                    <div className="space-y-4">
+                      <h4 className="font-medium text-trueme flex items-center gap-2">
+                        <Clock className="w-5 h-5 text-trueme-gold" />
+                        Disponibilité
+                      </h4>
+                      <p className="text-trueme-light">Service 24/7 avec réponse garantie sous 2h</p>
+                      <h4 className="font-medium text-trueme flex items-center gap-2">
+                        <Phone className="w-5 h-5 text-trueme-gold" />
+                        Contact Dédié
+                      </h4>
+                      <p className="text-trueme-light">Ligne directe avec votre concierge attitré</p>
+                    </div>
+                  </div>
+                  <div className="bg-trueme-gold/10 rounded-xl p-6">
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <p className="text-trueme font-medium">Formule Premium</p>
+                        <p className="text-trueme-light">Engagement 6 mois minimum</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-2xl font-bold text-trueme-gold">AED 2,500</p>
+                        <p className="text-trueme-light">/mois</p>
+                      </div>
+                    </div>
+                  </div>
+                  <button className="w-full btn-primary py-4 text-lg font-medium">
+                    Réserver une Consultation
+                  </button>
+                </div>
+              </DialogContent>
+            </Dialog>
 
-            <div className="glass-premium p-12 luxury-hover fade-in" style={{animationDelay: '0.2s'}}>
-              <Sparkles className="w-12 h-12 text-trueme-gold mx-auto mb-6" />
-              <h3 className="text-2xl font-bold mb-6 text-trueme">Accès Prioritaire</h3>
-              <p className="text-trueme-light leading-relaxed text-lg">
-                Soyez le premier à découvrir nos nouvelles arrivées et nos ventes privées exclusives.
-              </p>
-            </div>
+            <Dialog>
+              <DialogTrigger asChild>
+                <div className="glass-premium p-12 luxury-hover fade-in cursor-pointer hover:scale-105 transition-all duration-300" style={{animationDelay: '0.2s'}}>
+                  <Sparkles className="w-12 h-12 text-trueme-gold mx-auto mb-6" />
+                  <h3 className="text-2xl font-bold mb-6 text-trueme">Accès Prioritaire</h3>
+                  <p className="text-trueme-light leading-relaxed text-lg">
+                    Soyez le premier à découvrir nos nouvelles arrivées et nos ventes privées exclusives.
+                  </p>
+                </div>
+              </DialogTrigger>
+              <DialogContent className="max-w-2xl bg-trueme-cream/95 backdrop-blur-xl border-trueme-gold/30">
+                <DialogHeader>
+                  <DialogTitle className="flex items-center gap-3 text-2xl text-trueme">
+                    <Sparkles className="w-8 h-8 text-trueme-gold" />
+                    Accès Prioritaire VIP
+                  </DialogTitle>
+                  <DialogDescription className="text-trueme-light text-lg">
+                    L'exclusivité avant tout le monde
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="space-y-6 py-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-4">
+                      <h4 className="font-medium text-trueme">Avantages Exclusifs</h4>
+                      <ul className="space-y-2 text-trueme-light">
+                        <li>• Préview 48h avant public</li>
+                        <li>• Ventes privées mensuelles</li>
+                        <li>• Pièces limitées réservées</li>
+                        <li>• Invitations événements VIP</li>
+                        <li>• Remises privilégiées</li>
+                      </ul>
+                    </div>
+                    <div className="space-y-4">
+                      <h4 className="font-medium text-trueme">Conditions</h4>
+                      <ul className="space-y-2 text-trueme-light">
+                        <li>• Statut Gold minimum</li>
+                        <li>• Historique d'achat vérifié</li>
+                        <li>• Engagement communautaire</li>
+                        <li>• Parrainage possible</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="bg-gradient-to-r from-trueme-gold/20 to-trueme-gold/10 rounded-xl p-6">
+                    <p className="text-trueme font-medium mb-2">Inclus dans l'adhésion Gold+</p>
+                    <p className="text-trueme-light">Accès automatique dès validation du statut</p>
+                  </div>
+                  <button className="w-full btn-primary py-4 text-lg font-medium">
+                    Découvrir l'Adhésion Gold+
+                  </button>
+                </div>
+              </DialogContent>
+            </Dialog>
 
-            <div className="glass-premium p-12 luxury-hover fade-in" style={{animationDelay: '0.4s'}}>
-              <Shield className="w-12 h-12 text-trueme-gold mx-auto mb-6" />
-              <h3 className="text-2xl font-bold mb-6 text-trueme">Conseil Personnalisé</h3>
-              <p className="text-trueme-light leading-relaxed text-lg">
-                Nos experts vous accompagnent pour acheter, vendre ou entretenir vos biens les plus précieux.
-              </p>
-            </div>
+            <Dialog>
+              <DialogTrigger asChild>
+                <div className="glass-premium p-12 luxury-hover fade-in cursor-pointer hover:scale-105 transition-all duration-300" style={{animationDelay: '0.4s'}}>
+                  <Shield className="w-12 h-12 text-trueme-gold mx-auto mb-6" />
+                  <h3 className="text-2xl font-bold mb-6 text-trueme">Conseil Personnalisé</h3>
+                  <p className="text-trueme-light leading-relaxed text-lg">
+                    Nos experts vous accompagnent pour acheter, vendre ou entretenir vos biens les plus précieux.
+                  </p>
+                </div>
+              </DialogTrigger>
+              <DialogContent className="max-w-2xl bg-trueme-cream/95 backdrop-blur-xl border-trueme-gold/30">
+                <DialogHeader>
+                  <DialogTitle className="flex items-center gap-3 text-2xl text-trueme">
+                    <Shield className="w-8 h-8 text-trueme-gold" />
+                    Conseil en Investissement Luxe
+                  </DialogTitle>
+                  <DialogDescription className="text-trueme-light text-lg">
+                    Maximisez la valeur de votre collection
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="space-y-6 py-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-4">
+                      <h4 className="font-medium text-trueme">Expertise Incluse</h4>
+                      <ul className="space-y-2 text-trueme-light">
+                        <li>• Analyse de marché</li>
+                        <li>• Évaluation portfolio</li>
+                        <li>• Stratégie d'acquisition</li>
+                        <li>• Timing optimal vente</li>
+                        <li>• Diversification conseils</li>
+                      </ul>
+                    </div>
+                    <div className="space-y-4">
+                      <h4 className="font-medium text-trueme">Nos Experts</h4>
+                      <ul className="space-y-2 text-trueme-light">
+                        <li>• 15+ ans d'expérience</li>
+                        <li>• Réseau international</li>
+                        <li>• Spécialistes par marque</li>
+                        <li>• Suivi personnalisé</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="bg-trueme-gold/20 rounded-xl p-6">
+                    <div className="text-center">
+                      <p className="text-trueme font-medium mb-2">Première Consultation Offerte</p>
+                      <p className="text-trueme-light">Session de 60 minutes avec nos experts</p>
+                      <p className="text-sm text-trueme-light mt-2">Puis AED 500/consultation</p>
+                    </div>
+                  </div>
+                  <button className="w-full btn-primary py-4 text-lg font-medium">
+                    Réserver ma Consultation Gratuite
+                  </button>
+                </div>
+              </DialogContent>
+            </Dialog>
           </div>
           
           <Link href="/auth/register" className="btn-primary px-10 py-4 text-lg font-medium inline-flex items-center gap-2">
@@ -252,7 +458,7 @@ export default function Home() {
 
       {/* Testimonials Section */}
       <section className="relative py-20 bg-trueme-cream">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
             <div className="inline-flex items-center space-x-2 mb-6">
               <div className="w-2 h-2 bg-trueme-gold rounded-full"></div>
