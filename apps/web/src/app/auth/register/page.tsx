@@ -1,8 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import Navigation from '@/components/Navigation';
 import Link from 'next/link';
+import Navigation from '@/components/Navigation';
+import { GlassCard } from '@/components/ui/GlassCard';
+import { UserPlus } from 'lucide-react';
 
 export default function RegisterPage() {
   const [formData, setFormData] = useState({
@@ -79,7 +81,9 @@ export default function RegisterPage() {
           
           {/* Header */}
           <div className="text-center mb-16">
-            <div className="text-6xl mb-6">🌟</div>
+            <div className="mb-8">
+              <UserPlus className="w-16 h-16 mx-auto text-trueme-gold" />
+            </div>
             <h1 className="text-4xl font-bold text-trueme mb-4">TRUE ME</h1>
             <p className="text-trueme-light text-xl">Créer votre compte</p>
           </div>

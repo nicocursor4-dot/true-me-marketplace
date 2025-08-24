@@ -1,8 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import Navigation from '@/components/Navigation';
 import Link from 'next/link';
+import Navigation from '@/components/Navigation';
+import { GlassCard } from '@/components/ui/GlassCard';
+import { Shield } from 'lucide-react';
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -32,7 +34,9 @@ export default function LoginPage() {
           
           {/* Header */}
           <div className="text-center mb-16">
-            <div className="text-6xl mb-6">🔐</div>
+            <div className="mb-8">
+              <Shield className="w-16 h-16 mx-auto text-trueme-gold" />
+            </div>
             <h1 className="text-4xl font-bold text-trueme mb-4">TRUE ME</h1>
             <p className="text-trueme-light text-xl">Connexion à votre compte</p>
           </div>

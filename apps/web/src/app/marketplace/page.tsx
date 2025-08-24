@@ -51,7 +51,7 @@ export default function MarketplacePage() {
       name: 'Birkin 35 Togo Étoupe',
       price: 'AED 45,000',
       originalPrice: 'AED 52,000',
-      image: '🦄',
+      image: Sparkles,
       condition: 'Comme neuf',
       authenticity: '99.2%',
       seller: 'HermesParis_Official',

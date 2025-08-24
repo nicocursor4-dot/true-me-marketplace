@@ -1,8 +1,10 @@
 'use client';
 
 import React from 'react';
-import Navigation from '@/components/Navigation';
 import Link from 'next/link';
+import Navigation from '@/components/Navigation';
+import { GlassCard } from '@/components/ui/GlassCard';
+import { TrendingUp } from 'lucide-react';
 
 export default function Evolution() {
   return (
@@ -28,7 +30,9 @@ export default function Evolution() {
           {/* Evolution Content */}
           <div className="bg-[rgba(255,255,255,0.4)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.3)] rounded-[20px] p-8">
             <div className="text-center">
-              <div className="text-4xl mb-4">🔄</div>
+              <div className="mb-8">
+                <TrendingUp className="w-16 h-16 mx-auto text-trueme-gold" />
+              </div>
               <h2 className="text-2xl font-bold text-[#1C1C1E] mb-4">Évolution en cours...</h2>
               <p className="text-[#6B6B6B]">Cette page sera développée dans la prochaine phase du projet.</p>
             </div>
