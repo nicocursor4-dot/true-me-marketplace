@@ -166,13 +166,13 @@ export default function Home() {
       <section className="relative px-4 pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
         <div className="max-w-6xl mx-auto text-center relative z-10">
           {/* Hero Title with Typewriter Effect */}
-          <div className="mb-6 fade-in">
+          <div className="mb-6 fade-in flex flex-col items-center justify-center">
             <TypewriterEffectSmooth 
               key={currentPhrase} 
               words={typewriterWords}
-              className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight" 
+              className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-center" 
             />
-            <div className="text-4xl md:text-6xl lg:text-7xl font-bold text-trueme-gold mt-8 tracking-tight">
+            <div className="text-4xl md:text-6xl lg:text-7xl font-bold text-trueme-gold mt-8 tracking-tight text-center">
               True Me
             </div>
           </div>

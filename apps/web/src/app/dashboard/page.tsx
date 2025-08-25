@@ -54,9 +54,9 @@ export default function TrueMeDashboard() {
 
       {/* Main Content */}
       <main className="pt-20 px-4 md:px-6 max-w-7xl mx-auto py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
           {/* Left Column */}
-          <div className="lg:col-span-7 space-y-6">
+          <div className="lg:col-span-2 space-y-6">
             {/* Identity Card */}
             <motion.div 
               className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 md:p-8"
@@ -104,7 +104,7 @@ export default function TrueMeDashboard() {
             </motion.div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <motion.div 
                 className="bg-white rounded-xl shadow-sm border border-gray-200 p-6"
                 initial={{ opacity: 0, y: 20 }}
@@ -181,7 +181,7 @@ export default function TrueMeDashboard() {
                 </Modal>
               </div>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {benefits.map((benefit, index) => (
                   <div key={index} className="flex items-center gap-3 p-4 rounded-xl bg-trueme-gold/5 border border-trueme-gold/20">
                     <benefit.icon className="w-5 h-5 text-trueme-gold" />
@@ -193,7 +193,7 @@ export default function TrueMeDashboard() {
           </div>
 
           {/* Right Column */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="lg:col-span-1 space-y-6">
             {/* Quick Actions */}
             <motion.div 
               className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6"
@@ -206,11 +206,10 @@ export default function TrueMeDashboard() {
                 <motion.div
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full"
                 >
                   <a href="/marketplace" className="block">
-                    <HoverBorderGradient className="w-full justify-between">
-                      <span>Explorer le marketplace</span>
+                    <HoverBorderGradient className="w-full flex items-center justify-between px-6 py-3">
+                      <span className="font-medium">Explorer le marketplace</span>
                       <motion.div
                         whileHover={{ x: 4 }}
                         transition={{ duration: 0.2 }}
@@ -224,11 +223,10 @@ export default function TrueMeDashboard() {
                 <motion.div
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full"
                 >
                   <a href="/brands" className="block">
-                    <HoverBorderGradient className="w-full justify-between">
-                      <span>Ma collection</span>
+                    <HoverBorderGradient className="w-full flex items-center justify-between px-6 py-3">
+                      <span className="font-medium">Ma collection</span>
                       <motion.div
                         whileHover={{ x: 4 }}
                         transition={{ duration: 0.2 }}
@@ -244,10 +242,9 @@ export default function TrueMeDashboard() {
                     <motion.div
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="w-full"
                     >
-                      <HoverBorderGradient className="w-full justify-between">
-                        <span>Historique des achats</span>
+                      <HoverBorderGradient className="w-full flex items-center justify-between px-6 py-3">
+                        <span className="font-medium">Historique des achats</span>
                         <motion.div
                           whileHover={{ x: 4 }}
                           transition={{ duration: 0.2 }}
@@ -312,26 +309,40 @@ export default function TrueMeDashboard() {
                   transition={{ duration: 0.5, delay: 0.5 }}
                   whileHover={{ y: -2 }}
                 >
-                  <h3 className="text-xl font-serif text-trueme mb-4">Ma collection</h3>
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center">
-                      <span className="text-trueme-secondary">Articles possédés</span>
-                      <span className="font-semibold text-trueme">{userStats.totalItems}</span>
+                  <h3 className="text-xl font-serif text-trueme mb-6">Ma collection</h3>
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-3 gap-4 text-center">
+                      <div className="bg-trueme-gold/5 rounded-lg p-4 border border-trueme-gold/20">
+                        <p className="text-2xl font-bold text-trueme">{userStats.totalItems}</p>
+                        <p className="text-xs text-trueme-secondary">Articles</p>
+                      </div>
+                      <div className="bg-trueme-gold/5 rounded-lg p-4 border border-trueme-gold/20">
+                        <p className="text-2xl font-bold text-trueme">{userStats.totalValue}</p>
+                        <p className="text-xs text-trueme-secondary">Valeur</p>
+                      </div>
+                      <div className="bg-trueme-gold/5 rounded-lg p-4 border border-trueme-gold/20">
+                        <p className="text-2xl font-bold text-trueme-gold flex items-center justify-center gap-1">
+                          <TrendingUp className="w-4 h-4" />
+                          {userStats.collectionGrowth}
+                        </p>
+                        <p className="text-xs text-trueme-secondary">Croissance</p>
+                      </div>
                     </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-trueme-secondary">Valeur estimée</span>
-                      <span className="font-semibold text-trueme">{userStats.totalValue}</span>
+                    
+                    <div className="space-y-3 pt-2">
+                      <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                        <span className="text-sm text-trueme-secondary">Marques favorites</span>
+                        <span className="text-sm font-medium text-trueme">Hermès, Chanel, Dior</span>
+                      </div>
+                      <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                        <span className="text-sm text-trueme-secondary">Dernière acquisition</span>
+                        <span className="text-sm font-medium text-trueme">Sac Birkin 35 - 15 jan</span>
+                      </div>
+                      <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                        <span className="text-sm text-trueme-secondary">Score authenticité</span>
+                        <span className="text-sm font-medium text-trueme-gold">100% ✓</span>
+                      </div>
                     </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-trueme-secondary">Croissance</span>
-                      <span className="font-semibold text-trueme-gold flex items-center gap-1">
-                        <TrendingUp className="w-4 h-4" />
-                        {userStats.collectionGrowth}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="mt-4 text-center">
-                    <p className="text-xs text-trueme-secondary">Cliquez pour voir le détail</p>
                   </div>
                 </motion.div>
               </ModalTrigger>
