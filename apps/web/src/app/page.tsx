@@ -188,61 +188,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* True Me Universe Section */}
-      <section className="py-16 px-4 bg-gradient-to-r from-transparent via-trueme-cream/20 to-transparent">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="mb-12 fade-in">
-            <div className="inline-flex items-center space-x-2 mb-6">
-              <div className="w-2 h-2 bg-trueme-gold rounded-full"></div>
-              <span className="text-sm font-medium text-trueme-gold tracking-[0.2em] uppercase">L'Univers TRUE ME</span>
-              <div className="w-2 h-2 bg-trueme-gold rounded-full"></div>
-            </div>
-            <h2 className="text-3xl md:text-5xl font-light mb-6 text-trueme tracking-tight">
-              L'Excellence en Chiffres
-            </h2>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8 text-center">
-            <div className="fade-in">
-              <div className="text-4xl md:text-5xl font-light text-trueme-gold mb-2">500+</div>
-              <p className="text-sm text-trueme-secondary tracking-wide uppercase">Pièces Authentifiées</p>
-            </div>
-            <div className="fade-in" style={{animationDelay: '0.1s'}}>
-              <div className="text-4xl md:text-5xl font-light text-trueme-gold mb-2">98%</div>
-              <p className="text-sm text-trueme-secondary tracking-wide uppercase">Satisfaction Client</p>
-            </div>
-            <div className="fade-in" style={{animationDelay: '0.2s'}}>
-              <div className="text-4xl md:text-5xl font-light text-trueme-gold mb-2">24h</div>
-              <p className="text-sm text-trueme-secondary tracking-wide uppercase">Authentification Express</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Excellence Section */}
-      <section className="py-20 bg-white/5 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center space-x-2 mb-6">
-              <div className="w-2 h-2 bg-trueme-gold rounded-full"></div>
-              <span className="text-sm font-medium text-trueme-gold tracking-[0.2em] uppercase">Excellence</span>
-              <div className="w-2 h-2 bg-trueme-gold rounded-full"></div>
-            </div>
-            <h2 className="text-4xl md:text-6xl font-light mb-6 text-trueme tracking-tight">
-              L'Art du Luxe Authentique
-            </h2>
-            <p className="text-xl text-trueme-light max-w-3xl mx-auto leading-relaxed">
-              Plus qu'une marketplace, TRUE ME est votre passerelle vers l'excellence
-            </p>
-          </div>
-          <Carousel items={excellenceCards} />
-        </div>
-      </section>
-
       {/* Marketplace Preview */}
       <section className="py-20 md:py-32 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 md:mb-24 fade-in">
+            <div className="inline-flex items-center space-x-2 mb-6">
+              <div className="w-2 h-2 bg-trueme-gold rounded-full"></div>
+              <span className="text-sm font-medium text-trueme-gold tracking-[0.2em] uppercase">Marketplace</span>
+              <div className="w-2 h-2 bg-trueme-gold rounded-full"></div>
+            </div>
             <h2 className="text-4xl md:text-6xl font-light mb-8 text-trueme tracking-tight">
               Une Sélection d'Exception, Juste pour Vous
             </h2>
@@ -276,56 +230,46 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Authentification Section */}
-      <section id="authentification" className="py-20 md:py-32 px-4 bg-gradient-to-b from-white/5 to-transparent">
+      {/* Storytelling Section - 3 Icônes */}
+      <section className="py-16 px-4 bg-gradient-to-r from-transparent via-trueme-cream/20 to-transparent">
         <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center">
+          <div className="grid md:grid-cols-3 gap-8 text-center">
+            {/* Authenticité */}
             <div className="fade-in">
-              <div className="aspect-square bg-gradient-to-br from-trueme-gold/20 to-trueme-gold/5 rounded-3xl flex items-center justify-center mb-8 md:mb-0">
-                <Shield className="w-24 h-24 text-trueme-gold" />
+              <div className="w-16 h-16 mx-auto mb-6 bg-trueme-gold/10 rounded-full flex items-center justify-center">
+                <Shield className="w-8 h-8 text-trueme-gold" />
               </div>
+              <h3 className="text-xl md:text-2xl font-semibold text-trueme mb-4">Authenticité</h3>
+              <p className="text-trueme-light leading-relaxed">
+                Chaque pièce certifiée par nos experts. Votre garantie d'authenticité absolue.
+              </p>
             </div>
             
-            <div className="fade-in" style={{animationDelay: '0.2s'}}>
-              <h2 className="text-4xl md:text-5xl font-light mb-8 text-trueme tracking-tight">
-                Révélez la Vraie Valeur de vos Trésors
-              </h2>
-              <p className="text-xl text-trueme-light mb-8 leading-relaxed">
-                Votre article de luxe est unique. Sa provenance ne devrait plus être un doute.
-              </p>
-              
-              <div className="space-y-6 mb-10">
-                <div className="flex items-start gap-4">
-                  <CheckCircle className="w-6 h-6 text-trueme-gold mt-1 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold text-trueme mb-2">Gage d'Authenticité Ultime</h3>
-                    <p className="text-trueme-light">Recevez un certificat numérique infalsifiable qui accompagne votre article à vie.</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <Sparkles className="w-6 h-6 text-trueme-gold mt-1 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold text-trueme mb-2">Maximisez Votre Prix de Vente</h3>
-                    <p className="text-trueme-light">Un article certifié se vend plus vite et à un meilleur prix.</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <Shield className="w-6 h-6 text-trueme-gold mt-1 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold text-trueme mb-2">Tranquillité d'Esprit</h3>
-                    <p className="text-trueme-light">Vendez en toute sérénité sur notre plateforme ou en privé.</p>
-                  </div>
-                </div>
+            {/* Valeur */}
+            <div className="fade-in" style={{animationDelay: '0.1s'}}>
+              <div className="w-16 h-16 mx-auto mb-6 bg-trueme-gold/10 rounded-full flex items-center justify-center">
+                <Sparkles className="w-8 h-8 text-trueme-gold" />
               </div>
-              
-              <Link href="/auth/register" className="btn-primary px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-medium inline-flex items-center gap-2">
-                Faire authentifier mon article
-                <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
-              </Link>
+              <h3 className="text-xl md:text-2xl font-semibold text-trueme mb-4">Valeur</h3>
+              <p className="text-trueme-light leading-relaxed">
+                Des pièces d'exception qui conservent et augmentent leur valeur dans le temps.
+              </p>
+            </div>
+            
+            {/* Sécurité */}
+            <div className="fade-in" style={{animationDelay: '0.2s'}}>
+              <div className="w-16 h-16 mx-auto mb-6 bg-trueme-gold/10 rounded-full flex items-center justify-center">
+                <CheckCircle className="w-8 h-8 text-trueme-gold" />
+              </div>
+              <h3 className="text-xl md:text-2xl font-semibold text-trueme mb-4">Sécurité</h3>
+              <p className="text-trueme-light leading-relaxed">
+                Transactions sécurisées et service client d'exception pour votre tranquillité.
+              </p>
             </div>
           </div>
         </div>
       </section>
+
 
       {/* VIP Services */}
       <section className="py-20 md:py-32 px-4">
