@@ -120,19 +120,19 @@ export default function Home() {
       quote: "TRUE ME m'a permis de découvrir des pièces d'exception que je n'aurais jamais trouvées ailleurs. L'authenticité est garantie, le service irréprochable.",
       name: "Zara Al-Rashid",
       designation: "Top Model & Influenceuse Mode",
-      src: "https://images.unsplash.com/photo-1494790108755-2616b612b786?q=80&w=1887&auto=format&fit=crop"
+      src: "/images/hero/zara-al-rashid.png"
     },
     {
       quote: "En tant que footballeur, j'accorde une importance particulière à mon style. TRUE ME comprend mes besoins et me propose toujours des pièces qui correspondent à ma personnalité.",
       name: "Marcus Sterling", 
       designation: "Footballeur Premier League",
-      src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1935&auto=format&fit=crop"
+      src: "/images/hero/marcus-sterling.png"
     },
     {
       quote: "TRUE ME n'est pas qu'une marketplace, c'est une expérience. Chaque acquisition devient un moment privilégié, une histoire à raconter.",
       name: "Ahmed Al-Maktoum",
       designation: "Entrepreneur & Collectionneur",
-      src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1935&auto=format&fit=crop"
+      src: "/images/hero/ahmed-al-maktoum.png"
     }
   ];
 
@@ -192,8 +192,20 @@ export default function Home() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12">
             {featuredArticles.map((article, index) => (
               <GlassCard key={article.id} className="p-4 md:p-6 luxury-hover fade-in">
-                <div className="aspect-square bg-gradient-to-br from-trueme-gold/20 to-trueme-gold/5 rounded-lg mb-4 flex items-center justify-center">
-                  <Crown className="w-8 h-8 md:w-12 md:h-12 text-trueme-gold" />
+                <div className="aspect-square bg-gradient-to-br from-trueme-gold/20 to-trueme-gold/5 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+                  <img 
+                    src={`/images/products/${article.brand.toLowerCase().replace(' ', '-').replace('è', 'e')}-${article.name.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')}.jpg`}
+                    alt={`${article.brand} ${article.name}`}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                      const nextElement = e.currentTarget.nextElementSibling as HTMLElement;
+                      if (nextElement) {
+                        nextElement.style.display = 'flex';
+                      }
+                    }}
+                  />
+                  <Crown className="w-8 h-8 md:w-12 md:h-12 text-trueme-gold hidden" />
                 </div>
                 <div className="text-center">
                   <p className="text-xs md:text-sm text-trueme-gold font-medium mb-1">{article.brand}</p>

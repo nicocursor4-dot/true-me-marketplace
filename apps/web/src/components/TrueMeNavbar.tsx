@@ -26,9 +26,11 @@ const TrueMeNavbar = () => {
 
   const TrueMeLogo = ({ visible }: { visible?: boolean }) => (
     <Link href="/" className="flex items-center z-20">
-      <div className="w-8 h-8 bg-trueme-gold rounded-full flex items-center justify-center">
-        <span className="text-black font-bold text-sm">TM</span>
-      </div>
+      <img 
+        src="/images/logos/trueme-logo.png" 
+        alt="True Me Logo" 
+        className="w-8 h-8 object-contain"
+      />
     </Link>
   );
 
