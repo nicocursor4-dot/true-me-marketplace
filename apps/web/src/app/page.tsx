@@ -7,9 +7,53 @@ import { GlassCard } from '@/components/ui/GlassCard'
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
+import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
+import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { ShoppingBag, Shield, Crown, CheckCircle, ArrowRight, Sparkles, Star, Clock, Phone, Heart, Zap, User } from 'lucide-react';
 
 export default function Home() {
+  const typewriterWords = [
+    {
+      text: "Not",
+      className: "text-trueme",
+    },
+    {
+      text: "a",
+      className: "text-trueme",
+    },
+    {
+      text: "Style.",
+      className: "text-trueme",
+    },
+    {
+      text: "A",
+      className: "text-trueme-gold",
+    },
+    {
+      text: "Signature.",
+      className: "text-trueme-gold",
+    },
+  ];
+
+  const typewriterWords2 = [
+    {
+      text: "L'art",
+      className: "text-trueme",
+    },
+    {
+      text: "du",
+      className: "text-trueme",
+    },
+    {
+      text: "luxe",
+      className: "text-trueme-gold",
+    },
+    {
+      text: "authentique.",
+      className: "text-trueme-gold",
+    },
+  ];
+
   const brandLogos = [
     'Chanel', 'Hermès', 'Louis Vuitton', 'Dior', 'Gucci'
   ];
@@ -143,10 +187,16 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative px-4 pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
         <div className="max-w-6xl mx-auto text-center relative z-10">
-          {/* Hero Title */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-light mb-6 fade-in text-trueme tracking-tight">
-            True Me : Not a Style. A Signature.
-          </h1>
+          {/* Hero Title with Typewriter Effect */}
+          <div className="mb-6 fade-in">
+            <TypewriterEffectSmooth words={typewriterWords} />
+            <div className="mt-4">
+              <TypewriterEffectSmooth words={typewriterWords2} />
+            </div>
+            <div className="text-4xl md:text-6xl lg:text-7xl font-bold text-trueme-gold mt-8 tracking-tight">
+              True Me
+            </div>
+          </div>
           
           {/* Hero Subtitle */}
           <div className="mb-12 fade-in-delay-1">
@@ -157,13 +207,25 @@ export default function Home() {
           
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-24 fade-in" style={{animationDelay: '0.4s'}}>
-            <Link href="/marketplace" className="btn-primary px-10 py-4 text-lg font-medium flex items-center gap-2">
-              <ShoppingBag className="w-5 h-5" />
-              Découvrir la Marketplace
+            <Link href="/marketplace">
+              <HoverBorderGradient
+                containerClassName="rounded-full"
+                as="button"
+                className="bg-gradient-to-br from-trueme-gold to-trueme-gold text-white font-medium px-10 py-4 text-lg flex items-center gap-2"
+              >
+                <ShoppingBag className="w-5 h-5" />
+                Découvrir la Marketplace
+              </HoverBorderGradient>
             </Link>
-            <Link href="#authentification" className="btn-secondary px-10 py-4 text-lg font-medium flex items-center gap-2">
-              <Shield className="w-5 h-5" />
-              Faire certifier un article
+            <Link href="#authentification">
+              <HoverBorderGradient
+                containerClassName="rounded-full"
+                as="button"
+                className="bg-gradient-to-br from-trueme-gold to-trueme-gold text-white font-medium px-10 py-4 text-lg flex items-center gap-2"
+              >
+                <Shield className="w-5 h-5" />
+                Faire certifier un article
+              </HoverBorderGradient>
             </Link>
           </div>
         </div>

@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useId, useRef } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import TrueMeNavbar from '@/components/TrueMeNavbar';
 import { GlassCard } from '@/components/ui/GlassCard';
-import { Crown, Sparkles, ShoppingCart, BarChart, TrendingUp, Shield, Star, ArrowRight } from 'lucide-react';
+import { useOutsideClick } from '@/hooks/use-outside-click';
+import { Crown, Sparkles, ShoppingCart, BarChart, TrendingUp, Shield, Star, ArrowRight, Gift, Users, Calendar, Settings } from 'lucide-react';
 
 export default function Dashboard() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
@@ -45,22 +46,122 @@ export default function Dashboard() {
     }
   } as const;
 
-  const advantages = [
+  const [active, setActive] = useState<(typeof advantageCards)[number] | boolean | null>(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const id = useId();
+
+  useEffect(() => {
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setActive(false);
+      }
+    }
+
+    if (active && typeof active === "object") {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [active]);
+
+  useOutsideClick(ref, () => setActive(null));
+
+  const advantageCards = [
     {
-      title: "Authentification Express",
-      description: "Vos articles sont authentifiés en moins de 24h avec notre service premium Gold."
+      title: "Accès aux ventes privées TRUE ME",
+      description: "Membre privilégié",
+      icon: Gift,
+      content: () => (
+        <div className="p-6">
+          <p className="text-trueme-light text-lg leading-relaxed">
+            En tant que membre Gold, vous bénéficiez d'un accès exclusif aux ventes privées TRUE ME. 
+            Découvrez les dernières collections avant tout le monde et profitez de réductions privilégiées 
+            sur une sélection de pièces d'exception.
+          </p>
+          <div className="mt-6 p-4 bg-trueme-gold/10 rounded-lg">
+            <h4 className="font-bold text-trueme mb-2">Avantages inclus :</h4>
+            <ul className="text-trueme-light space-y-1">
+              <li>• Accès prioritaire 48h avant les ventes publiques</li>
+              <li>• Réductions exclusives jusqu'à 30%</li>
+              <li>• Invitations aux événements VIP</li>
+            </ul>
+          </div>
+        </div>
+      )
     },
     {
-      title: "Garantie Étendue",
-      description: "Protection complète sur tous vos achats pendant 2 ans avec assurance incluse."
+      title: "Invitations à des événements partenariaux",
+      description: "Réseau exclusif",
+      icon: Users,
+      content: () => (
+        <div className="p-6">
+          <p className="text-trueme-light text-lg leading-relaxed">
+            Rejoignez un réseau exclusif de passionnés de luxe. Participez à des événements 
+            organisés avec nos partenaires prestigieux : défilés privés, vernissages, 
+            et soirées dans les plus beaux lieux de Dubaï.
+          </p>
+          <div className="mt-6 grid grid-cols-2 gap-4">
+            <div className="p-3 bg-trueme/5 rounded-lg text-center">
+              <Calendar className="w-6 h-6 mx-auto text-trueme-gold mb-2" />
+              <span className="text-sm text-trueme">12 événements/an</span>
+            </div>
+            <div className="p-3 bg-trueme/5 rounded-lg text-center">
+              <Users className="w-6 h-6 mx-auto text-trueme-gold mb-2" />
+              <span className="text-sm text-trueme">150+ membres</span>
+            </div>
+          </div>
+        </div>
+      )
     },
     {
-      title: "Conseiller Dédié",
-      description: "Un expert personnel vous accompagne dans vos investissements luxe."
+      title: "Code de réduction chez The Luxury Cleaner",
+      description: "Partenaire privilégié",
+      icon: Sparkles,
+      content: () => (
+        <div className="p-6">
+          <p className="text-trueme-light text-lg leading-relaxed">
+            Bénéficiez d'un service de nettoyage professionnel pour vos pièces de luxe 
+            avec notre partenaire The Luxury Cleaner. Un savoir-faire unique pour préserver 
+            la beauté et la valeur de vos investissements.
+          </p>
+          <div className="mt-6 p-4 bg-gradient-to-r from-trueme-gold/20 to-trueme-gold/10 rounded-lg border border-trueme-gold/20">
+            <div className="flex items-center justify-between">
+              <div>
+                <h4 className="font-bold text-trueme mb-1">Code promo actif</h4>
+                <p className="text-trueme-light text-sm">Réduction de 25% sur tous les services</p>
+              </div>
+              <div className="text-2xl font-bold text-trueme-gold">GOLD25</div>
+            </div>
+          </div>
+        </div>
+      )
     },
     {
-      title: "Accès VIP",
-      description: "Pré-commandes exclusives et événements privés réservés au statut Gold."
+      title: "Accès prioritaire au centre d'authentification",
+      description: "Service premium",
+      icon: Shield,
+      content: () => (
+        <div className="p-6">
+          <p className="text-trueme-light text-lg leading-relaxed">
+            Profitez d'un service d'authentification prioritaire pour tous vos articles. 
+            Nos experts certifiés analysent vos pièces dans les plus brefs délais 
+            avec la garantie TRUE ME.
+          </p>
+          <div className="mt-6 space-y-3">
+            <div className="flex justify-between items-center p-3 bg-trueme/5 rounded-lg">
+              <span className="text-trueme">Délai standard</span>
+              <span className="text-trueme-light">5-7 jours</span>
+            </div>
+            <div className="flex justify-between items-center p-3 bg-trueme-gold/10 rounded-lg border border-trueme-gold/20">
+              <span className="text-trueme font-bold">Délai Gold</span>
+              <span className="text-trueme-gold font-bold">24-48h</span>
+            </div>
+          </div>
+        </div>
+      )
     }
   ];
 
@@ -227,7 +328,7 @@ export default function Dashboard() {
             ))}
           </motion.div>
 
-          {/* Advantages */}
+          {/* Advantages as Expandable Cards */}
           <motion.div className="mb-20" variants={itemVariants}>
             <motion.h2 
               className="mb-16 text-center text-trueme text-4xl"
@@ -235,35 +336,113 @@ export default function Dashboard() {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.2 }}
             >
-              Vos Avantages <span className="text-trueme-gold">{userStats.currentStatus}</span>
+              Avantages associés
             </motion.h2>
+            
+            <AnimatePresence>
+              {active && typeof active === "object" && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="fixed inset-0 bg-black/20 h-full w-full z-50"
+                />
+              )}
+            </AnimatePresence>
+            
+            <AnimatePresence>
+              {active && typeof active === "object" ? (
+                <div className="fixed inset-0 grid place-items-center z-[100]">
+                  <motion.button
+                    key={`button-${active.title}-${id}`}
+                    layout
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0, transition: { duration: 0.05 } }}
+                    className="flex absolute top-2 right-2 lg:hidden items-center justify-center bg-white rounded-full h-6 w-6"
+                    onClick={() => setActive(null)}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 text-black">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M18 6l-12 12" />
+                      <path d="M6 6l12 12" />
+                    </svg>
+                  </motion.button>
+                  <motion.div
+                    layoutId={`card-${active.title}-${id}`}
+                    ref={ref}
+                    className="w-full max-w-[500px] h-full md:h-fit md:max-h-[90%] flex flex-col bg-trueme-cream border border-trueme-gold/20 sm:rounded-3xl overflow-hidden shadow-2xl"
+                  >
+                    <div className="p-6 border-b border-trueme-gold/10">
+                      <div className="flex items-center gap-4 mb-4">
+                        <motion.div layoutId={`icon-${active.title}-${id}`}>
+                          <active.icon className="w-8 h-8 text-trueme-gold" />
+                        </motion.div>
+                        <div>
+                          <motion.h3
+                            layoutId={`title-${active.title}-${id}`}
+                            className="font-bold text-trueme text-xl"
+                          >
+                            {active.title}
+                          </motion.h3>
+                          <motion.p
+                            layoutId={`description-${active.description}-${id}`}
+                            className="text-trueme-gold text-sm"
+                          >
+                            {active.description}
+                          </motion.p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex-1">
+                      <motion.div
+                        layout
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="h-full overflow-auto [scrollbar-width:none] [-ms-overflow-style:none] [-webkit-scrollbar:none]"
+                      >
+                        {typeof active.content === "function" ? active.content() : active.content}
+                      </motion.div>
+                    </div>
+                  </motion.div>
+                </div>
+              ) : null}
+            </AnimatePresence>
+            
             <motion.div 
-              className="grid grid-cols-1 md:grid-cols-2 gap-8"
+              className="space-y-4"
               variants={containerVariants}
             >
-              {advantages.map((advantage, index) => (
-                <motion.div 
-                  key={index} 
-                  className="glass-morphism p-10 luxury-hover relative overflow-hidden group"
+              {advantageCards.map((card, index) => (
+                <motion.div
+                  layoutId={`card-${card.title}-${id}`}
+                  key={`card-${card.title}-${id}`}
+                  onClick={() => setActive(card)}
+                  className="glass-morphism p-6 flex items-center justify-between hover:bg-trueme-gold/5 rounded-xl cursor-pointer luxury-hover group"
                   variants={itemVariants}
-                  whileHover={{ 
-                    scale: 1.05,
-                    transition: { type: "spring", stiffness: 400, damping: 25 }
-                  }}
+                  whileHover={{ x: 5 }}
                 >
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-br from-trueme-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  />
-                  <motion.div 
-                    className="mb-6 relative z-10"
-                    initial={{ rotate: -45, scale: 0 }}
-                    animate={{ rotate: 0, scale: 1 }}
-                    transition={{ delay: 0.3 + index * 0.1, type: "spring" }}
-                  >
-                    <Sparkles className="w-10 h-10 text-trueme-gold" />
-                  </motion.div>
-                  <h3 className="mb-6 text-trueme text-2xl font-bold relative z-10">{advantage.title}</h3>
-                  <p className="text-trueme-light leading-relaxed text-lg relative z-10">{advantage.description}</p>
+                  <div className="flex items-center gap-4">
+                    <motion.div layoutId={`icon-${card.title}-${id}`}>
+                      <card.icon className="w-6 h-6 text-trueme-gold" />
+                    </motion.div>
+                    <div>
+                      <motion.h3
+                        layoutId={`title-${card.title}-${id}`}
+                        className="font-medium text-trueme text-lg"
+                      >
+                        {card.title}
+                      </motion.h3>
+                      <motion.p
+                        layoutId={`description-${card.description}-${id}`}
+                        className="text-trueme-gold text-sm"
+                      >
+                        {card.description}
+                      </motion.p>
+                    </div>
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-trueme-gold/60 group-hover:text-trueme-gold group-hover:translate-x-1 transition-all duration-200" />
                 </motion.div>
               ))}
             </motion.div>
