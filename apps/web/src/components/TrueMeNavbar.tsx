@@ -25,23 +25,10 @@ const TrueMeNavbar = () => {
   ];
 
   const TrueMeLogo = ({ visible }: { visible?: boolean }) => (
-    <Link href="/" className="flex items-center space-x-3 z-20">
+    <Link href="/" className="flex items-center z-20">
       <div className="w-8 h-8 bg-trueme-gold rounded-full flex items-center justify-center">
         <span className="text-black font-bold text-sm">TM</span>
       </div>
-      <AnimatePresence>
-        {!visible && (
-          <motion.span 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.3 }}
-            className="text-trueme font-light text-xl tracking-wider"
-          >
-            True Me
-          </motion.span>
-        )}
-      </AnimatePresence>
     </Link>
   );
 

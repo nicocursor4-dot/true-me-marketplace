@@ -7,7 +7,7 @@ import { GlassCard } from '@/components/ui/GlassCard'
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
-import { ShoppingBag, Shield, Crown, CheckCircle, ArrowRight, Sparkles, Star, Clock, Phone, Heart, Zap } from 'lucide-react';
+import { ShoppingBag, Shield, Crown, CheckCircle, ArrowRight, Sparkles, Star, Clock, Phone, Heart, Zap, User } from 'lucide-react';
 
 export default function Home() {
   const brandLogos = [
@@ -129,12 +129,6 @@ export default function Home() {
       src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1935&auto=format&fit=crop"
     },
     {
-      quote: "La conciergerie TRUE ME est exceptionnelle. Ils anticipent mes désirs et me dénichent les pièces les plus exclusives avant même qu'elles ne soient sur le marché.",
-      name: "Luna Castillo",
-      designation: "Actrice & Ambassadrice Luxe",
-      src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1935&auto=format&fit=crop"
-    },
-    {
       quote: "TRUE ME n'est pas qu'une marketplace, c'est une expérience. Chaque acquisition devient un moment privilégié, une histoire à raconter.",
       name: "Ahmed Al-Maktoum",
       designation: "Entrepreneur & Collectionneur",
@@ -151,20 +145,13 @@ export default function Home() {
         <div className="max-w-6xl mx-auto text-center relative z-10">
           {/* Hero Title */}
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-light mb-6 fade-in text-trueme tracking-tight">
-            Not a Styl. A Signature.
+            True Me : Not a Style. A Signature.
           </h1>
-          
-          {/* Hero Slogan */}
-          <div className="mb-8 fade-in-delay-1">
-            <p className="text-2xl md:text-3xl text-trueme-gold font-light italic tracking-wide">
-              by True Me
-            </p>
-          </div>
           
           {/* Hero Subtitle */}
           <div className="mb-12 fade-in-delay-1">
             <p className="text-xl md:text-2xl text-trueme-light max-w-4xl mx-auto leading-relaxed">
-              Découvrez des pièces d'exception où chaque détail révèle l'art de l'excellence. Votre signature du luxe authentique.
+              Découvrez des pièces d'exception où chaque détail révèle l'art de l'excellence. Not a Style. A Signature.
             </p>
           </div>
           
@@ -320,14 +307,14 @@ export default function Home() {
                       </h4>
                       <div className="space-y-3">
                         {[
-                          { icon: '🔍', text: 'Recherche mondiale de pièces rares' },
-                          { icon: '⚡', text: 'Accès prioritaire aux nouvelles arrivées' },
-                          { icon: '🎯', text: 'Curation personnalisée selon vos goûts' },
-                          { icon: '🏆', text: 'Expertise certifiée par les maisons de luxe' },
-                          { icon: '✨', text: 'Service concierge dédié 24/7' }
+                          { icon: <ShoppingBag className="w-5 h-5" />, text: 'Recherche mondiale de pièces rares' },
+                          { icon: <Zap className="w-5 h-5" />, text: 'Accès prioritaire aux nouvelles arrivées' },
+                          { icon: <Heart className="w-5 h-5" />, text: 'Curation personnalisée selon vos goûts' },
+                          { icon: <Crown className="w-5 h-5" />, text: 'Expertise certifiée par les maisons de luxe' },
+                          { icon: <Sparkles className="w-5 h-5" />, text: 'Service concierge dédié 24/7' }
                         ].map((item, idx) => (
                           <div key={idx} className="flex items-center gap-3 p-3 hover:bg-trueme-gold/5 rounded-xl transition-colors">
-                            <span className="text-2xl">{item.icon}</span>
+                            <div className="text-trueme-gold">{item.icon}</div>
                             <span className="text-trueme-light font-medium">{item.text}</span>
                           </div>
                         ))}
@@ -531,12 +518,12 @@ export default function Home() {
                   
                   <div className="grid md:grid-cols-3 gap-6 mb-8">
                     {[
-                      { icon: '👤', title: 'Profil Personnalisé', desc: 'Analyse complète de votre style et préférences' },
-                      { icon: '🎯', title: 'Curation Exclusive', desc: 'Sélection de pièces adaptées à votre personnalité' },
-                      { icon: '✨', title: 'Service Continu', desc: 'Accompagnement permanent dans vos choix luxe' }
+                      { icon: <User className="w-8 h-8" />, title: 'Profil Personnalisé', desc: 'Analyse complète de votre style et préférences' },
+                      { icon: <Heart className="w-8 h-8" />, title: 'Curation Exclusive', desc: 'Sélection de pièces adaptées à votre personnalité' },
+                      { icon: <Sparkles className="w-8 h-8" />, title: 'Service Continu', desc: 'Accompagnement permanent dans vos choix luxe' }
                     ].map((item, idx) => (
                       <div key={idx} className="text-center bg-gradient-to-b from-white/20 to-white/5 rounded-2xl p-6 border border-white/10">
-                        <span className="text-4xl mb-4 block">{item.icon}</span>
+                        <div className="text-trueme-gold mb-4 flex justify-center">{item.icon}</div>
                         <h4 className="font-semibold text-trueme mb-3">{item.title}</h4>
                         <p className="text-trueme-light text-sm">{item.desc}</p>
                       </div>
@@ -551,13 +538,13 @@ export default function Home() {
                       </h4>
                       <div className="space-y-4">
                         {[
-                          { icon: '🏆', text: 'Stylistes formés par les maisons de luxe' },
-                          { icon: '🌍', text: 'Accès mondial aux collections privées' },
-                          { icon: '📈', text: 'Conseil en investissement mode' },
-                          { icon: '⚡', text: 'Réponse garantie sous 4h' }
+                          { icon: <Crown className="w-5 h-5" />, text: 'Stylistes formés par les maisons de luxe' },
+                          { icon: <ShoppingBag className="w-5 h-5" />, text: 'Accès mondial aux collections privées' },
+                          { icon: <ArrowRight className="w-5 h-5" />, text: 'Conseil en investissement mode' },
+                          { icon: <Zap className="w-5 h-5" />, text: 'Réponse garantie sous 4h' }
                         ].map((item, idx) => (
                           <div key={idx} className="flex items-center gap-3 p-3 hover:bg-trueme-gold/5 rounded-xl transition-colors">
-                            <span className="text-xl">{item.icon}</span>
+                            <div className="text-trueme-gold">{item.icon}</div>
                             <span className="text-trueme-light font-medium">{item.text}</span>
                           </div>
                         ))}
@@ -595,11 +582,11 @@ export default function Home() {
                         <p className="text-trueme-light">Découvrez votre style unique avec nos experts</p>
                       </div>
                       <div className="flex items-center justify-center gap-4 text-sm text-trueme-light">
-                        <span>💎 Sans engagement</span>
+                        <div className="flex items-center gap-1"><Sparkles className="w-4 h-4 text-trueme-gold" /><span>Sans engagement</span></div>
                         <span>•</span>
-                        <span>⏰ 60 minutes</span>
+                        <div className="flex items-center gap-1"><Clock className="w-4 h-4 text-trueme-gold" /><span>60 minutes</span></div>
                         <span>•</span>
-                        <span>🎁 Carnet style offert</span>
+                        <div className="flex items-center gap-1"><Crown className="w-4 h-4 text-trueme-gold" /><span>Carnet style offert</span></div>
                       </div>
                     </div>
                   </div>
