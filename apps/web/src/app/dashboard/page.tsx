@@ -210,7 +210,7 @@ export default function TrueMeDashboard() {
                   className="w-full"
                 >
                   <a href="/marketplace" className="block w-full">
-                    <div className="w-full bg-trueme-gold hover:bg-trueme-gold/90 text-white rounded-lg px-4 py-3 flex items-center justify-between transition-colors duration-200">
+                    <div className="w-full bg-trueme-gold hover:bg-trueme-gold/90 text-white rounded-2xl px-4 py-3 flex items-center justify-between transition-colors duration-200">
                       <span className="font-medium">Explorer le marketplace</span>
                       <ArrowRight className="w-4 h-4" />
                     </div>
@@ -223,7 +223,7 @@ export default function TrueMeDashboard() {
                   className="w-full"
                 >
                   <a href="/brands" className="block w-full">
-                    <div className="w-full bg-trueme-gold hover:bg-trueme-gold/90 text-white rounded-lg px-4 py-3 flex items-center justify-between transition-colors duration-200">
+                    <div className="w-full bg-trueme-gold hover:bg-trueme-gold/90 text-white rounded-2xl px-4 py-3 flex items-center justify-between transition-colors duration-200">
                       <span className="font-medium">Ma collection</span>
                       <ArrowRight className="w-4 h-4" />
                     </div>
@@ -235,11 +235,9 @@ export default function TrueMeDashboard() {
                     <motion.div
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="w-full bg-white hover:bg-gray-50 text-trueme border border-gray-200 rounded-lg px-4 py-3 flex items-center justify-between transition-colors duration-200 cursor-pointer"
+                      className="w-full bg-trueme-gold hover:bg-trueme-gold/90 text-white rounded-2xl px-4 py-3 flex items-center justify-between transition-colors duration-200 cursor-pointer"
                     >
-                      <span className="font-medium flex items-center gap-2">
-                        📋 Historique des achats
-                      </span>
+                      <span className="font-medium">Historique des achats</span>
                       <ArrowRight className="w-4 h-4" />
                     </motion.div>
                   </ModalTrigger>
@@ -292,47 +290,37 @@ export default function TrueMeDashboard() {
             <Modal>
               <ModalTrigger>
                 <motion.div 
-                  className="bg-gradient-to-br from-trueme-gold/5 via-white to-trueme-gold/5 rounded-2xl shadow-lg border border-trueme-gold/20 p-8 cursor-pointer hover:shadow-xl transition-all duration-300 backdrop-blur-sm"
+                  className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 cursor-pointer hover:shadow-xl transition-all duration-300"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.5 }}
-                  whileHover={{ y: -3, scale: 1.01 }}
+                  whileHover={{ y: -2 }}
                 >
-                  <div className="text-center space-y-6">
-                    <div className="flex items-center justify-center gap-3 mb-4">
-                      <Crown className="w-6 h-6 text-trueme-gold" />
-                      <h3 className="text-2xl font-serif text-trueme">Ma Collection</h3>
-                      <Crown className="w-6 h-6 text-trueme-gold" />
+                  <div className="space-y-6">
+                    <div className="flex items-center gap-2 mb-6">
+                      <div className="w-2 h-2 bg-trueme-gold rounded-full"></div>
+                      <h3 className="text-xl font-medium text-trueme">Ma Collection</h3>
                     </div>
                     
-                    <div className="grid grid-cols-3 gap-6">
-                      <div className="text-center">
-                        <div className="w-16 h-16 mx-auto mb-3 bg-trueme-gold/10 rounded-full flex items-center justify-center border-2 border-trueme-gold/20">
-                          <Star className="w-8 h-8 text-trueme-gold" />
-                        </div>
-                        <p className="text-3xl font-bold text-trueme mb-1">{userStats.totalItems}</p>
-                        <p className="text-sm text-trueme-secondary font-medium">Articles</p>
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center py-3 border-b border-gray-100">
+                        <span className="text-sm text-gray-600">Articles</span>
+                        <span className="font-semibold text-trueme">{userStats.totalItems}</span>
                       </div>
                       
-                      <div className="text-center">
-                        <div className="w-16 h-16 mx-auto mb-3 bg-trueme-gold/10 rounded-full flex items-center justify-center border-2 border-trueme-gold/20">
-                          <Sparkles className="w-8 h-8 text-trueme-gold" />
-                        </div>
-                        <p className="text-3xl font-bold text-trueme mb-1">{userStats.totalValue}</p>
-                        <p className="text-sm text-trueme-secondary font-medium">Valeur</p>
+                      <div className="flex justify-between items-center py-3 border-b border-gray-100">
+                        <span className="text-sm text-gray-600">Valeur estimée</span>
+                        <span className="font-semibold text-trueme">{userStats.totalValue}</span>
                       </div>
                       
-                      <div className="text-center">
-                        <div className="w-16 h-16 mx-auto mb-3 bg-green-500/10 rounded-full flex items-center justify-center border-2 border-green-500/20">
-                          <TrendingUp className="w-8 h-8 text-green-500" />
-                        </div>
-                        <p className="text-3xl font-bold text-green-500 mb-1">{userStats.collectionGrowth}</p>
-                        <p className="text-sm text-trueme-secondary font-medium">Croissance</p>
+                      <div className="flex justify-between items-center py-3">
+                        <span className="text-sm text-gray-600">Évolution</span>
+                        <span className="font-semibold text-trueme-gold">{userStats.collectionGrowth}</span>
                       </div>
                     </div>
                     
-                    <div className="mt-6 pt-4 border-t border-trueme-gold/20">
-                      <p className="text-sm text-trueme-gold font-medium italic">Découvrez le détail de votre collection ✨</p>
+                    <div className="text-center pt-4">
+                      <span className="text-xs text-gray-500 uppercase tracking-wide">Voir détails</span>
                     </div>
                   </div>
                 </motion.div>

@@ -48,15 +48,18 @@ export const ModalTrigger = ({
 }) => {
   const { setOpen } = useModal();
   return (
-    <button
+    <motion.button
       className={cn(
         "px-4 py-2 rounded-md text-black dark:text-white text-center relative overflow-hidden",
         className
       )}
       onClick={() => setOpen(true)}
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ duration: 0.2 }}
     >
       {children}
-    </button>
+    </motion.button>
   );
 };
 
