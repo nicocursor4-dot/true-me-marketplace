@@ -7,7 +7,7 @@ import { GlassCard } from '@/components/ui/GlassCard'
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
-import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
+import { SmoothTypewriter } from "@/components/ui/smooth-typewriter";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { ShoppingBag, Shield, Crown, CheckCircle, ArrowRight, Sparkles, Star, Clock, Phone, Heart, Zap, User } from 'lucide-react';
 
@@ -167,10 +167,10 @@ export default function Home() {
         <div className="max-w-6xl mx-auto text-center relative z-10">
           {/* Hero Title with Typewriter Effect */}
           <div className="mb-6 fade-in flex flex-col items-center justify-center">
-            <TypewriterEffectSmooth 
-              key={currentPhrase} 
-              words={typewriterWords}
-              className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-center" 
+            <SmoothTypewriter 
+              phrases={phrases}
+              className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-center text-trueme" 
+              interval={4000}
             />
             <div className="text-4xl md:text-6xl lg:text-7xl font-bold text-trueme-gold mt-8 tracking-tight text-center">
               True Me

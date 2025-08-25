@@ -194,29 +194,54 @@ export default function TrueMeDashboard() {
           </div>
 
           {/* Right Column */}
-          <div className="lg:col-span-1 space-y-6">
+          <div className="lg:col-span-1 space-y-6 flex flex-col">
             {/* Quick Actions */}
             <motion.div 
-              className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6"
+              className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 w-full"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
               <h3 className="text-xl font-serif text-trueme mb-4">Actions rapides</h3>
-              <div className="space-y-4">
-                <ActionButton href="/marketplace" icon={ShoppingCart}>
-                  Explorer le marketplace
-                </ActionButton>
+              <div className="space-y-3">
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full"
+                >
+                  <a href="/marketplace" className="block w-full">
+                    <div className="w-full bg-trueme-gold hover:bg-trueme-gold/90 text-white rounded-lg px-4 py-3 flex items-center justify-between transition-colors duration-200">
+                      <span className="font-medium">Explorer le marketplace</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </div>
+                  </a>
+                </motion.div>
 
-                <ActionButton href="/brands" icon={Star}>
-                  Ma collection
-                </ActionButton>
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full"
+                >
+                  <a href="/brands" className="block w-full">
+                    <div className="w-full bg-trueme-gold hover:bg-trueme-gold/90 text-white rounded-lg px-4 py-3 flex items-center justify-between transition-colors duration-200">
+                      <span className="font-medium">Ma collection</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </div>
+                  </a>
+                </motion.div>
 
                 <Modal>
                   <ModalTrigger className="w-full">
-                    <ActionButton variant="secondary">
-                      Historique des achats
-                    </ActionButton>
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="w-full bg-white hover:bg-gray-50 text-trueme border border-gray-200 rounded-lg px-4 py-3 flex items-center justify-between transition-colors duration-200 cursor-pointer"
+                    >
+                      <span className="font-medium flex items-center gap-2">
+                        📋 Historique des achats
+                      </span>
+                      <ArrowRight className="w-4 h-4" />
+                    </motion.div>
                   </ModalTrigger>
                   <ModalBody>
                     <ModalContent>
@@ -267,7 +292,7 @@ export default function TrueMeDashboard() {
             <Modal>
               <ModalTrigger>
                 <motion.div 
-                  className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 cursor-pointer hover:shadow-md transition-shadow duration-300"
+                  className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 cursor-pointer hover:shadow-md transition-shadow duration-300 w-full flex-1"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.5 }}
