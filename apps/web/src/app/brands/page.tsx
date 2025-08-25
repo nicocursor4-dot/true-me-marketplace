@@ -1,237 +1,214 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import TrueMeNavbar from '@/components/TrueMeNavbar';
-import { GlassCard } from '@/components/ui/GlassCard';
-import { Crown, Check, Lock, Sparkles, ShoppingCart, BarChart, Target } from 'lucide-react';
 
-export default function Brands() {
-  const [selectedBrand, setSelectedBrand] = useState('chanel');
+const GOLD = "#b08a2e"; // teinte or cohérente TRUE ME
 
-  const brandsData = {
-    chanel: {
-      name: 'Chanel',
-      status: 'Silver',
-      progress: 65,
-      currentItems: 18,
-      totalValue: 'AED 89,500',
-      nextGoal: 'Gold',
-      missions: [
-        { id: 1, title: 'Authentifier 5 articles Chanel', status: 'completed', reward: '+25 pts' },
-        { id: 2, title: 'Participer à une vente privée', status: 'in_progress', reward: '+15 pts' },
-        { id: 3, title: 'Inviter 3 amis TRUE ME', status: 'available', reward: '+30 pts' },
-        { id: 4, title: 'Atteindre AED 100K de collection', status: 'locked', reward: '+50 pts' }
-      ],
-      advantages: [
-        'Authentification prioritaire sur articles Chanel',
-        'Accès aux ventes privées trimestrielles',
-        'Conseiller spécialisé Chanel dédié',
-        'Certificat d\'excellence premium'
-      ]
-    },
-    hermes: {
-      name: 'Hermès',
-      status: 'Bronze',
-      progress: 35,
-      currentItems: 8,
-      totalValue: 'AED 45,200',
-      nextGoal: 'Silver',
-      missions: [
-        { id: 1, title: 'Authentifier 3 articles Hermès', status: 'completed', reward: '+20 pts' },
-        { id: 2, title: 'Participer au webinaire expertise', status: 'available', reward: '+10 pts' },
-        { id: 3, title: 'Compléter le quiz Hermès', status: 'available', reward: '+15 pts' },
-        { id: 4, title: 'Atteindre AED 60K de collection', status: 'locked', reward: '+40 pts' }
-      ],
-      advantages: [
-        'Authentification rapide articles Hermès',
-        'Accès au forum expert Hermès',
-        'Guide d\'investissement exclusif',
-        'Newsletter tendances Hermès'
-      ]
-    },
-    louisVuitton: {
-      name: 'Louis Vuitton',
-      status: 'Gold',
-      progress: 85,
-      currentItems: 23,
-      totalValue: 'AED 125,800',
-      nextGoal: 'Platinum',
-      missions: [
-        { id: 1, title: 'Authentifier 10 articles LV', status: 'completed', reward: '+30 pts' },
-        { id: 2, title: 'Vendre 2 articles via TRUE ME', status: 'completed', reward: '+25 pts' },
-        { id: 3, title: 'Devenir ambassadeur LV', status: 'in_progress', reward: '+40 pts' },
-        { id: 4, title: 'Atteindre AED 150K de collection', status: 'available', reward: '+60 pts' }
-      ],
-      advantages: [
-        'Authentification express 12h garanties',
-        'Accès VIP aux lancements Louis Vuitton',
-        'Conseiller personnel Louis Vuitton',
-        'Invitation événements exclusifs'
-      ]
-    }
+const DATA = {
+  brands: [
+    { id: 1, name: "LOUIS VUITTON", tier: "Bronze", progressPct: 30 },
+    { id: 2, name: "CHANEL", tier: "Silver", progressPct: 60 },
+    { id: 3, name: "Dior", tier: "Gold", progressPct: 80 },
+    { id: 4, name: "HERMÈS", tier: "Gold", progressPct: 75 },
+    { id: 5, name: "BALENCIAGA", tier: "Gold", progressPct: 72 },
+    { id: 6, name: "BURBERRY", tier: "Bronze", progressPct: 30 },
+  ],
+  // Historique générique. Remplacez par l'historique réel de la marque sélectionnée.
+  history: [
+    { id: "h1", date: "APRIL 2021", brand: "SILVER", tier: "SILVER" },
+    { id: "h2", date: "FEB 2021", brand: "CHANEL", tier: "GOLD" },
+    { id: "h3", date: "JAN 2021", brand: "DIOR", tier: "GOLD" },
+    { id: "h4", date: "JAN 2021", brand: "HERMES", tier: "GOLD" },
+  ],
+};
+
+function TierBadge({ tier }: { tier: string }) {
+  const tone = tier.toLowerCase();
+  const styles: Record<string, string> = {
+    bronze:
+      "border-[#c6a57a] text-[#7d5e39] bg-[#fbf3e8] ring-1 ring-[#e5d2b9]",
+    silver:
+      "border-neutral-300 text-neutral-700 bg-white ring-1 ring-neutral-200",
+    gold: `border-[#d5bf86] text-[#7c6320] bg-[#f9f3e2] ring-1 ring-[#ead9aa]`,
+    platinum:
+      "border-neutral-300 text-neutral-800 bg-white ring-1 ring-neutral-200",
   };
+  return (
+    <span
+      className={`inline-flex items-center gap-2 rounded-full border px-3 py-0.5 text-xs tracking-wide ${
+        styles[tone] ?? styles.silver
+      }`}
+    >
+      <span className="inline-block h-2 w-2 rounded-full bg-current/80" />
+      {tier}
+    </span>
+  );
+}
 
-  const currentBrand = brandsData[selectedBrand as keyof typeof brandsData];
+function ProgressBar({ value }: { value: number }) {
+  return (
+    <div className="h-2.5 w-full rounded-full bg-neutral-100 ring-1 ring-black/5">
+      <div
+        className="h-2.5 rounded-full bg-gradient-to-r from-[#f0d89d] via-[#d8b356] to-[#a8842c]"
+        style={{ width: `${Math.max(0, Math.min(100, value))}%` }}
+      />
+    </div>
+  );
+}
 
-  const getMissionStatus = (status: string) => {
-    switch (status) {
-      case 'completed': return 'Terminé';
-      case 'in_progress': return 'En cours';
-      case 'available': return 'Commencer';
-      case 'locked': return 'Bloqué';
-      default: return 'Indisponible';
-    }
-  };
+export default function TrueMeBrandsStatus() {
+  // Sélection initiale = première marque
+  const selected = DATA.brands[0];
 
   return (
-    <main className="min-h-screen bg-trueme-cream pt-24">
+    <div className="min-h-screen bg-trueme-cream text-trueme antialiased selection:bg-black selection:text-white">
       <TrueMeNavbar />
       
-      <div className="min-h-screen pt-16 pb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 md:mb-16 fade-in">
-            <div className="inline-flex items-center space-x-2 mb-6">
-              <div className="w-2 h-2 bg-trueme-gold rounded-full"></div>
-              <span className="text-sm font-medium text-trueme-gold tracking-[0.2em] uppercase">Maisons Partenaires</span>
-              <div className="w-2 h-2 bg-trueme-gold rounded-full"></div>
-            </div>
-            <h1 className="text-4xl md:text-6xl font-light mb-6 text-trueme tracking-tight">
-              Vos Marques
-            </h1>
-            <h2 className="text-lg md:text-xl font-light mb-8 text-trueme-gold tracking-wide">
-              Not a Styl. A Signature.
-            </h2>
-            <p className="text-lg md:text-xl text-trueme-light max-w-3xl mx-auto leading-relaxed">
-              Cultivez vos relations privilégiées avec les plus grandes maisons de luxe
-            </p>
+      {/* Stage contraint pour grand écran */}
+      <main className="mx-auto w-full max-w-[1280px] 2xl:max-w-[1400px] px-6 py-10 mt-24">
+        {/* Titre + CTA marketplace */}
+        <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h1 className="text-4xl md:text-5xl font-serif tracking-wide text-trueme">BRANDS</h1>
+            <p className="mt-2 text-sm text-trueme-secondary">Votre niveau par maison. Avancées, manquants et historique.</p>
           </div>
-          
-          {/* Brand Selection */}
-          <div className="flex flex-wrap justify-center gap-3 md:gap-6 mb-12 md:mb-16 fade-in px-2" style={{animationDelay: '0.2s'}}>
-            {Object.entries(brandsData).map(([key, brand]) => (
-              <button
-                key={key}
-                onClick={() => setSelectedBrand(key)}
-                className={`glass-morphism px-4 md:px-8 py-3 md:py-4 rounded-xl font-medium text-sm md:text-lg transition-all duration-300 ${
-                  selectedBrand === key 
-                    ? 'bg-trueme-gold text-white transform scale-105' 
-                    : 'text-trueme hover:text-trueme-gold'
-                }`}
-              >
-                {brand.name}
-              </button>
-            ))}
-          </div>
-
-          {/* Brand Status Card */}
-          <div className="glass-premium p-8 md:p-16 mb-12 md:mb-16 text-center fade-in" style={{animationDelay: '0.4s'}}>
-            <div className="mb-6 md:mb-8">
-              <Crown className="w-12 h-12 md:w-16 md:h-16 mx-auto text-trueme-gold" />
-            </div>
-            <h2 className="mb-6 md:mb-8 text-trueme text-2xl md:text-4xl font-light">Statut <span className="text-trueme-gold font-medium">{currentBrand.status}</span></h2>
-            <div className="text-trueme-light text-lg md:text-2xl mb-12 md:mb-16">
-              {currentBrand.currentItems} articles • {currentBrand.totalValue}
-            </div>
-            
-            {/* Progress */}
-            <div className="max-w-lg mx-auto">
-              <div className="text-lg md:text-xl mb-6 text-trueme font-medium">{currentBrand.progress}% vers <span className="text-trueme-gold">{currentBrand.nextGoal}</span></div>
-              <div className="progress-bar h-3 md:h-4">
-                <div 
-                  className="progress-fill h-3 md:h-4"
-                  style={{width: `${currentBrand.progress}%`}}
-                ></div>
-              </div>
-            </div>
-          </div>
-
-            {/* Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-              <div className="glass-morphism p-8 text-center luxury-hover">
-                <div className="text-5xl font-bold mb-4 text-trueme">{currentBrand.currentItems}</div>
-                <div className="text-trueme-light text-lg">Articles authentifiés</div>
-              </div>
-              <div className="glass-morphism p-8 text-center luxury-hover">
-                <div className="text-5xl font-bold mb-4 text-trueme-gold">{currentBrand.totalValue}</div>
-                <div className="text-trueme-light text-lg">Valeur totale</div>
-              </div>
-              <div className="glass-morphism p-8 text-center luxury-hover">
-                <div className="text-5xl font-bold mb-4 text-trueme">{currentBrand.nextGoal}</div>
-                <div className="text-trueme-light text-lg">Prochain objectif</div>
-              </div>
-            </div>
-
-            {/* Missions */}
-          <div className="mb-16 md:mb-20 fade-in" style={{animationDelay: '0.6s'}}>
-            <h2 className="mb-8 md:mb-12 text-center text-trueme text-2xl md:text-4xl font-light">Missions <span className="text-trueme-gold font-medium">{currentBrand.name}</span></h2>
-            <div className="space-y-4 md:space-y-6">
-              {currentBrand.missions.map((mission) => (
-                <div key={mission.id} className="glass-morphism p-6 md:p-8 flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
-                  <div className="flex items-center space-x-4 md:space-x-6">
-                    <div className={`w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center shrink-0 ${
-                      mission.status === 'completed' ? 'bg-green-500' :
-                      mission.status === 'in_progress' ? 'bg-trueme-gold' :
-                      mission.status === 'available' ? 'bg-blue-500' :
-                      'bg-gray-400'
-                    }`}>
-                      {mission.status === 'completed' && <Check className="w-3 h-3 md:w-4 md:h-4 text-white" />}
-                      {mission.status === 'locked' && <Lock className="w-3 h-3 md:w-4 md:h-4 text-white" />}
-                    </div>
-                    <div>
-                      <h3 className="text-trueme text-lg md:text-xl font-medium mb-1 md:mb-2">{mission.title}</h3>
-                      <div className="text-trueme-light capitalize text-sm md:text-base">{mission.status}</div>
-                    </div>
-                  </div>
-                  <div className="text-trueme-gold font-semibold text-base md:text-lg md:text-right">{mission.reward}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-            {/* Advantages */}
-          <div className="mb-16 md:mb-20 fade-in" style={{animationDelay: '0.8s'}}>
-            <h2 className="mb-12 md:mb-16 text-center text-trueme text-2xl md:text-4xl font-light">Vos Avantages <span className="text-trueme-gold font-medium">{currentBrand.name}</span></h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-              {currentBrand.advantages.map((advantage, index) => (
-                <div key={index} className="glass-morphism p-6 md:p-10">
-                  <div className="mb-4 md:mb-6">
-                    <Sparkles className="w-8 h-8 md:w-10 md:h-10 text-trueme-gold" />
-                  </div>
-                  <p className="text-trueme-light leading-relaxed text-base md:text-lg">{advantage}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-          
-          {/* Quick Actions */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 fade-in">
-            <Link href="/marketplace" className="glass-premium p-8 md:p-12 block">
-              <div className="mb-4 md:mb-6">
-                <ShoppingCart className="w-10 h-10 md:w-12 md:h-12 text-trueme-gold" />
-              </div>
-              <h3 className="mb-4 md:mb-6 text-trueme text-xl md:text-2xl font-medium">Marketplace</h3>
-              <p className="text-trueme-light text-base md:text-lg">Découvrir de nouveaux articles {currentBrand.name}</p>
-            </Link>
-            
-            <Link href="/dashboard" className="glass-premium p-8 md:p-12 block">
-              <div className="mb-4 md:mb-6">
-                <BarChart className="w-10 h-10 md:w-12 md:h-12 text-trueme-gold" />
-              </div>
-              <h3 className="mb-4 md:mb-6 text-trueme text-xl md:text-2xl font-medium">Dashboard</h3>
-              <p className="text-trueme-light text-base md:text-lg">Voir votre statut global</p>
-            </Link>
-            
-            <div className="glass-premium p-8 md:p-12 cursor-pointer">
-              <div className="mb-4 md:mb-6">
-                <Target className="w-10 h-10 md:w-12 md:h-12 text-trueme-gold" />
-              </div>
-              <h3 className="mb-4 md:mb-6 text-trueme text-xl md:text-2xl font-medium">Objectifs</h3>
-              <p className="text-trueme-light text-base md:text-lg">Planifier votre progression</p>
-            </div>
-          </div>
+          <Link
+            href="/marketplace"
+            className="rounded-full bg-trueme px-5 py-3 text-sm text-white hover:bg-trueme-secondary transition-colors"
+          >
+            Aller au Marketplace
+          </Link>
         </div>
-      </div>
-    </main>
+
+        {/* Grille principale 12 colonnes pour 16:9 */}
+        <section className="grid grid-cols-12 gap-8">
+          {/* Col. gauche — Aperçu statuts (filtres + métriques) */}
+          <aside className="col-span-12 lg:col-span-3 space-y-6">
+            <div className="rounded-3xl bg-white ring-1 ring-black/5 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.12)] p-6">
+              <h2 className="text-xl font-serif text-trueme">Niveaux</h2>
+              <div className="mt-4 grid grid-cols-4 gap-2">
+                {[
+                  { k: "B", label: "Bronze" },
+                  { k: "S", label: "Silver" },
+                  { k: "G", label: "Gold" },
+                  { k: "P", label: "Platinum" },
+                ].map((t) => (
+                  <button
+                    key={t.k}
+                    className="aspect-square rounded-full border border-neutral-300 bg-white text-sm hover:bg-neutral-50 text-trueme"
+                    title={t.label}
+                  >
+                    {t.k}
+                  </button>
+                ))}
+              </div>
+              <div className="mt-6 space-y-3 text-sm">
+                <div className="flex items-center justify-between"><span className="text-trueme-secondary">Maisons suivies</span><span className="font-medium tabular-nums text-trueme">{DATA.brands.length}</span></div>
+                <div className="flex items-center justify-between"><span className="text-trueme-secondary">Statut global</span><TierBadge tier="Bronze" /></div>
+              </div>
+            </div>
+
+            {/* Carte mise en avant responsive */}
+            <div className="rounded-3xl bg-gradient-to-br from-white to-trueme-cream ring-1 ring-trueme-gold p-6">
+              <div className="font-serif text-lg text-trueme">Conciergerie</div>
+              <p className="mt-2 text-sm text-trueme-secondary">Besoin de deux pièces pour passer Silver. Demandez une chasse personnalisée.</p>
+              <button className="mt-4 inline-block rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm hover:bg-neutral-50 text-trueme">Contacter</button>
+            </div>
+          </aside>
+
+          {/* Col. centre — Liste des marques */}
+          <section className="col-span-12 lg:col-span-6">
+            <div className="rounded-3xl bg-white ring-1 ring-black/5 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.12)] overflow-hidden">
+              <div className="p-6">
+                {/* Barre utilitaire */}
+                <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                  <div className="relative w-full md:w-[360px]">
+                    <input
+                      type="search"
+                      placeholder="Rechercher une maison"
+                      className="w-full rounded-full border border-neutral-300 bg-white px-4 py-2.5 pr-10 text-sm outline-none placeholder:text-neutral-400 focus:border-trueme-gold"
+                    />
+                    <svg aria-hidden viewBox="0 0 24 24" className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-500">
+                      <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm11 3l-5.2-5.2" stroke="currentColor" strokeWidth="1.5" fill="none" />
+                    </svg>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-trueme-secondary">Trier</span>
+                    <select className="rounded-full border border-neutral-300 bg-white px-3 py-2 text-sm text-trueme">
+                      <option>Nom</option>
+                      <option>Statut</option>
+                      <option>Progression</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Tableau stylisé (sans <table> pour plus de flexibilité) */}
+                <ul className="divide-y divide-neutral-100">
+                  {DATA.brands.map((b) => (
+                    <li key={b.id} className="group p-4 md:p-5 hover:bg-neutral-50/60">
+                      <div className="flex flex-wrap items-center justify-between gap-3">
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div className="h-10 w-10 shrink-0 rounded-full bg-neutral-100 ring-1 ring-black/5" />
+                          <h3 className="truncate font-serif text-xl tracking-wide text-trueme">{b.name}</h3>
+                        </div>
+                        <TierBadge tier={b.tier} />
+                      </div>
+                      <div className="mt-3">
+                        <ProgressBar value={b.progressPct} />
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          {/* Col. droite — Détails de la marque sélectionnée */}
+          <aside className="col-span-12 lg:col-span-3 space-y-6">
+            {/* Carte statut de la marque active */}
+            <div className="rounded-3xl bg-white ring-1 ring-black/5 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.12)] p-6">
+              <div className="flex items-start justify-between">
+                <div>
+                  <div className="text-sm tracking-wide text-trueme-secondary">Marque sélectionnée</div>
+                  <div className="mt-1 font-serif text-2xl leading-tight text-trueme">{selected.name}</div>
+                </div>
+                <TierBadge tier={selected.tier} />
+              </div>
+              <div className="mt-6">
+                <div className="flex items-center justify-between text-sm text-trueme-secondary">
+                  <span>Évolution vers</span>
+                  <span className="font-medium text-trueme">PLATINUM</span>
+                </div>
+                <div className="mt-3"><ProgressBar value={64} /></div>
+                <div className="mt-2 text-xs text-trueme-secondary">64% — 2 articles pour Silver, 12 pour Gold</div>
+              </div>
+            </div>
+
+            {/* Historique */}
+            <div className="rounded-3xl bg-white ring-1 ring-black/5 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.12)] p-6">
+              <h2 className="text-xl font-serif text-trueme">Historique</h2>
+              <ul className="mt-4 divide-y divide-neutral-100 text-[15px]">
+                {DATA.history.map((h) => (
+                  <li key={h.id} className="py-3 flex items-center justify-between">
+                    <span className="text-trueme-secondary">{h.date}</span>
+                    <span className="font-medium text-trueme-gold">{h.tier}</span>
+                  </li>
+                ))}
+              </ul>
+              <Link href="/marketplace" className="mt-4 inline-flex w-full items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm hover:bg-neutral-50 text-trueme">Go to Marketplace</Link>
+            </div>
+          </aside>
+        </section>
+
+        {/* Footer discret */}
+        <footer className="mt-12 pb-10 text-xs text-trueme-secondary">
+          <div className="mx-auto w-full max-w-[960px] text-center leading-relaxed">
+            Données affichées à titre indicatif. Consultez les conditions dans votre espace membre. © TRUE ME 2025.
+          </div>
+        </footer>
+      </main>
+    </div>
   );
 }
