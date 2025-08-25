@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { HoverBorderGradient } from '@/components/ui/hover-border-gradient';
 import { Progress } from '@/components/ui/progress';
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalTrigger } from '@/components/ui/animated-modal';
+import { ActionButton } from '@/components/ui/action-button';
 import { Shield, Calendar, Sparkles, Crown, Gift, Users, Star, TrendingUp, ShoppingCart, ArrowRight } from 'lucide-react';
 import TrueMeNavbar from '@/components/TrueMeNavbar';
 
@@ -54,7 +55,7 @@ export default function TrueMeDashboard() {
 
       {/* Main Content */}
       <main className="pt-20 px-4 md:px-6 max-w-7xl mx-auto py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Left Column */}
           <div className="lg:col-span-2 space-y-6">
             {/* Identity Card */}
@@ -104,7 +105,7 @@ export default function TrueMeDashboard() {
             </motion.div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <motion.div 
                 className="bg-white rounded-xl shadow-sm border border-gray-200 p-6"
                 initial={{ opacity: 0, y: 20 }}
@@ -181,7 +182,7 @@ export default function TrueMeDashboard() {
                 </Modal>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {benefits.map((benefit, index) => (
                   <div key={index} className="flex items-center gap-3 p-4 rounded-xl bg-trueme-gold/5 border border-trueme-gold/20">
                     <benefit.icon className="w-5 h-5 text-trueme-gold" />
@@ -202,57 +203,20 @@ export default function TrueMeDashboard() {
               transition={{ duration: 0.5, delay: 0.4 }}
             >
               <h3 className="text-xl font-serif text-trueme mb-4">Actions rapides</h3>
-              <div className="space-y-3">
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <a href="/marketplace" className="block">
-                    <HoverBorderGradient className="w-full flex items-center justify-between px-6 py-3">
-                      <span className="font-medium">Explorer le marketplace</span>
-                      <motion.div
-                        whileHover={{ x: 4 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <ArrowRight className="w-4 h-4" />
-                      </motion.div>
-                    </HoverBorderGradient>
-                  </a>
-                </motion.div>
+              <div className="space-y-4">
+                <ActionButton href="/marketplace" icon={ShoppingCart}>
+                  Explorer le marketplace
+                </ActionButton>
 
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <a href="/brands" className="block">
-                    <HoverBorderGradient className="w-full flex items-center justify-between px-6 py-3">
-                      <span className="font-medium">Ma collection</span>
-                      <motion.div
-                        whileHover={{ x: 4 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <ArrowRight className="w-4 h-4" />
-                      </motion.div>
-                    </HoverBorderGradient>
-                  </a>
-                </motion.div>
+                <ActionButton href="/brands" icon={Star}>
+                  Ma collection
+                </ActionButton>
 
                 <Modal>
-                  <ModalTrigger>
-                    <motion.div
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      <HoverBorderGradient className="w-full flex items-center justify-between px-6 py-3">
-                        <span className="font-medium">Historique des achats</span>
-                        <motion.div
-                          whileHover={{ x: 4 }}
-                          transition={{ duration: 0.2 }}
-                        >
-                          <ArrowRight className="w-4 h-4" />
-                        </motion.div>
-                      </HoverBorderGradient>
-                    </motion.div>
+                  <ModalTrigger className="w-full">
+                    <ActionButton variant="secondary">
+                      Historique des achats
+                    </ActionButton>
                   </ModalTrigger>
                   <ModalBody>
                     <ModalContent>
@@ -310,35 +274,35 @@ export default function TrueMeDashboard() {
                   whileHover={{ y: -2 }}
                 >
                   <h3 className="text-xl font-serif text-trueme mb-6">Ma collection</h3>
-                  <div className="space-y-4">
-                    <div className="grid grid-cols-3 gap-4 text-center">
-                      <div className="bg-trueme-gold/5 rounded-lg p-4 border border-trueme-gold/20">
+                  <div className="space-y-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      <div className="bg-trueme-gold/5 rounded-xl p-4 border border-trueme-gold/20 text-center min-h-[80px] flex flex-col justify-center">
                         <p className="text-2xl font-bold text-trueme">{userStats.totalItems}</p>
-                        <p className="text-xs text-trueme-secondary">Articles</p>
+                        <p className="text-xs text-trueme-secondary mt-1">Articles</p>
                       </div>
-                      <div className="bg-trueme-gold/5 rounded-lg p-4 border border-trueme-gold/20">
+                      <div className="bg-trueme-gold/5 rounded-xl p-4 border border-trueme-gold/20 text-center min-h-[80px] flex flex-col justify-center">
                         <p className="text-2xl font-bold text-trueme">{userStats.totalValue}</p>
-                        <p className="text-xs text-trueme-secondary">Valeur</p>
+                        <p className="text-xs text-trueme-secondary mt-1">Valeur</p>
                       </div>
-                      <div className="bg-trueme-gold/5 rounded-lg p-4 border border-trueme-gold/20">
+                      <div className="bg-trueme-gold/5 rounded-xl p-4 border border-trueme-gold/20 text-center min-h-[80px] flex flex-col justify-center">
                         <p className="text-2xl font-bold text-trueme-gold flex items-center justify-center gap-1">
                           <TrendingUp className="w-4 h-4" />
                           {userStats.collectionGrowth}
                         </p>
-                        <p className="text-xs text-trueme-secondary">Croissance</p>
+                        <p className="text-xs text-trueme-secondary mt-1">Croissance</p>
                       </div>
                     </div>
                     
-                    <div className="space-y-3 pt-2">
-                      <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-center p-4 bg-gray-50 rounded-xl min-h-[56px]">
                         <span className="text-sm text-trueme-secondary">Marques favorites</span>
                         <span className="text-sm font-medium text-trueme">Hermès, Chanel, Dior</span>
                       </div>
-                      <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                      <div className="flex justify-between items-center p-4 bg-gray-50 rounded-xl min-h-[56px]">
                         <span className="text-sm text-trueme-secondary">Dernière acquisition</span>
                         <span className="text-sm font-medium text-trueme">Sac Birkin 35 - 15 jan</span>
                       </div>
-                      <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                      <div className="flex justify-between items-center p-4 bg-gray-50 rounded-xl min-h-[56px]">
                         <span className="text-sm text-trueme-secondary">Score authenticité</span>
                         <span className="text-sm font-medium text-trueme-gold">100% ✓</span>
                       </div>
