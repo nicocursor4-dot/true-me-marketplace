@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { User } from 'lucide-react';
 import { Navbar, NavBody, NavItems, MobileNav, MobileNavHeader, MobileNavMenu, MobileNavToggle } from './ui/resizable-navbar';
@@ -8,6 +8,16 @@ import { Navbar, NavBody, NavItems, MobileNav, MobileNavHeader, MobileNavMenu, M
 const TrueMeNavbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAccountDropdownOpen, setIsAccountDropdownOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 100);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navItems = [
     { name: 'Accueil', link: '/' },
@@ -23,12 +33,14 @@ const TrueMeNavbar = () => {
     { name: 'Inscription', href: '/auth/register' },
   ];
 
-  const TrueMeLogo = ({ visible }: { visible?: boolean }) => (
+  const TrueMeLogo = () => (
     <Link href="/" className="flex items-center z-20">
       <img 
         src="/images/logos/trueme-logo.png" 
         alt="True Me Logo" 
-        className="w-8 h-8 object-contain"
+        className={`object-contain transition-all duration-300 ${
+          isScrolled ? "w-8 h-8" : "w-12 h-12"
+        }`}
       />
     </Link>
   );
