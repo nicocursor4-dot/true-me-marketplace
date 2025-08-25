@@ -26,11 +26,45 @@ const TrueMeNavbar = () => {
 
   const TrueMeLogo = ({ visible }: { visible?: boolean }) => (
     <Link href="/" className="flex items-center z-20">
-      <img 
-        src="/images/logos/trueme-logo.png" 
-        alt="True Me Logo" 
-        className="w-8 h-8 object-contain"
-      />
+      <motion.div 
+        className="flex items-baseline gap-2"
+        animate={{
+          scale: visible ? 0.8 : 1,
+        }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+      >
+        <div className="select-none leading-none">
+          <motion.div 
+            className="font-serif tracking-[0.25em] text-trueme"
+            animate={{
+              fontSize: visible ? "1.5rem" : "2.5rem",
+            }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            TM
+          </motion.div>
+          <motion.div 
+            className="-mt-1 tracking-[0.35em] uppercase text-trueme"
+            animate={{
+              fontSize: visible ? "6px" : "10px",
+              marginTop: visible ? "-4px" : "-8px"
+            }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            True Me
+          </motion.div>
+        </div>
+        <motion.span 
+          className="text-xs tracking-[0.35em] uppercase text-trueme-gold"
+          animate={{
+            opacity: visible ? 0 : 1,
+            fontSize: visible ? "8px" : "12px"
+          }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+        >
+          Not a style. A signature.
+        </motion.span>
+      </motion.div>
     </Link>
   );
 

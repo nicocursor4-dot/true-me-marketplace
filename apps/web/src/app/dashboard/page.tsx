@@ -5,7 +5,9 @@ import { motion } from 'framer-motion';
 import { HoverBorderGradient } from '@/components/ui/hover-border-gradient';
 import { Progress } from '@/components/ui/progress';
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalTrigger } from '@/components/ui/animated-modal';
-import { Shield, Calendar, Sparkles, Crown, Gift, Users, Star, TrendingUp, BarChart, ShoppingCart, ArrowRight } from 'lucide-react';
+import { CardContainer, CardBody, CardItem } from '@/components/ui/3d-card';
+import { Shield, Calendar, Sparkles, Crown, Gift, Users, Star, TrendingUp, ShoppingCart, ArrowRight } from 'lucide-react';
+import TrueMeNavbar from '@/components/TrueMeNavbar';
 
 export default function TrueMeDashboard() {
   const userStats = {
@@ -49,36 +51,26 @@ export default function TrueMeDashboard() {
 
   return (
     <div className="min-h-screen bg-trueme-cream text-trueme antialiased">
-      {/* Sticky Top Bar */}
-      <header className="sticky top-0 z-30 backdrop-blur supports-[backdrop-filter]:bg-trueme-cream/80 border-b border-trueme/10">
-        <div className="mx-auto w-full max-w-[1280px] 2xl:max-w-[1400px] px-6 py-5 flex items-center justify-between">
-          <div className="flex items-baseline gap-4">
-            <div className="select-none leading-none">
-              <div className="text-3xl font-serif tracking-[0.25em] text-trueme">TM</div>
-              <div className="-mt-2 text-[10px] tracking-[0.35em] uppercase text-trueme">True Me</div>
-            </div>
-            <span className="hidden sm:inline text-xs tracking-[0.35em] uppercase text-trueme-gold">Not a style. A signature.</span>
-          </div>
-          <div className="flex items-center gap-3 text-sm">
-            <span className="hidden md:inline text-trueme-secondary">Dashboard membre</span>
-            <div className="h-8 w-px bg-trueme/20" />
-            <div className="rounded-full bg-white/80 ring-1 ring-trueme/20 px-3 py-1">FR</div>
-          </div>
-        </div>
-      </header>
+      <TrueMeNavbar />
 
       {/* Main Content */}
-      <main className="mx-auto w-full max-w-[1280px] 2xl:max-w-[1400px] px-6 py-10">
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <main className="mx-auto w-full max-w-[1280px] 2xl:max-w-[1400px] px-4 md:px-6 py-6 md:py-10">
+        <section className="grid grid-cols-1 xl:grid-cols-12 gap-4 md:gap-8">
           {/* Left Column */}
-          <div className="lg:col-span-7 space-y-8">
+          <div className="xl:col-span-7 space-y-4 md:space-y-8">
             {/* Identity Card */}
-            <motion.div 
-              className="rounded-3xl bg-white shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] ring-1 ring-black/5"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
+            <CardContainer className="inter-var py-4 md:py-8">
+              <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full h-auto rounded-xl p-6 border">
+                <CardItem
+                  translateZ="50"
+                  className="text-xl font-bold text-neutral-600 dark:text-white w-full"
+                >
+                  <motion.div 
+                    className="rounded-3xl bg-white shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] ring-1 ring-black/5 w-full"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                  >
               <div className="p-8 md:p-10">
                 <div className="flex items-start gap-6">
                   <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-full ring-1 ring-black/10">
@@ -121,10 +113,13 @@ export default function TrueMeDashboard() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+                  </motion.div>
+                </CardItem>
+              </CardBody>
+            </CardContainer>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <motion.div 
                 className="rounded-2xl bg-white p-6 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] ring-1 ring-black/5"
                 initial={{ opacity: 0, y: 20 }}
@@ -215,7 +210,7 @@ export default function TrueMeDashboard() {
           </div>
 
           {/* Right Column */}
-          <div className="lg:col-span-5 space-y-8">
+          <div className="xl:col-span-5 space-y-4 md:space-y-8">
             {/* Quick Actions */}
             <motion.div 
               className="rounded-3xl bg-white shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] ring-1 ring-black/5"
@@ -228,10 +223,21 @@ export default function TrueMeDashboard() {
                 <div className="space-y-3">
                   <Modal>
                     <ModalTrigger>
-                      <HoverBorderGradient className="w-full justify-between">
-                        <span>Explorer le marketplace</span>
-                        <ArrowRight className="w-4 h-4" />
-                      </HoverBorderGradient>
+                      <motion.div
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="w-full"
+                      >
+                        <HoverBorderGradient className="w-full justify-between">
+                          <span>Explorer le marketplace</span>
+                          <motion.div
+                            whileHover={{ x: 4 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            <ArrowRight className="w-4 h-4" />
+                          </motion.div>
+                        </HoverBorderGradient>
+                      </motion.div>
                     </ModalTrigger>
                     <ModalBody>
                       <ModalContent>
@@ -260,15 +266,35 @@ export default function TrueMeDashboard() {
                     </ModalBody>
                   </Modal>
 
-                  <HoverBorderGradient className="w-full justify-between">
-                    <span>Ma collection</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </HoverBorderGradient>
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <HoverBorderGradient className="w-full justify-between">
+                      <span>Ma collection</span>
+                      <motion.div
+                        whileHover={{ x: 4 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <ArrowRight className="w-4 h-4" />
+                      </motion.div>
+                    </HoverBorderGradient>
+                  </motion.div>
 
-                  <HoverBorderGradient className="w-full justify-between">
-                    <span>Historique des achats</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </HoverBorderGradient>
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <HoverBorderGradient className="w-full justify-between">
+                      <span>Historique des achats</span>
+                      <motion.div
+                        whileHover={{ x: 4 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <ArrowRight className="w-4 h-4" />
+                      </motion.div>
+                    </HoverBorderGradient>
+                  </motion.div>
                 </div>
               </div>
             </motion.div>
@@ -316,9 +342,19 @@ export default function TrueMeDashboard() {
                 </div>
                 <p className="text-3xl font-bold text-trueme mb-2">{userStats.points.toLocaleString()}</p>
                 <p className="text-sm text-trueme-secondary mb-6">points disponibles</p>
-                <HoverBorderGradient className="w-full">
-                  Échanger mes points
-                </HoverBorderGradient>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <HoverBorderGradient className="w-full">
+                    <motion.span
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      Échanger mes points
+                    </motion.span>
+                  </HoverBorderGradient>
+                </motion.div>
               </div>
             </motion.div>
           </div>

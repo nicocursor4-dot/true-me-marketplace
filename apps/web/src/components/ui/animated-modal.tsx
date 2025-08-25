@@ -1,14 +1,14 @@
 "use client";
-import React, {
-  createContext,
-  useState,
-  useContext,
-  useRef,
-  useEffect,
-} from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { useOutsideClick } from "@/hooks/use-outside-click";
+import { AnimatePresence, motion } from "motion/react";
+import React, {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 interface ModalContextType {
   open: boolean;
@@ -17,7 +17,7 @@ interface ModalContextType {
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
-export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
+export const ModalProvider = ({ children }: { children: ReactNode }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -35,7 +35,7 @@ export const useModal = () => {
   return context;
 };
 
-export function Modal({ children }: { children: React.ReactNode }) {
+export function Modal({ children }: { children: ReactNode }) {
   return <ModalProvider>{children}</ModalProvider>;
 }
 
@@ -43,7 +43,7 @@ export const ModalTrigger = ({
   children,
   className,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }) => {
   const { setOpen } = useModal();
@@ -64,7 +64,7 @@ export const ModalBody = ({
   children,
   className,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }) => {
   const { open } = useModal();
@@ -77,9 +77,9 @@ export const ModalBody = ({
     }
   }, [open]);
 
-  const ref = useRef<HTMLDivElement>(null);
+  const modalRef = useRef(null);
   const { setOpen } = useModal();
-  useOutsideClick(ref, () => setOpen(false));
+  useOutsideClick(modalRef, () => setOpen(false));
 
   return (
     <AnimatePresence>
@@ -96,12 +96,12 @@ export const ModalBody = ({
             opacity: 0,
             backdropFilter: "blur(0px)",
           }}
-          className="fixed [perspective:800px] [transform-style:preserve-3d] inset-0 h-full w-full flex items-center justify-center z-50"
+          className="fixed [perspective:800px] [transform-style:preserve-3d] inset-0 h-full w-full  flex items-center justify-center z-50"
         >
           <Overlay />
 
           <motion.div
-            ref={ref}
+            ref={modalRef}
             className={cn(
               "min-h-[50%] max-h-[90%] md:max-w-[40%] bg-white dark:bg-neutral-950 border border-transparent dark:border-neutral-800 md:rounded-2xl relative z-50 flex flex-col flex-1 overflow-hidden",
               className
@@ -142,7 +142,7 @@ export const ModalContent = ({
   children,
   className,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }) => {
   return (
@@ -156,7 +156,7 @@ export const ModalFooter = ({
   children,
   className,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }) => {
   return (
@@ -207,7 +207,7 @@ const CloseIcon = () => {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="h-4 w-4 text-black dark:text-white group-hover:scale-125 group-hover:rotate-3 transition duration-200"
+        className="text-black dark:text-white h-4 w-4 group-hover:scale-125 group-hover:rotate-3 transition duration-200"
       >
         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
         <path d="M18 6l-12 12" />
@@ -215,4 +215,29 @@ const CloseIcon = () => {
       </svg>
     </button>
   );
+};
+
+// Hook to detect clicks outside of a component.
+// Add it in a separate file, I've added here for simplicity
+export const useOutsideClick = (
+  ref: React.RefObject<HTMLDivElement>,
+  callback: Function
+) => {
+  useEffect(() => {
+    const listener = (event: any) => {
+      // DO NOTHING if the element being clicked is the target element or their children
+      if (!ref.current || ref.current.contains(event.target)) {
+        return;
+      }
+      callback(event);
+    };
+
+    document.addEventListener("mousedown", listener);
+    document.addEventListener("touchstart", listener);
+
+    return () => {
+      document.removeEventListener("mousedown", listener);
+      document.removeEventListener("touchstart", listener);
+    };
+  }, [ref, callback]);
 };
