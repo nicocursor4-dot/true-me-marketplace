@@ -319,7 +319,7 @@ export default function MarketplacePage() {
                     <Search className="w-16 h-16 mx-auto text-trueme-gold" />
                   </div>
                   <h3 className="text-2xl font-bold text-trueme mb-6">02 — Authentification</h3>
-                  <p className="text-trueme-light text-lg leading-relaxed">Nos experts certifient l'authenticité</p>
+                  <p className="text-trueme-light text-lg leading-relaxed">Nos experts certifient la qualité</p>
                 </div>
                 
                 <div className="glass-morphism p-10 text-center luxury-hover">

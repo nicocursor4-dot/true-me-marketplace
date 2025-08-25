@@ -27,7 +27,7 @@ export default function Brands() {
         'Authentification prioritaire sur articles Chanel',
         'Accès aux ventes privées trimestrielles',
         'Conseiller spécialisé Chanel dédié',
-        'Certificat d\'authenticité premium'
+        'Certificat d\'excellence premium'
       ]
     },
     hermes: {

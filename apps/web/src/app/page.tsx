@@ -83,9 +83,9 @@ export default function Home() {
           <div className="bg-[#F5F5F7] dark:bg-neutral-800 p-8 md:p-14 rounded-3xl mb-4">
             <p className="text-neutral-600 dark:text-neutral-400 text-base md:text-2xl font-sans max-w-3xl mx-auto">
               <span className="font-bold text-neutral-700 dark:text-neutral-200">
-                Chaque pièce est authentifiée par nos experts certifiés.
+                Chaque pièce est soigneusement sélectionnée par nos experts.
               </span>{" "}
-              Notre processus rigoureux en 7 étapes garantit l'authenticité absolue de chaque article. 
+              Notre processus rigoureux en 7 étapes garantit la qualité exceptionnelle de chaque article. 
               Nos spécialistes formés par les maisons de luxe vérifient matériaux, finitions, et provenance.
             </p>
             <Shield className="w-16 h-16 text-trueme-gold mx-auto mt-8" />
@@ -139,7 +139,7 @@ export default function Home() {
 
   const testimonials = [
     {
-      quote: "TRUE ME m'a permis de découvrir des pièces d'exception que je n'aurais jamais trouvées ailleurs. L'authenticité est garantie, le service irréprochable.",
+      quote: "TRUE ME m'a permis de découvrir des pièces d'exception que je n'aurais jamais trouvées ailleurs. La qualité est exceptionnelle, le service irréprochable.",
       name: "Zara Al-Rashid",
       designation: "Top Model & Influenceuse Mode",
       src: "/images/hero/zara-al-rashid.png"
@@ -279,9 +279,9 @@ export default function Home() {
               <div className="w-16 h-16 mx-auto mb-6 bg-trueme-gold/10 rounded-full flex items-center justify-center">
                 <Shield className="w-8 h-8 text-trueme-gold" />
               </div>
-              <h3 className="text-xl md:text-2xl font-semibold text-trueme mb-4">Authenticité</h3>
+              <h3 className="text-xl md:text-2xl font-semibold text-trueme mb-4">Excellence</h3>
               <p className="text-trueme-light leading-relaxed">
-                Chaque pièce certifiée par nos experts. Votre garantie d'authenticité absolue.
+                Chaque pièce certifiée par nos experts. Votre garantie d'excellence absolue.
               </p>
             </div>
             

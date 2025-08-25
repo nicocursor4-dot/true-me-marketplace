@@ -135,7 +135,7 @@ export default function TrueMeDashboard() {
                   </div>
                   <div>
                     <p className="text-2xl font-bold text-trueme">{userStats.authenticityScore}</p>
-                    <p className="text-sm text-trueme-secondary">Score authenticité</p>
+                    <p className="text-sm text-trueme-secondary">Statut VIP</p>
                   </div>
                 </div>
               </motion.div>
@@ -194,10 +194,10 @@ export default function TrueMeDashboard() {
           </div>
 
           {/* Right Column */}
-          <div className="lg:col-span-1 space-y-6 flex flex-col">
+          <div className="lg:col-span-1 space-y-6">
             {/* Quick Actions */}
             <motion.div 
-              className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 w-full"
+              className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
@@ -292,45 +292,47 @@ export default function TrueMeDashboard() {
             <Modal>
               <ModalTrigger>
                 <motion.div 
-                  className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 cursor-pointer hover:shadow-md transition-shadow duration-300 w-full flex-1"
+                  className="bg-gradient-to-br from-trueme-gold/5 via-white to-trueme-gold/5 rounded-2xl shadow-lg border border-trueme-gold/20 p-8 cursor-pointer hover:shadow-xl transition-all duration-300 backdrop-blur-sm"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.5 }}
-                  whileHover={{ y: -2 }}
+                  whileHover={{ y: -3, scale: 1.01 }}
                 >
-                  <h3 className="text-xl font-serif text-trueme mb-6">Ma collection</h3>
-                  <div className="space-y-6">
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                      <div className="bg-trueme-gold/5 rounded-xl p-4 border border-trueme-gold/20 text-center min-h-[80px] flex flex-col justify-center">
-                        <p className="text-2xl font-bold text-trueme">{userStats.totalItems}</p>
-                        <p className="text-xs text-trueme-secondary mt-1">Articles</p>
+                  <div className="text-center space-y-6">
+                    <div className="flex items-center justify-center gap-3 mb-4">
+                      <Crown className="w-6 h-6 text-trueme-gold" />
+                      <h3 className="text-2xl font-serif text-trueme">Ma Collection</h3>
+                      <Crown className="w-6 h-6 text-trueme-gold" />
+                    </div>
+                    
+                    <div className="grid grid-cols-3 gap-6">
+                      <div className="text-center">
+                        <div className="w-16 h-16 mx-auto mb-3 bg-trueme-gold/10 rounded-full flex items-center justify-center border-2 border-trueme-gold/20">
+                          <Star className="w-8 h-8 text-trueme-gold" />
+                        </div>
+                        <p className="text-3xl font-bold text-trueme mb-1">{userStats.totalItems}</p>
+                        <p className="text-sm text-trueme-secondary font-medium">Articles</p>
                       </div>
-                      <div className="bg-trueme-gold/5 rounded-xl p-4 border border-trueme-gold/20 text-center min-h-[80px] flex flex-col justify-center">
-                        <p className="text-2xl font-bold text-trueme">{userStats.totalValue}</p>
-                        <p className="text-xs text-trueme-secondary mt-1">Valeur</p>
+                      
+                      <div className="text-center">
+                        <div className="w-16 h-16 mx-auto mb-3 bg-trueme-gold/10 rounded-full flex items-center justify-center border-2 border-trueme-gold/20">
+                          <Sparkles className="w-8 h-8 text-trueme-gold" />
+                        </div>
+                        <p className="text-3xl font-bold text-trueme mb-1">{userStats.totalValue}</p>
+                        <p className="text-sm text-trueme-secondary font-medium">Valeur</p>
                       </div>
-                      <div className="bg-trueme-gold/5 rounded-xl p-4 border border-trueme-gold/20 text-center min-h-[80px] flex flex-col justify-center">
-                        <p className="text-2xl font-bold text-trueme-gold flex items-center justify-center gap-1">
-                          <TrendingUp className="w-4 h-4" />
-                          {userStats.collectionGrowth}
-                        </p>
-                        <p className="text-xs text-trueme-secondary mt-1">Croissance</p>
+                      
+                      <div className="text-center">
+                        <div className="w-16 h-16 mx-auto mb-3 bg-green-500/10 rounded-full flex items-center justify-center border-2 border-green-500/20">
+                          <TrendingUp className="w-8 h-8 text-green-500" />
+                        </div>
+                        <p className="text-3xl font-bold text-green-500 mb-1">{userStats.collectionGrowth}</p>
+                        <p className="text-sm text-trueme-secondary font-medium">Croissance</p>
                       </div>
                     </div>
                     
-                    <div className="space-y-3">
-                      <div className="flex justify-between items-center p-4 bg-gray-50 rounded-xl min-h-[56px]">
-                        <span className="text-sm text-trueme-secondary">Marques favorites</span>
-                        <span className="text-sm font-medium text-trueme">Hermès, Chanel, Dior</span>
-                      </div>
-                      <div className="flex justify-between items-center p-4 bg-gray-50 rounded-xl min-h-[56px]">
-                        <span className="text-sm text-trueme-secondary">Dernière acquisition</span>
-                        <span className="text-sm font-medium text-trueme">Sac Birkin 35 - 15 jan</span>
-                      </div>
-                      <div className="flex justify-between items-center p-4 bg-gray-50 rounded-xl min-h-[56px]">
-                        <span className="text-sm text-trueme-secondary">Score authenticité</span>
-                        <span className="text-sm font-medium text-trueme-gold">100% ✓</span>
-                      </div>
+                    <div className="mt-6 pt-4 border-t border-trueme-gold/20">
+                      <p className="text-sm text-trueme-gold font-medium italic">Découvrez le détail de votre collection ✨</p>
                     </div>
                   </div>
                 </motion.div>
