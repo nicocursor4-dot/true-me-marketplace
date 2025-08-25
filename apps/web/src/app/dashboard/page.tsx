@@ -220,7 +220,43 @@ export default function TrueMeDashboard() {
             >
               <div className="p-8">
                 <h3 className="text-xl font-serif text-trueme mb-6">Actions rapides</h3>
-                <div className="space-y-3">
+                <div className="flex flex-col gap-3">
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full"
+                  >
+                    <a href="/marketplace" className="block">
+                      <HoverBorderGradient className="w-full justify-between">
+                        <span>Explorer le marketplace</span>
+                        <motion.div
+                          whileHover={{ x: 4 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <ArrowRight className="w-4 h-4" />
+                        </motion.div>
+                      </HoverBorderGradient>
+                    </a>
+                  </motion.div>
+
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full"
+                  >
+                    <a href="/brands" className="block">
+                      <HoverBorderGradient className="w-full justify-between">
+                        <span>Ma collection</span>
+                        <motion.div
+                          whileHover={{ x: 4 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <ArrowRight className="w-4 h-4" />
+                        </motion.div>
+                      </HoverBorderGradient>
+                    </a>
+                  </motion.div>
+
                   <Modal>
                     <ModalTrigger>
                       <motion.div
@@ -229,7 +265,7 @@ export default function TrueMeDashboard() {
                         className="w-full"
                       >
                         <HoverBorderGradient className="w-full justify-between">
-                          <span>Explorer le marketplace</span>
+                          <span>Historique des achats</span>
                           <motion.div
                             whileHover={{ x: 4 }}
                             transition={{ duration: 0.2 }}
@@ -241,92 +277,150 @@ export default function TrueMeDashboard() {
                     </ModalTrigger>
                     <ModalBody>
                       <ModalContent>
-                        <h3 className="text-2xl font-bold text-trueme mb-4">Marketplace TRUE ME</h3>
-                        <p className="text-trueme-secondary mb-6">
-                          Découvrez notre sélection exclusive d'articles de luxe authentifiés. 
-                          En tant que membre {userStats.currentStatus}, bénéficiez d'un accès prioritaire 
-                          aux nouvelles arrivées et aux ventes privées.
-                        </p>
+                        <h3 className="text-2xl font-bold text-trueme mb-4">Historique des achats</h3>
                         <div className="space-y-4">
-                          <div className="flex items-center gap-3">
-                            <Shield className="w-5 h-5 text-trueme-gold" />
-                            <span className="text-trueme">Authenticité garantie 100%</span>
+                          <div className="border-b border-trueme/10 pb-4">
+                            <div className="flex justify-between items-start">
+                              <div>
+                                <p className="font-semibold text-trueme">Sac Hermès Birkin 35</p>
+                                <p className="text-sm text-trueme-secondary">15 janvier 2025</p>
+                              </div>
+                              <p className="font-bold text-trueme">2 850€</p>
+                            </div>
+                            <p className="text-xs text-trueme-gold mt-1">Authentifié ✓</p>
                           </div>
-                          <div className="flex items-center gap-3">
-                            <Sparkles className="w-5 h-5 text-trueme-gold" />
-                            <span className="text-trueme">Curation experte</span>
+                          <div className="border-b border-trueme/10 pb-4">
+                            <div className="flex justify-between items-start">
+                              <div>
+                                <p className="font-semibold text-trueme">Montre Rolex Submariner</p>
+                                <p className="text-sm text-trueme-secondary">8 janvier 2025</p>
+                              </div>
+                              <p className="font-bold text-trueme">1 450€</p>
+                            </div>
+                            <p className="text-xs text-trueme-gold mt-1">Authentifié ✓</p>
+                          </div>
+                          <div className="border-b border-trueme/10 pb-4">
+                            <div className="flex justify-between items-start">
+                              <div>
+                                <p className="font-semibold text-trueme">Chaussures Louboutin</p>
+                                <p className="text-sm text-trueme-secondary">2 janvier 2025</p>
+                              </div>
+                              <p className="font-bold text-trueme">680€</p>
+                            </div>
+                            <p className="text-xs text-trueme-gold mt-1">Authentifié ✓</p>
                           </div>
                         </div>
+                        <div className="mt-6 p-4 bg-trueme-gold/5 rounded-lg">
+                          <p className="font-semibold text-trueme">Total dépensé : {userStats.totalSpent}</p>
+                          <p className="text-sm text-trueme-secondary">Sur {userStats.totalPurchases} achats</p>
+                        </div>
                       </ModalContent>
-                      <ModalFooter>
-                        <HoverBorderGradient className="w-full">
-                          Accéder au marketplace
-                        </HoverBorderGradient>
-                      </ModalFooter>
                     </ModalBody>
                   </Modal>
-
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <HoverBorderGradient className="w-full justify-between">
-                      <span>Ma collection</span>
-                      <motion.div
-                        whileHover={{ x: 4 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <ArrowRight className="w-4 h-4" />
-                      </motion.div>
-                    </HoverBorderGradient>
-                  </motion.div>
-
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <HoverBorderGradient className="w-full justify-between">
-                      <span>Historique des achats</span>
-                      <motion.div
-                        whileHover={{ x: 4 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <ArrowRight className="w-4 h-4" />
-                      </motion.div>
-                    </HoverBorderGradient>
-                  </motion.div>
                 </div>
               </div>
             </motion.div>
 
             {/* Collection Summary */}
-            <motion.div 
-              className="rounded-3xl bg-white shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] ring-1 ring-black/5"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-            >
-              <div className="p-8">
-                <h3 className="text-xl font-serif text-trueme mb-6">Ma collection</h3>
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center">
-                    <span className="text-trueme-secondary">Articles possédés</span>
-                    <span className="font-semibold text-trueme">{userStats.totalItems}</span>
+            <Modal>
+              <ModalTrigger>
+                <motion.div 
+                  className="rounded-3xl bg-white shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] ring-1 ring-black/5 cursor-pointer hover:shadow-[0_15px_50px_-10px_rgba(0,0,0,0.2)] transition-shadow duration-300"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                  whileHover={{ y: -2 }}
+                >
+                  <div className="p-8">
+                    <h3 className="text-xl font-serif text-trueme mb-6">Ma collection</h3>
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center">
+                        <span className="text-trueme-secondary">Articles possédés</span>
+                        <span className="font-semibold text-trueme">{userStats.totalItems}</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-trueme-secondary">Valeur estimée</span>
+                        <span className="font-semibold text-trueme">{userStats.totalValue}</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-trueme-secondary">Croissance</span>
+                        <span className="font-semibold text-trueme-gold flex items-center gap-1">
+                          <TrendingUp className="w-4 h-4" />
+                          {userStats.collectionGrowth}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="mt-4 text-center">
+                      <p className="text-xs text-trueme-secondary">Cliquez pour voir le détail</p>
+                    </div>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-trueme-secondary">Valeur estimée</span>
-                    <span className="font-semibold text-trueme">{userStats.totalValue}</span>
+                </motion.div>
+              </ModalTrigger>
+              <ModalBody>
+                <ModalContent>
+                  <h3 className="text-2xl font-bold text-trueme mb-4">Ma Collection - Top 3</h3>
+                  <div className="space-y-6">
+                    <div className="flex items-center gap-4 p-4 border border-trueme/10 rounded-lg">
+                      <img 
+                        src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=100&auto=format&fit=crop" 
+                        alt="Sac Hermès Birkin" 
+                        className="w-16 h-16 object-cover rounded-lg"
+                      />
+                      <div className="flex-1">
+                        <p className="font-semibold text-trueme">Sac Hermès Birkin 35</p>
+                        <p className="text-sm text-trueme-secondary">Cuir Togo Orange</p>
+                      </div>
+                      <p className="font-bold text-trueme">3 200€</p>
+                    </div>
+                    <div className="flex items-center gap-4 p-4 border border-trueme/10 rounded-lg">
+                      <img 
+                        src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=100&auto=format&fit=crop" 
+                        alt="Montre Rolex" 
+                        className="w-16 h-16 object-cover rounded-lg"
+                      />
+                      <div className="flex-1">
+                        <p className="font-semibold text-trueme">Montre Rolex Submariner</p>
+                        <p className="text-sm text-trueme-secondary">Acier inoxydable</p>
+                      </div>
+                      <p className="font-bold text-trueme">2 850€</p>
+                    </div>
+                    <div className="flex items-center gap-4 p-4 border border-trueme/10 rounded-lg">
+                      <img 
+                        src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=100&auto=format&fit=crop" 
+                        alt="Chaussures Louboutin" 
+                        className="w-16 h-16 object-cover rounded-lg"
+                      />
+                      <div className="flex-1">
+                        <p className="font-semibold text-trueme">Chaussures Louboutin</p>
+                        <p className="text-sm text-trueme-secondary">So Kate 120mm</p>
+                      </div>
+                      <p className="font-bold text-trueme">1 250€</p>
+                    </div>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-trueme-secondary">Croissance</span>
-                    <span className="font-semibold text-trueme-gold flex items-center gap-1">
-                      <TrendingUp className="w-4 h-4" />
-                      {userStats.collectionGrowth}
-                    </span>
+                  <div className="mt-6 grid grid-cols-2 gap-4">
+                    <div className="p-4 bg-trueme-gold/5 rounded-lg">
+                      <p className="text-sm text-trueme-secondary">Valeur totale</p>
+                      <p className="text-xl font-bold text-trueme">{userStats.totalValue}</p>
+                    </div>
+                    <div className="p-4 bg-trueme-gold/5 rounded-lg">
+                      <p className="text-sm text-trueme-secondary">Croissance</p>
+                      <p className="text-xl font-bold text-trueme-gold">{userStats.collectionGrowth}</p>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </motion.div>
+                  <div className="mt-4 p-4 bg-trueme/5 rounded-lg">
+                    <p className="font-semibold text-trueme">{userStats.totalItems} articles au total</p>
+                    <p className="text-sm text-trueme-secondary">Collection certifiée TRUE ME</p>
+                  </div>
+                </ModalContent>
+                <ModalFooter>
+                  <a href="/brands" className="w-full">
+                    <HoverBorderGradient className="w-full">
+                      Voir toute ma collection
+                    </HoverBorderGradient>
+                  </a>
+                </ModalFooter>
+              </ModalBody>
+            </Modal>
 
             {/* Points & Rewards */}
             <motion.div 
