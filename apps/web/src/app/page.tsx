@@ -170,7 +170,7 @@ export default function Home() {
             <TypewriterEffectSmooth 
               key={currentPhrase} 
               words={typewriterWords}
-              className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tight" 
+              className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight" 
             />
             <div className="text-4xl md:text-6xl lg:text-7xl font-bold text-trueme-gold mt-8 tracking-tight">
               True Me
