@@ -134,8 +134,8 @@ export default function TrueMeDashboard() {
                     <Star className="w-5 h-5 text-trueme-gold" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-trueme">{userStats.authenticityScore}</p>
-                    <p className="text-sm text-trueme-secondary">Statut VIP</p>
+                    <p className="text-2xl font-bold text-trueme">{userStats.totalPurchases}</p>
+                    <p className="text-sm text-trueme-secondary">Achats effectués</p>
                   </div>
                 </div>
               </motion.div>
@@ -197,7 +197,7 @@ export default function TrueMeDashboard() {
           <div className="lg:col-span-1 space-y-6">
             {/* Quick Actions */}
             <motion.div 
-              className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6"
+              className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 w-full"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
@@ -231,15 +231,9 @@ export default function TrueMeDashboard() {
                 </motion.div>
 
                 <Modal>
-                  <ModalTrigger className="w-full">
-                    <motion.div
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="w-full bg-trueme-gold hover:bg-trueme-gold/90 text-white rounded-2xl px-4 py-3 flex items-center justify-between transition-colors duration-200 cursor-pointer"
-                    >
-                      <span className="font-medium">Historique des achats</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </motion.div>
+                  <ModalTrigger className="w-full bg-trueme-gold hover:bg-trueme-gold/90 text-white rounded-2xl px-4 py-3 flex items-center justify-between transition-colors duration-200 cursor-pointer">
+                    <span className="font-medium">Historique des achats</span>
+                    <ArrowRight className="w-4 h-4" />
                   </ModalTrigger>
                   <ModalBody>
                     <ModalContent>
@@ -290,7 +284,7 @@ export default function TrueMeDashboard() {
             <Modal>
               <ModalTrigger>
                 <motion.div 
-                  className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 cursor-pointer hover:shadow-xl transition-all duration-300"
+                  className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 cursor-pointer hover:shadow-xl transition-all duration-300 w-full"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.5 }}
