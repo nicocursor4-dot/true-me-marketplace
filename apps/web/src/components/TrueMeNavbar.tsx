@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { User } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Navbar, NavBody, NavItems, MobileNav, MobileNavHeader, MobileNavMenu, MobileNavToggle } from './ui/resizable-navbar';
 
 const TrueMeNavbar = () => {
@@ -28,9 +29,19 @@ const TrueMeNavbar = () => {
       <div className="w-8 h-8 bg-trueme-gold rounded-full flex items-center justify-center">
         <span className="text-black font-bold text-sm">TM</span>
       </div>
-      {!visible && (
-        <span className="text-trueme font-light text-xl tracking-wider">True Me</span>
-      )}
+      <AnimatePresence>
+        {!visible && (
+          <motion.span 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.3 }}
+            className="text-trueme font-light text-xl tracking-wider"
+          >
+            True Me
+          </motion.span>
+        )}
+      </AnimatePresence>
     </Link>
   );
 

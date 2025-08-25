@@ -150,9 +150,16 @@ export default function Home() {
       <section className="relative px-4 pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
         <div className="max-w-6xl mx-auto text-center relative z-10">
           {/* Hero Title */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-light mb-8 fade-in text-trueme tracking-tight">
-            True Me, L'Art du Luxe Authentique
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-light mb-6 fade-in text-trueme tracking-tight">
+            Not a Styl. A Signature.
           </h1>
+          
+          {/* Hero Slogan */}
+          <div className="mb-8 fade-in-delay-1">
+            <p className="text-2xl md:text-3xl text-trueme-gold font-light italic tracking-wide">
+              by True Me
+            </p>
+          </div>
           
           {/* Hero Subtitle */}
           <div className="mb-12 fade-in-delay-1">
@@ -349,8 +356,8 @@ export default function Home() {
                   </p>
                 </div>
               </DialogTrigger>
-              <DialogContent className="max-w-4xl bg-white/95 backdrop-blur-2xl border border-trueme-gold/20 rounded-3xl shadow-2xl">
-                <DialogHeader>
+              <DialogContent className="max-w-4xl max-h-[90vh] bg-white/95 backdrop-blur-2xl border border-trueme-gold/20 rounded-3xl shadow-2xl overflow-hidden">
+                <DialogHeader className="pb-4 border-b border-trueme-gold/10">
                   <DialogTitle className="flex items-center gap-3 text-2xl text-trueme">
                     <Crown className="w-8 h-8 text-trueme-gold" />
                     Conciergerie Privée TRUE ME
@@ -359,6 +366,7 @@ export default function Home() {
                     Votre assistant personnel dédié au luxe
                   </DialogDescription>
                 </DialogHeader>
+                <div className="overflow-y-auto max-h-[calc(90vh-120px)] custom-scrollbar">
                 <div className="space-y-8 py-6">
                   <div className="grid md:grid-cols-2 gap-8">
                     <div className="bg-gradient-to-br from-trueme-gold/5 to-transparent rounded-2xl p-6">
@@ -426,6 +434,7 @@ export default function Home() {
                     Réserver une Consultation Privée
                   </button>
                 </div>
+                </div>
               </DialogContent>
             </Dialog>
 
@@ -439,16 +448,17 @@ export default function Home() {
                   </p>
                 </div>
               </DialogTrigger>
-              <DialogContent className="max-w-4xl bg-white/95 backdrop-blur-2xl border border-trueme-gold/20 rounded-3xl shadow-2xl">
-                <DialogHeader>
+              <DialogContent className="max-w-4xl max-h-[90vh] bg-white/95 backdrop-blur-2xl border border-trueme-gold/20 rounded-3xl shadow-2xl overflow-hidden">
+                <DialogHeader className="pb-4 border-b border-trueme-gold/10">
                   <DialogTitle className="flex items-center gap-3 text-2xl text-trueme">
-                    <Sparkles className="w-8 h-8 text-trueme-gold" />
-                    Accès Prioritaire VIP
+                    <Zap className="w-8 h-8 text-trueme-gold" />
+                    Authentification Express
                   </DialogTitle>
                   <DialogDescription className="text-trueme-light text-lg">
-                    L'exclusivité avant tout le monde
+                    Certification ultra-rapide garantie sous 24h
                   </DialogDescription>
                 </DialogHeader>
+                <div className="overflow-y-auto max-h-[calc(90vh-120px)] custom-scrollbar">
                 <div className="space-y-6 py-6">
                   <div className="text-center mb-8">
                     <div className="inline-flex items-center gap-3 bg-trueme-gold/10 rounded-full px-6 py-3 mb-4">
@@ -538,6 +548,7 @@ export default function Home() {
                     Démarrer l'Authentification Express
                   </button>
                 </div>
+                </div>
               </DialogContent>
             </Dialog>
 
@@ -552,8 +563,8 @@ export default function Home() {
                   </p>
                 </div>
               </DialogTrigger>
-              <DialogContent className="max-w-4xl bg-white/95 backdrop-blur-2xl border border-trueme-gold/20 rounded-3xl shadow-2xl">
-                <DialogHeader>
+              <DialogContent className="max-w-4xl max-h-[90vh] bg-white/95 backdrop-blur-2xl border border-trueme-gold/20 rounded-3xl shadow-2xl overflow-hidden">
+                <DialogHeader className="pb-4 border-b border-trueme-gold/10">
                   <DialogTitle className="flex items-center gap-3 text-2xl text-trueme">
                     <Heart className="w-8 h-8 text-trueme-gold" />
                     Personal Shopper TRUE ME
@@ -562,6 +573,7 @@ export default function Home() {
                     Votre guide personnel dans l'univers du luxe authentique
                   </DialogDescription>
                 </DialogHeader>
+                <div className="overflow-y-auto max-h-[calc(90vh-120px)] custom-scrollbar">
                 <div className="space-y-8 py-6">
                   <div className="text-center mb-8">
                     <div className="inline-flex items-center gap-3 bg-trueme-gold/10 rounded-full px-6 py-3 mb-4">
@@ -651,6 +663,7 @@ export default function Home() {
                   <button className="w-full bg-gradient-to-r from-trueme-gold to-trueme-gold/80 hover:from-trueme-gold/90 hover:to-trueme-gold text-black font-semibold py-4 px-8 rounded-2xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg text-lg">
                     Réserver ma Session Découverte Gratuite
                   </button>
+                </div>
                 </div>
               </DialogContent>
             </Dialog>
