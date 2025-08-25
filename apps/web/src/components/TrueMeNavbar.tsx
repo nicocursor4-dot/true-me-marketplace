@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { User } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Navbar, NavBody, NavItems, MobileNav, MobileNavHeader, MobileNavMenu, MobileNavToggle } from './ui/resizable-navbar';
 
 const TrueMeNavbar = () => {
@@ -26,15 +25,10 @@ const TrueMeNavbar = () => {
 
   const TrueMeLogo = ({ visible }: { visible?: boolean }) => (
     <Link href="/" className="flex items-center z-20">
-      <motion.img 
+      <img 
         src="/images/logos/trueme-logo.png" 
         alt="True Me Logo" 
-        className="object-contain"
-        animate={{
-          width: visible ? "32px" : "48px",
-          height: visible ? "32px" : "48px",
-        }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="w-8 h-8 object-contain"
       />
     </Link>
   );
@@ -51,7 +45,7 @@ const TrueMeNavbar = () => {
       
       {isAccountDropdownOpen && (
         <div
-          className="absolute right-0 mt-2 w-48 bg-white/95 backdrop-blur-xl rounded-lg shadow-xl py-2 z-50 border border-trueme-gold/20"
+          className="absolute right-0 mt-2 w-48 bg-white/90 backdrop-blur-xl rounded-lg shadow-xl py-2 z-50 border border-trueme-gold/20"
           onMouseLeave={() => setIsAccountDropdownOpen(false)}
         >
           {accountItems.map((item) => (
@@ -71,13 +65,13 @@ const TrueMeNavbar = () => {
 
   return (
     <Navbar>
-      <NavBody className="bg-neutral-50/15 backdrop-blur-lg border border-white/20 shadow-lg">
+      <NavBody className="bg-white/20 backdrop-blur-lg border border-white/30 shadow-lg">
         <TrueMeLogo />
         <NavItems items={navItems} className="text-trueme" />
         <AccountDropdown />
       </NavBody>
 
-      <MobileNav className="bg-neutral-50/15 backdrop-blur-lg border border-white/20 shadow-lg">
+      <MobileNav className="bg-white/20 backdrop-blur-lg border border-white/30 shadow-lg">
         <MobileNavHeader>
           <TrueMeLogo />
           <MobileNavToggle
@@ -89,7 +83,7 @@ const TrueMeNavbar = () => {
         <MobileNavMenu
           isOpen={isMobileMenuOpen}
           onClose={() => setIsMobileMenuOpen(false)}
-          className="bg-neutral-50/97 backdrop-blur-xl border border-trueme-gold/20"
+          className="bg-white/95 backdrop-blur-xl border border-trueme-gold/20"
         >
           {navItems.map((item) => (
             <Link

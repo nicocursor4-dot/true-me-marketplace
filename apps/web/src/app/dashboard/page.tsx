@@ -6,7 +6,7 @@ import { HoverBorderGradient } from '@/components/ui/hover-border-gradient';
 import { Progress } from '@/components/ui/progress';
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalTrigger } from '@/components/ui/animated-modal';
 import { Shield, Calendar, Sparkles, Crown, Gift, Users, Star, TrendingUp, ShoppingCart, ArrowRight } from 'lucide-react';
-import SimpleNavbar from '@/components/SimpleNavbar';
+import TrueMeNavbar from '@/components/TrueMeNavbar';
 
 export default function TrueMeDashboard() {
   const userStats = {
@@ -50,7 +50,7 @@ export default function TrueMeDashboard() {
 
   return (
     <div className="min-h-screen bg-trueme-cream text-trueme antialiased">
-      <SimpleNavbar />
+      <TrueMeNavbar />
 
       {/* Main Content */}
       <main className="pt-20 px-4 md:px-6 max-w-7xl mx-auto py-8">
