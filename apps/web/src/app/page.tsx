@@ -12,47 +12,25 @@ import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { ShoppingBag, Shield, Crown, CheckCircle, ArrowRight, Sparkles, Star, Clock, Phone, Heart, Zap, User } from 'lucide-react';
 
 export default function Home() {
-  const typewriterWords = [
-    {
-      text: "Not",
-      className: "text-trueme",
-    },
-    {
-      text: "a",
-      className: "text-trueme",
-    },
-    {
-      text: "Style.",
-      className: "text-trueme",
-    },
-    {
-      text: "A",
-      className: "text-trueme-gold",
-    },
-    {
-      text: "Signature.",
-      className: "text-trueme-gold",
-    },
+  const [currentPhrase, setCurrentPhrase] = useState(0);
+  
+  const phrases = [
+    "Not a Style. A Signature.",
+    "L'art du luxe authentique."
   ];
 
-  const typewriterWords2 = [
-    {
-      text: "L'art",
-      className: "text-trueme",
-    },
-    {
-      text: "du",
-      className: "text-trueme",
-    },
-    {
-      text: "luxe",
-      className: "text-trueme-gold",
-    },
-    {
-      text: "authentique.",
-      className: "text-trueme-gold",
-    },
-  ];
+  const typewriterWords = phrases[currentPhrase].split(' ').map(word => ({
+    text: word,
+    className: "text-trueme",
+  }));
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentPhrase((prev) => (prev + 1) % phrases.length);
+    }, 4000); // Change phrase every 4 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   const brandLogos = [
     'Chanel', 'Hermès', 'Louis Vuitton', 'Dior', 'Gucci'
@@ -189,10 +167,11 @@ export default function Home() {
         <div className="max-w-6xl mx-auto text-center relative z-10">
           {/* Hero Title with Typewriter Effect */}
           <div className="mb-6 fade-in">
-            <TypewriterEffectSmooth words={typewriterWords} />
-            <div className="mt-4">
-              <TypewriterEffectSmooth words={typewriterWords2} />
-            </div>
+            <TypewriterEffectSmooth 
+              key={currentPhrase} 
+              words={typewriterWords}
+              className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tight" 
+            />
             <div className="text-4xl md:text-6xl lg:text-7xl font-bold text-trueme-gold mt-8 tracking-tight">
               True Me
             </div>
