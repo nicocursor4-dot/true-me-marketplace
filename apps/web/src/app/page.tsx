@@ -194,7 +194,7 @@ export default function Home() {
               <GlassCard key={article.id} className="p-4 md:p-6 luxury-hover fade-in">
                 <div className="aspect-square bg-gradient-to-br from-trueme-gold/20 to-trueme-gold/5 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
                   <img 
-                    src={`/images/products/${article.brand.toLowerCase().replace(' ', '-').replace('è', 'e')}-${article.name.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')}.jpg`}
+                    src={`/images/products/${article.id === 1 ? 'chanel-classic-flap' : article.id === 2 ? 'hermes-birkin-35' : article.id === 3 ? 'dior-lady-medium' : 'lv-speedy-30'}.jpg`}
                     alt={`${article.brand} ${article.name}`}
                     className="w-full h-full object-cover"
                     onError={(e) => {
