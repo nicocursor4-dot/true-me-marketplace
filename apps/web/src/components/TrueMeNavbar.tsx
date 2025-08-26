@@ -38,7 +38,7 @@ const TrueMeNavbar = () => {
         src="/images/logos/trueme-logo.png" 
         alt="True Me Logo" 
         className={`object-contain transition-all duration-300 ${
-          isScrolled ? "w-8 h-8" : "w-12 h-12"
+          isScrolled ? "w-10 h-10" : "w-16 h-16"
         }`}
       />
     </Link>

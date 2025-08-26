@@ -256,7 +256,7 @@ export default function QuiSommesNous() {
             
             <div className="border-t border-trueme-gold/20 pt-8">
               <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-                <p className="text-trueme-light text-sm">© 2024 TRUE ME. Tous droits réservés.</p>
+                <p className="text-trueme-light text-sm">© 2025 TRUE ME. Tous droits réservés.</p>
                 <div className="flex space-x-6 text-sm text-trueme-light">
                   <Link href="/privacy" className="hover:text-trueme-gold transition-colors">Confidentialité</Link>
                   <Link href="/terms" className="hover:text-trueme-gold transition-colors">Conditions</Link>
