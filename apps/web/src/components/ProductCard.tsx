@@ -31,7 +31,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
   className = ""
 }) => {
   const [imageError, setImageError] = useState(false)
-  const [isImageLoaded, setIsImageLoaded] = useState(false)
 
   const handleFavoriteClick = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -58,14 +57,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
             <img
               src={product.images[0]}
               alt={`${product.brand} ${product.name}`}
-              className={`w-full h-full object-cover transition-all duration-300 group-hover:scale-105 ${
-                isImageLoaded ? 'opacity-100' : 'opacity-0'
-              }`}
-              onLoad={() => setIsImageLoaded(true)}
-              onError={() => {
-                setImageError(true)
-                setIsImageLoaded(true)
-              }}
+              className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+              onError={() => setImageError(true)}
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-trueme-gold/10 to-trueme-gold/5">
