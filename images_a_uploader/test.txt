@@ -1,0 +1,11 @@
+Place your images here for bulk upload testing.
+
+Supported formats: .jpg, .jpeg, .png, .webp
+
+The bulkUpload.js script will:
+1. Read all images from this folder
+2. Upload them to Cloudinary with transformations
+3. Apply white background and resize to 1080x1080px
+4. Log success/failure for each image
+
+To test: node scripts/bulkUpload.js

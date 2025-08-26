@@ -1,0 +1,37 @@
+[
+  {
+    "id": "prod_001",
+    "name": "Sac Hermès Birkin 35cm",
+    "description": "Sac iconique en cuir Togo orange, parfait état. Pièce de collection authentifiée.",
+    "price": 45000,
+    "imageUrl": null
+  },
+  {
+    "id": "prod_002", 
+    "name": "Chaussures Louboutin So Kate",
+    "description": "Escarpins emblématiques en cuir noir, semelle rouge signature. Taille 38.",
+    "price": 850,
+    "imageUrl": null
+  },
+  {
+    "id": "prod_003",
+    "name": "Montre Rolex Submariner",
+    "description": "Montre de plongée en acier inoxydable, mouvement automatique. État impeccable.",
+    "price": 12500,
+    "imageUrl": null
+  },
+  {
+    "id": "prod_004",
+    "name": "Sac Chanel 2.55 Classic",
+    "description": "Sac matelassé en cuir d'agneau noir, chaîne dorée. Vintage authentique.",
+    "price": 5200,
+    "imageUrl": null
+  },
+  {
+    "id": "prod_005",
+    "name": "Bracelet Cartier Love",
+    "description": "Bracelet iconique en or rose 18k, système de vis. Avec certificat d'authenticité.",
+    "price": 8200,
+    "imageUrl": null
+  }
+]
