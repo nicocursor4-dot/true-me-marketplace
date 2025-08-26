@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import TrueMeNavbar from '@/components/TrueMeNavbar'
 import GenderFilter from '@/components/GenderFilter'
+import AdvancedFilters from '@/components/AdvancedFilters'
 import CategorySlider from '@/components/CategorySlider'
 import VipBanner from '@/components/VipBanner'
 import { productCategories } from '@/data/mockProducts'
@@ -12,12 +13,35 @@ import { ShoppingBag } from 'lucide-react'
 
 export default function Home() {
   const [selectedGender, setSelectedGender] = useState<'all' | 'homme' | 'femme' | 'enfant'>('all')
+  const [selectedCategory, setSelectedCategory] = useState<string>('all')
+  const [selectedBrand, setSelectedBrand] = useState<string>('all')
   const [favorites, setFavorites] = useState<string[]>([])
 
-  // Filtrer les produits par genre sélectionné
+  // Filtrer les produits par tous les critères sélectionnés
+  const filterProducts = (products: Product[]) => {
+    let filtered = products
+
+    // Filtrage par genre
+    if (selectedGender !== 'all') {
+      filtered = filtered.filter(product => product.gender === selectedGender)
+    }
+
+    // Filtrage par catégorie
+    if (selectedCategory !== 'all') {
+      filtered = filtered.filter(product => product.category === selectedCategory)
+    }
+
+    // Filtrage par marque
+    if (selectedBrand !== 'all') {
+      filtered = filtered.filter(product => product.brand === selectedBrand)
+    }
+
+    return filtered
+  }
+
+  // Ancienne fonction pour compatibilité
   const filterProductsByGender = (products: Product[]) => {
-    if (selectedGender === 'all') return products
-    return products.filter(product => product.gender === selectedGender)
+    return filterProducts(products)
   }
 
   // Gérer les favoris
@@ -38,19 +62,32 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-white to-trueme-cream/20">
+    <main className="min-h-screen bg-trueme-cream">
       <TrueMeNavbar />
       
       {/* Mini Navigation Interne - Directement après navbar */}
-      <section className="px-4 pt-32 pb-8 md:pt-40">
+      <section className="px-4 pt-32 pb-4 md:pt-40">
         <div className="max-w-6xl mx-auto">
           <GenderFilter 
             selectedGender={selectedGender}
-            onGenderChange={setSelectedGender}
+            onGenderChange={(gender) => {
+              setSelectedGender(gender)
+              setSelectedCategory('all') // Reset category filter when gender changes
+              setSelectedBrand('all') // Reset brand filter when gender changes
+            }}
             className="border-b border-trueme-gold/10"
           />
         </div>
       </section>
+
+      {/* Barre de Filtres Avancés */}
+      <AdvancedFilters
+        selectedGender={selectedGender}
+        selectedCategory={selectedCategory}
+        selectedBrand={selectedBrand}
+        onCategoryChange={setSelectedCategory}
+        onBrandChange={setSelectedBrand}
+      />
 
       {/* Categories de Produits */}
       <section className="px-4 pb-20">
@@ -60,7 +97,7 @@ export default function Home() {
           <CategorySlider
             title={productCategories['notre-selection'].title}
             products={updateProductsWithFavorites(
-              filterProductsByGender(productCategories['notre-selection'].products)
+              filterProducts(productCategories['notre-selection'].products)
             )}
             categoryLink="/marketplace/notre-selection"
             onToggleFavorite={handleToggleFavorite}
@@ -70,7 +107,7 @@ export default function Home() {
           <CategorySlider
             title={productCategories['sacs-iconiques'].title}
             products={updateProductsWithFavorites(
-              filterProductsByGender(productCategories['sacs-iconiques'].products)
+              filterProducts(productCategories['sacs-iconiques'].products)
             )}
             categoryLink="/marketplace/sacs-iconiques"
             onToggleFavorite={handleToggleFavorite}
@@ -83,7 +120,7 @@ export default function Home() {
           <CategorySlider
             title={productCategories['pret-a-porter'].title}
             products={updateProductsWithFavorites(
-              filterProductsByGender(productCategories['pret-a-porter'].products)
+              filterProducts(productCategories['pret-a-porter'].products)
             )}
             categoryLink="/marketplace/pret-a-porter"
             onToggleFavorite={handleToggleFavorite}
@@ -93,7 +130,7 @@ export default function Home() {
           <CategorySlider
             title={productCategories['chaussures'].title}
             products={updateProductsWithFavorites(
-              filterProductsByGender(productCategories['chaussures'].products)
+              filterProducts(productCategories['chaussures'].products)
             )}
             categoryLink="/marketplace/chaussures"
             onToggleFavorite={handleToggleFavorite}
@@ -103,7 +140,7 @@ export default function Home() {
           <CategorySlider
             title={productCategories['bijoux'].title}
             products={updateProductsWithFavorites(
-              filterProductsByGender(productCategories['bijoux'].products)
+              filterProducts(productCategories['bijoux'].products)
             )}
             categoryLink="/marketplace/bijoux"
             onToggleFavorite={handleToggleFavorite}
@@ -113,7 +150,7 @@ export default function Home() {
           <CategorySlider
             title={productCategories['accessoires'].title}
             products={updateProductsWithFavorites(
-              filterProductsByGender(productCategories['accessoires'].products)
+              filterProducts(productCategories['accessoires'].products)
             )}
             categoryLink="/marketplace/accessoires"
             onToggleFavorite={handleToggleFavorite}
