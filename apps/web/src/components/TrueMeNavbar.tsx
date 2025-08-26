@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { User } from 'lucide-react';
+import { User, ShoppingBag, Shield } from 'lucide-react';
 import { Navbar, NavBody, NavItems, MobileNav, MobileNavHeader, MobileNavMenu, MobileNavToggle } from './ui/resizable-navbar';
 
 const TrueMeNavbar = () => {
@@ -21,9 +21,8 @@ const TrueMeNavbar = () => {
 
   const navItems = [
     { name: 'Accueil', link: '/' },
-    { name: 'Marketplace', link: '/marketplace' },
-    { name: 'VIP', link: '/auth/register' },
-    { name: 'À propos', link: '/brands' },
+    { name: 'VIP', link: '/vip' },
+    { name: 'Authentifier un objet', link: '/authentification' },
   ];
 
   const accountItems = [
@@ -42,6 +41,13 @@ const TrueMeNavbar = () => {
           isScrolled ? "w-8 h-8" : "w-12 h-12"
         }`}
       />
+    </Link>
+  );
+
+  const SellButton = () => (
+    <Link href="/vendre" className="bg-gradient-to-r from-trueme-gold to-trueme-gold/80 hover:from-trueme-gold/90 hover:to-trueme-gold text-black font-semibold px-6 py-2 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center gap-2 z-20">
+      <ShoppingBag className="w-4 h-4" />
+      Vendre
     </Link>
   );
 
@@ -80,7 +86,10 @@ const TrueMeNavbar = () => {
       <NavBody className="bg-white/20 backdrop-blur-lg border border-white/30 shadow-lg">
         <TrueMeLogo />
         <NavItems items={navItems} className="text-trueme" />
-        <AccountDropdown />
+        <div className="flex items-center gap-4">
+          <SellButton />
+          <AccountDropdown />
+        </div>
       </NavBody>
 
       <MobileNav className="bg-white/20 backdrop-blur-lg border border-white/30 shadow-lg">
@@ -107,6 +116,16 @@ const TrueMeNavbar = () => {
               {item.name}
             </Link>
           ))}
+          
+          {/* Bouton Vendre pour mobile */}
+          <Link
+            href="/vendre"
+            className="bg-gradient-to-r from-trueme-gold to-trueme-gold/80 text-black font-semibold px-6 py-3 rounded-full transition-all duration-300 shadow-lg flex items-center gap-2 justify-center my-4"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            <ShoppingBag className="w-4 h-4" />
+            Vendre
+          </Link>
           
           <div className="border-t border-trueme-gold/20 pt-4 mt-4">
             <p className="text-trueme/60 text-sm mb-3 font-medium">Mon Compte</p>
