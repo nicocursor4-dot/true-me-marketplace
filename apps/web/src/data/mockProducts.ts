@@ -1,438 +1,395 @@
 import { Product } from '@/components/ProductCard'
 
-// Données mock pour les produits de luxe
-export const mockProducts: Product[] = [
-  // Notre Sélection
-  {
-    id: '1',
-    brand: 'Chanel',
-    name: 'Classic Flap Bag Medium Caviar',
-    price: 'AED 12,500',
-    originalPrice: 'AED 15,000',
-    condition: 'Excellent',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=400'],
-    category: 'notre-selection',
-    gender: 'femme',
-    size: 'Medium',
-    isFavorite: false
+// Données mock pour les produits de luxe avec images générées automatiquement
+export const mockProducts = {
+  "notre-selection": {
+    title: "Notre Sélection",
+    description: "Les pièces les plus recherchées de notre collection",
+    products: [
+      {
+        id: "ns-1",
+        name: "Birkin 35",
+        brand: "Hermès",
+        price: "AED 45,000",
+        originalPrice: "AED 52,000",
+        images: ["/images/products/notre-selection/hermes/femme/birkin-35-black.jpg"],
+        condition: "Excellent" as const,
+        certified: true,
+        gender: "femme" as const,
+        size: "35cm",
+        category: "sac"
+      },
+      {
+        id: "ns-2", 
+        name: "2.55 Classic",
+        brand: "Chanel",
+        price: "AED 12,500",
+        images: ["/images/products/notre-selection/chanel/femme/255-classic-black.jpg"],
+        condition: "Comme neuf" as const,
+        certified: true,
+        gender: "femme" as const,
+        category: "sac"
+      },
+      {
+        id: "ns-3",
+        name: "Love Bracelet",
+        brand: "Cartier", 
+        price: "AED 8,200",
+        images: ["/images/products/notre-selection/cartier/femme/love-bracelet-gold.jpg"],
+        condition: "Très bon" as const,
+        certified: true,
+        gender: "femme" as const,
+        category: "bijou"
+      },
+      {
+        id: "ns-4",
+        name: "Keepall 55",
+        brand: "Louis Vuitton",
+        price: "AED 3,800",
+        images: ["/images/products/notre-selection/louisvuitton/homme/keepall-55-monogram.jpg"], 
+        condition: "Bon" as const,
+        certified: true,
+        gender: "homme" as const,
+        size: "55cm",
+        category: "sac"
+      },
+      {
+        id: "ns-5",
+        name: "Saddle Bag",
+        brand: "Dior",
+        price: "AED 6,200",
+        images: ["/images/products/notre-selection/dior/femme/saddle-bag-oblique.jpg"],
+        condition: "Excellent" as const, 
+        certified: true,
+        gender: "femme" as const,
+        category: "sac"
+      }
+    ]
   },
-  {
-    id: '2',
-    brand: 'Hermès',
-    name: 'Birkin 35 Togo Étoupe',
-    price: 'AED 45,000',
-    condition: 'Comme neuf',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=400'],
-    category: 'notre-selection',
-    gender: 'femme',
-    size: '35',
-    isFavorite: false
+  "sacs-iconiques": {
+    title: "Sacs à Main Iconiques", 
+    description: "Les sacs les plus emblématiques de la mode",
+    products: [
+      {
+        id: "si-1",
+        name: "Boy Bag",
+        brand: "Chanel",
+        price: "AED 11,800",
+        images: ["/images/products/sacs/chanel/femme/boy-bag-quilted-black.jpg"],
+        condition: "Excellent" as const,
+        certified: true,
+        gender: "femme" as const,
+        category: "sac"
+      },
+      {
+        id: "si-2",
+        name: "Kelly 32",
+        brand: "Hermès",
+        price: "AED 35,000",
+        images: ["/images/products/sacs/hermes/femme/kelly-32-epsom-rouge.jpg"],
+        condition: "Comme neuf" as const,
+        certified: true,
+        gender: "femme" as const,
+        size: "32cm",
+        category: "sac"
+      },
+      {
+        id: "si-3",
+        name: "Neverfull MM",
+        brand: "Louis Vuitton",
+        price: "AED 2,800",
+        images: ["/images/products/sacs/louisvuitton/femme/neverfull-mm-damier.jpg"],
+        condition: "Très bon" as const,
+        certified: true,
+        gender: "femme" as const,
+        category: "sac"
+      },
+      {
+        id: "si-4",
+        name: "Book Tote",
+        brand: "Dior",
+        price: "AED 4,500",
+        images: ["/images/products/sacs/dior/femme/book-tote-oblique-navy.jpg"],
+        condition: "Bon" as const,
+        certified: true,
+        gender: "femme" as const,
+        category: "sac"
+      },
+      {
+        id: "si-5",
+        name: "Dionysus",
+        brand: "Gucci",
+        price: "AED 3,200",
+        images: ["/images/products/sacs/gucci/femme/dionysus-gg-supreme.jpg"],
+        condition: "Excellent" as const,
+        certified: true,
+        gender: "femme" as const,
+        category: "sac"
+      }
+    ]
   },
-  {
-    id: '3',
-    brand: 'Louis Vuitton',
-    name: 'Neverfull MM Damier Ebene',
-    price: 'AED 3,800',
-    originalPrice: 'AED 4,200',
-    condition: 'Très bon',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1551698618-1dfe5d97d256?q=80&w=400'],
-    category: 'notre-selection',
-    gender: 'femme',
-    size: 'MM',
-    isFavorite: false
+  "bijoux": {
+    title: "Bijoux Précieux",
+    description: "Les bijoux les plus raffinés et emblématiques",
+    products: [
+      {
+        id: "bj-1",
+        name: "Alhambra Vintage",
+        brand: "Van Cleef & Arpels",
+        price: "AED 15,500",
+        images: ["/images/products/bijoux/vancleef/femme/alhambra-vintage-gold.jpg"],
+        condition: "Excellent" as const,
+        certified: true,
+        gender: "femme" as const,
+        category: "bijou"
+      },
+      {
+        id: "bj-2",
+        name: "Panthère Watch",
+        brand: "Cartier",
+        price: "AED 22,000",
+        images: ["/images/products/bijoux/cartier/femme/panthere-watch-gold.jpg"],
+        condition: "Comme neuf" as const,
+        certified: true,
+        gender: "femme" as const,
+        category: "montre"
+      },
+      {
+        id: "bj-3",
+        name: "T1 Ring",
+        brand: "Tiffany & Co.",
+        price: "AED 4,800",
+        images: ["/images/products/bijoux/tiffany/femme/t1-ring-diamond.jpg"],
+        condition: "Très bon" as const,
+        certified: true,
+        gender: "femme" as const,
+        category: "bijou"
+      },
+      {
+        id: "bj-4",
+        name: "Serpenti Bracelet",
+        brand: "Bulgari",
+        price: "AED 18,500",
+        images: ["/images/products/bijoux/bulgari/femme/serpenti-bracelet-gold.jpg"],
+        condition: "Excellent" as const,
+        certified: true,
+        gender: "femme" as const,
+        category: "bijou"
+      },
+      {
+        id: "bj-5",
+        name: "Camélia Brooch",
+        brand: "Chanel",
+        price: "AED 3,500",
+        images: ["/images/products/bijoux/chanel/femme/camelia-brooch-white.jpg"],
+        condition: "Comme neuf" as const,
+        certified: true,
+        gender: "femme" as const,
+        category: "bijou"
+      }
+    ]
   },
-  {
-    id: '4',
-    brand: 'Dior',
-    name: 'Lady Dior Medium Cannage',
-    price: 'AED 8,500',
-    condition: 'Excellent',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?q=80&w=400'],
-    category: 'notre-selection',
-    gender: 'femme',
-    size: 'Medium',
-    isFavorite: false
+  "chaussures": {
+    title: "Chaussures de Luxe",
+    description: "Les chaussures les plus élégantes et recherchées",
+    products: [
+      {
+        id: "ch-1",
+        name: "So Kate 120",
+        brand: "Christian Louboutin",
+        price: "AED 2,800",
+        images: ["/images/products/chaussures/louboutin/femme/so-kate-120-black.jpg"],
+        condition: "Très bon" as const,
+        certified: true,
+        gender: "femme" as const,
+        size: "38",
+        category: "chaussure"
+      },
+      {
+        id: "ch-2",
+        name: "Hangisi Satin",
+        brand: "Manolo Blahnik",
+        price: "AED 3,200",
+        images: ["/images/products/chaussures/manoloblahnik/femme/hangisi-satin-blue.jpg"],
+        condition: "Excellent" as const,
+        certified: true,
+        gender: "femme" as const,
+        size: "37",
+        category: "chaussure"
+      },
+      {
+        id: "ch-3",
+        name: "Romy 100",
+        brand: "Jimmy Choo",
+        price: "AED 2,400",
+        images: ["/images/products/chaussures/jimmychoo/femme/romy-100-nude.jpg"],
+        condition: "Comme neuf" as const,
+        certified: true,
+        gender: "femme" as const,
+        size: "39",
+        category: "chaussure"
+      },
+      {
+        id: "ch-4",
+        name: "Plexi 105",
+        brand: "Gianvito Rossi",
+        price: "AED 2,600",
+        images: ["/images/products/chaussures/gianvitorossi/femme/plexi-105-transparent.jpg"],
+        condition: "Très bon" as const,
+        certified: true,
+        gender: "femme" as const,
+        size: "38",
+        category: "chaussure"
+      },
+      {
+        id: "ch-5",
+        name: "Two-Tone Slingback",
+        brand: "Chanel",
+        price: "AED 3,800",
+        images: ["/images/products/chaussures/chanel/femme/two-tone-slingback-beige.jpg"],
+        condition: "Excellent" as const,
+        certified: true,
+        gender: "femme" as const,
+        size: "37.5",
+        category: "chaussure"
+      }
+    ]
   },
-  {
-    id: '5',
-    brand: 'Bottega Veneta',
-    name: 'Jodie Mini Intrecciato',
-    price: 'AED 6,200',
-    condition: 'Comme neuf',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=400'],
-    category: 'notre-selection',
-    gender: 'femme',
-    size: 'Mini',
-    isFavorite: false
+  "pret-a-porter": {
+    title: "Prêt-à-porter de Créateurs",
+    description: "Les pièces mode les plus tendances et intemporelles",
+    products: [
+      {
+        id: "pp-1",
+        name: "Tweed Jacket",
+        brand: "Chanel",
+        price: "AED 15,000",
+        images: ["/images/products/pret-a-porter/chanel/femme/tweed-jacket-pink.jpg"],
+        condition: "Excellent" as const,
+        certified: true,
+        gender: "femme" as const,
+        size: "38",
+        category: "vêtement"
+      },
+      {
+        id: "pp-2",
+        name: "Bar Jacket",
+        brand: "Dior",
+        price: "AED 12,500",
+        images: ["/images/products/pret-a-porter/dior/femme/bar-jacket-navy.jpg"],
+        condition: "Comme neuf" as const,
+        certified: true,
+        gender: "femme" as const,
+        size: "40",
+        category: "vêtement"
+      },
+      {
+        id: "pp-3",
+        name: "Cashmere Coat",
+        brand: "Hermès",
+        price: "AED 8,500",
+        images: ["/images/products/pret-a-porter/hermes/homme/cashmere-coat-camel.jpg"],
+        condition: "Très bon" as const,
+        certified: true,
+        gender: "homme" as const,
+        size: "50",
+        category: "vêtement"
+      },
+      {
+        id: "pp-4",
+        name: "Silk Blouse",
+        brand: "Gucci",
+        price: "AED 2,800",
+        images: ["/images/products/pret-a-porter/gucci/femme/silk-blouse-floral.jpg"],
+        condition: "Excellent" as const,
+        certified: true,
+        gender: "femme" as const,
+        size: "M",
+        category: "vêtement"
+      },
+      {
+        id: "pp-5",
+        name: "Leather Jacket",
+        brand: "Louis Vuitton",
+        price: "AED 6,200",
+        images: ["/images/products/pret-a-porter/louisvuitton/homme/leather-jacket-black.jpg"],
+        condition: "Comme neuf" as const,
+        certified: true,
+        gender: "homme" as const,
+        size: "48",
+        category: "vêtement"
+      }
+    ]
   },
-
-  // Sacs à Main Iconiques
-  {
-    id: '6',
-    brand: 'Hermès',
-    name: 'Kelly 28 Epsom Noir',
-    price: 'AED 38,000',
-    condition: 'Excellent',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=400'],
-    category: 'sacs-iconiques',
-    gender: 'femme',
-    size: '28',
-    isFavorite: false
-  },
-  {
-    id: '7',
-    brand: 'Chanel',
-    name: '2.55 Reissue 226 Aged Calfskin',
-    price: 'AED 14,800',
-    condition: 'Très bon',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=400'],
-    category: 'sacs-iconiques',
-    gender: 'femme',
-    size: '226',
-    isFavorite: false
-  },
-  {
-    id: '8',
-    brand: 'Saint Laurent',
-    name: 'Sac de Jour Baby Grain de Poudre',
-    price: 'AED 4,900',
-    condition: 'Excellent',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?q=80&w=400'],
-    category: 'sacs-iconiques',
-    gender: 'femme',
-    size: 'Baby',
-    isFavorite: false
-  },
-  {
-    id: '9',
-    brand: 'Goyard',
-    name: 'St. Louis PM Goyardine',
-    price: 'AED 3,200',
-    condition: 'Bon',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1551698618-1dfe5d97d256?q=80&w=400'],
-    category: 'sacs-iconiques',
-    gender: 'femme',
-    size: 'PM',
-    isFavorite: false
-  },
-  {
-    id: '10',
-    brand: 'Celine',
-    name: 'Belt Bag Micro Grained Calfskin',
-    price: 'AED 5,500',
-    condition: 'Comme neuf',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=400'],
-    category: 'sacs-iconiques',
-    gender: 'femme',
-    size: 'Micro',
-    isFavorite: false
-  },
-
-  // Prêt-à-porter de Créateurs
-  {
-    id: '11',
-    brand: 'Brunello Cucinelli',
-    name: 'Cashmere Turtleneck Sweater',
-    price: 'AED 2,800',
-    originalPrice: 'AED 3,200',
-    condition: 'Excellent',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1434389677669-e08b4cac3105?q=80&w=400'],
-    category: 'pret-a-porter',
-    gender: 'homme',
-    size: 'L',
-    isFavorite: false
-  },
-  {
-    id: '12',
-    brand: 'Tom Ford',
-    name: 'Tailored Suit Black Wool',
-    price: 'AED 8,500',
-    condition: 'Comme neuf',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400'],
-    category: 'pret-a-porter',
-    gender: 'homme',
-    size: '50',
-    isFavorite: false
-  },
-  {
-    id: '13',
-    brand: 'The Row',
-    name: 'Margaux Coat Wool Cashmere',
-    price: 'AED 12,000',
-    condition: 'Très bon',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?q=80&w=400'],
-    category: 'pret-a-porter',
-    gender: 'femme',
-    size: 'M',
-    isFavorite: false
-  },
-  {
-    id: '14',
-    brand: 'Loro Piana',
-    name: 'Baby Cashmere Scarf',
-    price: 'AED 1,800',
-    condition: 'Excellent',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1434389677669-e08b4cac3105?q=80&w=400'],
-    category: 'pret-a-porter',
-    gender: 'femme',
-    isFavorite: false
-  },
-  {
-    id: '15',
-    brand: 'Ermenegildo Zegna',
-    name: 'Silk Tie Classic Pattern',
-    price: 'AED 450',
-    condition: 'Comme neuf',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400'],
-    category: 'pret-a-porter',
-    gender: 'homme',
-    isFavorite: false
-  },
-
-  // Chaussures de Luxe
-  {
-    id: '16',
-    brand: 'Christian Louboutin',
-    name: 'Pigalle 85 Patent Leather',
-    price: 'AED 2,200',
-    originalPrice: 'AED 2,800',
-    condition: 'Très bon',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=400'],
-    category: 'chaussures',
-    gender: 'femme',
-    size: '38',
-    isFavorite: false
-  },
-  {
-    id: '17',
-    brand: 'Manolo Blahnik',
-    name: 'Hangisi Satin Pumps',
-    price: 'AED 2,800',
-    condition: 'Excellent',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=400'],
-    category: 'chaussures',
-    gender: 'femme',
-    size: '37',
-    isFavorite: false
-  },
-  {
-    id: '18',
-    brand: 'John Lobb',
-    name: 'William Oxford Shoes Black',
-    price: 'AED 3,500',
-    condition: 'Comme neuf',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=400'],
-    category: 'chaussures',
-    gender: 'homme',
-    size: '42',
-    isFavorite: false
-  },
-  {
-    id: '19',
-    brand: 'Golden Goose',
-    name: 'Super-Star Sneakers Distressed',
-    price: 'AED 1,800',
-    condition: 'Très bon',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=400'],
-    category: 'chaussures',
-    gender: 'femme',
-    size: '39',
-    isFavorite: false
-  },
-  {
-    id: '20',
-    brand: 'Berluti',
-    name: 'Alessandro Leather Boots',
-    price: 'AED 4,200',
-    condition: 'Excellent',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=400'],
-    category: 'chaussures',
-    gender: 'homme',
-    size: '41',
-    isFavorite: false
-  },
-
-  // Bijoux Précieux
-  {
-    id: '21',
-    brand: 'Cartier',
-    name: 'Love Bracelet Yellow Gold',
-    price: 'AED 18,500',
-    condition: 'Excellent',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=400'],
-    category: 'bijoux',
-    gender: 'femme',
-    size: '17',
-    isFavorite: false
-  },
-  {
-    id: '22',
-    brand: 'Van Cleef & Arpels',
-    name: 'Alhambra Necklace Mother-of-Pearl',
-    price: 'AED 12,000',
-    condition: 'Comme neuf',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=400'],
-    category: 'bijoux',
-    gender: 'femme',
-    isFavorite: false
-  },
-  {
-    id: '23',
-    brand: 'Tiffany & Co.',
-    name: 'Setting Engagement Ring 1.5ct',
-    price: 'AED 25,000',
-    condition: 'Excellent',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=400'],
-    category: 'bijoux',
-    gender: 'femme',
-    size: '54',
-    isFavorite: false
-  },
-  {
-    id: '24',
-    brand: 'Bulgari',
-    name: 'B.zero1 Ring White Gold',
-    price: 'AED 8,500',
-    condition: 'Très bon',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=400'],
-    category: 'bijoux',
-    gender: 'femme',
-    size: '52',
-    isFavorite: false
-  },
-  {
-    id: '25',
-    brand: 'David Yurman',
-    name: 'Cable Classic Bracelet Sterling Silver',
-    price: 'AED 3,200',
-    condition: 'Excellent',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=400'],
-    category: 'bijoux',
-    gender: 'homme',
-    size: 'M',
-    isFavorite: false
-  },
-
-  // Accessoires Indispensables
-  {
-    id: '26',
-    brand: 'Hermès',
-    name: 'Carré 90 Silk Scarf',
-    price: 'AED 1,200',
-    condition: 'Excellent',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=400'],
-    category: 'accessoires',
-    gender: 'femme',
-    isFavorite: false
-  },
-  {
-    id: '27',
-    brand: 'Ray-Ban',
-    name: 'Aviator Classic Gold Frame',
-    price: 'AED 450',
-    originalPrice: 'AED 580',
-    condition: 'Très bon',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=400'],
-    category: 'accessoires',
-    gender: 'homme',
-    isFavorite: false
-  },
-  {
-    id: '28',
-    brand: 'Gucci',
-    name: 'GG Marmont Belt Leather',
-    price: 'AED 1,800',
-    condition: 'Comme neuf',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=400'],
-    category: 'accessoires',
-    gender: 'femme',
-    size: '85',
-    isFavorite: false
-  },
-  {
-    id: '29',
-    brand: 'Louis Vuitton',
-    name: 'Multiple Wallet Damier Graphite',
-    price: 'AED 1,200',
-    condition: 'Excellent',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=400'],
-    category: 'accessoires',
-    gender: 'homme',
-    isFavorite: false
-  },
-  {
-    id: '30',
-    brand: 'Bottega Veneta',
-    name: 'Intrecciato Card Case',
-    price: 'AED 850',
-    condition: 'Très bon',
-    certified: true,
-    images: ['https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=400'],
-    category: 'accessoires',
-    gender: 'femme',
-    isFavorite: false
+  "accessoires": {
+    title: "Accessoires Indispensables",
+    description: "Les accessoires iconiques qui subliment votre style",
+    products: [
+      {
+        id: "ac-1",
+        name: "Carré Silk Scarf",
+        brand: "Hermès",
+        price: "AED 1,200",
+        images: ["/images/products/accessoires/hermes/femme/carre-silk-equestrian.jpg"],
+        condition: "Excellent" as const,
+        certified: true,
+        gender: "femme" as const,
+        category: "accessoire"
+      },
+      {
+        id: "ac-2",
+        name: "Quilted Sunglasses",
+        brand: "Chanel",
+        price: "AED 1,800",
+        images: ["/images/products/accessoires/chanel/femme/sunglasses-quilted-black.jpg"],
+        condition: "Comme neuf" as const,
+        certified: true,
+        gender: "femme" as const,
+        category: "accessoire"
+      },
+      {
+        id: "ac-3",
+        name: "Passport Holder",
+        brand: "Goyard",
+        price: "AED 850",
+        images: ["/images/products/accessoires/goyard/homme/passport-holder-black.jpg"],
+        condition: "Très bon" as const,
+        certified: true,
+        gender: "homme" as const,
+        category: "accessoire"
+      },
+      {
+        id: "ac-4",
+        name: "Initiales Belt",
+        brand: "Louis Vuitton",
+        price: "AED 1,500",
+        images: ["/images/products/accessoires/louisvuitton/homme/belt-initiales-damier.jpg"],
+        condition: "Excellent" as const,
+        certified: true,
+        gender: "homme" as const,
+        category: "accessoire"
+      },
+      {
+        id: "ac-5",
+        name: "Horsebit Loafers",
+        brand: "Gucci",
+        price: "AED 2,200",
+        images: ["/images/products/accessoires/gucci/homme/horsebit-loafers-brown.jpg"],
+        condition: "Comme neuf" as const,
+        certified: true,
+        gender: "homme" as const,
+        category: "chaussure"
+      }
+    ]
   }
-]
+}
 
-// Organisation des produits par catégorie
+// Export compatible avec l'ancien format pour la homepage
 export const productCategories = {
-  'notre-selection': {
-    title: 'Notre Sélection',
-    description: 'Articles mis en avant par notre équipe',
-    products: mockProducts.filter(p => p.category === 'notre-selection')
-  },
-  'sacs-iconiques': {
-    title: 'Sacs à Main Iconiques',
-    description: 'Les modèles les plus recherchés et emblématiques',
-    products: mockProducts.filter(p => p.category === 'sacs-iconiques')
-  },
-  'pret-a-porter': {
-    title: 'Prêt-à-porter de Créateurs',
-    description: 'Vêtements de marques de luxe',
-    products: mockProducts.filter(p => p.category === 'pret-a-porter')
-  },
-  'chaussures': {
-    title: 'Chaussures de Luxe',
-    description: 'Escarpins, sneakers, bottes, etc.',
-    products: mockProducts.filter(p => p.category === 'chaussures')
-  },
-  'bijoux': {
-    title: 'Bijoux Précieux',
-    description: 'Colliers, bracelets, bagues (hors montres)',
-    products: mockProducts.filter(p => p.category === 'bijoux')
-  },
-  'accessoires': {
-    title: 'Accessoires Indispensables',
-    description: 'Foulards, ceintures, lunettes de soleil, petite maroquinerie',
-    products: mockProducts.filter(p => p.category === 'accessoires')
-  }
+  'notre-selection': mockProducts["notre-selection"],
+  'sacs-iconiques': mockProducts["sacs-iconiques"],
+  'bijoux': mockProducts["bijoux"],
+  'chaussures': mockProducts["chaussures"],
+  'pret-a-porter': mockProducts["pret-a-porter"],
+  'accessoires': mockProducts["accessoires"]
 }

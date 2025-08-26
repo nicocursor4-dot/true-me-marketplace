@@ -41,55 +41,8 @@ export default function Home() {
     <main className="min-h-screen bg-gradient-to-b from-white to-trueme-cream/20">
       <TrueMeNavbar />
       
-      {/* Hero Section Marketplace */}
-      <section className="relative px-4 pt-32 pb-16 md:pt-40 md:pb-20">
-        <div className="max-w-6xl mx-auto text-center relative z-10">
-          <div className="mb-8 fade-in">
-            <div className="inline-flex items-center gap-2 bg-trueme-gold/20 rounded-full px-4 py-2 mb-6">
-              <ShoppingBag className="w-5 h-5 text-trueme-gold" />
-              <span className="text-trueme-gold font-semibold text-sm tracking-wide uppercase">
-                Marketplace de Luxe
-              </span>
-            </div>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-trueme mb-6">
-              Découvrez l'Excellence
-              <span className="block text-trueme-gold font-normal mt-2">du Luxe Authentique</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-trueme-light max-w-4xl mx-auto leading-relaxed">
-              Une sélection exceptionnelle de pièces certifiées des plus grandes maisons de luxe. 
-              Chaque article raconte une histoire d'excellence.
-            </p>
-          </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 fade-in" style={{animationDelay: '0.2s'}}>
-            <div className="bg-white/50 backdrop-blur-sm rounded-2xl p-6 border border-trueme-gold/10">
-              <div className="text-3xl font-bold text-trueme-gold mb-2">500+</div>
-              <p className="text-trueme-light text-sm">Pièces certifiées</p>
-            </div>
-            <div className="bg-white/50 backdrop-blur-sm rounded-2xl p-6 border border-trueme-gold/10">
-              <div className="text-3xl font-bold text-trueme-gold mb-2">50+</div>
-              <p className="text-trueme-light text-sm">Marques de luxe</p>
-            </div>
-            <div className="bg-white/50 backdrop-blur-sm rounded-2xl p-6 border border-trueme-gold/10">
-              <div className="text-3xl font-bold text-trueme-gold mb-2">98%</div>
-              <p className="text-trueme-light text-sm">Satisfaction</p>
-            </div>
-            <div className="bg-white/50 backdrop-blur-sm rounded-2xl p-6 border border-trueme-gold/10">
-              <div className="text-3xl font-bold text-trueme-gold mb-2">24h</div>
-              <p className="text-trueme-light text-sm">Support VIP</p>
-            </div>
-          </div>
-        </div>
-        
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-trueme-gold/5 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-48 h-48 bg-trueme-gold/5 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
-        </div>
-      </section>
-
-      {/* Mini Navigation Interne */}
-      <section className="px-4 pb-8">
+      {/* Mini Navigation Interne - Directement après navbar */}
+      <section className="px-4 pt-32 pb-8 md:pt-40">
         <div className="max-w-6xl mx-auto">
           <GenderFilter 
             selectedGender={selectedGender}
