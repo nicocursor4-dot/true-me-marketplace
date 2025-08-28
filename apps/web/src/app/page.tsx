@@ -82,8 +82,8 @@ export default function Home() {
       </section>
 
       {/* Categories de Produits */}
-      <section className="px-4 pb-20">
-        <div className="max-w-7xl mx-auto space-y-16">
+      <section className="px-4 pb-20 overflow-visible">
+        <div className="max-w-7xl mx-auto space-y-20 overflow-visible">
           
           {/* Notre Sélection */}
           <CategorySlider

@@ -78,19 +78,20 @@ const CategorySlider: React.FC<CategorySliderProps> = ({
       </div>
 
       {/* Products Slider */}
-      <div className="relative">
+      <div className="relative overflow-visible">
         <div
           ref={scrollRef}
-          className="flex gap-4 overflow-x-auto scrollbar-hide pb-8 px-2"
+          className="flex gap-4 overflow-x-auto scrollbar-hide pb-12 px-4 py-4 -mx-4"
           style={{
             scrollSnapType: 'x mandatory',
-            WebkitOverflowScrolling: 'touch'
+            WebkitOverflowScrolling: 'touch',
+            overflowY: 'visible'
           }}
         >
           {products.map((product) => (
             <div
               key={product.id}
-              className="flex-none w-[280px] md:w-[300px]"
+              className="flex-none w-[280px] md:w-[300px] px-2"
               style={{ scrollSnapAlign: 'start' }}
             >
               <ProductCard
