@@ -136,7 +136,7 @@ const TrueMeNavbar = () => {
             {/* Bouton Vendre mobile (header) */}
             <Link
               href="/vendre"
-              className="bg-trueme-gold text-black font-semibold px-3 py-1.5 text-xs rounded-full hover:bg-trueme-gold/90 transition-colors flex items-center gap-1 lg:hidden"
+              className="bg-gradient-to-r from-trueme-gold to-trueme-gold/80 text-black font-semibold px-3 py-1.5 text-xs rounded-full hover:from-trueme-gold/90 hover:to-trueme-gold/70 transition-all duration-300 flex items-center gap-1 lg:hidden"
             >
               <ShoppingBag className="w-3 h-3" />
               Vendre
@@ -169,7 +169,7 @@ const TrueMeNavbar = () => {
             {/* Bouton Vendre pour mobile */}
             <Link
               href="/vendre"
-              className="bg-gradient-to-r from-trueme-gold to-trueme-gold/80 text-black font-bold text-xl px-8 py-4 rounded-full transition-all duration-300 shadow-lg flex items-center gap-3 justify-center mx-auto w-fit"
+              className="bg-gradient-to-r from-trueme-gold to-trueme-gold/80 text-black font-bold text-xl px-8 py-4 rounded-full hover:from-trueme-gold/90 hover:to-trueme-gold/70 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-3 justify-center mx-auto w-fit"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <ShoppingBag className="w-6 h-6" />

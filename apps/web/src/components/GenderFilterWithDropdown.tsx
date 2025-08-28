@@ -215,11 +215,11 @@ const GenderFilterWithDropdown: React.FC<GenderFilterProps> = ({
             {hasDropdown && hoveredCategory === option.key && (
               <div className="hidden lg:block">
                 <div 
-                  className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 z-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 z-[9999] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   onMouseEnter={() => setHoveredCategory(option.key)}
                   onMouseLeave={() => setHoveredCategory(null)}
                 >
-                  <div className="bg-white/95 backdrop-blur-lg rounded-lg shadow-xl border border-trueme-gold/20 p-6 min-w-[600px] max-w-4xl">
+                  <div className="bg-white/95 backdrop-blur-lg rounded-lg shadow-xl border border-trueme-gold/20 p-6 min-w-[600px] max-w-4xl relative z-[9999]">
                     <div className="grid grid-cols-2 xl:grid-cols-3 gap-6">
                       {Object.entries(categoryMenus[option.key as keyof typeof categoryMenus] || {}).map(([categoryName, items]) => (
                         <div key={categoryName} className="space-y-3">

@@ -44,7 +44,7 @@ const CategorySlider: React.FC<CategorySliderProps> = ({
   }
 
   return (
-    <section className="py-8 sm:py-12 px-2 sm:px-4 lg:px-8 bg-gradient-to-br from-white to-trueme-gold/5 overflow-visible">
+    <section className="py-8 sm:py-12 px-2 sm:px-4 lg:px-8 overflow-visible">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-8 gap-4">
           <div className="px-2 sm:px-0">
@@ -54,7 +54,7 @@ const CategorySlider: React.FC<CategorySliderProps> = ({
           
           <Link 
             href={`/marketplace/${categoryKey}`}
-            className="bg-trueme text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full hover:bg-trueme-gold transition-colors duration-300 font-semibold shadow-lg hover:shadow-xl text-sm sm:text-base whitespace-nowrap mx-2 sm:mx-0"
+            className="bg-gradient-to-r from-trueme-gold to-trueme-gold/80 text-black px-4 sm:px-6 py-2 sm:py-3 rounded-full hover:from-trueme-gold/90 hover:to-trueme-gold/70 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl text-sm sm:text-base whitespace-nowrap mx-2 sm:mx-0"
           >
             Voir tout
           </Link>
