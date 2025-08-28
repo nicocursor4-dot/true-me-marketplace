@@ -185,76 +185,87 @@ const GenderFilterWithDropdown: React.FC<GenderFilterProps> = ({
   }
 
   return (
-    <div className={`relative flex items-center justify-center space-x-8 py-4 ${className}`}>
-      {genderOptions.map((option, index) => (
-        <React.Fragment key={option.key}>
+    <div className={`flex flex-wrap items-center justify-center gap-2 sm:gap-4 px-2 sm:px-4 py-4 sm:py-6 bg-white/50 backdrop-blur-sm border-b border-trueme-gold/20 ${className}`}>
+      {genderOptions.map((option) => {
+        const isActive = selectedGender === option.key
+        const hasDropdown = option.key !== 'all'
+        
+        return (
           <div 
-            className="relative"
-            onMouseEnter={() => setHoveredCategory(option.key)}
-            onMouseLeave={() => {
-              // Delay pour permettre la navigation vers le menu
-              setTimeout(() => {
-                setHoveredCategory(null)
-              }, 150)
-            }}
+            key={option.key}
+            className="relative group"
+            onMouseEnter={() => hasDropdown && setHoveredCategory(option.key)}
+            onMouseLeave={() => setHoveredCategory(null)}
           >
             <button
               onClick={() => handleGenderClick(option.key)}
-              className={`text-sm md:text-base font-medium tracking-[0.15em] transition-all duration-300 hover:text-trueme-gold ${
-                selectedGender === option.key
-                  ? 'text-trueme-gold border-b-2 border-trueme-gold pb-1'
-                  : 'text-trueme hover:scale-105'
-              }`}
+              className={`
+                px-3 py-2 sm:px-6 sm:py-3 rounded-full text-xs sm:text-base font-medium transition-all duration-300 ease-in-out whitespace-nowrap
+                ${
+                  isActive
+                    ? 'bg-trueme text-white shadow-lg transform scale-105'
+                    : 'bg-white/80 text-trueme border border-trueme/20 hover:border-trueme hover:bg-trueme/5 hover:shadow-md'
+                }
+              `}
             >
               {option.label}
             </button>
 
-            {/* Dropdown Menu */}
-            {hoveredCategory === option.key && option.key !== 'all' && (
-              <div 
-                data-dropdown-menu
-                className="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 w-screen max-w-6xl bg-white shadow-2xl border border-trueme-gold/30 rounded-lg z-50 transition-all duration-300 ease-out"
-                onMouseEnter={() => setHoveredCategory(option.key)}
-                onMouseLeave={() => setHoveredCategory(null)}
-              >
-                <div className="p-8 bg-gradient-to-br from-white to-gray-50/30">
-                  <div className={`grid ${option.key === 'enfant' ? 'grid-cols-3' : 'grid-cols-4'} gap-8`}>
-                    {Object.entries(categoryMenus[option.key as keyof typeof categoryMenus]).map(([categoryName, items]) => (
-                      <div key={categoryName}>
-                        <h3 className="font-bold text-black mb-4 uppercase tracking-wide text-sm border-b border-trueme-gold/30 pb-2">
-                          {categoryName === 'vetements' ? 'Vêtements' :
-                           categoryName === 'chaussures' ? 'Chaussures' :
-                           categoryName === 'sacs' ? 'Sacs' :
-                           categoryName === 'accessoires' ? 'Accessoires' :
-                           categoryName === 'fille' ? 'Fille' :
-                           categoryName === 'garcon' ? 'Garçon' :
-                           categoryName === 'bebe' ? 'Bébé' :
-                           categoryName}
-                        </h3>
-                        <ul className="space-y-3">
-                          {items.map((item, index) => (
-                            <li key={index}>
-                              <Link
-                                href={`/marketplace/${option.key}?category=${categoryName}&subcategory=${item.name.toLowerCase().replace(/\s+/g, '-').replace(/[àâä]/g, 'a').replace(/[éèêë]/g, 'e').replace(/[îï]/g, 'i').replace(/[ôö]/g, 'o').replace(/[ùûü]/g, 'u').replace(/[ç]/g, 'c').replace(/[&]/g, '').replace(/[œ]/g, 'oe')}`}
-                                className="text-gray-700 hover:text-trueme-gold hover:font-medium transition-all duration-200 text-sm block py-1 hover:pl-2 hover:border-l-2 hover:border-trueme-gold"
-                              >
-                                {item.name}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
+            {/* Desktop Dropdown Menu */}
+            {hasDropdown && hoveredCategory === option.key && (
+              <div className="hidden lg:block">
+                <div 
+                  className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 z-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  onMouseEnter={() => setHoveredCategory(option.key)}
+                  onMouseLeave={() => setHoveredCategory(null)}
+                >
+                  <div className="bg-white/95 backdrop-blur-lg rounded-lg shadow-xl border border-trueme-gold/20 p-6 min-w-[600px] max-w-4xl">
+                    <div className="grid grid-cols-2 xl:grid-cols-3 gap-6">
+                      {Object.entries(categoryMenus[option.key as keyof typeof categoryMenus] || {}).map(([categoryName, items]) => (
+                        <div key={categoryName} className="space-y-3">
+                          <h4 className="font-semibold text-trueme text-sm xl:text-base capitalize border-b border-trueme-gold/30 pb-2">
+                            {categoryName}
+                          </h4>
+                          <ul className="space-y-1.5">
+                            {items.map((item) => (
+                              <li key={item.name}>
+                                <Link
+                                  href={`/marketplace/${option.key}?category=${categoryName}&subcategory=${encodeURIComponent(item.name)}`}
+                                  className="block text-xs xl:text-sm text-trueme/80 hover:text-trueme-gold transition-colors duration-200 py-1 hover:translate-x-1 transform transition-transform"
+                                  onClick={() => setHoveredCategory(null)}
+                                >
+                                  {item.name}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
             )}
           </div>
-          {index < genderOptions.length - 1 && (
-            <span className="text-trueme-gold/40 text-sm">|</span>
-          )}
-        </React.Fragment>
-      ))}
+        )
+      })}
+      
+      {/* Mobile Category Links - Only show when a gender is selected */}
+      {selectedGender !== 'all' && (
+        <div className="lg:hidden w-full mt-4">
+          <div className="flex flex-wrap gap-2 justify-center">
+            {Object.entries(categoryMenus[selectedGender as keyof typeof categoryMenus] || {}).map(([categoryName]) => (
+              <Link
+                key={categoryName}
+                href={`/marketplace/${selectedGender}?category=${categoryName}`}
+                className="px-3 py-1.5 text-xs font-medium bg-trueme-gold/10 text-trueme rounded-full border border-trueme-gold/30 hover:bg-trueme-gold/20 transition-colors capitalize"
+              >
+                {categoryName}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   )
 }

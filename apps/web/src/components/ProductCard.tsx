@@ -50,9 +50,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
   return (
     <Link href={`/marketplace/product/${product.id}`} className={`group block ${className}`}>
-      <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 ease-out overflow-hidden border border-gray-100 hover:border-trueme-gold/30 hover:-translate-y-1 transform">
+      <div className="bg-white rounded-xl sm:rounded-2xl shadow-md sm:shadow-lg hover:shadow-xl sm:hover:shadow-2xl transition-all duration-500 ease-out overflow-hidden border border-gray-100 hover:border-trueme-gold/30 hover:-translate-y-0.5 sm:hover:-translate-y-1 transform">
         {/* Image Container */}
-        <div className="relative aspect-[4/5] overflow-hidden bg-gray-50">
+        <div className="relative aspect-[4/5] sm:aspect-[4/5] overflow-hidden bg-gray-50">
           {!imageError ? (
             <img
               src={product.images[0]}
@@ -63,8 +63,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-trueme-gold/10 to-trueme-gold/5">
               <div className="text-center">
-                <div className="text-4xl text-trueme-gold mb-2">👜</div>
-                <p className="text-sm text-trueme-light">{product.brand}</p>
+                <div className="text-3xl sm:text-4xl text-trueme-gold mb-2">👜</div>
+                <p className="text-xs sm:text-sm text-trueme-light">{product.brand}</p>
               </div>
             </div>
           )}
@@ -72,58 +72,58 @@ const ProductCard: React.FC<ProductCardProps> = ({
           {/* Favorite Button */}
           <button
             onClick={handleFavoriteClick}
-            className={`absolute top-3 right-3 p-2 rounded-full backdrop-blur-sm transition-all duration-300 ${
+            className={`absolute top-2 sm:top-3 right-2 sm:right-3 p-1.5 sm:p-2 rounded-full backdrop-blur-sm transition-all duration-300 touch-manipulation ${
               product.isFavorite
                 ? 'bg-red-500/20 text-red-500'
                 : 'bg-white/20 text-white hover:bg-white/30'
             }`}
           >
             <Heart 
-              className={`w-4 h-4 ${product.isFavorite ? 'fill-current' : ''}`}
+              className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${product.isFavorite ? 'fill-current' : ''}`}
             />
           </button>
 
           {/* Certification Badge */}
           {product.certified && (
-            <div className="absolute top-3 left-3 bg-trueme-gold/90 text-black px-2 py-1 rounded-full flex items-center gap-1">
-              <CheckCircle className="w-3 h-3" />
-              <span className="text-xs font-medium">Certifié</span>
+            <div className="absolute top-2 sm:top-3 left-2 sm:left-3 bg-trueme-gold/90 text-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full flex items-center gap-0.5 sm:gap-1">
+              <CheckCircle className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
+              <span className="text-[10px] sm:text-xs font-medium">Certifié</span>
             </div>
           )}
 
           {/* Size Badge */}
           {product.size && (
-            <div className="absolute bottom-3 left-3 bg-black/60 text-white px-2 py-1 rounded text-xs font-medium">
+            <div className="absolute bottom-2 sm:bottom-3 left-2 sm:left-3 bg-black/60 text-white px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-[10px] sm:text-xs font-medium">
               Taille {product.size}
             </div>
           )}
         </div>
 
         {/* Product Info */}
-        <div className="p-4 space-y-2">
+        <div className="p-3 sm:p-4 space-y-1.5 sm:space-y-2">
           {/* Brand */}
-          <p className="text-sm font-medium text-trueme-gold tracking-wide uppercase">
+          <p className="text-xs sm:text-sm font-medium text-trueme-gold tracking-wide uppercase">
             {product.brand}
           </p>
 
           {/* Product Name */}
-          <h3 className="text-base font-semibold text-trueme line-clamp-2 group-hover:text-trueme-gold transition-colors duration-300">
+          <h3 className="text-sm sm:text-base font-semibold text-trueme line-clamp-2 group-hover:text-trueme-gold transition-colors duration-300 leading-tight">
             {product.name}
           </h3>
 
           {/* Condition */}
-          <p className={`text-sm font-medium ${getConditionColor(product.condition)}`}>
+          <p className={`text-xs sm:text-sm font-medium ${getConditionColor(product.condition)}`}>
             État : {product.condition}
           </p>
 
           {/* Price */}
-          <div className="flex items-center justify-between pt-2">
-            <div className="flex items-center gap-2">
-              <span className="text-lg font-bold text-trueme">
+          <div className="flex items-center justify-between pt-1.5 sm:pt-2">
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <span className="text-base sm:text-lg font-bold text-trueme">
                 {product.price}
               </span>
               {product.originalPrice && (
-                <span className="text-sm text-gray-400 line-through">
+                <span className="text-xs sm:text-sm text-gray-400 line-through">
                   {product.originalPrice}
                 </span>
               )}

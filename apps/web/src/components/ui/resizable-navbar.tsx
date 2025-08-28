@@ -91,7 +91,7 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         boxShadow: visible
           ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
           : "none",
-        width: visible ? "40%" : "100%",
+        width: visible ? "60%" : "100%",
         y: visible ? 20 : 0,
       }}
       transition={{
@@ -100,7 +100,7 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         damping: 50,
       }}
       style={{
-        minWidth: "800px",
+        minWidth: "320px",
       }}
       className={cn(
         "relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full bg-transparent px-4 py-2 lg:flex dark:bg-transparent",
@@ -143,11 +143,11 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
         boxShadow: visible
           ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
           : "none",
-        width: visible ? "90%" : "100%",
-        paddingRight: visible ? "12px" : "0px",
-        paddingLeft: visible ? "12px" : "0px",
-        borderRadius: visible ? "4px" : "2rem",
-        y: visible ? 20 : 0,
+        width: visible ? "95%" : "100%",
+        paddingRight: visible ? "8px" : "0px",
+        paddingLeft: visible ? "8px" : "0px",
+        borderRadius: visible ? "12px" : "2rem",
+        y: visible ? 10 : 0,
       }}
       transition={{
         type: "spring",
@@ -155,7 +155,7 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
         damping: 50,
       }}
       className={cn(
-        "relative z-40 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-transparent px-0 py-2 lg:hidden",
+        "relative z-40 mx-auto flex w-full max-w-[calc(100vw-1rem)] flex-col items-center justify-between bg-transparent px-2 py-2 lg:hidden",
         visible && "bg-white/80 dark:bg-neutral-950/80",
         className,
       )}
@@ -190,20 +190,52 @@ export const MobileNavMenu = ({
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className={cn(
-            "w-full rounded-full p-2 fixed z-[9999] top-2 inset-x-0 mx-auto border border-transparent dark:border-white/[0.2] group-hover:shadow-sm transition duration-200",
-            isOpen
-              ? "bg-white/90 backdrop-blur-lg shadow-lg border-gray-200/50"
-              : "bg-white/20 backdrop-blur-lg border-white/20",
-            className
-          )}
-        >
-          {children}
-        </motion.div>
+        <>
+          {/* Overlay */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 z-[9998]"
+            onClick={onClose}
+          />
+          
+          {/* Full screen menu */}
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{
+              type: "spring",
+              stiffness: 300,
+              damping: 30
+            }}
+            className={cn(
+              "fixed right-0 top-0 h-screen w-screen bg-white z-[9999] flex flex-col",
+              className
+            )}
+          >
+            {/* Header with logo and close */}
+            <div className="flex items-center justify-between p-4 border-b border-trueme-gold/20">
+              <img 
+                src="/images/logos/trueme-logo.png" 
+                alt="True Me Logo" 
+                className="h-12 w-12 object-contain"
+              />
+              <button
+                onClick={onClose}
+                className="p-2 hover:bg-trueme-gold/10 rounded-full transition-colors"
+              >
+                <IconX className="h-6 w-6 text-trueme" />
+              </button>
+            </div>
+            
+            {/* Menu content */}
+            <div className="flex-1 flex flex-col justify-center px-8 space-y-6">
+              {children}
+            </div>
+          </motion.div>
+        </>
       )}
     </AnimatePresence>
   );
@@ -216,10 +248,17 @@ export const MobileNavToggle = ({
   isOpen: boolean;
   onClick: () => void;
 }) => {
-  return isOpen ? (
-    <IconX className="text-black dark:text-white" onClick={onClick} />
-  ) : (
-    <IconMenu2 className="text-black dark:text-white" onClick={onClick} />
+  return (
+    <button
+      onClick={onClick}
+      className="p-2 hover:bg-trueme-gold/10 rounded-full transition-colors relative z-[10000]"
+    >
+      {isOpen ? (
+        <IconX className="h-6 w-6 text-trueme" />
+      ) : (
+        <IconMenu2 className="h-6 w-6 text-trueme" />
+      )}
+    </button>
   );
 };
 

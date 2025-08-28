@@ -116,6 +116,7 @@ const TrueMeNavbar = () => {
 
   return (
     <Navbar>
+      {/* Desktop Navigation */}
       <NavBody className="bg-white/20 backdrop-blur-lg border border-white/30 shadow-lg">
         <TrueMeLogo />
         <NavItems items={navItems} className="text-trueme" />
@@ -125,53 +126,75 @@ const TrueMeNavbar = () => {
         </div>
       </NavBody>
 
+      {/* Mobile Navigation */}
       <MobileNav className="bg-white/20 backdrop-blur-lg border border-white/30 shadow-lg">
         <MobileNavHeader>
-          <TrueMeLogo />
-          <MobileNavToggle
-            isOpen={isMobileMenuOpen}
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          />
+          <div className="flex items-center">
+            <TrueMeLogo />
+          </div>
+          <div className="flex items-center gap-2">
+            {/* Bouton Vendre mobile (header) */}
+            <Link
+              href="/vendre"
+              className="bg-trueme-gold text-black font-semibold px-3 py-1.5 text-xs rounded-full hover:bg-trueme-gold/90 transition-colors flex items-center gap-1 lg:hidden"
+            >
+              <ShoppingBag className="w-3 h-3" />
+              Vendre
+            </Link>
+            <MobileNavToggle
+              isOpen={isMobileMenuOpen}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            />
+          </div>
         </MobileNavHeader>
 
         <MobileNavMenu
           isOpen={isMobileMenuOpen}
           onClose={() => setIsMobileMenuOpen(false)}
-          className="bg-white/95 backdrop-blur-xl border border-trueme-gold/20"
+          className="bg-white"
         >
-          {navItems.map((item) => (
-            <Link
-              key={item.name}
-              href={item.link}
-              className="text-trueme text-lg font-medium hover:text-trueme-gold transition-colors duration-200"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {item.name}
-            </Link>
-          ))}
-          
-          {/* Bouton Vendre pour mobile */}
-          <Link
-            href="/vendre"
-            className="bg-gradient-to-r from-trueme-gold to-trueme-gold/80 text-black font-semibold px-6 py-3 rounded-full transition-all duration-300 shadow-lg flex items-center gap-2 justify-center my-4"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            <ShoppingBag className="w-4 h-4" />
-            Vendre
-          </Link>
-          
-          <div className="border-t border-trueme-gold/20 pt-4 mt-4">
-            <p className="text-trueme/60 text-sm mb-3 font-medium">Mon Compte</p>
-            {accountItems.map((item) => (
+          {/* Navigation principale */}
+          <div className="space-y-8">
+            {navItems.map((item) => (
               <Link
                 key={item.name}
-                href={item.href}
-                className="block text-trueme text-base hover:text-trueme-gold transition-colors duration-200 mb-2"
+                href={item.link}
+                className="text-trueme text-2xl font-medium hover:text-trueme-gold transition-colors duration-300 block text-center"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.name}
               </Link>
             ))}
+            
+            {/* Bouton Vendre pour mobile */}
+            <Link
+              href="/vendre"
+              className="bg-gradient-to-r from-trueme-gold to-trueme-gold/80 text-black font-bold text-xl px-8 py-4 rounded-full transition-all duration-300 shadow-lg flex items-center gap-3 justify-center mx-auto w-fit"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <ShoppingBag className="w-6 h-6" />
+              Vendre
+            </Link>
+          </div>
+          
+          {/* Séparateur */}
+          <div className="border-t border-trueme-gold/20 my-8"></div>
+          
+          {/* Section compte */}
+          <div className="space-y-6">
+            <p className="text-trueme/60 text-lg font-medium text-center">Mon Compte</p>
+            <div className="space-y-4">
+              {accountItems.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="block text-trueme text-lg hover:text-trueme-gold transition-colors duration-300 text-center"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
           </div>
         </MobileNavMenu>
       </MobileNav>

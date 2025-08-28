@@ -7,16 +7,18 @@ import ProductCard, { Product } from './ProductCard'
 
 interface CategorySliderProps {
   title: string
+  subtitle?: string
+  categoryKey: string
   products: Product[]
-  categoryLink: string
   onToggleFavorite?: (productId: string) => void
   className?: string
 }
 
 const CategorySlider: React.FC<CategorySliderProps> = ({
   title,
+  subtitle,
+  categoryKey,
   products,
-  categoryLink,
   onToggleFavorite,
   className = ""
 }) => {
@@ -42,74 +44,30 @@ const CategorySlider: React.FC<CategorySliderProps> = ({
   }
 
   return (
-    <section className={`py-8 ${className}`}>
-      {/* Category Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-4">
-          <h2 className="text-2xl md:text-3xl font-light text-trueme tracking-tight">
-            {title}
-          </h2>
-          
-          {/* Desktop Navigation Arrows */}
-          <div className="hidden lg:flex items-center gap-2">
-            <button
-              onClick={() => scroll('left')}
-              className="p-2 rounded-full bg-white/80 hover:bg-white shadow-sm hover:shadow-md transition-all duration-300 group"
-            >
-              <ChevronLeft className="w-5 h-5 text-trueme group-hover:text-trueme-gold transition-colors" />
-            </button>
-            <button
-              onClick={() => scroll('right')}
-              className="p-2 rounded-full bg-white/80 hover:bg-white shadow-sm hover:shadow-md transition-all duration-300 group"
-            >
-              <ChevronRight className="w-5 h-5 text-trueme group-hover:text-trueme-gold transition-colors" />
-            </button>
+    <section className="py-8 sm:py-12 px-2 sm:px-4 lg:px-8 bg-gradient-to-br from-white to-trueme-gold/5 overflow-visible">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-8 gap-4">
+          <div className="px-2 sm:px-0">
+            <h2 className="text-2xl sm:text-3xl font-bold text-trueme mb-1 sm:mb-2">{title}</h2>
+            {subtitle && <p className="text-trueme-light text-base sm:text-lg">{subtitle}</p>}
           </div>
+          
+          <Link 
+            href={`/marketplace/${categoryKey}`}
+            className="bg-trueme text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full hover:bg-trueme-gold transition-colors duration-300 font-semibold shadow-lg hover:shadow-xl text-sm sm:text-base whitespace-nowrap mx-2 sm:mx-0"
+          >
+            Voir tout
+          </Link>
         </div>
-
-        {/* View All Link */}
-        <Link 
-          href={categoryLink}
-          className="text-trueme hover:text-trueme-gold transition-colors duration-300 flex items-center gap-2 text-sm font-medium"
-        >
-          Voir tout
-          <ArrowRight className="w-4 h-4" />
-        </Link>
-      </div>
-
-      {/* Products Slider */}
-      <div className="relative overflow-visible">
-        <div
-          ref={scrollRef}
-          className="flex gap-4 overflow-x-auto scrollbar-hide pb-12 px-4 py-4 -mx-4"
-          style={{
-            scrollSnapType: 'x mandatory',
-            WebkitOverflowScrolling: 'touch',
-            overflowY: 'visible'
-          }}
-        >
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="flex-none w-[280px] md:w-[300px] px-2"
-              style={{ scrollSnapAlign: 'start' }}
-            >
-              <ProductCard
-                product={product}
+        
+        <div className="overflow-visible px-2 sm:px-4 py-4 sm:py-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 lg:gap-6">
+            {products.map((product) => (
+              <ProductCard 
+                key={product.id} 
+                product={product} 
                 onToggleFavorite={onToggleFavorite}
-                className="h-full"
-              />
-            </div>
-          ))}
-        </div>
-
-        {/* Mobile Scroll Indicators */}
-        <div className="flex justify-center mt-4 lg:hidden">
-          <div className="flex gap-2">
-            {Array.from({ length: Math.ceil(products.length / 2) }).map((_, index) => (
-              <div
-                key={index}
-                className="w-2 h-2 rounded-full bg-trueme-gold/20"
+                className="w-full"
               />
             ))}
           </div>
