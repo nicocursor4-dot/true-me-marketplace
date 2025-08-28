@@ -19,144 +19,152 @@ const GenderFilterWithDropdown: React.FC<GenderFilterProps> = ({
   const categoryMenus = {
     homme: {
       vetements: [
-        { name: 'Nouveautés', subcategory: 'nouveautes' },
-        { name: 'Manteaux', subcategory: 'manteaux' },
-        { name: 'Trench-coats', subcategory: 'trench-coats' },
-        { name: 'Vestes', link: '/marketplace/homme/vestes' },
-        { name: 'Vestes en cuir', link: '/marketplace/homme/vestes-cuir' },
-        { name: 'Robes', link: '/marketplace/homme/robes' },
-        { name: 'Mailles', link: '/marketplace/homme/mailles' },
-        { name: 'Hauts', link: '/marketplace/homme/hauts' },
-        { name: 'Shorts', link: '/marketplace/homme/shorts' },
-        { name: 'Pantalons', link: '/marketplace/homme/pantalons' },
-        { name: 'Jeans', link: '/marketplace/homme/jeans' },
-        { name: 'Combinaisons', link: '/marketplace/homme/combinaisons' },
-        { name: 'Lingerie', link: '/marketplace/homme/lingerie' },
-        { name: 'Maillots de bain', link: '/marketplace/homme/maillots' },
-        { name: 'Tous les vêtements', link: '/marketplace/homme/vetements' }
+        { name: 'Nouveautés' },
+        { name: 'Costumes & Smoking' },
+        { name: 'Blazers & Vestes' },
+        { name: 'Manteaux & Trenchs' },
+        { name: 'Pulls & Mailles' },
+        { name: 'Chemises' },
+        { name: 'T-shirts & Polos' },
+        { name: 'Pantalons & Chinos' },
+        { name: 'Jeans & Denim' },
+        { name: 'Shorts' },
+        { name: 'Sous-vêtements' },
+        { name: 'Maillots de bain' },
+        { name: 'Tous les vêtements' }
       ],
       chaussures: [
-        { name: 'Nouveautés', link: '/marketplace/homme/chaussures/nouveautes' },
-        { name: 'Chaussure à talons', link: '/marketplace/homme/chaussures/talons' },
-        { name: 'Bottines', link: '/marketplace/homme/chaussures/bottines' },
-        { name: 'Bottes et bottines', link: '/marketplace/homme/chaussures/bottes' },
-        { name: 'Sandales', link: '/marketplace/homme/chaussures/sandales' },
-        { name: 'Espadrilles', link: '/marketplace/homme/chaussures/espadrilles' },
-        { name: 'Mules et sabots', link: '/marketplace/homme/chaussures/mules' },
-        { name: 'Baskets', link: '/marketplace/homme/chaussures/baskets' },
-        { name: 'Mocassine', link: '/marketplace/homme/chaussures/mocassins' },
-        { name: 'Derbies et richelieux', link: '/marketplace/homme/chaussures/derbies' },
-        { name: 'Toutes les chaussures', link: '/marketplace/homme/chaussures' }
+        { name: 'Nouveautés' },
+        { name: 'Sneakers' },
+        { name: 'Derbies & Richelieux' },
+        { name: 'Mocassins & Loafers' },
+        { name: 'Boots & Bottines' },
+        { name: 'Bottes' },
+        { name: 'Sandales' },
+        { name: 'Chaussures de sport' },
+        { name: 'Chaussures habillées' },
+        { name: 'Toutes les chaussures' }
       ],
       sacs: [
-        { name: 'Nouveautés', link: '/marketplace/homme/sacs/nouveautes' },
-        { name: 'Sacs à main', link: '/marketplace/homme/sacs/main' },
-        { name: 'Sacs portés épaule', link: '/marketplace/homme/sacs/epaule' },
-        { name: 'Cabas', link: '/marketplace/homme/sacs/cabas' },
-        { name: 'Sacs à bandoulière', link: '/marketplace/homme/sacs/bandouliere' },
-        { name: 'Pochettes', link: '/marketplace/homme/sacs/pochettes' },
-        { name: 'Sacs ceinture', link: '/marketplace/homme/sacs/ceinture' },
-        { name: 'Sacs à dos', link: '/marketplace/homme/sacs/dos' },
-        { name: 'Sacs de voyage', link: '/marketplace/homme/sacs/voyage' },
-        { name: 'Sacoches', link: '/marketplace/homme/sacs/sacoches' },
-        { name: 'Tous les sacs', link: '/marketplace/homme/sacs' }
+        { name: 'Nouveautés' },
+        { name: 'Sacs à dos' },
+        { name: 'Sacoches & Messagers' },
+        { name: 'Sacs de voyage' },
+        { name: 'Sacs de sport' },
+        { name: 'Pochettes homme' },
+        { name: 'Porte-documents' },
+        { name: 'Sacs ceinture' },
+        { name: 'Tous les sacs' }
       ],
       accessoires: [
-        { name: 'Nouveautés', link: '/marketplace/homme/accessoires/nouveautes' },
-        { name: 'Écharpes', link: '/marketplace/homme/accessoires/echarpes' },
-        { name: 'Carrés de soie', link: '/marketplace/homme/accessoires/carres' },
-        { name: 'Gants', link: '/marketplace/homme/accessoires/gants' },
-        { name: 'Chapeaux', link: '/marketplace/homme/accessoires/chapeaux' },
-        { name: 'Portefeuilles', link: '/marketplace/homme/accessoires/portefeuilles' },
-        { name: 'Ceintures', link: '/marketplace/homme/accessoires/ceintures' },
-        { name: 'Lunettes de soleil', link: '/marketplace/homme/accessoires/lunettes' },
-        { name: 'Petite maroquinerie', link: '/marketplace/homme/accessoires/maroquinerie' },
-        { name: 'Tous les accessoires', link: '/marketplace/homme/accessoires' }
+        { name: 'Nouveautés' },
+        { name: 'Montres' },
+        { name: 'Bijoux' },
+        { name: 'Ceintures' },
+        { name: 'Portefeuilles' },
+        { name: 'Cravates & Nœuds' },
+        { name: 'Foulards & Écharpes' },
+        { name: 'Lunettes' },
+        { name: 'Chapeaux & Casquettes' },
+        { name: 'Gants' },
+        { name: 'Boutons de manchette' },
+        { name: 'Tous les accessoires' }
       ]
     },
     femme: {
       vetements: [
-        { name: 'Nouveautés', link: '/marketplace/femme/nouveautes' },
-        { name: 'Manteaux', link: '/marketplace/femme/manteaux' },
-        { name: 'Trench-coats', link: '/marketplace/femme/trench-coats' },
-        { name: 'Vestes', link: '/marketplace/femme/vestes' },
-        { name: 'Vestes en cuir', link: '/marketplace/femme/vestes-cuir' },
-        { name: 'Robes', link: '/marketplace/femme/robes' },
-        { name: 'Mailles', link: '/marketplace/femme/mailles' },
-        { name: 'Hauts', link: '/marketplace/femme/hauts' },
-        { name: 'Shorts', link: '/marketplace/femme/shorts' },
-        { name: 'Pantalons', link: '/marketplace/femme/pantalons' },
-        { name: 'Jeans', link: '/marketplace/femme/jeans' },
-        { name: 'Combinaisons', link: '/marketplace/femme/combinaisons' },
-        { name: 'Lingerie', link: '/marketplace/femme/lingerie' },
-        { name: 'Maillots de bain', link: '/marketplace/femme/maillots' },
-        { name: 'Tous les vêtements', link: '/marketplace/femme/vetements' }
+        { name: 'Nouveautés' },
+        { name: 'Robes' },
+        { name: 'Manteaux & Trenchs' },
+        { name: 'Blazers & Vestes' },
+        { name: 'Pulls & Mailles' },
+        { name: 'Chemisiers & Tops' },
+        { name: 'T-shirts & Débardeurs' },
+        { name: 'Jupes' },
+        { name: 'Pantalons' },
+        { name: 'Jeans & Denim' },
+        { name: 'Shorts' },
+        { name: 'Combinaisons & Ensembles' },
+        { name: 'Lingerie & Sous-vêtements' },
+        { name: 'Maillots de bain' },
+        { name: 'Tous les vêtements' }
       ],
       chaussures: [
-        { name: 'Nouveautés', link: '/marketplace/femme/chaussures/nouveautes' },
-        { name: 'Chaussure à talons', link: '/marketplace/femme/chaussures/talons' },
-        { name: 'Bottines', link: '/marketplace/femme/chaussures/bottines' },
-        { name: 'Bottes et bottines', link: '/marketplace/femme/chaussures/bottes' },
-        { name: 'Sandales', link: '/marketplace/femme/chaussures/sandales' },
-        { name: 'Espadrilles', link: '/marketplace/femme/chaussures/espadrilles' },
-        { name: 'Mules et sabots', link: '/marketplace/femme/chaussures/mules' },
-        { name: 'Baskets', link: '/marketplace/femme/chaussures/baskets' },
-        { name: 'Mocassine', link: '/marketplace/femme/chaussures/mocassins' },
-        { name: 'Derbies et richelieux', link: '/marketplace/femme/chaussures/derbies' },
-        { name: 'Toutes les chaussures', link: '/marketplace/femme/chaussures' }
+        { name: 'Nouveautés' },
+        { name: 'Escarpins' },
+        { name: 'Sandales à talons' },
+        { name: 'Ballerines' },
+        { name: 'Mocassins & Loafers' },
+        { name: 'Sneakers' },
+        { name: 'Boots & Bottines' },
+        { name: 'Bottes' },
+        { name: 'Sandales plates' },
+        { name: 'Mules & Sabots' },
+        { name: 'Espadrilles' },
+        { name: 'Chaussures de sport' },
+        { name: 'Toutes les chaussures' }
       ],
       sacs: [
-        { name: 'Nouveautés', link: '/marketplace/femme/sacs/nouveautes' },
-        { name: 'Sacs à main', link: '/marketplace/femme/sacs/main' },
-        { name: 'Sacs portés épaule', link: '/marketplace/femme/sacs/epaule' },
-        { name: 'Cabas', link: '/marketplace/femme/sacs/cabas' },
-        { name: 'Sacs à bandoulière', link: '/marketplace/femme/sacs/bandouliere' },
-        { name: 'Pochettes', link: '/marketplace/femme/sacs/pochettes' },
-        { name: 'Sacs ceinture', link: '/marketplace/femme/sacs/ceinture' },
-        { name: 'Sacs à dos', link: '/marketplace/femme/sacs/dos' },
-        { name: 'Sacs de voyage', link: '/marketplace/femme/sacs/voyage' },
-        { name: 'Sacoches', link: '/marketplace/femme/sacs/sacoches' },
-        { name: 'Tous les sacs', link: '/marketplace/femme/sacs' }
+        { name: 'Nouveautés' },
+        { name: 'Sacs à main' },
+        { name: 'Sacs portés épaule' },
+        { name: 'Sacs à bandoulière' },
+        { name: 'Cabas & Tote bags' },
+        { name: 'Pochettes & Clutchs' },
+        { name: 'Sacs à dos' },
+        { name: 'Sacs ceinture' },
+        { name: 'Sacs de soirée' },
+        { name: 'Sacs de voyage' },
+        { name: 'Mini sacs' },
+        { name: 'Tous les sacs' }
       ],
       accessoires: [
-        { name: 'Nouveautés', link: '/marketplace/femme/accessoires/nouveautes' },
-        { name: 'Écharpes', link: '/marketplace/femme/accessoires/echarpes' },
-        { name: 'Carrés de soie', link: '/marketplace/femme/accessoires/carres' },
-        { name: 'Gants', link: '/marketplace/femme/accessoires/gants' },
-        { name: 'Chapeaux', link: '/marketplace/femme/accessoires/chapeaux' },
-        { name: 'Portefeuilles', link: '/marketplace/femme/accessoires/portefeuilles' },
-        { name: 'Ceintures', link: '/marketplace/femme/accessoires/ceintures' },
-        { name: 'Lunettes de soleil', link: '/marketplace/femme/accessoires/lunettes' },
-        { name: 'Petite maroquinerie', link: '/marketplace/femme/accessoires/maroquinerie' },
-        { name: 'Tous les accessoires', link: '/marketplace/femme/accessoires' }
+        { name: 'Nouveautés' },
+        { name: 'Bijoux' },
+        { name: 'Montres' },
+        { name: 'Foulards & Carrés' },
+        { name: 'Écharpes & Châles' },
+        { name: 'Ceintures' },
+        { name: 'Chapeaux & Bonnets' },
+        { name: 'Lunettes' },
+        { name: 'Gants' },
+        { name: 'Portefeuilles & Porte-monnaie' },
+        { name: 'Broches & Épingles' },
+        { name: 'Accessoires cheveux' },
+        { name: 'Tous les accessoires' }
       ]
     },
     enfant: {
       fille: [
-        { name: 'Nouveautés', link: '/marketplace/enfant/fille/nouveautes' },
-        { name: 'Robes', link: '/marketplace/enfant/fille/robes' },
-        { name: 'Hauts', link: '/marketplace/enfant/fille/hauts' },
-        { name: 'Pantalons', link: '/marketplace/enfant/fille/pantalons' },
-        { name: 'Chaussures', link: '/marketplace/enfant/fille/chaussures' },
-        { name: 'Accessoires', link: '/marketplace/enfant/fille/accessoires' },
-        { name: 'Tout pour fille', link: '/marketplace/enfant/fille' }
+        { name: 'Nouveautés' },
+        { name: 'Robes & Jupes' },
+        { name: 'Tops & T-shirts' },
+        { name: 'Pantalons & Leggings' },
+        { name: 'Manteaux & Vestes' },
+        { name: 'Pulls & Gilets' },
+        { name: 'Chaussures' },
+        { name: 'Accessoires' },
+        { name: 'Tout pour fille' }
       ],
       garcon: [
-        { name: 'Nouveautés', link: '/marketplace/enfant/garcon/nouveautes' },
-        { name: 'T-shirts', link: '/marketplace/enfant/garcon/tshirts' },
-        { name: 'Pantalons', link: '/marketplace/enfant/garcon/pantalons' },
-        { name: 'Vestes', link: '/marketplace/enfant/garcon/vestes' },
-        { name: 'Chaussures', link: '/marketplace/enfant/garcon/chaussures' },
-        { name: 'Accessoires', link: '/marketplace/enfant/garcon/accessoires' },
-        { name: 'Tout pour garçon', link: '/marketplace/enfant/garcon' }
+        { name: 'Nouveautés' },
+        { name: 'T-shirts & Polos' },
+        { name: 'Chemises' },
+        { name: 'Pantalons & Shorts' },
+        { name: 'Manteaux & Vestes' },
+        { name: 'Pulls & Sweats' },
+        { name: 'Chaussures' },
+        { name: 'Accessoires' },
+        { name: 'Tout pour garçon' }
       ],
       bebe: [
-        { name: 'Nouveautés', link: '/marketplace/enfant/bebe/nouveautes' },
-        { name: 'Bodies', link: '/marketplace/enfant/bebe/bodies' },
-        { name: 'Pyjamas', link: '/marketplace/enfant/bebe/pyjamas' },
-        { name: 'Chaussures', link: '/marketplace/enfant/bebe/chaussures' },
-        { name: 'Accessoires', link: '/marketplace/enfant/bebe/accessoires' },
-        { name: 'Tout pour bébé', link: '/marketplace/enfant/bebe' }
+        { name: 'Nouveautés' },
+        { name: 'Bodies & Grenouillères' },
+        { name: 'Pyjamas & Gigoteuses' },
+        { name: 'Robes & Ensembles' },
+        { name: 'Chaussons & Chaussures' },
+        { name: 'Bonnets & Accessoires' },
+        { name: 'Tout pour bébé' }
       ]
     }
   }
@@ -190,7 +198,7 @@ const GenderFilterWithDropdown: React.FC<GenderFilterProps> = ({
                 if (!menuElement?.matches(':hover')) {
                   setHoveredCategory(null)
                 }
-              }, 100)
+              }, 150)
             }}
           >
             <button
@@ -208,9 +216,11 @@ const GenderFilterWithDropdown: React.FC<GenderFilterProps> = ({
             {hoveredCategory === option.key && option.key !== 'all' && (
               <div 
                 data-dropdown-menu
-                className="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 w-screen max-w-6xl bg-white/95 backdrop-blur-xl shadow-2xl border border-trueme-gold/20 rounded-lg z-50"
+                className="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 w-screen max-w-6xl bg-white/98 backdrop-blur-xl shadow-2xl border border-trueme-gold/20 rounded-lg z-50 transition-all duration-300 ease-out"
                 onMouseEnter={() => setHoveredCategory(option.key)}
-                onMouseLeave={() => setHoveredCategory(null)}
+                onMouseLeave={() => {
+                  setTimeout(() => setHoveredCategory(null), 100)
+                }}
               >
                 <div className="p-8">
                   <div className={`grid ${option.key === 'enfant' ? 'grid-cols-3' : 'grid-cols-4'} gap-8`}>

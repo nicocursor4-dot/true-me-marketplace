@@ -49,8 +49,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
   }
 
   return (
-    <Link href={`/marketplace/product/${product.id}`} className={`group ${className}`}>
-      <div className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-trueme-gold/20">
+    <Link href={`/marketplace/product/${product.id}`} className={`group block ${className}`}>
+      <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 ease-out overflow-hidden border border-gray-100 hover:border-trueme-gold/30 hover:-translate-y-1 transform">
         {/* Image Container */}
         <div className="relative aspect-[4/5] overflow-hidden bg-gray-50">
           {!imageError ? (
