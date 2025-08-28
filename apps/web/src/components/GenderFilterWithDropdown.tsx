@@ -19,9 +19,9 @@ const GenderFilterWithDropdown: React.FC<GenderFilterProps> = ({
   const categoryMenus = {
     homme: {
       vetements: [
-        { name: 'Nouveautés', link: '/marketplace/homme/nouveautes' },
-        { name: 'Manteaux', link: '/marketplace/homme/manteaux' },
-        { name: 'Trench-coats', link: '/marketplace/homme/trench-coats' },
+        { name: 'Nouveautés', subcategory: 'nouveautes' },
+        { name: 'Manteaux', subcategory: 'manteaux' },
+        { name: 'Trench-coats', subcategory: 'trench-coats' },
         { name: 'Vestes', link: '/marketplace/homme/vestes' },
         { name: 'Vestes en cuir', link: '/marketplace/homme/vestes-cuir' },
         { name: 'Robes', link: '/marketplace/homme/robes' },
@@ -177,13 +177,21 @@ const GenderFilterWithDropdown: React.FC<GenderFilterProps> = ({
   }
 
   return (
-    <div className={`relative flex items-center justify-center space-x-8 py-6 ${className}`}>
+    <div className={`relative flex items-center justify-center space-x-8 py-4 ${className}`}>
       {genderOptions.map((option, index) => (
         <React.Fragment key={option.key}>
           <div 
             className="relative"
             onMouseEnter={() => setHoveredCategory(option.key)}
-            onMouseLeave={() => setHoveredCategory(null)}
+            onMouseLeave={(e) => {
+              // Delay pour permettre la navigation vers le menu
+              setTimeout(() => {
+                const menuElement = e.currentTarget.querySelector('[data-dropdown-menu]')
+                if (!menuElement?.matches(':hover')) {
+                  setHoveredCategory(null)
+                }
+              }, 100)
+            }}
           >
             <button
               onClick={() => handleGenderClick(option.key)}
@@ -198,7 +206,12 @@ const GenderFilterWithDropdown: React.FC<GenderFilterProps> = ({
 
             {/* Dropdown Menu */}
             {hoveredCategory === option.key && option.key !== 'all' && (
-              <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-screen max-w-6xl bg-white/95 backdrop-blur-xl shadow-2xl border border-trueme-gold/20 rounded-lg z-50">
+              <div 
+                data-dropdown-menu
+                className="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 w-screen max-w-6xl bg-white/95 backdrop-blur-xl shadow-2xl border border-trueme-gold/20 rounded-lg z-50"
+                onMouseEnter={() => setHoveredCategory(option.key)}
+                onMouseLeave={() => setHoveredCategory(null)}
+              >
                 <div className="p-8">
                   <div className={`grid ${option.key === 'enfant' ? 'grid-cols-3' : 'grid-cols-4'} gap-8`}>
                     {Object.entries(categoryMenus[option.key as keyof typeof categoryMenus]).map(([categoryName, items]) => (
@@ -216,7 +229,7 @@ const GenderFilterWithDropdown: React.FC<GenderFilterProps> = ({
                           {items.map((item) => (
                             <Link
                               key={item.name}
-                              href={item.link}
+                              href={`/marketplace/${option.key}?category=${categoryName}&subcategory=${encodeURIComponent(item.name.toLowerCase().replace(/\s+/g, '-'))}`}
                               className="block text-sm text-trueme-light hover:text-trueme-gold transition-colors duration-200 py-1"
                             >
                               {item.name}
