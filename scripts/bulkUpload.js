@@ -28,6 +28,9 @@ const CONFIG = {
     folder: 'products',
     transformation: [
       {
+        effect: 'background_removal'
+      },
+      {
         width: 1080, 
         height: 1080, 
         crop: 'pad', 

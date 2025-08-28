@@ -3,8 +3,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import TrueMeNavbar from '@/components/TrueMeNavbar'
-import GenderFilter from '@/components/GenderFilter'
-import AdvancedFilters from '@/components/AdvancedFilters'
+import GenderFilterWithDropdown from '@/components/GenderFilterWithDropdown'
 import CategorySlider from '@/components/CategorySlider'
 import VipBanner from '@/components/VipBanner'
 import { productCategories } from '@/data/mockProducts'
@@ -66,28 +65,21 @@ export default function Home() {
       <TrueMeNavbar />
       
       {/* Mini Navigation Interne - Directement après navbar */}
-      <section className="px-4 pt-32 pb-4 md:pt-40">
+      <section className="px-4 pt-20 pb-4 md:pt-24">
         <div className="max-w-6xl mx-auto">
-          <GenderFilter 
+          <GenderFilterWithDropdown 
             selectedGender={selectedGender}
-            onGenderChange={(gender) => {
-              setSelectedGender(gender)
-              setSelectedCategory('all') // Reset category filter when gender changes
-              setSelectedBrand('all') // Reset brand filter when gender changes
+            onGenderChange={(gender: 'all' | 'homme' | 'femme' | 'enfant') => {
+              // Pour 'all', on reste sur la page d'accueil sans filtrer
+              if (gender === 'all') {
+                setSelectedGender('all')
+              }
+              // Les autres redirections sont gérées dans le composant
             }}
             className="border-b border-trueme-gold/10"
           />
         </div>
       </section>
-
-      {/* Barre de Filtres Avancés */}
-      <AdvancedFilters
-        selectedGender={selectedGender}
-        selectedCategory={selectedCategory}
-        selectedBrand={selectedBrand}
-        onCategoryChange={setSelectedCategory}
-        onBrandChange={setSelectedBrand}
-      />
 
       {/* Categories de Produits */}
       <section className="px-4 pb-20">

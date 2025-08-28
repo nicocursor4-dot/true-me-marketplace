@@ -10,8 +10,11 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 })
 
-// Transformations identiques au script bulkUpload
+// Transformations identiques au script bulkUpload avec détourage
 const CLOUDINARY_TRANSFORMATIONS = [
+  {
+    effect: 'background_removal'
+  },
   {
     width: 1080, 
     height: 1080, 
