@@ -216,36 +216,38 @@ const GenderFilterWithDropdown: React.FC<GenderFilterProps> = ({
             {hoveredCategory === option.key && option.key !== 'all' && (
               <div 
                 data-dropdown-menu
-                className="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 w-screen max-w-6xl bg-white/98 backdrop-blur-xl shadow-2xl border border-trueme-gold/20 rounded-lg z-50 transition-all duration-300 ease-out"
+                className="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 w-screen max-w-6xl bg-white shadow-2xl border border-trueme-gold/30 rounded-lg z-50 transition-all duration-300 ease-out"
                 onMouseEnter={() => setHoveredCategory(option.key)}
                 onMouseLeave={() => {
                   setTimeout(() => setHoveredCategory(null), 100)
                 }}
               >
-                <div className="p-8">
+                <div className="p-8 bg-gradient-to-br from-white to-gray-50/30">
                   <div className={`grid ${option.key === 'enfant' ? 'grid-cols-3' : 'grid-cols-4'} gap-8`}>
                     {Object.entries(categoryMenus[option.key as keyof typeof categoryMenus]).map(([categoryName, items]) => (
                       <div key={categoryName}>
-                        <h3 className="font-semibold text-trueme mb-4 uppercase tracking-wide text-sm">
+                        <h3 className="font-bold text-black mb-4 uppercase tracking-wide text-sm border-b border-trueme-gold/30 pb-2">
                           {categoryName === 'vetements' ? 'Vêtements' :
                            categoryName === 'chaussures' ? 'Chaussures' :
                            categoryName === 'sacs' ? 'Sacs' :
                            categoryName === 'accessoires' ? 'Accessoires' :
                            categoryName === 'fille' ? 'Fille' :
                            categoryName === 'garcon' ? 'Garçon' :
-                           categoryName === 'bebe' ? 'Bébé' : categoryName}
+                           categoryName === 'bebe' ? 'Bébé' :
+                           categoryName}
                         </h3>
-                        <div className="space-y-2">
-                          {items.map((item) => (
-                            <Link
-                              key={item.name}
-                              href={`/marketplace/${option.key}?category=${categoryName}&subcategory=${encodeURIComponent(item.name.toLowerCase().replace(/\s+/g, '-'))}`}
-                              className="block text-sm text-trueme-light hover:text-trueme-gold transition-colors duration-200 py-1"
-                            >
-                              {item.name}
-                            </Link>
+                        <ul className="space-y-3">
+                          {items.map((item, index) => (
+                            <li key={index}>
+                              <Link
+                                href={`/marketplace/${option.key}?category=${categoryName}&subcategory=${item.name.toLowerCase().replace(/\s+/g, '-').replace(/[àâä]/g, 'a').replace(/[éèêë]/g, 'e').replace(/[îï]/g, 'i').replace(/[ôö]/g, 'o').replace(/[ùûü]/g, 'u').replace(/[ç]/g, 'c').replace(/[&]/g, '').replace(/[œ]/g, 'oe')}`}
+                                className="text-gray-700 hover:text-trueme-gold hover:font-medium transition-all duration-200 text-sm block py-1 hover:pl-2 hover:border-l-2 hover:border-trueme-gold"
+                              >
+                                {item.name}
+                              </Link>
+                            </li>
                           ))}
-                        </div>
+                        </ul>
                       </div>
                     ))}
                   </div>
