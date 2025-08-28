@@ -191,13 +191,10 @@ const GenderFilterWithDropdown: React.FC<GenderFilterProps> = ({
           <div 
             className="relative"
             onMouseEnter={() => setHoveredCategory(option.key)}
-            onMouseLeave={(e) => {
+            onMouseLeave={() => {
               // Delay pour permettre la navigation vers le menu
               setTimeout(() => {
-                const menuElement = e.currentTarget.querySelector('[data-dropdown-menu]')
-                if (!menuElement?.matches(':hover')) {
-                  setHoveredCategory(null)
-                }
+                setHoveredCategory(null)
               }, 150)
             }}
           >
@@ -218,9 +215,7 @@ const GenderFilterWithDropdown: React.FC<GenderFilterProps> = ({
                 data-dropdown-menu
                 className="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 w-screen max-w-6xl bg-white shadow-2xl border border-trueme-gold/30 rounded-lg z-50 transition-all duration-300 ease-out"
                 onMouseEnter={() => setHoveredCategory(option.key)}
-                onMouseLeave={() => {
-                  setTimeout(() => setHoveredCategory(null), 100)
-                }}
+                onMouseLeave={() => setHoveredCategory(null)}
               >
                 <div className="p-8 bg-gradient-to-br from-white to-gray-50/30">
                   <div className={`grid ${option.key === 'enfant' ? 'grid-cols-3' : 'grid-cols-4'} gap-8`}>

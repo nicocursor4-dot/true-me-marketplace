@@ -95,7 +95,7 @@ const TrueMeNavbar = () => {
       
       {isAccountDropdownOpen && (
         <div
-          className="absolute right-0 mt-2 w-48 bg-white/90 backdrop-blur-xl rounded-lg shadow-xl py-2 z-50 border border-trueme-gold/20"
+          className="absolute right-0 mt-2 w-48 bg-white/90 backdrop-blur-xl rounded-lg shadow-xl py-2 z-40 border border-trueme-gold/20"
           onMouseLeave={() => setIsAccountDropdownOpen(false)}
         >
           {accountItems.map((item) => (
