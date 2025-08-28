@@ -97,8 +97,10 @@ export const ModalBody = ({
           exit={{
             opacity: 0,
           }}
-          className="fixed [perspective:800px] [transform-style:preserve-3d] inset-0 h-screen w-screen flex items-center justify-center z-[9999]"
+          className="fixed inset-0 h-screen w-screen flex items-center justify-center z-[9999]"
           style={{
+            margin: 0,
+            padding: 0,
             top: 0,
             left: 0,
             right: 0,
@@ -116,25 +118,24 @@ export const ModalBody = ({
             )}
             initial={{
               opacity: 0,
-              scale: 0.5,
-              rotateX: 40,
-              y: 40,
+              scale: 0.95,
+              y: 20,
             }}
             animate={{
               opacity: 1,
               scale: 1,
-              rotateX: 0,
               y: 0,
             }}
             exit={{
               opacity: 0,
-              scale: 0.8,
-              rotateX: 10,
+              scale: 0.95,
+              y: 20,
             }}
             transition={{
               type: "spring",
-              stiffness: 260,
-              damping: 15,
+              stiffness: 300,
+              damping: 25,
+              duration: 0.3
             }}
           >
             <CloseIcon />
@@ -191,10 +192,12 @@ const Overlay = ({ className }: { className?: string }) => {
       exit={{
         opacity: 0,
       }}
-      className={`fixed inset-0 h-screen w-screen bg-black/60 backdrop-blur-md z-[9998] ${className}`}
+      className={`fixed inset-0 h-screen w-screen bg-black/70 z-[9998] ${className}`}
       style={{
         backdropFilter: 'blur(8px)',
         WebkitBackdropFilter: 'blur(8px)',
+        margin: 0,
+        padding: 0,
         top: 0,
         left: 0,
         right: 0,
