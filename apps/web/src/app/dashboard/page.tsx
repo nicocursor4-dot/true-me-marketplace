@@ -54,13 +54,13 @@ export default function TrueMeDashboard() {
       <TrueMeNavbar />
 
       {/* Main Content */}
-      <main className="pt-20 px-4 md:px-6 lg:px-8 max-w-7xl mx-auto py-6 md:py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
+      <main className="pt-16 md:pt-20 px-4 md:px-6 lg:px-8 max-w-7xl mx-auto py-4 md:py-6 lg:py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-4 lg:gap-6">
           {/* Left Column */}
-          <div className="lg:col-span-2 space-y-4 md:space-y-6">
+          <div className="lg:col-span-2 space-y-3 md:space-y-4 lg:space-y-6">
             {/* Identity Card */}
             <motion.div 
-              className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 md:p-8"
+              className="bg-white rounded-xl md:rounded-2xl shadow-sm border border-gray-200 p-4 md:p-6 lg:p-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -92,7 +92,7 @@ export default function TrueMeDashboard() {
                 </div>
               </div>
               
-              <div className="mt-6">
+              <div className="mt-4 md:mt-6">
                 <div className="flex items-center justify-between text-sm text-trueme-secondary mb-2">
                   <span>Évolution vers {userStats.nextStatus}</span>
                   <span className="font-medium text-trueme">{userStats.progress}%</span>
@@ -105,37 +105,37 @@ export default function TrueMeDashboard() {
             </motion.div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-2 gap-3 md:gap-4 lg:gap-6">
               <motion.div 
-                className="bg-white rounded-xl shadow-sm border border-gray-200 p-6"
+                className="bg-white rounded-lg md:rounded-xl shadow-sm border border-gray-200 p-3 md:p-4 lg:p-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
                 <div className="flex items-center gap-3">
-                  <div className="rounded-full bg-trueme-gold/10 p-3">
-                    <ShoppingCart className="w-5 h-5 text-trueme-gold" />
+                  <div className="rounded-full bg-trueme-gold/10 p-2 md:p-3">
+                    <ShoppingCart className="w-4 h-4 md:w-5 md:h-5 text-trueme-gold" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-trueme">{userStats.totalPurchases}</p>
-                    <p className="text-sm text-trueme-secondary">Achats totaux</p>
+                    <p className="text-lg md:text-2xl font-bold text-trueme">{userStats.totalPurchases}</p>
+                    <p className="text-xs md:text-sm text-trueme-secondary">Achats totaux</p>
                   </div>
                 </div>
               </motion.div>
 
               <motion.div 
-                className="bg-white rounded-xl shadow-sm border border-gray-200 p-6"
+                className="bg-white rounded-lg md:rounded-xl shadow-sm border border-gray-200 p-3 md:p-4 lg:p-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
                 <div className="flex items-center gap-3">
-                  <div className="rounded-full bg-trueme-gold/10 p-3">
-                    <Star className="w-5 h-5 text-trueme-gold" />
+                  <div className="rounded-full bg-trueme-gold/10 p-2 md:p-3">
+                    <Star className="w-4 h-4 md:w-5 md:h-5 text-trueme-gold" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-trueme">{userStats.totalPurchases}</p>
-                    <p className="text-sm text-trueme-secondary">Achats effectués</p>
+                    <p className="text-lg md:text-2xl font-bold text-trueme">{userStats.totalPurchases}</p>
+                    <p className="text-xs md:text-sm text-trueme-secondary">Achats effectués</p>
                   </div>
                 </div>
               </motion.div>
@@ -143,12 +143,12 @@ export default function TrueMeDashboard() {
 
             {/* Benefits Section */}
             <motion.div 
-              className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 md:p-8"
+              className="bg-white rounded-xl md:rounded-2xl shadow-sm border border-gray-200 p-4 md:p-6 lg:p-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center justify-between mb-4 md:mb-6">
                 <h2 className="text-xl font-serif text-trueme">Vos avantages {userStats.currentStatus}</h2>
                 <Modal>
                   <ModalTrigger>
@@ -182,11 +182,11 @@ export default function TrueMeDashboard() {
                 </Modal>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-2 gap-3 md:gap-4 lg:gap-6">
                 {benefits.map((benefit, index) => (
-                  <div key={index} className="flex items-center gap-3 p-4 rounded-xl bg-trueme-gold/5 border border-trueme-gold/20">
-                    <benefit.icon className="w-5 h-5 text-trueme-gold" />
-                    <span className="text-sm text-trueme">{benefit.title}</span>
+                  <div key={index} className="flex items-center gap-2 md:gap-3 p-2 md:p-3 lg:p-4 rounded-lg md:rounded-xl bg-trueme-gold/5 border border-trueme-gold/20">
+                    <benefit.icon className="w-4 h-4 md:w-5 md:h-5 text-trueme-gold" />
+                    <span className="text-xs md:text-sm text-trueme leading-tight">{benefit.title}</span>
                   </div>
                 ))}
               </div>
@@ -194,28 +194,28 @@ export default function TrueMeDashboard() {
           </div>
 
           {/* Right Column */}
-          <div className="lg:col-span-1 space-y-4 md:space-y-6">
+          <div className="lg:col-span-1 space-y-3 md:space-y-4 lg:space-y-6">
             {/* Quick Actions */}
             <motion.div 
-              className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 md:p-8 w-full"
+              className="bg-white rounded-xl md:rounded-2xl shadow-sm border border-gray-200 p-4 md:p-6 lg:p-8 w-full"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <div className="flex items-center gap-2 mb-6">
+              <div className="flex items-center gap-2 mb-4 md:mb-6">
                 <div className="w-2 h-2 bg-trueme-gold rounded-full"></div>
                 <h3 className="text-xl font-serif text-trueme">Actions rapides</h3>
               </div>
-              <div className="space-y-4">
+              <div className="space-y-3 md:space-y-4">
                 <motion.div
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className="w-full"
                 >
                   <a href="/" className="block w-full">
-                    <div className="w-full bg-trueme-gold hover:bg-trueme-gold/90 text-white rounded-xl px-4 py-3 flex items-center justify-between transition-colors duration-200">
-                      <span className="font-medium">Explorer le marketplace</span>
-                      <ArrowRight className="w-4 h-4" />
+                    <div className="w-full bg-trueme-gold hover:bg-trueme-gold/90 text-white rounded-lg md:rounded-xl px-3 md:px-4 py-2 md:py-3 flex items-center justify-between transition-colors duration-200">
+                      <span className="font-medium text-sm md:text-base">Explorer le marketplace</span>
+                      <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
                     </div>
                   </a>
                 </motion.div>
@@ -226,17 +226,17 @@ export default function TrueMeDashboard() {
                   className="w-full"
                 >
                   <a href="/brands" className="block w-full">
-                    <div className="w-full bg-trueme-gold hover:bg-trueme-gold/90 text-white rounded-xl px-4 py-3 flex items-center justify-between transition-colors duration-200">
-                      <span className="font-medium">Ma collection</span>
-                      <ArrowRight className="w-4 h-4" />
+                    <div className="w-full bg-trueme-gold hover:bg-trueme-gold/90 text-white rounded-lg md:rounded-xl px-3 md:px-4 py-2 md:py-3 flex items-center justify-between transition-colors duration-200">
+                      <span className="font-medium text-sm md:text-base">Ma collection</span>
+                      <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
                     </div>
                   </a>
                 </motion.div>
 
                 <Modal>
-                  <ModalTrigger className="w-full bg-trueme-gold hover:bg-trueme-gold/90 text-white rounded-xl px-4 py-3 flex items-center justify-between transition-colors duration-200 cursor-pointer">
-                    <span className="font-medium">Historique des achats</span>
-                    <ArrowRight className="w-4 h-4" />
+                  <ModalTrigger className="w-full bg-trueme-gold hover:bg-trueme-gold/90 text-white rounded-lg md:rounded-xl px-3 md:px-4 py-2 md:py-3 flex items-center justify-between transition-colors duration-200 cursor-pointer">
+                    <span className="font-medium text-sm md:text-base">Historique des achats</span>
+                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
                   </ModalTrigger>
                   <ModalBody>
                     <ModalContent>
@@ -285,38 +285,38 @@ export default function TrueMeDashboard() {
 
             {/* Collection Summary - Clickable with Modal */}
             <Modal>
-              <ModalTrigger>
+              <ModalTrigger className="w-full block">
                 <motion.div 
-                  className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 md:p-8 cursor-pointer hover:shadow-xl transition-all duration-300 w-full"
+                  className="bg-white rounded-xl md:rounded-2xl shadow-sm border border-gray-200 p-4 md:p-6 lg:p-8 cursor-pointer hover:shadow-xl transition-all duration-300 w-full"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.5 }}
                   whileHover={{ y: -2 }}
                 >
-                  <div className="space-y-6">
-                    <div className="flex items-center gap-2 mb-6">
+                  <div className="space-y-4 md:space-y-6">
+                    <div className="flex items-center gap-2 mb-4 md:mb-6">
                       <div className="w-2 h-2 bg-trueme-gold rounded-full"></div>
                       <h3 className="text-xl font-serif text-trueme">Ma Collection</h3>
                     </div>
                     
-                    <div className="space-y-4">
-                      <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                        <span className="text-sm text-gray-600">Articles</span>
-                        <span className="font-semibold text-trueme">{userStats.totalItems}</span>
+                    <div className="space-y-3 md:space-y-4">
+                      <div className="flex justify-between items-center py-2 md:py-3 border-b border-gray-100">
+                        <span className="text-xs md:text-sm text-gray-600">Articles</span>
+                        <span className="font-semibold text-sm md:text-base text-trueme">{userStats.totalItems}</span>
                       </div>
                       
-                      <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                        <span className="text-sm text-gray-600">Valeur estimée</span>
-                        <span className="font-semibold text-trueme">{userStats.totalValue}</span>
+                      <div className="flex justify-between items-center py-2 md:py-3 border-b border-gray-100">
+                        <span className="text-xs md:text-sm text-gray-600">Valeur estimée</span>
+                        <span className="font-semibold text-sm md:text-base text-trueme">{userStats.totalValue}</span>
                       </div>
                       
-                      <div className="flex justify-between items-center py-3">
-                        <span className="text-sm text-gray-600">Évolution</span>
-                        <span className="font-semibold text-trueme-gold">{userStats.collectionGrowth}</span>
+                      <div className="flex justify-between items-center py-2 md:py-3">
+                        <span className="text-xs md:text-sm text-gray-600">Évolution</span>
+                        <span className="font-semibold text-sm md:text-base text-trueme-gold">{userStats.collectionGrowth}</span>
                       </div>
                     </div>
                     
-                    <div className="text-center pt-4">
+                    <div className="text-center pt-3 md:pt-4">
                       <span className="text-xs text-gray-500 uppercase tracking-wide">Voir détails</span>
                     </div>
                   </div>
@@ -390,17 +390,17 @@ export default function TrueMeDashboard() {
 
             {/* Points & Rewards */}
             <motion.div 
-              className="bg-gradient-to-br from-trueme-gold/10 to-trueme-gold/5 rounded-2xl border border-trueme-gold/20 p-6"
+              className="bg-gradient-to-br from-trueme-gold/10 to-trueme-gold/5 rounded-xl md:rounded-2xl border border-trueme-gold/20 p-4 md:p-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
             >
-              <div className="flex items-center gap-3 mb-4">
-                <Crown className="w-6 h-6 text-trueme-gold" />
-                <h3 className="text-xl font-serif text-trueme">Points TRUE ME</h3>
+              <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
+                <Crown className="w-5 h-5 md:w-6 md:h-6 text-trueme-gold" />
+                <h3 className="text-lg md:text-xl font-serif text-trueme">Points TRUE ME</h3>
               </div>
-              <p className="text-3xl font-bold text-trueme mb-2">{userStats.points.toLocaleString()}</p>
-              <p className="text-sm text-trueme-secondary mb-6">points disponibles</p>
+              <p className="text-2xl md:text-3xl font-bold text-trueme mb-1 md:mb-2">{userStats.points.toLocaleString()}</p>
+              <p className="text-xs md:text-sm text-trueme-secondary mb-4 md:mb-6">points disponibles</p>
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
