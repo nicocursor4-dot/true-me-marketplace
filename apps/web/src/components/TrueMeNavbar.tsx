@@ -136,12 +136,9 @@ const TrueMeNavbar = () => {
   };
 
   return (
-    <div 
-      className={`transition-transform duration-300 ease-in-out ${
-        isNavVisible ? 'translate-y-0' : '-translate-y-full'
-      }`}
-    >
-      <Navbar>
+    <Navbar className={`transition-transform duration-300 ease-in-out ${
+      isNavVisible ? 'translate-y-0' : '-translate-y-full'
+    }`}>
         {/* Desktop Navigation */}
         <NavBody className="bg-white/20 backdrop-blur-lg border border-white/30 shadow-lg">
           <TrueMeLogo />
@@ -225,7 +222,6 @@ const TrueMeNavbar = () => {
         </MobileNavMenu>
       </MobileNav>
     </Navbar>
-    </div>
   );
 };
 
