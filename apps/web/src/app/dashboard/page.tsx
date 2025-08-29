@@ -54,10 +54,10 @@ export default function TrueMeDashboard() {
       <TrueMeNavbar />
 
       {/* Main Content */}
-      <main className="pt-20 px-4 md:px-6 max-w-7xl mx-auto py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <main className="pt-20 px-4 md:px-6 lg:px-8 max-w-7xl mx-auto py-6 md:py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
           {/* Left Column */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-4 md:space-y-6">
             {/* Identity Card */}
             <motion.div 
               className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 md:p-8"
@@ -65,25 +65,25 @@ export default function TrueMeDashboard() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <div className="flex items-start gap-6">
-                <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full ring-2 ring-trueme-gold/20">
+              <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+                <div className="relative h-16 w-16 sm:h-20 sm:w-20 shrink-0 overflow-hidden rounded-full ring-2 ring-trueme-gold/20 mx-auto sm:mx-0">
                   <img
                     alt="Portrait"
                     className="h-full w-full object-cover"
                     src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop"
                   />
                 </div>
-                <div className="flex-1">
-                  <h1 className="text-2xl md:text-3xl font-serif leading-tight text-trueme">{userStats.name}</h1>
-                  <p className="mt-1 italic text-trueme-gold">I embody authenticity.</p>
-                  <div className="mt-3 space-y-2 text-sm text-trueme-secondary">
-                    <div className="flex items-center gap-2">
+                <div className="flex-1 text-center sm:text-left">
+                  <h1 className="text-xl sm:text-2xl md:text-3xl font-serif leading-tight text-trueme">{userStats.name}</h1>
+                  <p className="mt-1 italic text-trueme-gold text-sm sm:text-base">I embody authenticity.</p>
+                  <div className="mt-3 space-y-2 text-xs sm:text-sm text-trueme-secondary">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
                       <span>Membre depuis :</span>
                       <span className="font-medium text-trueme">{userStats.memberSince}</span>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
                       <span>Statut :</span>
-                      <span className="inline-flex items-center gap-1 rounded-full border border-trueme-gold/40 bg-trueme-gold/10 px-2 py-0.5 text-trueme-gold text-xs">
+                      <span className="inline-flex items-center gap-1 rounded-full border border-trueme-gold/40 bg-trueme-gold/10 px-2 py-0.5 text-trueme-gold text-xs w-fit mx-auto sm:mx-0">
                         <Crown className="w-3 h-3" />
                         {userStats.currentStatus}
                       </span>
@@ -182,7 +182,7 @@ export default function TrueMeDashboard() {
                 </Modal>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 {benefits.map((benefit, index) => (
                   <div key={index} className="flex items-center gap-3 p-4 rounded-xl bg-trueme-gold/5 border border-trueme-gold/20">
                     <benefit.icon className="w-5 h-5 text-trueme-gold" />
@@ -194,23 +194,26 @@ export default function TrueMeDashboard() {
           </div>
 
           {/* Right Column */}
-          <div className="lg:col-span-1 space-y-6">
+          <div className="lg:col-span-1 space-y-4 md:space-y-6">
             {/* Quick Actions */}
             <motion.div 
-              className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 w-full"
+              className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 md:p-8 w-full"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <h3 className="text-xl font-serif text-trueme mb-4">Actions rapides</h3>
-              <div className="space-y-3">
+              <div className="flex items-center gap-2 mb-6">
+                <div className="w-2 h-2 bg-trueme-gold rounded-full"></div>
+                <h3 className="text-xl font-serif text-trueme">Actions rapides</h3>
+              </div>
+              <div className="space-y-4">
                 <motion.div
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className="w-full"
                 >
-                  <a href="/marketplace" className="block w-full">
-                    <div className="w-full bg-trueme-gold hover:bg-trueme-gold/90 text-white rounded-2xl px-4 py-3 flex items-center justify-between transition-colors duration-200">
+                  <a href="/" className="block w-full">
+                    <div className="w-full bg-trueme-gold hover:bg-trueme-gold/90 text-white rounded-xl px-4 py-3 flex items-center justify-between transition-colors duration-200">
                       <span className="font-medium">Explorer le marketplace</span>
                       <ArrowRight className="w-4 h-4" />
                     </div>
@@ -223,7 +226,7 @@ export default function TrueMeDashboard() {
                   className="w-full"
                 >
                   <a href="/brands" className="block w-full">
-                    <div className="w-full bg-trueme-gold hover:bg-trueme-gold/90 text-white rounded-2xl px-4 py-3 flex items-center justify-between transition-colors duration-200">
+                    <div className="w-full bg-trueme-gold hover:bg-trueme-gold/90 text-white rounded-xl px-4 py-3 flex items-center justify-between transition-colors duration-200">
                       <span className="font-medium">Ma collection</span>
                       <ArrowRight className="w-4 h-4" />
                     </div>
@@ -231,7 +234,7 @@ export default function TrueMeDashboard() {
                 </motion.div>
 
                 <Modal>
-                  <ModalTrigger className="w-full bg-trueme-gold hover:bg-trueme-gold/90 text-white rounded-2xl px-4 py-3 flex items-center justify-between transition-colors duration-200 cursor-pointer">
+                  <ModalTrigger className="w-full bg-trueme-gold hover:bg-trueme-gold/90 text-white rounded-xl px-4 py-3 flex items-center justify-between transition-colors duration-200 cursor-pointer">
                     <span className="font-medium">Historique des achats</span>
                     <ArrowRight className="w-4 h-4" />
                   </ModalTrigger>
@@ -284,7 +287,7 @@ export default function TrueMeDashboard() {
             <Modal>
               <ModalTrigger>
                 <motion.div 
-                  className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 cursor-pointer hover:shadow-xl transition-all duration-300 w-full"
+                  className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 md:p-8 cursor-pointer hover:shadow-xl transition-all duration-300 w-full"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.5 }}
@@ -293,7 +296,7 @@ export default function TrueMeDashboard() {
                   <div className="space-y-6">
                     <div className="flex items-center gap-2 mb-6">
                       <div className="w-2 h-2 bg-trueme-gold rounded-full"></div>
-                      <h3 className="text-xl font-medium text-trueme">Ma Collection</h3>
+                      <h3 className="text-xl font-serif text-trueme">Ma Collection</h3>
                     </div>
                     
                     <div className="space-y-4">
