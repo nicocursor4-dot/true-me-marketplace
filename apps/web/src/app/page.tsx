@@ -65,7 +65,7 @@ export default function Home() {
       <TrueMeNavbar />
       
       {/* Mini Navigation Interne - Directement après navbar */}
-      <section className="px-2 sm:px-4 pt-16 pb-2 md:pt-20">
+      <section className="px-2 sm:px-4 pt-8 pb-2 md:pt-12">
         <div className="max-w-6xl mx-auto">
           <GenderFilterWithDropdown 
             selectedGender={selectedGender}

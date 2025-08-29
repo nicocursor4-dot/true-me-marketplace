@@ -9,6 +9,11 @@ interface GenderFilterProps {
   className?: string
 }
 
+interface QuickLink {
+  label: string
+  href: string
+}
+
 const GenderFilterWithDropdown: React.FC<GenderFilterProps> = ({ 
   selectedGender, 
   onGenderChange,
@@ -185,7 +190,19 @@ const GenderFilterWithDropdown: React.FC<GenderFilterProps> = ({
         { name: 'Tout pour bébé' }
       ]
     }
-  }
+  } as const
+
+  // Quick access curated links - 2 de chaque côté avec design élégant
+  const leftQuickLinks: QuickLink[] = [
+    { label: "Sélection d'été", href: "/marketplace/femme?category=selections&subcategory=S%C3%A9lection%20d'%C3%A9t%C3%A9" },
+    { label: 'Promotions', href: '/marketplace/homme?category=selections&subcategory=Promotions' }
+  ]
+
+  const rightQuickLinks: QuickLink[] = [
+    { label: 'Les incontournables', href: '/marketplace/femme?category=selections&subcategory=Les%20incontournables' },
+    { label: 'Pré-owned de luxe', href: '/marketplace/homme?category=selections&subcategory=Pr%C3%A9-owned%20de%20luxe' }
+  ]
+  
 
   const genderOptions = [
     { key: 'homme' as const, label: 'HOMME', display: 'Homme' },
@@ -202,76 +219,176 @@ const GenderFilterWithDropdown: React.FC<GenderFilterProps> = ({
   }
 
   return (
-    <div className={`relative z-[999999] isolate overflow-visible flex flex-wrap items-center justify-center gap-2 sm:gap-4 px-2 sm:px-4 py-4 sm:py-6 bg-white/50 backdrop-blur-sm border-b border-trueme-gold/20 ${className}`}>
-      {genderOptions.map((option) => {
-        const isActive = selectedGender === option.key
-        const hasDropdown = true
+    <div className={`relative z-[999999] isolate overflow-visible px-2 sm:px-4 py-2 sm:py-3 border-b border-trueme-gold/20 ${className}`}>
+      {/* Design élégant avec séparateurs - responsive */}
+      <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 lg:gap-8 flex-wrap max-w-7xl mx-auto">
         
-        return (
-          <div 
-            key={option.key}
-            className="relative group"
-            onMouseEnter={() => hasDropdown && setHoveredCategory(option.key)}
-            onMouseLeave={() => setHoveredCategory(null)}
-          >
-            <button
-              onClick={() => handleGenderClick(option.key)}
-              className={`
-                px-3 py-2 sm:px-6 sm:py-3 rounded-full text-xs sm:text-base font-medium transition-all duration-300 ease-in-out whitespace-nowrap
-                ${
-                  isActive
-                    ? 'bg-trueme text-white shadow-lg transform scale-105'
-                    : 'bg-white/80 text-trueme border border-trueme/20 hover:border-trueme hover:bg-trueme/5 hover:shadow-md'
-                }
-              `}
-            >
-              {option.label}
-            </button>
+        {/* Desktop layout - Catégories visibles uniquement sur grands écrans */}
+        <div className="hidden lg:flex items-center justify-center gap-6 lg:gap-8 w-full">
+          
+          {/* Catégories de gauche */}
+          {leftQuickLinks.map((link: QuickLink, index) => (
+            <div key={link.label} className="flex items-center">
+              <Link
+                href={link.href}
+                className="text-xs lg:text-sm font-medium text-trueme/80 hover:text-trueme border-b-2 border-transparent hover:border-trueme-gold transition-all duration-300 pb-1 whitespace-nowrap"
+              >
+                {link.label.toUpperCase()}
+              </Link>
+              {index < leftQuickLinks.length - 1 && (
+                <div className="w-px h-4 bg-trueme-gold/30 ml-6 lg:ml-8"></div>
+              )}
+            </div>
+          ))}
 
-            {/* Desktop Dropdown Menu */}
-            {hasDropdown && hoveredCategory === option.key && (
-              <div className="hidden lg:block">
+          {/* Séparateur avant les genres */}
+          <div className="w-px h-4 bg-trueme-gold/30"></div>
+
+          {/* Boutons genres - Desktop */}
+          {genderOptions.map((option, index) => {
+            const isActive = selectedGender === option.key
+            const hasDropdown = true
+
+            return (
+              <div key={option.key} className="flex items-center">
                 <div 
-                  className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 z-[999999] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto"
-                  onMouseEnter={() => setHoveredCategory(option.key)}
+                  className="relative pb-2"
+                  onMouseEnter={() => hasDropdown && setHoveredCategory(option.key)}
                   onMouseLeave={() => setHoveredCategory(null)}
                 >
-                  <div className="bg-white/95 backdrop-blur-lg rounded-lg shadow-xl border border-trueme-gold/20 p-6 min-w-[600px] max-w-4xl relative z-[1000000]">
-                    <div className="grid grid-cols-2 xl:grid-cols-3 gap-6">
-                      {Object.entries(categoryMenus[option.key as keyof typeof categoryMenus] || {}).map(([categoryName, items]) => (
-                        <div key={categoryName} className="space-y-3">
-                          <h4 className="font-semibold text-trueme text-sm xl:text-base capitalize border-b border-trueme-gold/30 pb-2">
-                            {categoryName}
-                          </h4>
-                          <ul className="space-y-1.5">
-                            {items.map((item) => (
-                              <li key={item.name}>
-                                <Link
-                                  href={`/marketplace/${option.key}?category=${categoryName}&subcategory=${encodeURIComponent(item.name)}`}
-                                  className="block text-xs xl:text-sm text-trueme/80 hover:text-trueme-gold transition-colors duration-200 py-1 hover:translate-x-1 transform transition-transform"
-                                  onClick={() => setHoveredCategory(null)}
-                                >
-                                  {item.name}
-                                </Link>
-                              </li>
+                  <button
+                    onClick={() => handleGenderClick(option.key)}
+                    className={`
+                      text-xs lg:text-sm font-medium transition-all duration-300 pb-1 whitespace-nowrap
+                      ${
+                        isActive
+                          ? 'text-trueme border-b-2 border-trueme-gold'
+                          : 'text-trueme/80 hover:text-trueme border-b-2 border-transparent hover:border-trueme-gold'
+                      }
+                    `}
+                  >
+                    {option.label}
+                  </button>
+
+                  {/* Desktop Dropdown Menu */}
+                  {hasDropdown && hoveredCategory === option.key && (
+                    <div className="hidden lg:block">
+                      <div 
+                        className="absolute top-full left-1/2 -translate-x-1/2 mt-0 z-[1000000]"
+                        onMouseEnter={() => setHoveredCategory(option.key)}
+                        onMouseLeave={() => setHoveredCategory(null)}
+                      >
+                        <div className="bg-white/95 backdrop-blur-lg rounded-lg shadow-xl border border-trueme-gold/20 p-6 min-w-[800px] max-w-6xl relative">
+                          <div className="grid grid-cols-3 xl:grid-cols-4 gap-6">
+                            {Object.entries(categoryMenus[option.key as keyof typeof categoryMenus] || {})
+                              .filter(([categoryName]) => categoryName !== 'selections')
+                              .map(([categoryName, items]) => (
+                              <div key={categoryName} className="space-y-3">
+                                <h4 className="font-semibold text-trueme text-sm xl:text-base capitalize border-b border-trueme-gold/30 pb-2">
+                                  {categoryName}
+                                </h4>
+                                <ul className="space-y-1.5">
+                                  {(items as { name: string }[]).map((item: { name: string }) => (
+                                    <li key={item.name}>
+                                      <Link
+                                        href={`/marketplace/${option.key}?category=${categoryName}&subcategory=${encodeURIComponent(item.name)}`}
+                                        className="block text-xs xl:text-sm text-trueme/80 hover:text-trueme-gold transition-colors duration-200 py-1 hover:translate-x-1 transform transition-transform"
+                                        onClick={() => setHoveredCategory(null)}
+                                      >
+                                        {item.name}
+                                      </Link>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
                             ))}
-                          </ul>
+                          </div>
                         </div>
-                      ))}
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
+
+                {/* Séparateur après chaque genre sauf le dernier */}
+                {index < genderOptions.length - 1 && (
+                  <div className="w-px h-4 bg-trueme-gold/30 ml-6 lg:ml-8"></div>
+                )}
               </div>
-            )}
+            )
+          })}
+
+          {/* Séparateur après les genres */}
+          <div className="w-px h-4 bg-trueme-gold/30"></div>
+
+          {/* Catégories de droite */}
+          {rightQuickLinks.map((link: QuickLink, index) => (
+            <div key={link.label} className="flex items-center">
+              <Link
+                href={link.href}
+                className="text-xs lg:text-sm font-medium text-trueme/80 hover:text-trueme border-b-2 border-transparent hover:border-trueme-gold transition-all duration-300 pb-1 whitespace-nowrap"
+              >
+                {link.label.toUpperCase()}
+              </Link>
+              {index < rightQuickLinks.length - 1 && (
+                <div className="w-px h-4 bg-trueme-gold/30 ml-6 lg:ml-8"></div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile/Tablet layout - Menu simplifié */}
+        <div className="lg:hidden flex items-center justify-between w-full">
+          
+          {/* Menu hamburger avec recherche */}
+          <div className="flex items-center gap-3">
+            <button className="p-2 text-trueme/80 hover:text-trueme transition-colors">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+            <button className="p-2 text-trueme/80 hover:text-trueme transition-colors">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607z" />
+              </svg>
+            </button>
           </div>
-        )
-      })}
-      
+
+          {/* Boutons genres centrés - Mobile */}
+          <div className="flex items-center gap-4 sm:gap-6">
+            {genderOptions.map((option) => {
+              const isActive = selectedGender === option.key
+              
+              return (
+                <button
+                  key={option.key}
+                  onClick={() => handleGenderClick(option.key)}
+                  className={`
+                    text-xs sm:text-sm font-medium transition-all duration-300 pb-1 whitespace-nowrap
+                    ${
+                      isActive
+                        ? 'text-trueme border-b-2 border-trueme-gold'
+                        : 'text-trueme/80 hover:text-trueme border-b-2 border-transparent hover:border-trueme-gold'
+                    }
+                  `}
+                >
+                  {option.label}
+                </button>
+              )
+            })}
+          </div>
+
+          {/* Espace pour équilibrer */}
+          <div className="w-[68px]"></div>
+        </div>
+      </div>
+
       {/* Mobile Category Links - Only show when a gender is selected */}
       {selectedGender !== 'all' && (
         <div className="lg:hidden w-full mt-4">
           <div className="flex flex-wrap gap-2 justify-center">
-            {Object.entries(categoryMenus[selectedGender as keyof typeof categoryMenus] || {}).map(([categoryName]) => (
+            {Object.entries(categoryMenus[selectedGender as keyof typeof categoryMenus] || {})
+              .filter(([categoryName]) => categoryName !== 'selections')
+              .map(([categoryName]) => (
               <Link
                 key={categoryName}
                 href={`/marketplace/${selectedGender}?category=${categoryName}`}

@@ -358,18 +358,16 @@ export default function TrueMeDashboard() {
             </motion.div>
 
             {/* Collection Summary - Clickable with Modal */}
-            <motion.div 
-              className="bg-white rounded-xl md:rounded-2xl shadow-sm border border-gray-200 p-4 md:p-6 lg:p-8 w-full"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-            >
-              <Modal>
-                <ModalTrigger className="w-full block cursor-pointer hover:shadow-xl transition-all duration-300">
-                  <motion.div 
-                    className="w-full"
-                    whileHover={{ y: -2 }}
-                  >
+            <Modal>
+              <ModalTrigger className="w-full block">
+                <motion.div 
+                  className="bg-white rounded-xl md:rounded-2xl shadow-sm border border-gray-200 p-4 md:p-6 lg:p-8 w-full cursor-pointer transition-all duration-300 hover:shadow-lg hover:border-trueme-gold/30"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                  whileHover={{ y: -1, scale: 1.01 }}
+                  whileTap={{ scale: 0.99 }}
+                >
                     <div className="space-y-4 md:space-y-6">
                       <div className="flex items-center gap-2 mb-4 md:mb-6">
                         <div className="w-2 h-2 bg-trueme-gold rounded-full"></div>
@@ -397,8 +395,8 @@ export default function TrueMeDashboard() {
                         <span className="text-xs text-gray-500 uppercase tracking-wide">Voir détails</span>
                       </div>
                     </div>
-                  </motion.div>
-                </ModalTrigger>
+                </motion.div>
+              </ModalTrigger>
               <ModalBody>
                 <ModalContent>
                   <h3 className="text-2xl font-bold text-trueme mb-4">Ma Collection - Top 3</h3>
@@ -464,7 +462,6 @@ export default function TrueMeDashboard() {
                 </ModalFooter>
               </ModalBody>
             </Modal>
-            </motion.div>
 
             {/* Points & Rewards */}
             <motion.div 

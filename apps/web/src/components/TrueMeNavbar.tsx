@@ -137,7 +137,7 @@ const TrueMeNavbar = () => {
 
   return (
     <div 
-      className={`fixed inset-x-0 top-2 z-[9999] w-full transition-transform duration-300 ease-in-out ${
+      className={`transition-transform duration-300 ease-in-out ${
         isNavVisible ? 'translate-y-0' : '-translate-y-full'
       }`}
     >
