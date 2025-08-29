@@ -215,19 +215,13 @@ export const MobileNavMenu = ({
               className
             )}
           >
-            {/* Header with logo and close */}
+            {/* Header with logo only (close button handled by toggle) */}
             <div className="flex items-center justify-between p-4 border-b border-trueme-gold/20">
               <img 
                 src="/images/logos/trueme-logo.png" 
                 alt="True Me Logo" 
                 className="h-12 w-12 object-contain"
               />
-              <button
-                onClick={onClose}
-                className="p-2 hover:bg-trueme-gold/10 rounded-full transition-colors"
-              >
-                <IconX className="h-6 w-6 text-trueme" />
-              </button>
             </div>
             
             {/* Menu content */}

@@ -58,49 +58,123 @@ export default function TrueMeDashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-4 lg:gap-6">
           {/* Left Column */}
           <div className="lg:col-span-2 space-y-3 md:space-y-4 lg:space-y-6">
-            {/* Identity Card */}
+            {/* Identity Card - Redesigned */}
             <motion.div 
-              className="bg-white rounded-xl md:rounded-2xl shadow-sm border border-gray-200 p-4 md:p-6 lg:p-8"
+              className="bg-gradient-to-br from-white via-white to-trueme-gold/5 rounded-2xl md:rounded-3xl shadow-xl border border-trueme-gold/20 p-6 md:p-8 lg:p-10 relative overflow-hidden"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
             >
-              <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
-                <div className="relative h-16 w-16 sm:h-20 sm:w-20 shrink-0 overflow-hidden rounded-full ring-2 ring-trueme-gold/20 mx-auto sm:mx-0">
-                  <img
-                    alt="Portrait"
-                    className="h-full w-full object-cover"
-                    src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop"
-                  />
-                </div>
-                <div className="flex-1 text-center sm:text-left">
-                  <h1 className="text-xl sm:text-2xl md:text-3xl font-serif leading-tight text-trueme">{userStats.name}</h1>
-                  <p className="mt-1 italic text-trueme-gold text-sm sm:text-base">I embody authenticity.</p>
-                  <div className="mt-3 space-y-2 text-xs sm:text-sm text-trueme-secondary">
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
-                      <span>Membre depuis :</span>
-                      <span className="font-medium text-trueme">{userStats.memberSince}</span>
-                    </div>
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
-                      <span>Statut :</span>
-                      <span className="inline-flex items-center gap-1 rounded-full border border-trueme-gold/40 bg-trueme-gold/10 px-2 py-0.5 text-trueme-gold text-xs w-fit mx-auto sm:mx-0">
-                        <Crown className="w-3 h-3" />
-                        {userStats.currentStatus}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {/* Background decoration */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-trueme-gold/10 rounded-full blur-3xl -translate-y-16 translate-x-16"></div>
+              <div className="absolute bottom-0 left-0 w-24 h-24 bg-trueme-gold/5 rounded-full blur-2xl translate-y-12 -translate-x-12"></div>
               
-              <div className="mt-4 md:mt-6">
-                <div className="flex items-center justify-between text-sm text-trueme-secondary mb-2">
-                  <span>Évolution vers {userStats.nextStatus}</span>
-                  <span className="font-medium text-trueme">{userStats.progress}%</span>
-                </div>
-                <Progress value={userStats.progress} className="h-2" />
-                <p className="mt-1 text-xs text-trueme-secondary">
-                  3 achats restants pour passer {userStats.nextStatus}
-                </p>
+              {/* Main content container - perfectly centered */}
+              <div className="relative z-10 flex flex-col items-center text-center space-y-6 md:space-y-8">
+                {/* Profile image with enhanced styling */}
+                <motion.div 
+                  className="relative"
+                  initial={{ scale: 0.8 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.3, duration: 0.5 }}
+                >
+                  <div className="relative h-24 w-24 md:h-28 md:w-28 lg:h-32 lg:w-32 overflow-hidden rounded-full ring-4 ring-trueme-gold/30 shadow-2xl">
+                    <img
+                      alt="Portrait"
+                      className="h-full w-full object-cover hover:scale-110 transition-transform duration-500"
+                      src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop"
+                    />
+                  </div>
+                  {/* Status indicator */}
+                  <motion.div 
+                    className="absolute -bottom-2 -right-2 bg-trueme-gold text-black rounded-full p-2 shadow-lg"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 0.5, duration: 0.3 }}
+                  >
+                    <Crown className="w-4 h-4 md:w-5 md:h-5" />
+                  </motion.div>
+                </motion.div>
+
+                {/* User info with enhanced typography */}
+                <motion.div 
+                  className="space-y-3 md:space-y-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4, duration: 0.6 }}
+                >
+                  <div className="space-y-2">
+                    <h1 className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-trueme tracking-wide">
+                      {userStats.name}
+                    </h1>
+                    <motion.p 
+                      className="text-trueme-gold text-base md:text-lg italic font-medium"
+                      animate={{ opacity: [0.7, 1, 0.7] }}
+                      transition={{ duration: 3, repeat: Infinity }}
+                    >
+                      I embody authenticity.
+                    </motion.p>
+                  </div>
+
+                  {/* User details in modern card format */}
+                  <div className="flex flex-col md:flex-row gap-4 md:gap-6 justify-center items-center">
+                    <motion.div 
+                      className="bg-white/70 backdrop-blur-sm rounded-xl px-4 py-3 shadow-md border border-trueme-gold/10"
+                      whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.9)" }}
+                    >
+                      <p className="text-xs md:text-sm text-trueme-secondary font-medium">Membre depuis</p>
+                      <p className="text-sm md:text-base font-semibold text-trueme">{userStats.memberSince}</p>
+                    </motion.div>
+
+                    <motion.div 
+                      className="bg-gradient-to-r from-trueme-gold/20 to-trueme-gold/10 backdrop-blur-sm rounded-xl px-4 py-3 shadow-md border border-trueme-gold/20"
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      <p className="text-xs md:text-sm text-trueme-secondary font-medium">Statut actuel</p>
+                      <div className="flex items-center gap-2 justify-center">
+                        <Crown className="w-4 h-4 text-trueme-gold" />
+                        <p className="text-sm md:text-base font-bold text-trueme-gold">{userStats.currentStatus}</p>
+                      </div>
+                    </motion.div>
+                  </div>
+                </motion.div>
+
+                {/* Progress section with enhanced design */}
+                <motion.div 
+                  className="w-full max-w-md space-y-3"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.6, duration: 0.5 }}
+                >
+                  <div className="flex items-center justify-between text-sm md:text-base text-trueme-secondary">
+                    <span className="font-medium">Évolution vers {userStats.nextStatus}</span>
+                    <motion.span 
+                      className="font-bold text-trueme text-lg"
+                      animate={{ scale: [1, 1.1, 1] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      {userStats.progress}%
+                    </motion.span>
+                  </div>
+                  <div className="relative">
+                    <Progress value={userStats.progress} className="h-3 md:h-4" />
+                    <motion.div 
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-full"
+                      animate={{ x: [-100, 300] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                      style={{ width: "30%" }}
+                    />
+                  </div>
+                  <motion.p 
+                    className="text-xs md:text-sm text-trueme-secondary text-center font-medium"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.8 }}
+                  >
+                    3 achats restants pour passer {userStats.nextStatus}
+                  </motion.p>
+                </motion.div>
               </div>
             </motion.div>
 
@@ -284,44 +358,47 @@ export default function TrueMeDashboard() {
             </motion.div>
 
             {/* Collection Summary - Clickable with Modal */}
-            <Modal>
-              <ModalTrigger className="w-full block">
-                <motion.div 
-                  className="bg-white rounded-xl md:rounded-2xl shadow-sm border border-gray-200 p-4 md:p-6 lg:p-8 cursor-pointer hover:shadow-xl transition-all duration-300 w-full"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.5 }}
-                  whileHover={{ y: -2 }}
-                >
-                  <div className="space-y-4 md:space-y-6">
-                    <div className="flex items-center gap-2 mb-4 md:mb-6">
-                      <div className="w-2 h-2 bg-trueme-gold rounded-full"></div>
-                      <h3 className="text-xl font-serif text-trueme">Ma Collection</h3>
-                    </div>
-                    
-                    <div className="space-y-3 md:space-y-4">
-                      <div className="flex justify-between items-center py-2 md:py-3 border-b border-gray-100">
-                        <span className="text-xs md:text-sm text-gray-600">Articles</span>
-                        <span className="font-semibold text-sm md:text-base text-trueme">{userStats.totalItems}</span>
+            <motion.div 
+              className="bg-white rounded-xl md:rounded-2xl shadow-sm border border-gray-200 p-4 md:p-6 lg:p-8 w-full"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+            >
+              <Modal>
+                <ModalTrigger className="w-full block cursor-pointer hover:shadow-xl transition-all duration-300">
+                  <motion.div 
+                    className="w-full"
+                    whileHover={{ y: -2 }}
+                  >
+                    <div className="space-y-4 md:space-y-6">
+                      <div className="flex items-center gap-2 mb-4 md:mb-6">
+                        <div className="w-2 h-2 bg-trueme-gold rounded-full"></div>
+                        <h3 className="text-xl font-serif text-trueme">Ma Collection</h3>
                       </div>
                       
-                      <div className="flex justify-between items-center py-2 md:py-3 border-b border-gray-100">
-                        <span className="text-xs md:text-sm text-gray-600">Valeur estimée</span>
-                        <span className="font-semibold text-sm md:text-base text-trueme">{userStats.totalValue}</span>
+                      <div className="space-y-3 md:space-y-4">
+                        <div className="flex justify-between items-center py-2 md:py-3 border-b border-gray-100">
+                          <span className="text-xs md:text-sm text-gray-600">Articles</span>
+                          <span className="font-semibold text-sm md:text-base text-trueme">{userStats.totalItems}</span>
+                        </div>
+                        
+                        <div className="flex justify-between items-center py-2 md:py-3 border-b border-gray-100">
+                          <span className="text-xs md:text-sm text-gray-600">Valeur estimée</span>
+                          <span className="font-semibold text-sm md:text-base text-trueme">{userStats.totalValue}</span>
+                        </div>
+                        
+                        <div className="flex justify-between items-center py-2 md:py-3">
+                          <span className="text-xs md:text-sm text-gray-600">Évolution</span>
+                          <span className="font-semibold text-sm md:text-base text-trueme-gold">{userStats.collectionGrowth}</span>
+                        </div>
                       </div>
                       
-                      <div className="flex justify-between items-center py-2 md:py-3">
-                        <span className="text-xs md:text-sm text-gray-600">Évolution</span>
-                        <span className="font-semibold text-sm md:text-base text-trueme-gold">{userStats.collectionGrowth}</span>
+                      <div className="text-center pt-3 md:pt-4">
+                        <span className="text-xs text-gray-500 uppercase tracking-wide">Voir détails</span>
                       </div>
                     </div>
-                    
-                    <div className="text-center pt-3 md:pt-4">
-                      <span className="text-xs text-gray-500 uppercase tracking-wide">Voir détails</span>
-                    </div>
-                  </div>
-                </motion.div>
-              </ModalTrigger>
+                  </motion.div>
+                </ModalTrigger>
               <ModalBody>
                 <ModalContent>
                   <h3 className="text-2xl font-bold text-trueme mb-4">Ma Collection - Top 3</h3>
@@ -387,6 +464,7 @@ export default function TrueMeDashboard() {
                 </ModalFooter>
               </ModalBody>
             </Modal>
+            </motion.div>
 
             {/* Points & Rewards */}
             <motion.div 

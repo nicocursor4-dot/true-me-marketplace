@@ -10,6 +10,8 @@ const TrueMeNavbar = () => {
   const [isAccountDropdownOpen, setIsAccountDropdownOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isNavVisible, setIsNavVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,11 +21,30 @@ const TrueMeNavbar = () => {
       
       setScrollProgress(progress);
       setIsScrolled(scrollY > 50);
+
+      // Hide/Show navbar behavior on mobile only
+      if (window.innerWidth < 1024) { // lg breakpoint
+        if (scrollY > lastScrollY && scrollY > 100) {
+          // Scrolling down & past threshold - hide navbar
+          setIsNavVisible(false);
+        } else if (scrollY < lastScrollY || scrollY < 50) {
+          // Scrolling up or near top - show navbar
+          setIsNavVisible(true);
+        }
+        setLastScrollY(scrollY);
+      } else {
+        // Always visible on desktop
+        setIsNavVisible(true);
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    window.addEventListener('resize', handleScroll, { passive: true }); // Handle resize too
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, [lastScrollY]);
 
   const navItems = [
     { name: 'Accueil', link: '/' },
@@ -115,19 +136,24 @@ const TrueMeNavbar = () => {
   };
 
   return (
-    <Navbar>
-      {/* Desktop Navigation */}
-      <NavBody className="bg-white/20 backdrop-blur-lg border border-white/30 shadow-lg">
-        <TrueMeLogo />
-        <NavItems items={navItems} className="text-trueme" />
-        <div className="flex items-center gap-4">
-          <SellButton />
-          <AccountDropdown />
-        </div>
-      </NavBody>
+    <div 
+      className={`fixed inset-x-0 top-2 z-[9999] w-full transition-transform duration-300 ease-in-out ${
+        isNavVisible ? 'translate-y-0' : '-translate-y-full'
+      }`}
+    >
+      <Navbar>
+        {/* Desktop Navigation */}
+        <NavBody className="bg-white/20 backdrop-blur-lg border border-white/30 shadow-lg">
+          <TrueMeLogo />
+          <NavItems items={navItems} className="text-trueme" />
+          <div className="flex items-center gap-4">
+            <SellButton />
+            <AccountDropdown />
+          </div>
+        </NavBody>
 
-      {/* Mobile Navigation */}
-      <MobileNav className="bg-white/20 backdrop-blur-lg border border-white/30 shadow-lg">
+        {/* Mobile Navigation */}
+        <MobileNav className="bg-white/20 backdrop-blur-lg border border-white/30 shadow-lg">
         <MobileNavHeader>
           <div className="flex items-center">
             <TrueMeLogo />
@@ -199,6 +225,7 @@ const TrueMeNavbar = () => {
         </MobileNavMenu>
       </MobileNav>
     </Navbar>
+    </div>
   );
 };
 
