@@ -152,7 +152,7 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
         ease: "easeOut"
       }}
       className={cn(
-        "relative z-40 mx-auto flex w-full max-w-[calc(100vw-1rem)] flex-col items-center justify-between bg-transparent px-2 py-2 lg:hidden",
+        "relative z-[60000] mx-auto flex w-full max-w-[calc(100vw-1rem)] flex-col items-center justify-between bg-transparent px-2 py-2 lg:hidden",
         visible && "bg-white/80 dark:bg-neutral-950/80",
         className,
       )}
@@ -193,7 +193,7 @@ export const MobileNavMenu = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 z-[50000]"
+            className="fixed inset-0 bg-black/50 z-[70000]"
             onClick={onClose}
           />
           
@@ -208,7 +208,7 @@ export const MobileNavMenu = ({
               damping: 30
             }}
             className={cn(
-              "fixed right-0 top-0 h-screen w-screen bg-white z-[50001] flex flex-col",
+              "fixed right-0 top-0 h-screen w-screen bg-white z-[70001] flex flex-col",
               className
             )}
           >
@@ -242,7 +242,7 @@ export const MobileNavToggle = ({
   return (
     <button
       onClick={onClick}
-      className="p-2 hover:bg-trueme-gold/10 rounded-full transition-colors relative z-[50002]"
+      className="p-2 hover:bg-trueme-gold/10 rounded-full transition-colors relative z-[70002]"
     >
       {isOpen ? (
         <IconX className="h-6 w-6 text-trueme" />

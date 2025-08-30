@@ -13,6 +13,33 @@ const TrueMeNavbar = () => {
   const [isNavVisible, setIsNavVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
+  // Bloquer le scroll quand le menu mobile est ouvert
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${window.scrollY}px`;
+      document.body.style.width = '100%';
+    } else {
+      const scrollY = document.body.style.top;
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
+    }
+    
+    return () => {
+      // Nettoyage au unmount
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+    };
+  }, [isMobileMenuOpen]);
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -24,11 +51,16 @@ const TrueMeNavbar = () => {
 
       // Hide/Show navbar behavior on mobile only
       if (window.innerWidth < 1024) { // lg breakpoint
-        if (scrollY > lastScrollY && scrollY > 100) {
-          // Scrolling down & past threshold - hide navbar
+        const scrollDiff = Math.abs(scrollY - lastScrollY);
+        
+        if (scrollY > lastScrollY && scrollY > 80 && scrollDiff > 5) {
+          // Scrolling down & past threshold - hide navbar completely
           setIsNavVisible(false);
-        } else if (scrollY < lastScrollY || scrollY < 100) {
-          // Scrolling up or near top - show navbar
+        } else if (scrollY < lastScrollY && scrollDiff > 5) {
+          // Scrolling up - show navbar
+          setIsNavVisible(true);
+        } else if (scrollY <= 50) {
+          // Always show at top
           setIsNavVisible(true);
         }
         setLastScrollY(scrollY);
@@ -148,8 +180,8 @@ const TrueMeNavbar = () => {
   };
 
   return (
-    <Navbar className={`transition-transform duration-200 ease-out ${
-      isNavVisible ? 'translate-y-0' : '-translate-y-full'
+    <Navbar className={`transition-transform duration-300 ease-in-out ${
+      isNavVisible ? 'translate-y-0' : '-translate-y-[120%]'
     }`}>
         {/* Desktop Navigation */}
         <NavBody className="bg-white/20 backdrop-blur-lg border border-white/30 shadow-lg">
