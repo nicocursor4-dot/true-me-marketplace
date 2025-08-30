@@ -60,21 +60,21 @@ const TrueMeNavbar = () => {
   ];
 
   const TrueMeLogo = () => {
-    // Calcul de la taille progressive basée sur le scroll
-    const logoSize = 96 - (scrollProgress * 48); // De 96px (w-24) à 48px (w-12)
-    const logoSizeClass = logoSize <= 48 ? 'w-12 h-12' : logoSize <= 64 ? 'w-16 h-16' : logoSize <= 80 ? 'w-20 h-20' : 'w-24 h-24';
+    // Calcul de la taille progressive basée sur le scroll avec stabilisation
+    const logoSize = 96 - (scrollProgress * 48); // De 96px à 48px sans Math.round
     
     return (
-      <Link href="/" className="flex items-center z-20 transition-all duration-500 ease-out">
+      <Link href="/" className="flex items-center z-20">
         <img 
           src="/images/logos/trueme-logo.png" 
           alt="True Me Logo" 
-          className="object-contain transition-all duration-500 ease-out transform hover:scale-105"
+          className="object-contain transform hover:scale-105"
           style={{
             width: `${logoSize}px`,
             height: `${logoSize}px`,
             minWidth: '48px',
-            minHeight: '48px'
+            minHeight: '48px',
+            transition: 'width 0.2s ease-out, height 0.2s ease-out, transform 0.2s ease-out'
           }}
         />
       </Link>
@@ -82,20 +82,24 @@ const TrueMeNavbar = () => {
   };
 
   const SellButton = () => {
-    // Taille du bouton adaptative selon le scroll
-    const buttonScale = 1 - (scrollProgress * 0.1); // Légère réduction avec le scroll
+    // Taille du bouton adaptative selon le scroll - transitions fluides
+    const buttonScale = 1 - (scrollProgress * 0.05); // Réduction plus subtile
     const padding = isScrolled ? 'px-4 py-1.5' : 'px-6 py-2';
     const textSize = isScrolled ? 'text-sm' : 'text-base';
     
     return (
       <Link 
         href="/vendre" 
-        className={`bg-gradient-to-r from-trueme-gold to-trueme-gold/80 hover:from-trueme-gold/90 hover:to-trueme-gold text-black font-semibold ${padding} ${textSize} rounded-full transition-all duration-500 ease-out transform hover:scale-105 shadow-lg flex items-center gap-2 z-20`}
+        className={`bg-gradient-to-r from-trueme-gold to-trueme-gold/80 hover:from-trueme-gold/90 hover:to-trueme-gold text-black font-semibold ${padding} ${textSize} rounded-full transform hover:scale-105 shadow-lg flex items-center gap-2 z-20`}
         style={{
-          transform: `scale(${buttonScale}) translateZ(0)`,
+          transform: `scale(${buttonScale})`,
+          transition: 'transform 0.2s ease-out, padding 0.2s ease-out, font-size 0.2s ease-out'
         }}
       >
-        <ShoppingBag className={isScrolled ? "w-3 h-3" : "w-4 h-4"} style={{ transition: 'all 0.5s ease-out' }} />
+        <ShoppingBag 
+          className={isScrolled ? "w-3 h-3" : "w-4 h-4"} 
+          style={{ transition: 'width 0.2s ease-out, height 0.2s ease-out' }} 
+        />
         Vendre
       </Link>
     );
@@ -109,14 +113,15 @@ const TrueMeNavbar = () => {
         <button
           onClick={() => setIsAccountDropdownOpen(!isAccountDropdownOpen)}
           onMouseEnter={() => setIsAccountDropdownOpen(true)}
-          className="flex items-center space-x-1 text-trueme hover:text-trueme-gold transition-all duration-500 ease-out z-20 p-2 rounded-full hover:bg-trueme-gold/10"
+          className="flex items-center space-x-1 text-trueme hover:text-trueme-gold z-20 p-2 rounded-full hover:bg-trueme-gold/10"
+          style={{ transition: 'color 0.3s ease, background-color 0.3s ease' }}
         >
-          <User className={`${iconSize} transition-all duration-500 ease-out`} />
+          <User className={`${iconSize}`} style={{ transition: 'width 0.3s ease, height 0.3s ease' }} />
         </button>
       
       {isAccountDropdownOpen && (
         <div
-          className="absolute right-0 mt-2 w-48 bg-white/90 backdrop-blur-xl rounded-lg shadow-xl py-2 z-40 border border-trueme-gold/20"
+          className="absolute right-0 mt-2 w-48 bg-white/90 backdrop-blur-xl rounded-lg shadow-xl py-2 z-[60000] border border-trueme-gold/20"
           onMouseLeave={() => setIsAccountDropdownOpen(false)}
         >
           {accountItems.map((item) => (
@@ -136,7 +141,7 @@ const TrueMeNavbar = () => {
   };
 
   return (
-    <Navbar className={`transition-transform duration-300 ease-in-out ${
+    <Navbar className={`transition-transform duration-200 ease-out ${
       isNavVisible ? 'translate-y-0' : '-translate-y-full'
     }`}>
         {/* Desktop Navigation */}

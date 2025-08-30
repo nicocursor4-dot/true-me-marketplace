@@ -219,7 +219,7 @@ const GenderFilterWithDropdown: React.FC<GenderFilterProps> = ({
   }
 
   return (
-    <div className={`relative z-[999999] isolate overflow-visible px-2 sm:px-4 py-2 sm:py-3 border-b border-trueme-gold/20 ${className}`}>
+    <div className={`relative z-[40000] isolate overflow-visible px-2 sm:px-4 py-2 sm:py-3 border-b border-trueme-gold/20 ${className}`}>
       {/* Design élégant avec séparateurs - responsive */}
       <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 lg:gap-8 flex-wrap max-w-7xl mx-auto">
         
@@ -274,7 +274,7 @@ const GenderFilterWithDropdown: React.FC<GenderFilterProps> = ({
                   {hasDropdown && hoveredCategory === option.key && (
                     <div className="hidden lg:block">
                       <div 
-                        className="absolute top-full left-1/2 -translate-x-1/2 mt-0 z-[1000000]"
+                        className="absolute top-full left-1/2 -translate-x-1/2 mt-0 z-[50001]"
                         onMouseEnter={() => setHoveredCategory(option.key)}
                         onMouseLeave={() => setHoveredCategory(null)}
                       >
