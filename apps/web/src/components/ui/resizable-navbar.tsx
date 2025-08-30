@@ -68,7 +68,7 @@ export const Navbar = ({ children, className }: NavbarProps) => {
   return (
     <motion.div
       ref={ref}
-      className={cn("sticky inset-x-0 top-2 z-[9999] w-full", className)}
+      className={cn("sticky inset-x-0 top-2 z-[50000] w-full", className)}
     >
       {React.Children.map(children, (child) =>
         React.isValidElement(child)
@@ -195,7 +195,7 @@ export const MobileNavMenu = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 z-[9998]"
+            className="fixed inset-0 bg-black/50 z-[50000]"
             onClick={onClose}
           />
           
@@ -210,7 +210,7 @@ export const MobileNavMenu = ({
               damping: 30
             }}
             className={cn(
-              "fixed right-0 top-0 h-screen w-screen bg-white z-[9999] flex flex-col",
+              "fixed right-0 top-0 h-screen w-screen bg-white z-[50001] flex flex-col",
               className
             )}
           >
@@ -244,7 +244,7 @@ export const MobileNavToggle = ({
   return (
     <button
       onClick={onClick}
-      className="p-2 hover:bg-trueme-gold/10 rounded-full transition-colors relative z-[10000]"
+      className="p-2 hover:bg-trueme-gold/10 rounded-full transition-colors relative z-[50002]"
     >
       {isOpen ? (
         <IconX className="h-6 w-6 text-trueme" />
