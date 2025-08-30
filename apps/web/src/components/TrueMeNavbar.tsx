@@ -16,18 +16,18 @@ const TrueMeNavbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      const maxScroll = 150; // Distance pour transition complète
+      const maxScroll = 100; // Synchronisé avec resizable-navbar
       const progress = Math.min(scrollY / maxScroll, 1);
       
       setScrollProgress(progress);
-      setIsScrolled(scrollY > 50);
+      setIsScrolled(scrollY > 100); // Synchronisé avec resizable-navbar
 
       // Hide/Show navbar behavior on mobile only
       if (window.innerWidth < 1024) { // lg breakpoint
         if (scrollY > lastScrollY && scrollY > 100) {
           // Scrolling down & past threshold - hide navbar
           setIsNavVisible(false);
-        } else if (scrollY < lastScrollY || scrollY < 50) {
+        } else if (scrollY < lastScrollY || scrollY < 100) {
           // Scrolling up or near top - show navbar
           setIsNavVisible(true);
         }
@@ -38,10 +38,22 @@ const TrueMeNavbar = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll, { passive: true }); // Handle resize too
+    // Throttle scroll pour performance et fluidité
+    let ticking = false;
+    const throttledScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', throttledScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', throttledScroll);
       window.removeEventListener('resize', handleScroll);
     };
   }, [lastScrollY]);
@@ -60,45 +72,44 @@ const TrueMeNavbar = () => {
   ];
 
   const TrueMeLogo = () => {
-    // Calcul de la taille progressive basée sur le scroll avec stabilisation
-    const logoSize = 96 - (scrollProgress * 48); // De 96px à 48px sans Math.round
+    // Utilisation de transform scale pour éviter les recalculs de layout
+    const scale = 1 - (scrollProgress * 0.375); // De 1 (96px) à 0.625 (60px)
     
     return (
       <Link href="/" className="flex items-center z-20">
-        <img 
-          src="/images/logos/trueme-logo.png" 
-          alt="True Me Logo" 
-          className="object-contain transform hover:scale-105"
+        <div 
+          className="w-24 h-24 flex items-center justify-center"
           style={{
-            width: `${logoSize}px`,
-            height: `${logoSize}px`,
-            minWidth: '48px',
-            minHeight: '48px',
-            transition: 'width 0.2s ease-out, height 0.2s ease-out, transform 0.2s ease-out'
+            transform: `scale(${Math.max(scale, 0.5)})`, // Minimum scale 0.5
+            transition: 'transform 0.15s ease-out'
           }}
-        />
+        >
+          <img 
+            src="/images/logos/trueme-logo.png" 
+            alt="True Me Logo" 
+            className="object-contain w-full h-full hover:scale-105"
+            style={{
+              transition: 'transform 0.2s ease-out'
+            }}
+          />
+        </div>
       </Link>
     );
   };
 
   const SellButton = () => {
-    // Taille du bouton adaptative selon le scroll - transitions fluides
-    const buttonScale = 1 - (scrollProgress * 0.05); // Réduction plus subtile
-    const padding = isScrolled ? 'px-4 py-1.5' : 'px-6 py-2';
-    const textSize = isScrolled ? 'text-sm' : 'text-base';
+    // Utilisation de classes CSS au lieu de styles inline pour de meilleures performances
+    const buttonClasses = isScrolled 
+      ? 'px-4 py-1.5 text-sm' 
+      : 'px-6 py-2 text-base';
     
     return (
       <Link 
         href="/vendre" 
-        className={`bg-gradient-to-r from-trueme-gold to-trueme-gold/80 hover:from-trueme-gold/90 hover:to-trueme-gold text-black font-semibold ${padding} ${textSize} rounded-full transform hover:scale-105 shadow-lg flex items-center gap-2 z-20`}
-        style={{
-          transform: `scale(${buttonScale})`,
-          transition: 'transform 0.2s ease-out, padding 0.2s ease-out, font-size 0.2s ease-out'
-        }}
+        className={`bg-gradient-to-r from-trueme-gold to-trueme-gold/80 hover:from-trueme-gold/90 hover:to-trueme-gold text-black font-semibold ${buttonClasses} rounded-full transform hover:scale-105 shadow-lg flex items-center gap-2 z-20 transition-all duration-150 ease-out`}
       >
         <ShoppingBag 
-          className={isScrolled ? "w-3 h-3" : "w-4 h-4"} 
-          style={{ transition: 'width 0.2s ease-out, height 0.2s ease-out' }} 
+          className={`transition-all duration-150 ease-out ${isScrolled ? "w-3 h-3" : "w-4 h-4"}`}
         />
         Vendre
       </Link>
