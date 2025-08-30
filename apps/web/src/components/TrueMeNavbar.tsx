@@ -72,23 +72,22 @@ const TrueMeNavbar = () => {
   ];
 
   const TrueMeLogo = () => {
-    // Réduction plus importante en mode scrollé
-    const scale = 1 - (scrollProgress * 0.5); // De 1 (96px) à 0.5 (48px)
+    // Approche plus conservative pour éviter tremblements
+    const scale = 1 - (scrollProgress * 0.25); // Réduction plus subtile
     
     return (
       <Link href="/" className="flex items-center z-20">
         <div 
-          className={`flex items-center justify-center transition-all duration-150 ease-out ${
-            isScrolled ? 'w-12 h-12' : 'w-20 h-20'
-          }`}
+          className="w-16 h-16 flex items-center justify-center"
           style={{
-            transform: `scale(${Math.max(scale, 0.4)})`, // Minimum scale 0.4
+            transform: `scale(${Math.max(scale, 0.7)})`, // Minimum scale 0.7
+            transition: 'transform 0.15s ease-out'
           }}
         >
           <img 
             src="/images/logos/trueme-logo.png" 
             alt="True Me Logo" 
-            className="object-contain w-full h-full hover:scale-105 transition-transform duration-150 ease-out"
+            className="object-contain w-full h-full hover:scale-105 transition-transform duration-200 ease-out"
           />
         </div>
       </Link>
@@ -96,9 +95,9 @@ const TrueMeNavbar = () => {
   };
 
   const SellButton = () => {
-    // Bouton plus compact en mode scrollé
+    // Changements plus subtils pour éviter tremblements
     const buttonClasses = isScrolled 
-      ? 'px-3 py-1 text-xs' 
+      ? 'px-4 py-1.5 text-sm' 
       : 'px-6 py-2 text-base';
     
     return (
@@ -107,23 +106,22 @@ const TrueMeNavbar = () => {
         className={`bg-gradient-to-r from-trueme-gold to-trueme-gold/80 hover:from-trueme-gold/90 hover:to-trueme-gold text-black font-semibold ${buttonClasses} rounded-full transform hover:scale-105 shadow-lg flex items-center gap-2 z-20 transition-all duration-150 ease-out`}
       >
         <ShoppingBag 
-          className={`transition-all duration-150 ease-out ${isScrolled ? "w-2.5 h-2.5" : "w-4 h-4"}`}
+          className={`transition-all duration-150 ease-out ${isScrolled ? "w-3.5 h-3.5" : "w-4 h-4"}`}
         />
-        {isScrolled ? 'Vendre' : 'Vendre'}
+        Vendre
       </Link>
     );
   };
 
   const AccountDropdown = () => {
-    const iconSize = isScrolled ? 'w-3.5 h-3.5' : 'w-5 h-5';
-    const buttonPadding = isScrolled ? 'p-1.5' : 'p-2';
+    const iconSize = isScrolled ? 'w-4 h-4' : 'w-5 h-5';
     
     return (
       <div className="relative">
         <button
           onClick={() => setIsAccountDropdownOpen(!isAccountDropdownOpen)}
           onMouseEnter={() => setIsAccountDropdownOpen(true)}
-          className={`flex items-center space-x-1 text-trueme hover:text-trueme-gold z-20 ${buttonPadding} rounded-full hover:bg-trueme-gold/10 transition-all duration-150 ease-out`}
+          className="flex items-center space-x-1 text-trueme hover:text-trueme-gold z-20 p-2 rounded-full hover:bg-trueme-gold/10 transition-all duration-150 ease-out"
         >
           <User className={`${iconSize} transition-all duration-150 ease-out`} />
         </button>
