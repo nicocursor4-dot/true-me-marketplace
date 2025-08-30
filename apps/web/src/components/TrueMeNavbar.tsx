@@ -228,9 +228,34 @@ const TrueMeNavbar = () => {
             </div>
             
             {/* Icône recherche mobile/tablet */}
-            <button className="xl:hidden p-2 text-trueme hover:text-trueme-gold transition-colors rounded-full hover:bg-trueme-gold/10">
+            <button 
+              onClick={() => setIsSearchOpen(true)}
+              className="xl:hidden p-2 text-trueme hover:text-trueme-gold transition-colors rounded-full hover:bg-trueme-gold/10"
+            >
               <Search className="w-5 h-5" />
             </button>
+            
+            {/* Barre de recherche mobile responsive */}
+            {isSearchOpen && (
+              <div className="xl:hidden absolute top-full left-0 right-0 mt-2 px-4">
+                <div className="flex items-center bg-white/90 backdrop-blur-lg rounded-full px-4 py-3 border border-trueme-gold/30 shadow-lg">
+                  <Search className="w-4 h-4 text-trueme/60 mr-3" />
+                  <input
+                    type="text"
+                    placeholder="Rechercher..."
+                    className="bg-transparent outline-none text-sm text-trueme placeholder-trueme/60 flex-1"
+                    autoFocus
+                    onBlur={() => setIsSearchOpen(false)}
+                  />
+                  <button 
+                    onClick={() => setIsSearchOpen(false)}
+                    className="ml-2 p-1 text-trueme/60 hover:text-trueme"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            )}
             
             {/* Bouton panier */}
             <Link

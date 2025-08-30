@@ -23,6 +23,9 @@ const GenderFilterWithDropdown: React.FC<GenderFilterProps> = ({
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [mobileMenuLevel, setMobileMenuLevel] = useState<'gender' | 'category' | 'subcategory'>('gender')
+  const [selectedMobileGender, setSelectedMobileGender] = useState<'homme' | 'femme' | 'enfant' | null>(null)
+  const [selectedMobileCategory, setSelectedMobileCategory] = useState<string | null>(null)
 
   const categoryMenus = {
     homme: {
@@ -408,33 +411,129 @@ const GenderFilterWithDropdown: React.FC<GenderFilterProps> = ({
         </div>
       )}
 
-      {/* Menu mobile catégories */}
+      {/* Menu mobile dynamique par niveaux */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden w-full mt-4 bg-white/95 backdrop-blur-lg rounded-lg border border-trueme-gold/20 shadow-lg p-4">
-          <div className="grid grid-cols-2 gap-4">
-            {genderOptions.map((option) => (
-              <div key={option.key} className="space-y-3">
-                <h4 className="font-semibold text-trueme text-sm capitalize border-b border-trueme-gold/30 pb-2">
-                  {option.display}
-                </h4>
-                <div className="space-y-2">
-                  {Object.entries(categoryMenus[option.key as keyof typeof categoryMenus] || {})
-                    .filter(([categoryName]) => categoryName !== 'selections')
-                    .slice(0, 4)
-                    .map(([categoryName]) => (
-                    <Link
-                      key={`${option.key}-${categoryName}`}
-                      href={`/marketplace/${option.key}?category=${categoryName}`}
-                      className="block text-xs text-trueme/80 hover:text-trueme-gold transition-colors capitalize"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      {categoryName}
-                    </Link>
-                  ))}
-                </div>
+        <div className="lg:hidden w-full mt-4 bg-white/95 backdrop-blur-lg rounded-lg border border-trueme-gold/20 shadow-lg overflow-hidden">
+          
+          {/* Niveau 1: Sélection genre */}
+          {mobileMenuLevel === 'gender' && (
+            <div className="p-4 space-y-4">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-trueme">Choisir une catégorie</h3>
+                <button 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-2 text-trueme/60 hover:text-trueme"
+                >
+                  <X className="w-5 h-5" />
+                </button>
               </div>
-            ))}
-          </div>
+              <div className="space-y-3">
+                {genderOptions.map((option) => (
+                  <button
+                    key={option.key}
+                    onClick={() => {
+                      setSelectedMobileGender(option.key)
+                      setMobileMenuLevel('category')
+                    }}
+                    className="w-full flex items-center justify-between p-4 bg-trueme-gold/5 hover:bg-trueme-gold/10 rounded-lg border border-trueme-gold/20 transition-colors"
+                  >
+                    <span className="text-trueme font-medium text-lg">{option.display}</span>
+                    <svg className="w-5 h-5 text-trueme/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+          
+          {/* Niveau 2: Catégories principales */}
+          {mobileMenuLevel === 'category' && selectedMobileGender && (
+            <div className="p-4 space-y-4">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <button 
+                    onClick={() => setMobileMenuLevel('gender')}
+                    className="p-2 text-trueme/60 hover:text-trueme"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                  <h3 className="text-lg font-semibold text-trueme capitalize">
+                    {genderOptions.find(g => g.key === selectedMobileGender)?.display}
+                  </h3>
+                </div>
+                <button 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-2 text-trueme/60 hover:text-trueme"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              <div className="space-y-3">
+                {Object.entries(categoryMenus[selectedMobileGender as keyof typeof categoryMenus] || {})
+                  .filter(([categoryName]) => categoryName !== 'selections')
+                  .map(([categoryName]) => (
+                  <button
+                    key={categoryName}
+                    onClick={() => {
+                      setSelectedMobileCategory(categoryName)
+                      setMobileMenuLevel('subcategory')
+                    }}
+                    className="w-full flex items-center justify-between p-4 bg-trueme-gold/5 hover:bg-trueme-gold/10 rounded-lg border border-trueme-gold/20 transition-colors"
+                  >
+                    <span className="text-trueme font-medium capitalize">{categoryName}</span>
+                    <svg className="w-5 h-5 text-trueme/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+          
+          {/* Niveau 3: Sous-catégories */}
+          {mobileMenuLevel === 'subcategory' && selectedMobileGender && selectedMobileCategory && (
+            <div className="p-4 space-y-4">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <button 
+                    onClick={() => setMobileMenuLevel('category')}
+                    className="p-2 text-trueme/60 hover:text-trueme"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                  <h3 className="text-lg font-semibold text-trueme capitalize">{selectedMobileCategory}</h3>
+                </div>
+                <button 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-2 text-trueme/60 hover:text-trueme"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              <div className="space-y-2">
+                {((categoryMenus[selectedMobileGender as keyof typeof categoryMenus] as any)?.[selectedMobileCategory] || []).map((item: { name: string }) => (
+                  <Link
+                    key={item.name}
+                    href={`/marketplace/${selectedMobileGender}?category=${selectedMobileCategory}&subcategory=${encodeURIComponent(item.name)}`}
+                    className="block p-3 text-trueme hover:text-trueme-gold hover:bg-trueme-gold/5 rounded-lg transition-colors border border-transparent hover:border-trueme-gold/20"
+                    onClick={() => {
+                      setIsMobileMenuOpen(false)
+                      setMobileMenuLevel('gender')
+                      setSelectedMobileGender(null)
+                      setSelectedMobileCategory(null)
+                    }}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       )}
 
