@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { User, ShoppingBag, Shield } from 'lucide-react';
+import { User, ShoppingBag, Shield, Search, Menu, X } from 'lucide-react';
 import { Navbar, NavBody, NavItems, MobileNav, MobileNavHeader, MobileNavMenu, MobileNavToggle } from './ui/resizable-navbar';
 
 const TrueMeNavbar = () => {
@@ -12,6 +12,8 @@ const TrueMeNavbar = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isNavVisible, setIsNavVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isUserConnected] = useState(false); // Pour validation, sera géré plus tard
 
   // Bloquer le scroll quand le menu mobile est ouvert
   useEffect(() => {
@@ -96,12 +98,26 @@ const TrueMeNavbar = () => {
     { name: 'Authentifier un objet', link: '/authentification' },
   ];
 
-  const accountItems = [
-    { name: 'Dashboard', href: '/dashboard' },
-    { name: 'Mes Marques', href: '/brands' },
-    { name: 'Connexion', href: '/auth/login' },
-    { name: 'Inscription', href: '/auth/register' },
-  ];
+  // Logique des items compte selon connexion (pour validation on affiche tout)
+  const getAccountItems = () => {
+    const connectedItems = [
+      { name: 'Dashboard', href: '/dashboard', icon: User },
+      { name: 'Mes Marques', href: '/brands', icon: Shield },
+      { name: 'Mon Panier', href: '/panier', icon: ShoppingBag },
+      { name: 'Se déconnecter', href: '/auth/logout', icon: null },
+    ];
+    
+    const notConnectedItems = [
+      { name: 'Mon Panier', href: '/panier', icon: ShoppingBag },
+      { name: 'Connexion', href: '/auth/login', icon: null },
+      { name: 'Inscription', href: '/auth/register', icon: null },
+    ];
+    
+    // Pour validation, on affiche tout
+    return [...connectedItems, ...notConnectedItems];
+  };
+  
+  const accountItems = getAccountItems();
 
   const TrueMeLogo = () => {
     // Approche plus conservative pour éviter tremblements
@@ -187,7 +203,47 @@ const TrueMeNavbar = () => {
         <NavBody className="bg-white/20 backdrop-blur-lg border border-white/30 shadow-lg">
           <TrueMeLogo />
           <NavItems items={navItems} className="text-trueme" />
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            {/* Barre de recherche desktop */}
+            <div className="hidden xl:flex items-center">
+              {isSearchOpen ? (
+                <div className="flex items-center bg-white/90 backdrop-blur-lg rounded-full px-4 py-2 border border-trueme-gold/30 shadow-lg">
+                  <Search className="w-4 h-4 text-trueme/60 mr-2" />
+                  <input
+                    type="text"
+                    placeholder="Rechercher..."
+                    className="bg-transparent outline-none text-sm text-trueme placeholder-trueme/60 w-64"
+                    autoFocus
+                    onBlur={() => setIsSearchOpen(false)}
+                  />
+                </div>
+              ) : (
+                <button
+                  onClick={() => setIsSearchOpen(true)}
+                  className="p-2 text-trueme hover:text-trueme-gold transition-colors rounded-full hover:bg-trueme-gold/10"
+                >
+                  <Search className="w-5 h-5" />
+                </button>
+              )}
+            </div>
+            
+            {/* Icône recherche mobile/tablet */}
+            <button className="xl:hidden p-2 text-trueme hover:text-trueme-gold transition-colors rounded-full hover:bg-trueme-gold/10">
+              <Search className="w-5 h-5" />
+            </button>
+            
+            {/* Bouton panier */}
+            <Link
+              href="/panier"
+              className="p-2 text-trueme hover:text-trueme-gold transition-colors rounded-full hover:bg-trueme-gold/10 relative"
+            >
+              <ShoppingBag className={`transition-all duration-150 ease-out ${isScrolled ? "w-4 h-4" : "w-5 h-5"}`} />
+              {/* Badge panier (optionnel) */}
+              <span className="absolute -top-1 -right-1 bg-trueme-gold text-black text-xs rounded-full w-5 h-5 flex items-center justify-center font-semibold">
+                2
+              </span>
+            </Link>
+            
             <SellButton />
             <AccountDropdown />
           </div>
@@ -200,6 +256,17 @@ const TrueMeNavbar = () => {
             <TrueMeLogo />
           </div>
           <div className="flex items-center gap-2">
+            {/* Bouton panier mobile */}
+            <Link
+              href="/panier"
+              className="p-2 text-trueme hover:text-trueme-gold transition-colors rounded-full hover:bg-trueme-gold/10 relative"
+            >
+              <ShoppingBag className="w-5 h-5" />
+              <span className="absolute -top-1 -right-1 bg-trueme-gold text-black text-xs rounded-full w-4 h-4 flex items-center justify-center font-semibold text-[10px]">
+                2
+              </span>
+            </Link>
+            
             {/* Bouton Vendre mobile (header) */}
             <Link
               href="/vendre"
@@ -220,47 +287,86 @@ const TrueMeNavbar = () => {
           onClose={() => setIsMobileMenuOpen(false)}
           className="bg-white"
         >
-          {/* Navigation principale */}
-          <div className="space-y-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.link}
-                className="text-trueme text-2xl font-medium hover:text-trueme-gold transition-colors duration-300 block text-center"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
+          {/* Contenu centré verticalement */}
+          <div className="flex flex-col justify-center h-full py-8 space-y-12">
             
-            {/* Bouton Vendre pour mobile */}
-            <Link
-              href="/vendre"
-              className="bg-gradient-to-r from-trueme-gold to-trueme-gold/80 text-black font-bold text-xl px-8 py-4 rounded-full hover:from-trueme-gold/90 hover:to-trueme-gold/70 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-3 justify-center mx-auto w-fit"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              <ShoppingBag className="w-6 h-6" />
-              Vendre
-            </Link>
-          </div>
-          
-          {/* Séparateur */}
-          <div className="border-t border-trueme-gold/20 my-8"></div>
-          
-          {/* Section compte */}
-          <div className="space-y-6">
-            <p className="text-trueme/60 text-lg font-medium text-center">Mon Compte</p>
-            <div className="space-y-4">
-              {accountItems.map((item) => (
+            {/* Navigation principale */}
+            <div className="space-y-8">
+              {navItems.map((item) => (
                 <Link
                   key={item.name}
-                  href={item.href}
-                  className="block text-trueme text-lg hover:text-trueme-gold transition-colors duration-300 text-center"
+                  href={item.link}
+                  className="text-trueme text-2xl font-medium hover:text-trueme-gold transition-colors duration-300 block text-center"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.name}
                 </Link>
               ))}
+              
+              {/* Bouton Vendre pour mobile */}
+              <Link
+                href="/vendre"
+                className="bg-gradient-to-r from-trueme-gold to-trueme-gold/80 text-black font-bold text-xl px-8 py-4 rounded-full hover:from-trueme-gold/90 hover:to-trueme-gold/70 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-3 justify-center mx-auto w-fit"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <ShoppingBag className="w-6 h-6" />
+                Vendre
+              </Link>
+            </div>
+            
+            {/* Séparateur */}
+            <div className="border-t border-trueme-gold/20"></div>
+            
+            {/* Section compte */}
+            <div className="space-y-8">
+              <p className="text-trueme/60 text-lg font-medium text-center">Mon Compte</p>
+              <div className="space-y-6">
+                {/* Items avec icônes */}
+                {accountItems.filter(item => item.icon).map((item) => {
+                  const IconComponent = item.icon;
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className="flex items-center justify-center gap-3 text-trueme text-lg hover:text-trueme-gold transition-colors duration-300"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {IconComponent && <IconComponent className="w-5 h-5" />}
+                      {item.name}
+                    </Link>
+                  );
+                })}
+                
+                {/* Boutons connexion/inscription côte à côte */}
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
+                  {accountItems.filter(item => !item.icon && (item.name === 'Connexion' || item.name === 'Inscription')).map((item) => (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className={`${
+                        item.name === 'Inscription' 
+                          ? 'bg-gradient-to-r from-trueme-gold to-trueme-gold/80 text-black hover:from-trueme-gold/90 hover:to-trueme-gold'
+                          : 'bg-transparent border-2 border-trueme text-trueme hover:bg-trueme hover:text-white'
+                      } font-semibold px-6 py-3 rounded-full transition-all duration-300 text-center min-w-[120px]`}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+                
+                {/* Se déconnecter */}
+                {accountItems.filter(item => item.name === 'Se déconnecter').map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="block text-trueme/60 text-base hover:text-trueme-gold transition-colors duration-300 text-center mt-6"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </MobileNavMenu>

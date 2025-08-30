@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
+import { Menu, Search, X } from 'lucide-react'
 
 interface GenderFilterProps {
   selectedGender: 'all' | 'homme' | 'femme' | 'enfant'
@@ -20,6 +21,8 @@ const GenderFilterWithDropdown: React.FC<GenderFilterProps> = ({
   className = ""
 }) => {
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
 
   const categoryMenus = {
     homme: {
@@ -341,15 +344,17 @@ const GenderFilterWithDropdown: React.FC<GenderFilterProps> = ({
           
           {/* Menu hamburger avec recherche */}
           <div className="flex items-center gap-3">
-            <button className="p-2 text-trueme/80 hover:text-trueme transition-colors">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 text-trueme/80 hover:text-trueme transition-colors"
+            >
+              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
-            <button className="p-2 text-trueme/80 hover:text-trueme transition-colors">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607z" />
-              </svg>
+            <button 
+              onClick={() => setIsSearchOpen(!isSearchOpen)}
+              className="p-2 text-trueme/80 hover:text-trueme transition-colors"
+            >
+              <Search className="w-5 h-5" />
             </button>
           </div>
 
@@ -382,8 +387,59 @@ const GenderFilterWithDropdown: React.FC<GenderFilterProps> = ({
         </div>
       </div>
 
+      {/* Barre de recherche mobile */}
+      {isSearchOpen && (
+        <div className="lg:hidden w-full mt-4 px-4">
+          <div className="flex items-center bg-white/90 backdrop-blur-lg rounded-full px-4 py-3 border border-trueme-gold/30 shadow-lg">
+            <Search className="w-4 h-4 text-trueme/60 mr-3" />
+            <input
+              type="text"
+              placeholder="Rechercher des produits..."
+              className="bg-transparent outline-none text-sm text-trueme placeholder-trueme/60 flex-1"
+              autoFocus
+            />
+            <button 
+              onClick={() => setIsSearchOpen(false)}
+              className="ml-2 p-1 text-trueme/60 hover:text-trueme"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Menu mobile catégories */}
+      {isMobileMenuOpen && (
+        <div className="lg:hidden w-full mt-4 bg-white/95 backdrop-blur-lg rounded-lg border border-trueme-gold/20 shadow-lg p-4">
+          <div className="grid grid-cols-2 gap-4">
+            {genderOptions.map((option) => (
+              <div key={option.key} className="space-y-3">
+                <h4 className="font-semibold text-trueme text-sm capitalize border-b border-trueme-gold/30 pb-2">
+                  {option.display}
+                </h4>
+                <div className="space-y-2">
+                  {Object.entries(categoryMenus[option.key as keyof typeof categoryMenus] || {})
+                    .filter(([categoryName]) => categoryName !== 'selections')
+                    .slice(0, 4)
+                    .map(([categoryName]) => (
+                    <Link
+                      key={`${option.key}-${categoryName}`}
+                      href={`/marketplace/${option.key}?category=${categoryName}`}
+                      className="block text-xs text-trueme/80 hover:text-trueme-gold transition-colors capitalize"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {categoryName}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Mobile Category Links - Only show when a gender is selected */}
-      {selectedGender !== 'all' && (
+      {selectedGender !== 'all' && !isMobileMenuOpen && !isSearchOpen && (
         <div className="lg:hidden w-full mt-4">
           <div className="flex flex-wrap gap-2 justify-center">
             {Object.entries(categoryMenus[selectedGender as keyof typeof categoryMenus] || {})
