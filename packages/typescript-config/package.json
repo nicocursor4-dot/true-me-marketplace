@@ -1,0 +1,11 @@
+{
+  "name": "@trueme/typescript-config",
+  "version": "1.0.0",
+  "description": "Shared TypeScript configuration for TRUE ME project",
+  "main": "index.js",
+  "files": [
+    "base.json",
+    "nextjs.json",
+    "node.json"
+  ]
+}
