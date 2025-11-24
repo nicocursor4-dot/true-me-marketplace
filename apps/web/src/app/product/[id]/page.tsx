@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import { Heart, CheckCircle, ArrowLeft, Share2, Star, Shield, Truck, RefreshCw, MessageCircle } from 'lucide-react'
+import { Heart, CheckCircle, ArrowLeft, Share2, Star, Shield, Truck, RefreshCw, MessageCircle, Search } from 'lucide-react'
 import { products, Product } from '@/data/realProducts'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -141,8 +141,8 @@ const ProductPage = () => {
                   <button
                     key={index}
                     className={`flex-shrink-0 w-24 h-24 rounded-2xl overflow-hidden border-2 transition-all duration-300 relative ${selectedImageIndex === index
-                        ? 'border-trueme-gold ring-2 ring-trueme-gold/20'
-                        : 'border-transparent hover:border-gray-200 opacity-70 hover:opacity-100'
+                      ? 'border-trueme-gold ring-2 ring-trueme-gold/20'
+                      : 'border-transparent hover:border-gray-200 opacity-70 hover:opacity-100'
                       }`}
                     onClick={() => setSelectedImageIndex(index)}
                   >
